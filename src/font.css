@@ -1,0 +1,89 @@
+@font-face {
+  font-family: 'General Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('General Sans Regular'),
+    url('fonts/general-sans/GeneralSans-Regular.woff') format('woff');
+}
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;1,100;1,200;1,300;1,400&display=swap');
+@font-face {
+  font-family: 'General Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: local('General Sans Medium'),
+    url('fonts/general-sans/GeneralSans-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'General Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: local('General Sans Semibold'),
+    url('fonts/general-sans/GeneralSans-Semibold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'General Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('General Sans Bold'),
+    url('fonts/general-sans/GeneralSans-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy/Gilroy-Regular.woff') format('truetype');
+  font-style: 'normal';
+  font-weight: 400;
+  font-display: 'swap';
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy/Gilroy-Medium.woff') format('truetype');
+  font-style: 'normal';
+  font-weight: 500;
+  font-display: 'swap';
+}
+body{
+  overflow-x: hidden;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy/Gilroy-Semibold.woff') format('truetype');
+  font-style: 'normal';
+  font-weight: 600;
+  font-display: 'swap';
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy/Gilroy-Bold.woff') format('truetype');
+  font-style: 'normal';
+  font-weight: 700;
+  font-display: 'swap';
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy/Gilroy-Black.woff') format('truetype');
+  font-style: 'normal';
+  font-weight: 800;
+  font-display: 'swap';
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy/Gilroy-Heavy.woff') format('truetype');
+  font-style: 'normal';
+  font-weight: 900;
+  font-display: 'swap';
+}
+
+
+.swal2-styled.swal2-confirm{
+  background-color: #E25D24 !important;
+  outline: none !important;
+  border: none !important;
+} 

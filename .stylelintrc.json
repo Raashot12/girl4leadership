@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "stylelint-config-recommended",
+    "stylelint-config-styled-components",
+    "stylelint-config-property-sort-order-smacss",
+    "stylelint-config-prettier",
+    "stylelint-prettier/recommended"
+  ],
+  "processors": ["stylelint-processor-styled-components"],
+  "plugins": ["stylelint-prettier"],
+  "rules": {
+    "prettier/prettier": true,
+    "string-quotes": "single",
+    "no-duplicate-selectors": true,
+    "color-hex-length": "short",
+    "selector-combinator-space-after": "always",
+    "selector-attribute-quotes": "always",
+    "selector-attribute-operator-space-before": "never",
+    "declaration-block-trailing-semicolon": "always",
+    "declaration-colon-space-before": "never",
+    "declaration-colon-space-after": "always"
+  }
+}
