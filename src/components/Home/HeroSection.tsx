@@ -1,48 +1,50 @@
-import {Box, Container, Flex} from "@mantine/core"
-import React from "react"
-import {motion} from "framer-motion"
-import styled from "@emotion/styled"
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Box, Container, Flex } from '@mantine/core';
+import React from 'react';
+import { motion } from 'framer-motion';
+import styled from '@emotion/styled';
 
 const HeroSection = () => {
   return (
     <Box
       mt={70}
       sx={{
-        "@media (max-width: 567px)": {
-          minHeight: "50px",
+        '@media (max-width: 567px)': {
+          minHeight: '50px',
         },
       }}
     >
       <Box
         sx={{
-          position: "relative",
-          overflow: "hidden",
-          width: "100%",
-          minHeight: "754px",
-          display: "flex",
-          alignItems: "center",
-          "@media (max-width: 567px)": {
-            minHeight: "671px",
+          position: 'relative',
+          overflow: 'hidden',
+          width: '100%',
+          minHeight: '754px',
+          display: 'flex',
+          alignItems: 'center',
+          '@media (max-width: 567px)': {
+            minHeight: '671px',
           },
         }}
       >
         <HeroBackground>
           <Container size="xl">
             <motion.div
-              animate={{opacity: 1, scale: 1}}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{
                 duration: 1,
                 delay: 0.3,
                 ease: [0.5, 0.71, 1, 1.5],
               }}
-              initial={{opacity: 0, scale: 0.5}}
+              initial={{ opacity: 0, scale: 0.5 }}
             >
-              <Box sx={{textAlign: "center", color: "white"}}>
+              <Box sx={{ textAlign: 'center', color: 'white' }}>
                 <Box fw={600}>WE NEED YOUR HELP TO SERVE THE PEOPLE</Box>
                 <Box
                   sx={{
                     fontSize: 48,
-                    "@media (max-width: 767px)": {
+                    '@media (max-width: 767px)': {
                       fontSize: 30,
                     },
                   }}
@@ -51,16 +53,16 @@ const HeroSection = () => {
                 >
                   Help for victims affcted by flood
                 </Box>
-                <Box sx={{fontSize: 14, lineHeight: "24px"}} fw={300} mb={25}>
+                <Box sx={{ fontSize: 14, lineHeight: '24px' }} fw={300} mb={25}>
                   If you are looking at blank cassettes on the web, you may be
                   very confused at the<br></br> difference in price. You may see
                   some for as low as $.17 each.
                 </Box>
-                <Flex align={"center"} columnGap={20} justify={"center"}>
-                  <BtnMain component="a" sx={{zIndex: 1}}>
+                <Flex align={'center'} columnGap={20} justify={'center'}>
+                  <BtnMain component="a" sx={{ zIndex: 1 }}>
                     DONATE NOW
                   </BtnMain>
-                  <BtnWhite component="a" sx={{zIndex: 1}}>
+                  <BtnWhite component="a" sx={{ zIndex: 1 }}>
                     VIEW ACTIVITY
                   </BtnWhite>
                 </Flex>
@@ -70,10 +72,10 @@ const HeroSection = () => {
         </HeroBackground>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default HeroSection
+export default HeroSection;
 
 const HeroBackground = styled(Box as any)`
   background: url(https://res.cloudinary.com/rashot/image/upload/v1678442773/258515A2-ABB0-4372-B79A-AE8A7162EAA7_rw7xdv_sl74rs.webp)
@@ -94,7 +96,7 @@ const HeroBackground = styled(Box as any)`
   @media (max-width: 567px) {
     min-height: 673px;
   }
-`
+`;
 const BtnMain = styled(Box as any)`
   line-height: 40px;
   display: inline-block;
@@ -119,7 +121,7 @@ const BtnMain = styled(Box as any)`
   @media (max-width: 567px) {
     padding: 0px 16px;
   }
-`
+`;
 const BtnWhite = styled(Box as any)`
   border: 1px solid #635e68 !important;
   display: inline-block;
@@ -142,4 +144,4 @@ const BtnWhite = styled(Box as any)`
   @media (max-width: 567px) {
     padding: 0px 16px;
   }
-`
+`;
