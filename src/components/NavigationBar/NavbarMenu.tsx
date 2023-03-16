@@ -16,7 +16,7 @@ import {
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import { IconSearch, IconShoppingCart } from '@tabler/icons';
-import Logo from '../../images/logo.png';
+import Logo from '../../images/logo.svg';
 import { ColorSchemeToggle } from '../ColorSchemeToggle';
 
 const HeaderComponent = styled(Box as any)<{ scrollDirection: string }>`
