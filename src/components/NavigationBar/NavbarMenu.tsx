@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from 'react';
@@ -14,6 +15,7 @@ import {
   Collapse,
 } from '@mantine/core';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import { IconSearch, IconShoppingCart } from '@tabler/icons';
 import Logo from '../../images/logo.png';
@@ -81,7 +83,7 @@ function NavbarMenu() {
   const [scrollHeight, setScrollHeight] = useState(0);
   const [scrollDirection, setScrollDirection] = useState('');
   const [opened, setOpened] = useState(false);
-
+  const { pathname } = useRouter();
   useEffect(() => {
     const scrollableElement = document.body;
     function checkScrollDirectionIsUp(event: any) {
@@ -140,8 +142,14 @@ function NavbarMenu() {
                   <React.Fragment key={value.id}>
                     <CustomLink
                       href={value.route}
-                      // activeClassName="active"
-                      className="nav-link"
+                      className={
+                        pathname === '/' && value.route === '/'
+                          ? 'active'
+                          : pathname.includes(value.route) &&
+                            value.route !== '/'
+                          ? 'active'
+                          : 'not-active'
+                      }
                     >
                       {value.pathName}
                     </CustomLink>
@@ -217,8 +225,14 @@ function NavbarMenu() {
                   <React.Fragment key={value.id}>
                     <MobileLink
                       href={value.route}
-                      // activeClassName="active"
-                      className="nav-link"
+                      className={
+                        pathname === '/' && value.route === '/'
+                          ? 'active'
+                          : pathname.includes(value.route) &&
+                            value.route !== '/'
+                          ? 'active'
+                          : 'not-active'
+                      }
                     >
                       {value.pathName}
                     </MobileLink>
@@ -269,29 +283,29 @@ function NavbarMenu() {
 export default NavbarMenu;
 
 const CustomLink = styled(Link)`
-  &.nav-link {
-    font-weight: 500;
-    line-height: 90px;
-    &.active {
-      color: #e1621b;
-      font-weight: 600;
-    }
-  }
-  &.nav-link:hover {
+  font-weight: 500;
+  line-height: 90px;
+  &.active {
     color: #e1621b;
+    font-weight: 600;
+  }
+
+  &.not-active:hover {
+    color: #e1621b;
+    font-weight: 600;
     transition: all ease-in-out 0.5s;
   }
 `;
 const MobileLink = styled(Link)`
-  &.nav-link {
-    font-weight: 500;
-    &.active {
-      color: #e1621b;
-      font-weight: 600;
-    }
-  }
-  &.nav-link:hover {
+  font-weight: 500;
+  &.active {
     color: #e1621b;
+    font-weight: 600;
+  }
+
+  &.not-active:hover {
+    color: #e1621b;
+    font-weight: 600;
     transition: all ease-in-out 0.5s;
   }
 `;

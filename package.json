@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 4200",
+    "dev": "next dev -p 4300",
     "build": "next build",
-    "start": "next start -p 4200",
+    "start": "next start -p 4300",
     "lint": "next lint",
     "prepare": "husky install",
     "api-generate": " npx @rtk-query/codegen-openapi openapi-config.ts"
@@ -34,6 +34,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.39.2",
+    "react-icons": "^4.8.0",
     "react-numeric-input": "^2.2.3",
     "react-redux": "^8.0.4",
     "sweetalert2": "^11.7.3",
