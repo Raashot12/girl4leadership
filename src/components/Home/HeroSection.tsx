@@ -8,7 +8,7 @@ import styled from '@emotion/styled';
 const HeroSection = () => {
   return (
     <Box
-      mt={70}
+      mt={76}
       sx={{
         '@media (max-width: 567px)': {
           minHeight: '50px',

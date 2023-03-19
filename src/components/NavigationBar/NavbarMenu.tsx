@@ -52,7 +52,7 @@ const navMenu = [
   },
   {
     pathName: 'About',
-    route: '/about',
+    route: '/about_us',
     id: 2,
   },
 
@@ -120,7 +120,7 @@ function NavbarMenu() {
         position={scrollDirection}
       >
         <Container size="xl">
-          <Flex align={'center'} justify={'space-between'} py={2}>
+          <Flex align={'center'} justify={'space-between'} py={3}>
             <Link href="/">
               <Image
                 src={Logo}
