@@ -153,7 +153,7 @@ const AboutUs = () => {
                       </Text>
                     </Box>
                     <Box>
-                      <Text>
+                      <Text fz={14} fw={300} lh={'24px'}>
                         <Text fw={600} component="span">
                           1.1 Mission
                         </Text>
@@ -162,7 +162,7 @@ const AboutUs = () => {
                         levels of life with our mantra as ‘building the next
                         generation of female leaders.
                       </Text>
-                      <Text mt={10}>
+                      <Text mt={10} fz={14} fw={300} lh={'24px'}>
                         <Text fw={600} component="span">
                           1.2 Vision
                         </Text>
@@ -170,7 +170,7 @@ const AboutUs = () => {
                         environment that enables women and girls to thrive
                         without any form of gender limitations or hindrances.
                       </Text>
-                      <Text mt={10}>
+                      <Text mt={10} fz={14} fw={300} lh={'24px'}>
                         <Text fw={600} component="span">
                           1.3 Nature of our Activities
                         </Text>
@@ -225,12 +225,12 @@ const AboutUs = () => {
                 Summary
               </Text>
             </Box>
-            <Text>
+            <Text fz={14} fw={300} lh={'24px'}>
               We work on projects and programs that are targetted at addressing
               the challenges of women and girls which hinders them from
               maximizing their potential.
             </Text>
-            <Text>
+            <Text fz={14} fw={300} lh={'24px'}>
               Girls 4 Leadership Initiative (G4L) imbibes a culture of inclusion
               which allows us to engage boys and men in our programs and
               projects.
