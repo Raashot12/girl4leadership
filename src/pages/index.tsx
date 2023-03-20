@@ -12,7 +12,7 @@ import UpComingEvent from '../components/UpComingEvents/UpComingEvent';
 function index() {
   return (
     <>
-      <Layout>
+      <Layout pageTitle="Home">
         <HeroSection />
         <Container size="xl">
           <HeroSectionCard />
