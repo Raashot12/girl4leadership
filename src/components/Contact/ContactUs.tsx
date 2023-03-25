@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { IconArrowForward } from '@tabler/icons';
 import { IoMdMail } from 'react-icons/io';
+import { logEvent } from 'components/Shared/gtmVirtualPage';
 
 const text = 'Contact Us';
 const ContactUs = () => {
@@ -107,6 +108,11 @@ const ContactUs = () => {
               fw={400}
               component="a"
               href="mailto:girls4leadership@gmail.com"
+              onClick={() => {
+                logEvent('Touched Email address', {
+                  Language_Menu_Selection: 'User Click Email',
+                });
+              }}
             >
               girls4leadership@gmail.com
             </Text>
