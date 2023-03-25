@@ -7,7 +7,7 @@ import {
   useCallback,
 } from 'react';
 import type { AppProps } from 'next/app';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import type { NextPage } from 'next';
@@ -20,6 +20,7 @@ import {
 import { buttonStyles, checkboxStyles, defaultFonts, inputStyles } from 'theme';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { LoaderAnimation } from 'components/Shared/ScreenLoader';
+import { gtmVirtualPageView } from 'components/Shared/gtmVirtualPage';
 import store from '../state/store';
 
 type NextPageWithLayout = NextPage & {
@@ -39,7 +40,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   });
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
-
+  const router = useRouter();
   useHotkeys([['mod+J', () => toggleColorScheme()]]);
   const getLayout = Component.getLayout ?? ((page) => page);
 
@@ -58,7 +59,14 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       }
     });
   }, []);
+  useEffect(() => {
+    const mainDataLayer = {
+      pageTypeName: pageProps.page || null,
+      url: router.pathname,
+    };
 
+    gtmVirtualPageView(mainDataLayer);
+  }, [pageProps]);
   useEffect(() => {
     setLoading(false);
     handlePageScroll();
