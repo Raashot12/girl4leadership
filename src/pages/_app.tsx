@@ -21,7 +21,7 @@ import TagManager, { TagManagerArgs } from 'react-gtm-module';
 import { buttonStyles, checkboxStyles, defaultFonts, inputStyles } from 'theme';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { LoaderAnimation } from 'components/Shared/ScreenLoader';
-import { gtmVirtualPageView } from 'components/Shared/gtmVirtualPage';
+import { gtmVirtualPageView, pageview } from 'components/Shared/gtmVirtualPage';
 import store from '../state/store';
 
 type NextPageWithLayout = NextPage & {
@@ -49,6 +49,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     gtmId,
   };
   const handlePageScroll = useCallback(() => {
+    pageview(router.pathname);
     setTimeout(() => {
       if (typeof window !== undefined && window.location.hash) {
         const pageSection = document.getElementById(

@@ -15,3 +15,8 @@ export const logEvent = (eventName: string, payload = {}) => {
     console.log(e);
   }
 };
+export const pageview = (url: string) => {
+  window.gtag('config', process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
+    page_path: url,
+  });
+};
