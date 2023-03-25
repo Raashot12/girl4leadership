@@ -106,6 +106,7 @@ const ContactUs = () => {
               color="#E25D24"
               fw={400}
               component="a"
+              className="gmail_address_clicked"
               href="mailto:girls4leadership@gmail.com"
             >
               girls4leadership@gmail.com

@@ -7,7 +7,7 @@ import {
   useCallback,
 } from 'react';
 import type { AppProps } from 'next/app';
-import Router, { useRouter } from 'next/router';
+import Router from 'next/router';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import type { NextPage } from 'next';
@@ -21,7 +21,7 @@ import TagManager, { TagManagerArgs } from 'react-gtm-module';
 import { buttonStyles, checkboxStyles, defaultFonts, inputStyles } from 'theme';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { LoaderAnimation } from 'components/Shared/ScreenLoader';
-import { gtmVirtualPageView } from 'components/Shared/gtmVirtualPage';
+// import { gtmVirtualPageView } from 'components/Shared/gtmVirtualPage';
 import store from '../state/store';
 
 type NextPageWithLayout = NextPage & {
@@ -41,7 +41,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   });
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
-  const router = useRouter();
   useHotkeys([['mod+J', () => toggleColorScheme()]]);
   const getLayout = Component.getLayout ?? ((page) => page);
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID || '';
@@ -63,14 +62,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       }
     });
   }, []);
-  useEffect(() => {
-    const mainDataLayer = {
-      pageTypeName: pageProps.page || null,
-      url: router.pathname,
-    };
 
-    gtmVirtualPageView(mainDataLayer);
-  }, [pageProps, router.pathname]);
   useEffect(() => {
     setLoading(false);
     handlePageScroll();
@@ -78,7 +70,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   useEffect(() => {
     AOS.init();
-    TagManager.initialize(tagManagerArgs);
+    if (process.browser) {
+      TagManager.initialize(tagManagerArgs);
+    }
   }, []);
 
   Router.events.on('routeChangeStart', () => {

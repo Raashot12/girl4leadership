@@ -15,16 +15,17 @@ export default class AppDocument extends Document {
           <Script
             strategy="lazyOnload"
             async
-            src="https://www.googletagmanager.com/gtag/js?id=G-R8DGDBFYYY"
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
           />
           <Script async id="13" strategy="lazyOnload">
             {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', ${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS});
-            `}
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+                    page_path: window.location.pathname,
+                    });
+                `}
           </Script>
 
           <link rel="manifest" href="/manifest.json" />
