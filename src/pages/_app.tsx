@@ -8,6 +8,8 @@ import {
 } from 'react';
 import type { AppProps } from 'next/app';
 import Router from 'next/router';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import type { NextPage } from 'next';
 import { Provider } from 'react-redux';
 import {
@@ -61,6 +63,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     setLoading(false);
     handlePageScroll();
   }, [handlePageScroll]);
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   Router.events.on('routeChangeStart', () => {
     setLoading(true);

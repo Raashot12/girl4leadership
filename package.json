@@ -25,6 +25,7 @@
     "@types/node": "18.11.8",
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
+    "aos": "^3.0.0-beta.6",
     "dayjs": "^1.11.6",
     "embla-carousel-autoplay": "^7.0.5",
     "embla-carousel-react": "^7.1.0",
@@ -43,6 +44,7 @@
   },
   "devDependencies": {
     "@rtk-query/codegen-openapi": "^1.0.0",
+    "@types/aos": "^3.0.4",
     "@types/react-numeric-input": "^2.2.4",
     "@types/react-redux": "^7.1.24",
     "@typescript-eslint/eslint-plugin": "^5.42.0",

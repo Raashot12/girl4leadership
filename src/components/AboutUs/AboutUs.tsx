@@ -5,14 +5,14 @@ import Animation from 'components/Shared/Animation/AnimationWrapper';
 import React from 'react';
 import Link from 'next/link';
 
-const container = {
+export const container = {
   hidden: { opacity: 0 },
   visible: (i = 1) => ({
     opacity: 1,
     transition: { staggerChildren: 0.12, delayChildren: 0.04 * i },
   }),
 };
-const child = {
+export const child = {
   visible: {
     opacity: 1,
     x: 0,
