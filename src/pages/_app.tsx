@@ -17,7 +17,7 @@ import {
   MantineProvider,
   ColorSchemeProvider,
 } from '@mantine/core';
-import TagManager from 'react-gtm-module';
+import TagManager, { TagManagerArgs } from 'react-gtm-module';
 import { buttonStyles, checkboxStyles, defaultFonts, inputStyles } from 'theme';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { LoaderAnimation } from 'components/Shared/ScreenLoader';
@@ -44,7 +44,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
   useHotkeys([['mod+J', () => toggleColorScheme()]]);
   const getLayout = Component.getLayout ?? ((page) => page);
-
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || '';
+  const tagManagerArgs: TagManagerArgs = {
+    gtmId,
+  };
   const handlePageScroll = useCallback(() => {
     setTimeout(() => {
       if (typeof window !== undefined && window.location.hash) {
@@ -72,9 +75,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     setLoading(false);
     handlePageScroll();
   }, [handlePageScroll]);
+
   useEffect(() => {
     AOS.init();
-    TagManager.initialize({ gtmId: 'GTM-TX9BML6' });
+    TagManager.initialize(tagManagerArgs);
   }, []);
 
   Router.events.on('routeChangeStart', () => {
@@ -84,6 +88,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     setLoading(false);
     handlePageScroll();
   });
+
   return (
     <Provider store={store}>
       <ColorSchemeProvider
