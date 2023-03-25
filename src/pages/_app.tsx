@@ -17,6 +17,7 @@ import {
   MantineProvider,
   ColorSchemeProvider,
 } from '@mantine/core';
+import TagManager from 'react-gtm-module';
 import { buttonStyles, checkboxStyles, defaultFonts, inputStyles } from 'theme';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { LoaderAnimation } from 'components/Shared/ScreenLoader';
@@ -73,6 +74,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   }, [handlePageScroll]);
   useEffect(() => {
     AOS.init();
+    TagManager.initialize({ gtmId: 'GTM-TX9BML6' });
   }, []);
 
   Router.events.on('routeChangeStart', () => {
