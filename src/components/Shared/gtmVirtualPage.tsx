@@ -8,15 +8,3 @@ export const gtmVirtualPageView = (rest: any) => {
     });
   }
 };
-export const logEvent = (eventName: string, payload = {}) => {
-  try {
-    window.gtag('event', eventName, payload);
-  } catch (e) {
-    console.log(e);
-  }
-};
-export const pageview = (url: string) => {
-  window.gtag('config', process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
-    page_path: url,
-  });
-};
