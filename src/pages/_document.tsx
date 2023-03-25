@@ -26,6 +26,21 @@ export default class AppDocument extends Document {
         })(window,document,'script','dataLayer','GTM-NC7P28Z');`,
             }}
           ></Script>
+
+          {/* <Script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-R8DGDBFYYY"
+          ></Script>
+          <Script id="3">
+            dangerouslySetInnerHTML=
+            {{
+              __html: `window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+            gtag('config', 'G-R8DGDBFYYY');`,
+            }}
+          </Script> */}
         </Head>
         <body>
           <Main />

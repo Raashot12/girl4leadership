@@ -66,7 +66,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     };
 
     gtmVirtualPageView(mainDataLayer);
-  }, [pageProps]);
+  }, [pageProps, router.pathname]);
   useEffect(() => {
     setLoading(false);
     handlePageScroll();
