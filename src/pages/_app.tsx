@@ -8,7 +8,6 @@ import {
 } from 'react';
 import type { AppProps } from 'next/app';
 import Router from 'next/router';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
 import type { NextPage } from 'next';
 import { Provider } from 'react-redux';
@@ -69,7 +68,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   }, [handlePageScroll]);
 
   useEffect(() => {
-    AOS.init();
     if (process.browser) {
       TagManager.initialize(tagManagerArgs);
     }

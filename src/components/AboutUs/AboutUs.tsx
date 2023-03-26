@@ -60,7 +60,7 @@ const AboutUs = () => {
               right: 0,
               left: 0,
               height: '125%',
-              opacity: 0.25,
+              opacity: 0.3,
               zIndex: -1,
               background:
                 'url(https://res.cloudinary.com/rashot/image/upload/v1679231969/banner.jpg_amcshe.webp) no-repeat scroll center center',

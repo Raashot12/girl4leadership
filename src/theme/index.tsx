@@ -9,7 +9,7 @@ export const inputStyles = {
     borderRadius: 8,
   },
   label: {
-    fontSize: 12,
+    fontSize: 14,
   },
 };
 
@@ -18,7 +18,8 @@ export const buttonStyles = {
     height: '3rem',
   },
   label: {
-    fontSize: '1rem',
+    fontSize: '1.5rem',
+    fontWeight: 500,
   },
 };
 
