@@ -3,7 +3,7 @@ import { IconArrowForward, IconEye } from '@tabler/icons';
 import { motion } from 'framer-motion';
 import { container, child } from 'components/AboutUs/AboutUs';
 import Link from 'next/link';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { FaExpandAlt } from 'react-icons/fa';
 import { GridWrapper } from 'styles';
 import { data } from './data';
@@ -12,7 +12,7 @@ const text = 'Image Gallery';
 const Galleries = () => {
   const [showMore, setShowMore] = useState(false);
   const [visibleImages, setVisibleImages] = useState(data.slice(0, 8));
-  const containerRef = useRef<HTMLDivElement>();
+
   const handleShowMore = () => {
     setVisibleImages(data.slice(0, visibleImages.length - 1 + 8));
     if (data.length - 1 === visibleImages.length) {
@@ -23,18 +23,12 @@ const Galleries = () => {
   const handleShowLess = () => {
     setVisibleImages(data.slice(0, 8));
     setShowMore(false);
-    window.scrollTo({ behavior: 'smooth' });
+    window.scrollTo({ top: 359, left: 0, behavior: 'smooth' });
   };
-  useEffect(() => {
-    const firstChild = containerRef && containerRef?.current?.firstChild;
-    // console.log('First element:', firstChild);
-    alert(firstChild);
-  });
-  // const parentContainer = document.getElementById('grid-container');
-  // console.log(parentContainer);
+
   const renderImages = () => {
     return visibleImages.map((value) => (
-      <Box key={value.id}>
+      <Box key={value.id} className="card-container">
         <Image
           src={value.imageURL}
           alt="Gallery Image"
@@ -134,12 +128,11 @@ const Galleries = () => {
           </Container>
         </Flex>
         <Container size="xl">
-          <Box py={{ base: 30, sm: 40, md: 90 }}>
-            <GridWrapper ref={containerRef}>{renderImages()}</GridWrapper>
+          <Box py={{ base: 40, md: 90 }}>
+            <GridWrapper>{renderImages()}</GridWrapper>
             <Flex align={'center'} justify={'center'} mt={{ base: 30, sm: 40 }}>
               {!showMore && data.length > 8 && (
                 <Button
-                  component="a"
                   onClick={handleShowMore}
                   sx={{
                     '&.mantine-Button-root': {
@@ -162,8 +155,6 @@ const Galleries = () => {
               {showMore && (
                 <Button
                   onClick={handleShowLess}
-                  component="a"
-                  href="#first-element"
                   sx={{
                     '&.mantine-Button-root': {
                       background: '#E25D24',
