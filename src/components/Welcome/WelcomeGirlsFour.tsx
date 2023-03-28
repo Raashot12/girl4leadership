@@ -28,7 +28,13 @@ const WelcomeGirlsFourInitative = () => {
           >
             <Box>
               <Box mb={40}>
-                <Text fw={600} fz={{ base: 24, md: 36 }} mb={18} lh={'1.5em'}>
+                <Text
+                  fw={600}
+                  fz={{ base: 24, sm: 30, md: 36 }}
+                  mb={18}
+                  lh={'1.5em'}
+                  ta={{ sm: 'center', md: 'left' }}
+                >
                   Welcome to Girls 4 Leadership
                 </Text>
                 <Text
@@ -36,6 +42,7 @@ const WelcomeGirlsFourInitative = () => {
                   fw={300}
                   lh={'24px'}
                   sx={{ width: '100%', maxWidth: '470px' }}
+                  mx={{ sm: 'auto', md: '0' }}
                 >
                   inappropriate behavior is often laughed off as “boys will be
                   boys,” women face higher conduct standards especially in the
@@ -45,7 +52,7 @@ const WelcomeGirlsFourInitative = () => {
                 </Text>
               </Box>
               <Grid gutterLg={20}>
-                <Grid.Col md={4} sm={12}>
+                <Grid.Col md={4} sm={6}>
                   <Box sx={{ border: '1px solid #eeeeee' }} py={30} px={15}>
                     <Flex columnGap={20} direction={'column'} rowGap={10}>
                       <IconDatabase
@@ -66,7 +73,7 @@ const WelcomeGirlsFourInitative = () => {
                   </Box>
                 </Grid.Col>
 
-                <Grid.Col md={4} sm={12}>
+                <Grid.Col md={4} sm={6}>
                   <Box sx={{ border: '1px solid #eeeeee' }} py={30} px={15}>
                     <Flex columnGap={20} direction={'column'} rowGap={10}>
                       <IconBook
@@ -86,7 +93,7 @@ const WelcomeGirlsFourInitative = () => {
                     </Flex>
                   </Box>
                 </Grid.Col>
-                <Grid.Col md={4} sm={12}>
+                <Grid.Col md={4} sm={6}>
                   <Box sx={{ border: '1px solid #eeeeee' }} py={30} px={15}>
                     <Flex columnGap={20} direction={'column'} rowGap={10}>
                       <IconUsers

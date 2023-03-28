@@ -4,9 +4,13 @@ import Animation from '../Shared/Animation/AnimationWrapper';
 
 const HeroSectionCard = () => {
   return (
-    <Box mt={{ lg: -60, base: 20 }} sx={{ zIndex: 2, position: 'relative' }}>
+    <Box
+      mt={{ lg: -60, base: 20 }}
+      sx={{ zIndex: 2, position: 'relative' }}
+      mx={'auto'}
+    >
       <Grid sx={{ color: 'white' }} gutterLg={30}>
-        <Grid.Col md={4} sm={12}>
+        <Grid.Col sm={6} md={4}>
           <Animation
             direction="top"
             width="auto"
@@ -33,7 +37,7 @@ const HeroSectionCard = () => {
           </Animation>
         </Grid.Col>
 
-        <Grid.Col md={4} sm={12}>
+        <Grid.Col sm={6} md={4}>
           <Animation
             direction="top"
             width="auto"
@@ -59,7 +63,7 @@ const HeroSectionCard = () => {
             </Box>
           </Animation>
         </Grid.Col>
-        <Grid.Col md={4} sm={12}>
+        <Grid.Col sm={6} md={4}>
           <Animation
             direction="top"
             width="auto"

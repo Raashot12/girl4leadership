@@ -234,7 +234,7 @@ const ContactUs = () => {
                       height: 40,
                     },
                     '& .mantine-Button-label': {
-                      fontSize: 18,
+                      fontSize: 16,
                       fontWeight: 600,
                     },
                     borderRadius: '10px',

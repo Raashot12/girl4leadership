@@ -162,3 +162,70 @@ const rightToLeftAnimationsharedCSS = css`
   animation-play-state: running;
   opacity: 1 !important;
 `;
+export const GridWrapper = styled.div`
+  --auto-grid-min-size: 16rem;
+  display: grid;
+  margin-top: 2rem;
+  grid-gap: 2rem;
+  position: relative;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--auto-grid-min-size), 1fr)
+  );
+  box-sizing: border-box;
+  & .mantine-Image-image {
+    height: 280px !important;
+    object-fit: cover !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  & .card-container {
+    overflow: hidden;
+    height: fit-content;
+    position: relative;
+    .text-card {
+      transform: translate(-50%, -50%);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      text-align: center;
+      align-items: center;
+      width: 100%;
+      display: none;
+    }
+  }
+  .card-container:hover {
+    -webkit-transition: background-color 2s ease-out;
+    -moz-transition: background-color 2s ease-out;
+    -o-transition: background-color 2s ease-out;
+    transition: background-color 2s ease-out;
+    img {
+      transform: scale(1.0423);
+      -webkit-transition: -webkit-transform 0.5s;
+      transition: -webkit-transform 0.5s;
+      transition: transform 0.5s;
+      transition: transform 0.5s, -webkit-transform 0.5s;
+      transition: transform 0.5s, -webkit-transform 0.5s;
+    }
+  }
+
+  .card-container:hover .text-card {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    background-color: rgba(15, 15, 15, 0.4);
+    -webkit-column-break-inside: avoid;
+    justify-content: center;
+    backface-visibility: hidden;
+    transform: translate(-50%, -50%);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transition: background-color 2s ease-out;
+    -moz-transition: background-color 2s ease-out;
+    -o-transition: background-color 2s ease-out;
+    transition: background-color 2s ease-out;
+  }
+`;
