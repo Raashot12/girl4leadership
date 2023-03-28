@@ -27,7 +27,8 @@ const Galleries = () => {
   };
   useEffect(() => {
     const firstChild = containerRef && containerRef?.current?.firstChild;
-    console.log('First element:', firstChild.);
+    // console.log('First element:', firstChild);
+    alert(firstChild);
   });
   // const parentContainer = document.getElementById('grid-container');
   // console.log(parentContainer);
