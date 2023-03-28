@@ -1,4 +1,12 @@
-import { Box, Container, Text, Flex, Image, Button } from '@mantine/core';
+import {
+  Box,
+  Container,
+  Text,
+  Flex,
+  Image,
+  Button,
+  Modal,
+} from '@mantine/core';
 import { IconArrowForward, IconEye } from '@tabler/icons';
 import { motion } from 'framer-motion';
 import { container, child } from 'components/AboutUs/AboutUs';
@@ -12,7 +20,7 @@ const text = 'Image Gallery';
 const Galleries = () => {
   const [showMore, setShowMore] = useState(false);
   const [visibleImages, setVisibleImages] = useState(data.slice(0, 8));
-
+  const [openModal, setOpenModal] = useState(false);
   const handleShowMore = () => {
     setVisibleImages(data.slice(0, visibleImages.length - 1 + 8));
     if (data.length - 1 === visibleImages.length) {
@@ -20,6 +28,10 @@ const Galleries = () => {
     }
   };
 
+  const handleImageClickedOpenModal = (id: number) => {
+    setOpenModal(true);
+    console.log(id);
+  };
   const handleShowLess = () => {
     setVisibleImages(data.slice(0, 8));
     setShowMore(false);
@@ -37,6 +49,7 @@ const Galleries = () => {
         />
         <Box className="text-card">
           <FaExpandAlt
+            onClick={() => handleImageClickedOpenModal(value.id)}
             color="white"
             fontWeight="bold"
             size={24}
@@ -177,6 +190,13 @@ const Galleries = () => {
           </Box>
         </Container>
       </Box>
+      <Modal
+        opened={openModal}
+        onClose={() => setOpenModal(false)}
+        fullScreen
+        title={<>Previewer</>}
+        withCloseButton={true}
+      ></Modal>
     </>
   );
 };

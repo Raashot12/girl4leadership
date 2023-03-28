@@ -77,7 +77,7 @@ export const data = [
   {
     id: 15,
     imageURL:
-      'https://res.cloudinary.com/rashot/image/upload/v1679913368/IMG_2263_bbyggn.webp',
+      'https://res.cloudinary.com/rashot/image/upload/v1679991551/IMG_2263_ei6ga3.webp',
   },
   {
     id: 16,
@@ -142,7 +142,7 @@ export const data = [
   {
     id: 28,
     imageURL:
-      'https://res.cloudinary.com/rashot/image/upload/v1679913375/1_7_f2pjl4.webp',
+      'https://res.cloudinary.com/rashot/image/upload/v1679991600/1_7_dzfns1.webp',
   },
   {
     id: 29,
