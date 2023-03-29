@@ -50,7 +50,7 @@ const ContactUs = () => {
               transform: 'translateY(38px)',
               zIndex: -1,
               background:
-                'url(https://res.cloudinary.com/rashot/image/upload/v1679287935/afdf_xagteq.jpg) no-repeat scroll center center',
+                'url(https://res.cloudinary.com/rashot/image/upload/v1680009725/julian-hochgesang-Dkn8-zPIbwo-unsplash_iud5cf.webp) no-repeat scroll center center',
             }}
           ></Box>
           <Container size="xl">

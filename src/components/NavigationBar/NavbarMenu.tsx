@@ -68,7 +68,7 @@ const navMenu = [
   },
   {
     pathName: 'Merch Collections',
-    route: '/merch-collections',
+    route: '/merch-collection',
     id: 5,
   },
   {

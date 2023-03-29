@@ -61,9 +61,10 @@ const AboutUs = () => {
               left: 0,
               height: '125%',
               opacity: 0.3,
+              transform: 'translateY(-30px)',
               zIndex: -1,
               background:
-                'url(https://res.cloudinary.com/rashot/image/upload/v1679231969/banner.jpg_amcshe.webp) no-repeat scroll center center',
+                'url(https://res.cloudinary.com/rashot/image/upload/v1680009513/olga-subach-_Ua8fQ4H9Ew-unsplash_hizmi1.jpg) no-repeat scroll center center',
             }}
           ></Box>
           <Container size="xl">

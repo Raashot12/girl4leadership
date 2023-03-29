@@ -2,7 +2,15 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable react/display-name */
-import { Text, Sx, Box, Grid, Flex, MantineNumberSize } from '@mantine/core';
+import {
+  Text,
+  Sx,
+  Box,
+  Grid,
+  Flex,
+  MantineNumberSize,
+  Modal,
+} from '@mantine/core';
 import React from 'react';
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
@@ -227,5 +235,22 @@ export const GridWrapper = styled.div`
     -moz-transition: background-color 2s ease-out;
     -o-transition: background-color 2s ease-out;
     transition: background-color 2s ease-out;
+  }
+`;
+
+export const CustomizedModalPreviewer = styled(Modal)`
+  & .mantine-Paper-root {
+    background-color: rgba(15, 15, 15, 0.6);
+    position: 'relative';
+    overflow: hidden;
+  }
+  & .mantine-Modal-header {
+    z-index: 999;
+    color: #ffffff;
+    font-weight: 600;
+  }
+  & .mantine-Text-root {
+    width: 100%;
+    margin-right: 0;
   }
 `;

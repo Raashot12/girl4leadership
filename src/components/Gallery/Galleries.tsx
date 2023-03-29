@@ -1,37 +1,61 @@
-import {
-  Box,
-  Container,
-  Text,
-  Flex,
-  Image,
-  Button,
-  Modal,
-} from '@mantine/core';
+/* eslint-disable no-plusplus */
+/* eslint-disable no-param-reassign */
+import { Box, Container, Text, Flex, Image, Button } from '@mantine/core';
 import { IconArrowForward, IconEye } from '@tabler/icons';
 import { motion } from 'framer-motion';
 import { container, child } from 'components/AboutUs/AboutUs';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { FaExpandAlt } from 'react-icons/fa';
-import { GridWrapper } from 'styles';
+import { CustomizedModalPreviewer, GridWrapper } from 'styles';
+import CloseIcon from 'components/Icons/CloseIcon';
+import PreviousArrow from 'components/Icons/PreviousArrow';
+import NextArrow from 'components/Icons/NextArrow';
 import { data } from './data';
 
 const text = 'Image Gallery';
 const Galleries = () => {
   const [showMore, setShowMore] = useState(false);
   const [visibleImages, setVisibleImages] = useState(data.slice(0, 8));
+  const [selectedImg, setSelectedImage] = useState<{
+    id: number;
+    imageURL: string;
+  }>({ id: 1, imageURL: '' });
   const [openModal, setOpenModal] = useState(false);
+
   const handleShowMore = () => {
     setVisibleImages(data.slice(0, visibleImages.length - 1 + 8));
     if (data.length - 1 === visibleImages.length) {
       setShowMore(true);
     }
   };
+  const imageToPreiview = (id: number) => {
+    data.forEach((item) => {
+      if (item.id === id) {
+        setSelectedImage(item);
+      }
+    });
+  };
+  const changeBox = (side: string, id: number) => {
+    if (side === '>') {
+      id++;
+      if (id > 30) {
+        id = 1;
+      }
+    } else if (side === '<') {
+      id--;
+      if (id < 1) {
+        id = 30;
+      }
+    }
+    imageToPreiview(id);
+  };
 
   const handleImageClickedOpenModal = (id: number) => {
     setOpenModal(true);
-    console.log(id);
+    imageToPreiview(id);
   };
+
   const handleShowLess = () => {
     setVisibleImages(data.slice(0, 8));
     setShowMore(false);
@@ -83,7 +107,7 @@ const Galleries = () => {
               transform: 'translateY(38px)',
               zIndex: -1,
               background:
-                'url(https://res.cloudinary.com/rashot/image/upload/v1679287935/afdf_xagteq.jpg) no-repeat scroll center center',
+                'url(https://res.cloudinary.com/rashot/image/upload/v1680008227/josh-liu-Tjio9DgtIls-unsplash_mzdmil.webp) no-repeat scroll center center',
             }}
           ></Box>
           <Container size="xl">
@@ -190,13 +214,57 @@ const Galleries = () => {
           </Box>
         </Container>
       </Box>
-      <Modal
+      <CustomizedModalPreviewer
         opened={openModal}
         onClose={() => setOpenModal(false)}
         fullScreen
-        title={<>Previewer</>}
-        withCloseButton={true}
-      ></Modal>
+        title={
+          <Flex align={'center'} justify={'space-between'} w={'100%'}>
+            <Box color="white" fw={500} sx={{ zIndex: 300 }}>
+              Previewer mode
+            </Box>
+            <CloseIcon onclick={() => setOpenModal(false)} />
+          </Flex>
+        }
+        withCloseButton={false}
+      >
+        <Box
+          sx={{
+            width: '100%',
+            position: 'fixed',
+            top: '50%',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingRight: '40px',
+            zIndex: 9999,
+          }}
+        >
+          <PreviousArrow onclick={() => changeBox('<', selectedImg.id)} />
+
+          <NextArrow onclick={() => changeBox('>', selectedImg.id)} />
+        </Box>
+        <Image
+          src={selectedImg && selectedImg.imageURL}
+          alt=""
+          height={400}
+          width={'auto'}
+          sx={{
+            display: 'flex',
+            pointerEvents: 'none',
+            position: 'absolute',
+            transform: 'translate(-50%, -50%)',
+            alignItems: 'center',
+            justifyContent: 'center',
+            left: '50%',
+            right: '50%',
+            top: '50%',
+            '@media (max-width:567px)': {
+              width: '90%',
+            },
+          }}
+        />
+      </CustomizedModalPreviewer>
     </>
   );
 };
