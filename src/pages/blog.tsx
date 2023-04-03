@@ -1,6 +1,7 @@
 import { Box, Container, Flex, Text } from '@mantine/core';
 import { IconArrowForward } from '@tabler/icons';
 import { container, child } from 'components/AboutUs/AboutUs';
+import Blog from 'components/Blog/Blog';
 import { Layout } from 'components/Layout/Layout';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -89,6 +90,7 @@ const BlogPage = () => {
             </Box>
           </Container>
         </Flex>
+        <Blog />
       </Box>
     </Layout>
   );
