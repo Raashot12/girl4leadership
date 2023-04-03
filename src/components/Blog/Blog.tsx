@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Box, Text, Container, Flex } from '@mantine/core';
+import { Box, Text, Container, Group, Image, Grid } from '@mantine/core';
 import Autoplay from 'embla-carousel-autoplay';
 import { Carousel } from '@mantine/carousel';
 import React, { useRef } from 'react';
@@ -44,19 +44,21 @@ const Blog = () => {
               return (
                 <React.Fragment key={value.id}>
                   <Carousel.Slide>
-                    <Flex columnGap={40} rowGap={25} align={'center'}>
-                      <img
-                        src={value.img}
-                        alt={value.title}
-                        loading="eager"
-                        style={{
-                          maxWidth: '100%',
-                          height: '385px',
-                          width: '440px',
-                          borderRadius: 7,
-                        }}
-                      />
-                      <Box>
+                    <Grid gutter={25} gutterMd={50} align={'center'}>
+                      <Grid.Col md={6} lg={4}>
+                        <img
+                          src={value.img}
+                          alt={value.title}
+                          loading="eager"
+                          style={{
+                            maxWidth: '100%',
+                            height: 'auto',
+                            width: '100%',
+                            borderRadius: 7,
+                          }}
+                        />
+                      </Grid.Col>
+                      <Grid.Col md={6} lg={8}>
                         <Text>
                           <span style={{ fontWeight: '600' }}>
                             {value.category}
@@ -71,7 +73,13 @@ const Blog = () => {
                             -- {value.date}
                           </span>
                         </Text>
-                        <Text fz={40} fw={800} lh={1.2} mt={15}>
+                        <Text
+                          fz={{ base: 30, md: 40 }}
+                          fw={700}
+                          lh={1.2}
+                          mt={15}
+                          sx={{ whiteSpace: 'normal' }}
+                        >
                           {value.title}
                         </Text>
                         <Text
@@ -84,8 +92,29 @@ const Blog = () => {
                         >
                           {value.subtitle}
                         </Text>
-                      </Box>
-                    </Flex>
+                        <Group mt={20}>
+                          <Image
+                            src={value.profileImage}
+                            alt="profile display picture"
+                            h={45}
+                            width={45}
+                            sx={{
+                              '& .mantine-Image-image': {
+                                borderRadius: '50%',
+                              },
+                            }}
+                          />
+                          <Box>
+                            <Text fw={700} lh={1}>
+                              {value.author.name}
+                            </Text>
+                            <Text fw={14} color="#888">
+                              {value.author.profession}
+                            </Text>
+                          </Box>
+                        </Group>
+                      </Grid.Col>
+                    </Grid>
                   </Carousel.Slide>
                 </React.Fragment>
               );

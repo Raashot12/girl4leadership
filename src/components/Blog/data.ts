@@ -4,7 +4,9 @@ export const blogData = {
       id: 1,
       category: 'Business, Travel',
       img: 'https://preview.colorlib.com/theme/magdesign/images/post_lg_1.jpg',
-      auto: {
+      profileImage:
+        'https://preview.colorlib.com/theme/magdesign/images/person_1.jpg',
+      author: {
         name: 'Rasheed Iskilu',
         profession: 'Frontend Dev & Freelancer',
       },
@@ -18,7 +20,9 @@ export const blogData = {
       id: 2,
       category: 'Business, Travel',
       img: 'https://preview.colorlib.com/theme/magdesign/images/post_lg_4.jpg',
-      auto: {
+      profileImage:
+        'https://preview.colorlib.com/theme/magdesign/images/person_1.jpg',
+      author: {
         name: 'Rasheed Iskilu',
         profession: 'Frontend Dev & Freelancer',
       },
@@ -32,7 +36,9 @@ export const blogData = {
       id: 3,
       category: 'Business, Travel',
       img: '	https://preview.colorlib.com/theme/magdesign/images/post_lg_2.jpg',
-      auto: {
+      profileImage:
+        'https://res.cloudinary.com/rashot/image/upload/v1678357985/testi-1.png_j0uy1x.webp',
+      author: {
         name: 'Kehinde',
         profession: 'Technical Recruiter',
       },
