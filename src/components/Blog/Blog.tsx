@@ -1,10 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { Box, Text, Container, Image, Flex, Grid } from '@mantine/core';
+import { Box, Text, Container, Flex } from '@mantine/core';
 import Autoplay from 'embla-carousel-autoplay';
 import { Carousel } from '@mantine/carousel';
 import React, { useRef } from 'react';
 import { blogData } from './data';
-import { GridCol } from 'styles';
 
 const Blog = () => {
   const autoplay = useRef(Autoplay({ delay: 2000 }));
