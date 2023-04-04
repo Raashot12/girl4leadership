@@ -210,6 +210,7 @@ const Blog = () => {
           changePage={changePage}
         />
       </Container>
+      <Box></Box>
     </Box>
   );
 };

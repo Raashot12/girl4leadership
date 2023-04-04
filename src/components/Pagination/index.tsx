@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { List, Flex, Button, useMantineColorScheme } from '@mantine/core';
@@ -28,7 +29,7 @@ const Pagination: FC<IPaginationProps> = ({
 }) => {
   const router = useRouter();
   const { colorScheme } = useMantineColorScheme();
-  console.log(colorScheme);
+
   // when data changes navigate to page 1
   useEffect(() => {
     changePage(1);
@@ -41,7 +42,6 @@ const Pagination: FC<IPaginationProps> = ({
         display={pagination.length === 0 ? 'none' : 'flex'}
         onClick={(e: any) => {
           prevPage(e);
-
           const pathAndSlug = router.asPath.split('#')[0];
           const newPath = `${pathAndSlug}#${idToClampTo}`;
           // eslint-disable-next-line no-unused-expressions
@@ -91,21 +91,31 @@ const Pagination: FC<IPaginationProps> = ({
                   }}
                   fz={14}
                   bg={page.current ? '#E25D24' : 'transparent'}
-                  // color={page.current ? '#3f3733' : 'red'}
                   sx={{
                     ':hover': {
                       backgroundColor: page.current ? '#E25D24' : '',
-                      transform: 'scale(1.05)',
                     },
                     ':active': {
                       backgroundColor: '#E25D24',
                       transform: 'scale(0.95)',
                     },
-                    borderColor: 'orange',
+                    borderColor: '#E25D24',
                     '.mantine-Button-label': {
                       fontSize: 14,
                     },
-                    // color: colorScheme ? '#888' : 'white',
+                    '&.mantine-Button-root': {
+                      color: page.current
+                        ? 'white'
+                        : colorScheme === 'dark'
+                        ? 'white'
+                        : '#051438',
+                      height: 36,
+                      '&:hover': {
+                        background: '#E25D24',
+                        color: 'white',
+                        border: 'none',
+                      },
+                    },
                   }}
                   fw={400}
                 >
@@ -130,11 +140,13 @@ const Pagination: FC<IPaginationProps> = ({
                 bg="transparent"
                 fw={400}
                 sx={{
-                  borderColor: 'orange',
+                  borderColor: '#E25D24',
                   '.mantine-Button-label': {
                     fontSize: 14,
                   },
                   '&.mantine-Button-root': {
+                    height: 36,
+                    color: colorScheme === 'dark' ? 'white' : '#051438',
                     '&:hover': {
                       background: 'none !important',
                     },
