@@ -5,13 +5,20 @@ import { Carousel } from '@mantine/carousel';
 import React, { useRef } from 'react';
 import { usePagination } from 'hooks/usePagination';
 import Pagination from 'components/Pagination';
+import { useMediaQuery } from '@mantine/hooks';
 import { blogData } from './data';
 
 const Blog = () => {
   const autoplay = useRef(Autoplay({ delay: 2000 }));
   const { trendingPost, blogPostItem } = blogData;
+  const matches = useMediaQuery('(max-width: 991.5px)');
   const { slicedData, pagination, prevPage, nextPage, changePage } =
-    usePagination({ itemsPerPage: 3, data: blogPostItem, startFrom: 1 });
+    usePagination({
+      itemsPerPage: matches ? 4 : 3,
+      data: blogPostItem,
+      startFrom: 1,
+    });
+
   return (
     <Box py={40}>
       <Text
@@ -130,7 +137,7 @@ const Blog = () => {
             {slicedData &&
               slicedData.map((value) => {
                 return (
-                  <Grid.Col md={4} lg={4} key={value.id}>
+                  <Grid.Col xs={12} sm={6} md={4} key={value.id}>
                     <Image
                       src={value.img}
                       alt={value.title}

@@ -133,7 +133,6 @@ const Pagination: FC<IPaginationProps> = ({
                   background: 'none !important',
                 },
               }}
-              // color={colorScheme === 'dark' ? 'red' : 'yellow'}
             >
               {/* Ellipsis */}
               <Button
