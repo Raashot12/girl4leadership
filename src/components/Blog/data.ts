@@ -19,7 +19,7 @@ export const blogData = {
     {
       id: 2,
       category: 'Business, Travel',
-      img: 'https://preview.colorlib.com/theme/magdesign/images/img_6.jpg',
+      img: 'https://preview.colorlib.com/theme/magdesign/images/post_lg_3.jpg',
       profileImage:
         'https://preview.colorlib.com/theme/magdesign/images/person_1.jpg',
       author: {

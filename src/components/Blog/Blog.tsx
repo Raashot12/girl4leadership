@@ -22,7 +22,7 @@ const Blog = () => {
       >
         Trending
       </Text>
-      <Container size={'xl'}>
+      <Container size={'xl'} sx={{ overflowY: 'hidden', overflowX: 'hidden' }}>
         <Carousel
           mx="auto"
           plugins={[autoplay.current]}
@@ -130,7 +130,7 @@ const Blog = () => {
             {slicedData &&
               slicedData.map((value) => {
                 return (
-                  <Grid.Col lg={4} key={value.id}>
+                  <Grid.Col md={4} lg={4} key={value.id}>
                     <Image
                       src={value.img}
                       alt={value.title}
@@ -172,7 +172,7 @@ const Blog = () => {
                         color="#999"
                         sx={{ whiteSpace: 'normal' }}
                       >
-                        {value.subtitle.substring(0, 160)}.
+                        {value.subtitle.substring(0, 88)}.
                       </Text>
                       <Group mt={20}>
                         <Image
