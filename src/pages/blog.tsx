@@ -33,7 +33,7 @@ const BlogPage = () => {
               transform: 'translateY(38px)',
               zIndex: -1,
               background:
-                'url(https://res.cloudinary.com/rashot/image/upload/v1680008227/josh-liu-Tjio9DgtIls-unsplash_mzdmil.webp) no-repeat scroll center center',
+                'url(https://res.cloudinary.com/rashot/image/upload/v1680580320/arnel-hasanovic-MNd-Rka1o0Q-unsplash_tr1etx.webp) no-repeat scroll center center',
             }}
           ></Box>
           <Container size="xl">

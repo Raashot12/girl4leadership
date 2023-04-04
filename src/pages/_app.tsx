@@ -109,6 +109,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                     ? theme.colors.brand[5]
                     : theme.black,
               },
+              html: {
+                scrollBehavior: 'smooth',
+              },
             }),
             colorScheme,
             black: '#051438',

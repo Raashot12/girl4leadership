@@ -1,13 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
-import { Box, Text, Container, Group, Image, Grid } from '@mantine/core';
+import { Box, Text, Container, Group, Image, Grid, Flex } from '@mantine/core';
 import Autoplay from 'embla-carousel-autoplay';
 import { Carousel } from '@mantine/carousel';
 import React, { useRef } from 'react';
+import { usePagination } from 'hooks/usePagination';
+import Pagination from 'components/Pagination';
 import { blogData } from './data';
 
 const Blog = () => {
   const autoplay = useRef(Autoplay({ delay: 2000 }));
-  const { trendingPost } = blogData;
+  const { trendingPost, blogPostItem } = blogData;
+  const { slicedData, pagination, prevPage, nextPage, changePage } =
+    usePagination({ itemsPerPage: 3, data: blogPostItem, startFrom: 1 });
   return (
     <Box py={40}>
       <Text
@@ -92,7 +96,7 @@ const Blog = () => {
                         >
                           {value.subtitle}
                         </Text>
-                        <Group mt={20}>
+                        <Group mt={20} id="blogs">
                           <Image
                             src={value.profileImage}
                             alt="profile display picture"
@@ -120,6 +124,91 @@ const Blog = () => {
               );
             })}
         </Carousel>
+        {/* Blog Items Section */}
+        <Box mt={50}>
+          <Grid gutter={45}>
+            {slicedData &&
+              slicedData.map((value) => {
+                return (
+                  <Grid.Col lg={4} key={value.id}>
+                    <Image
+                      src={value.img}
+                      alt={value.title}
+                      sx={{
+                        '& .mantine-Image-image': {
+                          borderRadius: '7px',
+                        },
+                      }}
+                    />
+                    <Box mt={25}>
+                      <Text>
+                        <span style={{ fontWeight: '600' }}>
+                          {value.category}
+                        </span>{' '}
+                        <span
+                          style={{
+                            color: ' #999',
+                            fontWeight: 400,
+                            fontSize: 14,
+                          }}
+                        >
+                          -- {value.date}
+                        </span>
+                      </Text>
+                      <Text
+                        fz={{ base: 18 }}
+                        fw={700}
+                        lh={1.2}
+                        mt={15}
+                        sx={{ whiteSpace: 'normal' }}
+                      >
+                        {value.title}
+                      </Text>
+                      <Text
+                        fz={14}
+                        fw={400}
+                        lh={1.5}
+                        mt={15}
+                        color="#999"
+                        sx={{ whiteSpace: 'normal' }}
+                      >
+                        {value.subtitle.substring(0, 160)}.
+                      </Text>
+                      <Group mt={20}>
+                        <Image
+                          src={value.profileImage}
+                          alt="profile display picture"
+                          sx={{
+                            '& .mantine-Image-image': {
+                              borderRadius: '50%',
+                              height: '45px !important',
+                              width: '45px !important',
+                            },
+                          }}
+                        />
+                        <Box>
+                          <Text fw={700} lh={1}>
+                            {value.author.name}
+                          </Text>
+                          <Text fw={14} color="#888">
+                            {value.author.profession}
+                          </Text>
+                        </Box>
+                      </Group>
+                    </Box>
+                  </Grid.Col>
+                );
+              })}
+          </Grid>
+        </Box>
+        <Flex justify="center" mt={40}></Flex>
+        <Pagination
+          idToClampTo="blogs"
+          pagination={pagination}
+          prevPage={prevPage}
+          nextPage={nextPage}
+          changePage={changePage}
+        />
       </Container>
     </Box>
   );
