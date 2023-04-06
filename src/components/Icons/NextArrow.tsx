@@ -1,4 +1,4 @@
-const NextArrow = ({ onclick }: { onclick: () => void }) => (
+const NextArrow = ({ onclick }: { onclick?: () => void }) => (
   <svg
     width="10"
     height="20"

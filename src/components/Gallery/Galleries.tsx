@@ -1,6 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
-import { Box, Container, Text, Flex, Image, Button } from '@mantine/core';
+import {
+  Box,
+  Container,
+  Text,
+  Flex,
+  Image,
+  Button,
+  useMantineColorScheme,
+} from '@mantine/core';
 import { IconArrowForward, IconEye } from '@tabler/icons';
 import { motion } from 'framer-motion';
 import { container, child } from 'components/AboutUs/AboutUs';
@@ -16,6 +25,8 @@ import { data } from './data';
 const text = 'Image Gallery';
 const Galleries = () => {
   const [showMore, setShowMore] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const { colorScheme } = useMantineColorScheme();
   const [visibleImages, setVisibleImages] = useState(data.slice(0, 8));
   const [selectedImg, setSelectedImage] = useState<{
     id: number;
@@ -35,6 +46,18 @@ const Galleries = () => {
         setSelectedImage(item);
       }
     });
+  };
+
+  const handleWheel = (event: any) => {
+    event.preventDefault();
+
+    // Increase or decrease zoom level based on scroll direction
+    const newZoomLevel = event.deltaY > 0 ? zoomLevel - 0.1 : zoomLevel + 0.1;
+
+    // Limit zoom level between 0.5 and 3
+    if (newZoomLevel >= 0.5 && newZoomLevel <= 3) {
+      setZoomLevel(newZoomLevel);
+    }
   };
   const changeBox = (side: string, id: number) => {
     if (side === '>') {
@@ -216,6 +239,7 @@ const Galleries = () => {
       </Box>
       <CustomizedModalPreviewer
         opened={openModal}
+        onWheel={handleWheel}
         onClose={() => setOpenModal(false)}
         fullScreen
         title={
@@ -223,7 +247,12 @@ const Galleries = () => {
             <Box color="white" fw={500} sx={{ zIndex: 300 }}>
               Previewer mode
             </Box>
-            <CloseIcon onclick={() => setOpenModal(false)} />
+            <CloseIcon
+              onclick={() => {
+                setOpenModal(false);
+                setZoomLevel(1);
+              }}
+            />
           </Flex>
         }
         withCloseButton={false}
@@ -240,25 +269,65 @@ const Galleries = () => {
             zIndex: 9999,
           }}
         >
-          <PreviousArrow onclick={() => changeBox('<', selectedImg.id)} />
-
-          <NextArrow onclick={() => changeBox('>', selectedImg.id)} />
+          <Flex
+            onClick={() => changeBox('<', selectedImg.id)}
+            align={'center'}
+            justify={'center'}
+            sx={{
+              cursor: 'pointer',
+              borderRadius: 3,
+              transition: 'all 0.3s ease-in-out',
+              ':hover': {
+                background:
+                  colorScheme === 'dark'
+                    ? 'rgb(255, 255, 255, 0.2)'
+                    : 'rgb(6, 11, 32, 0.2)',
+              },
+            }}
+            h={40}
+            w={20}
+          >
+            <PreviousArrow />
+          </Flex>
+          <Flex
+            onClick={() => changeBox('>', selectedImg.id)}
+            align={'center'}
+            justify={'center'}
+            sx={{
+              cursor: 'pointer',
+              borderRadius: 3,
+              transition: 'all 0.3s ease-in-out',
+              ':hover': {
+                background:
+                  colorScheme === 'dark'
+                    ? 'rgb(255, 255, 255, 0.2)'
+                    : 'rgb(6, 11, 32, 0.2)',
+              },
+            }}
+            h={40}
+            w={20}
+          >
+            <NextArrow />
+          </Flex>
         </Box>
         <Image
           src={selectedImg && selectedImg.imageURL}
           alt=""
           height={400}
           width={'auto'}
+          onWheel={handleWheel}
+          style={{ transform: `scale(${zoomLevel})` }}
           sx={{
             display: 'flex',
             pointerEvents: 'none',
             position: 'absolute',
             transform: 'translate(-50%, -50%)',
+
             alignItems: 'center',
             justifyContent: 'center',
             left: '50%',
             right: '50%',
-            top: '50%',
+            top: '25%',
             '@media (max-width:567px)': {
               width: '90%',
             },
