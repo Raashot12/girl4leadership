@@ -7,6 +7,7 @@ import { usePagination } from 'hooks/usePagination';
 import Pagination from 'components/Pagination';
 import { useMediaQuery } from '@mantine/hooks';
 import { blogData } from './data';
+import Popular from './Popular';
 
 const Blog = () => {
   const autoplay = useRef(Autoplay({ delay: 2000 }));
@@ -54,7 +55,13 @@ const Blog = () => {
             trendingPost.map((value) => {
               return (
                 <React.Fragment key={value.id}>
-                  <Carousel.Slide>
+                  <Carousel.Slide
+                    sx={{
+                      '.mantine-Carousel-viewport': {
+                        overflowY: 'hidden',
+                      },
+                    }}
+                  >
                     <Grid gutter={25} gutterMd={50} align={'center'}>
                       <Grid.Col md={6} lg={4}>
                         <img
@@ -217,7 +224,9 @@ const Blog = () => {
           changePage={changePage}
         />
       </Container>
-      <Box></Box>
+      <Box>
+        <Popular />
+      </Box>
     </Box>
   );
 };
