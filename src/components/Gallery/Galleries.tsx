@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-return */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
@@ -9,8 +10,15 @@ import {
   Image,
   Button,
   useMantineColorScheme,
+  Group,
 } from '@mantine/core';
-import { IconArrowForward, IconEye } from '@tabler/icons';
+import {
+  IconArrowForward,
+  IconEye,
+  IconMinus,
+  IconPlus,
+  IconResize,
+} from '@tabler/icons';
 import { motion } from 'framer-motion';
 import { container, child } from 'components/AboutUs/AboutUs';
 import Link from 'next/link';
@@ -49,14 +57,23 @@ const Galleries = () => {
   };
 
   const handleWheel = (event: any) => {
-    event.preventDefault();
-
     // Increase or decrease zoom level based on scroll direction
     const newZoomLevel = event.deltaY > 0 ? zoomLevel - 0.1 : zoomLevel + 0.1;
 
     // Limit zoom level between 0.5 and 3
-    if (newZoomLevel >= 0.5 && newZoomLevel <= 3) {
+    if (newZoomLevel >= 0.5 && newZoomLevel <= 1.6) {
       setZoomLevel(newZoomLevel);
+    }
+  };
+  const handleZoomFunc = (arg?: string) => {
+    if (arg === '+') {
+      if (zoomLevel >= 1.6) return;
+      setZoomLevel((prev) => prev + 0.1);
+    } else if (arg === '-') {
+      if (zoomLevel <= 0.5) return;
+      setZoomLevel((prev) => prev - 0.1);
+    } else if (arg === '[]') {
+      setZoomLevel(1);
     }
   };
   const changeBox = (side: string, id: number) => {
@@ -244,9 +261,20 @@ const Galleries = () => {
         fullScreen
         title={
           <Flex align={'center'} justify={'space-between'} w={'100%'}>
-            <Box color="white" fw={500} sx={{ zIndex: 300 }}>
-              Previewer mode
-            </Box>
+            <Group>
+              <IconPlus
+                cursor={'pointer'}
+                onClick={() => handleZoomFunc('+')}
+              />
+              <IconResize
+                cursor={'pointer'}
+                onClick={() => handleZoomFunc('[]')}
+              />
+              <IconMinus
+                cursor={'pointer'}
+                onClick={() => handleZoomFunc('-')}
+              />
+            </Group>
             <CloseIcon
               onclick={() => {
                 setOpenModal(false);
@@ -317,9 +345,15 @@ const Galleries = () => {
           width={'auto'}
           onWheel={handleWheel}
           style={{ transform: `scale(${zoomLevel})` }}
+          top={{
+            base: '25%',
+            sm: '35%',
+            md: '40%',
+            lg: '30%',
+            xl: '25%',
+          }}
           sx={{
             display: 'flex',
-            pointerEvents: 'none',
             position: 'absolute',
             transform: 'translate(-50%, -50%)',
 
@@ -327,7 +361,7 @@ const Galleries = () => {
             justifyContent: 'center',
             left: '50%',
             right: '50%',
-            top: '25%',
+
             '@media (max-width:567px)': {
               width: '90%',
             },
