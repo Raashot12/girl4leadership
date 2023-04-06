@@ -144,7 +144,7 @@ const Testimonial = () => {
           loop
           withControls={mobileScreen ? false : true}
           align="center"
-          slidesToScroll={largeScreen ? 3 : mediumScreen ? 3 : 1}
+          slidesToScroll={largeScreen ? 3 : mediumScreen ? 2 : 1}
         >
           {testimonialCards.map((value) => {
             return (

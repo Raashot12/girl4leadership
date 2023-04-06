@@ -244,4 +244,22 @@ export const blogData = {
         'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.',
     },
   ],
+  popularPost: [
+    {
+      id: 1,
+      category: 'Movies, Fun fact',
+      img: 'https://preview.colorlib.com/theme/magdesign/images/img_7.jpg',
+      profileImage:
+        'https://preview.colorlib.com/theme/magdesign/images/person_1.jpg',
+      author: {
+        name: 'Rasheed Iskilu',
+        profession: 'Frontend Dev & Freelancer',
+      },
+      date: 'Feburary 10, 2023',
+      title:
+        'Your most unhappy customers are your greatest source of learning.',
+      subtitle:
+        'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.',
+    },
+  ],
 };
