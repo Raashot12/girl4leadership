@@ -347,8 +347,8 @@ const Galleries = () => {
           style={{ transform: `scale(${zoomLevel})` }}
           top={{
             base: '25%',
-            sm: '35%',
-            md: '40%',
+            sm: '34%',
+            md: '37%',
             lg: '30%',
             xl: '25%',
           }}
