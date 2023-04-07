@@ -346,7 +346,7 @@ const Galleries = () => {
           onWheel={handleWheel}
           style={{ transform: `scale(${zoomLevel})` }}
           top={{
-            base: '25%',
+            base: '25.4%',
             sm: '34%',
             md: '37%',
             lg: '30%',
@@ -361,7 +361,9 @@ const Galleries = () => {
             justifyContent: 'center',
             left: '50%',
             right: '50%',
-
+            '@media (max-width:375.5px)': {
+              top: '23%',
+            },
             '@media (max-width:567px)': {
               width: '90%',
             },
