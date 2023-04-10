@@ -58,7 +58,7 @@ const HeroSection = () => {
                 mb={20}
                 fw={600}
               >
-                Help for victims affcted by flood
+                Help for victims affected by flood
               </Box>
               <Box sx={{ fontSize: 14, lineHeight: '24px' }} fw={300} mb={25}>
                 If you are looking at blank cassettes on the web, you may be
