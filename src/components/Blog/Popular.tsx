@@ -3,8 +3,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Carousel, Embla } from '@mantine/carousel';
 import { Box, Group, Progress, Text, Image } from '@mantine/core';
-import { blogData } from './data';
 import { useMediaQuery } from '@mantine/hooks';
+import { blogData } from './data';
 
 function Popular() {
   const [scrollProgress, setScrollProgress] = useState(0);
