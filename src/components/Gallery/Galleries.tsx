@@ -113,7 +113,7 @@ const Galleries = () => {
         />
         <Box className="text-card">
           <FaExpandAlt
-            onClick={() => handleImageClickedOpenModal(value.id)}
+            onClick={handleImageClickedOpenModal.bind(this, value.id)}
             color="white"
             fontWeight="bold"
             size={24}
@@ -356,7 +356,6 @@ const Galleries = () => {
             display: 'flex',
             position: 'absolute',
             transform: 'translate(-50%, -50%)',
-
             alignItems: 'center',
             justifyContent: 'center',
             left: '50%',
