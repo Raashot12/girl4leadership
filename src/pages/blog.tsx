@@ -1,5 +1,13 @@
-import { Box, Container, Flex, Text } from '@mantine/core';
-import { IconArrowForward } from '@tabler/icons';
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Grid,
+  Text,
+  TextInput,
+} from '@mantine/core';
+import { IconArrowForward, IconSend } from '@tabler/icons';
 import { container, child } from 'components/AboutUs/AboutUs';
 import Blog from 'components/Blog/Blog';
 import { Layout } from 'components/Layout/Layout';
@@ -91,6 +99,43 @@ const BlogPage = () => {
           </Container>
         </Flex>
         <Blog />
+        <Container size={'xl'}>
+          <Box
+            px={{ base: 20, sm: 30, md: 40, lg: 60 }}
+            py={20}
+            sx={{ background: '#F8F9FA' }}
+            my={50}
+          >
+            <Text fz={{ base: 20, sm: 24, md: 28 }} mb={16} fw={600}>
+              Subscribe to newsletter
+            </Text>
+            <Grid>
+              <Grid.Col sm={8}>
+                <TextInput placeholder="Enter your mail" />
+              </Grid.Col>
+              <Grid.Col sm={4}>
+                <Button
+                  fullWidth
+                  sx={{
+                    '&.mantine-Button-root': {
+                      background: '#E25D24',
+                    },
+                    '& .mantine-Button-label': {
+                      fontSize: 16,
+                      fontWeight: 600,
+                    },
+                    borderRadius: '10px',
+                  }}
+                  rightIcon={
+                    <IconSend style={{ cursor: 'pointer' }} size={16} />
+                  }
+                >
+                  SUBSCRIBE
+                </Button>
+              </Grid.Col>
+            </Grid>
+          </Box>
+        </Container>
       </Box>
     </Layout>
   );

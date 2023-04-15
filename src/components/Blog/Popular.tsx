@@ -34,10 +34,10 @@ const ProgressBar = styled(Box as any)`
   margin: auto;
   background-color: transparent;
 `;
-const BoxFill = styled(Box as any)<{ scrollProgress: number }>`
+const BoxFill = styled(Box as any)<{ scrollprogress: number }>`
   position: absolute;
   height: 8px;
-  width: ${({ scrollProgress }) => (scrollProgress ? `${scrollProgress}%` : 0)};
+  width: ${({ scrollprogress }) => (scrollprogress ? `${scrollprogress}%` : 0)};
   animation: ${progressForward} 1s;
   background: rgb(34, 193, 195);
   background: #e25d24;
@@ -74,12 +74,11 @@ function Popular() {
   }, [embla]);
 
   return (
-    <Box py={'7rem'}>
+    <Box pb={'3rem'} pt={'7rem'}>
       <Box
         sx={{ textAlign: 'center' }}
         fz={{ base: 25, sm: 30, lg: 40 }}
         fw={700}
-        mb={40}
       >
         Most Popular Posts
       </Box>
@@ -176,7 +175,7 @@ function Popular() {
         pr={25}
       >
         <ProgressBar display={{ base: 'none', sm: 'block' }}>
-          <BoxFill scrollProgress={scrollProgress}></BoxFill>
+          <BoxFill scrollprogress={scrollProgress}></BoxFill>
         </ProgressBar>
         <Flex
           align={'center'}
@@ -185,10 +184,16 @@ function Popular() {
           fw={500}
         >
           <Box
+            component="button"
             onClick={scrollPrev}
             sx={{
+              outline: 'none',
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              color: scrollProgress <= 0.4 ? 'gray' : '',
               ':hover': {
-                color: '#e25d24',
+                color: scrollProgress <= 0 ? '' : '#e25d24',
                 transition: 'all 0.4s ease-in-out',
               },
             }}
@@ -196,11 +201,16 @@ function Popular() {
             Prev
           </Box>
           <Box
+            component="button"
             onClick={scrollNext}
             sx={{
+              outline: 'none',
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
               color: scrollProgress >= 99 ? 'gray' : '',
               ':hover': {
-                color: scrollProgress >= 100 ? '' : '#e25d24',
+                color: scrollProgress >= 99 ? '' : '#e25d24',
                 transition: 'all 0.4s ease-in-out',
               },
             }}

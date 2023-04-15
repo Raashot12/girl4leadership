@@ -21,7 +21,7 @@ const Blog = () => {
     });
 
   return (
-    <Box py={40}>
+    <Box pt={40}>
       <Text
         ta={'center'}
         fz={{ base: 30, lg: 40 }}
