@@ -1,11 +1,48 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable @next/next/no-img-element */
 import { useCallback, useEffect, useState } from 'react';
 import { Carousel, Embla } from '@mantine/carousel';
-import { Box, Group, Progress, Text, Image } from '@mantine/core';
+import { Box, Group, Text, Image, Flex, keyframes } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import styled from '@emotion/styled';
 import { blogData } from './data';
 
+const progressForward = keyframes`
+  0% {
+    width: 0%;
+  }
+  25% {
+    width: 50%;
+  }
+  50% {
+    width: 75%;
+  }
+  75% {
+    width: 85%;
+  }
+  100% {
+    width: 100%;
+  }
+`;
+const ProgressBar = styled(Box as any)`
+  position: relative;
+  height: 8px;
+  width: 320px;
+  background: white;
+  border-radius: 25px;
+  margin: auto;
+  background-color: transparent;
+`;
+const BoxFill = styled(Box as any)<{ scrollProgress: number }>`
+  position: absolute;
+  height: 8px;
+  width: ${({ scrollProgress }) => (scrollProgress ? `${scrollProgress}%` : 0)};
+  animation: ${progressForward} 1s;
+  background: rgb(34, 193, 195);
+  background: #e25d24;
+  border-radius: 15px;
+`;
 function Popular() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [embla, setEmbla] = useState<Embla | null>(null);
@@ -28,6 +65,14 @@ function Popular() {
     }
   }, [embla]);
 
+  const scrollPrev = useCallback(() => {
+    if (embla) embla.scrollPrev();
+  }, [embla]);
+
+  const scrollNext = useCallback(() => {
+    if (embla) embla.scrollNext();
+  }, [embla]);
+
   return (
     <Box py={'7rem'}>
       <Box
@@ -45,6 +90,8 @@ function Popular() {
         loop={!!mobile}
         getEmblaApi={setEmbla}
         initialSlide={0}
+        withControls={false}
+        onNextSlide={() => null}
       >
         {blogData &&
           blogData.popularPost.map((value) => {
@@ -63,7 +110,7 @@ function Popular() {
                     verticalAlign: 'middle',
                   }}
                 />
-                <Box>
+                <Box w={'100%'}>
                   <Text>
                     <span style={{ fontWeight: '600' }}>{value.category}</span>{' '}
                     <span
@@ -99,7 +146,7 @@ function Popular() {
                     <Image
                       src={value.profileImage}
                       alt="profile display picture"
-                      h={45}
+                      height={45}
                       width={45}
                       sx={{
                         '& .mantine-Image-image': {
@@ -120,22 +167,48 @@ function Popular() {
               </Carousel.Slide>
             );
           })}
-      </Carousel>
-      <Progress
-        value={scrollProgress}
-        sx={{
-          '& .mantine-Progress-bar': {
-            background: '#E25D24',
-          },
-        }}
-        styles={{
-          bar: { transitionDuration: '0ms' },
-          root: { maxWidth: 320 },
-        }}
-        size="sm"
-        mt="xl"
+      </Carousel>{' '}
+      <Flex
+        justify={{ base: 'center', sm: 'space-between' }}
+        mt={50}
         mx="auto"
-      />
+        align={'center'}
+        pr={25}
+      >
+        <ProgressBar display={{ base: 'none', sm: 'block' }}>
+          <BoxFill scrollProgress={scrollProgress}></BoxFill>
+        </ProgressBar>
+        <Flex
+          align={'center'}
+          columnGap={25}
+          sx={{ cursor: 'pointer' }}
+          fw={500}
+        >
+          <Box
+            onClick={scrollPrev}
+            sx={{
+              ':hover': {
+                color: '#e25d24',
+                transition: 'all 0.4s ease-in-out',
+              },
+            }}
+          >
+            Prev
+          </Box>
+          <Box
+            onClick={scrollNext}
+            sx={{
+              color: scrollProgress >= 99 ? 'gray' : '',
+              ':hover': {
+                color: scrollProgress >= 100 ? '' : '#e25d24',
+                transition: 'all 0.4s ease-in-out',
+              },
+            }}
+          >
+            Next
+          </Box>
+        </Flex>
+      </Flex>
     </Box>
   );
 }

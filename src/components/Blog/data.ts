@@ -35,7 +35,7 @@ export const blogData = {
     {
       id: 3,
       category: 'Business, Travel',
-      img: '	https://preview.colorlib.com/theme/magdesign/images/post_lg_2.jpg',
+      img: 'https://preview.colorlib.com/theme/magdesign/images/post_lg_2.jpg',
       profileImage:
         'https://res.cloudinary.com/rashot/image/upload/v1678357985/testi-1.png_j0uy1x.webp',
       author: {
@@ -69,7 +69,7 @@ export const blogData = {
     {
       id: 2,
       category: 'Business, Travel',
-      img: '	https://preview.colorlib.com/theme/magdesign/images/img_6.jpg',
+      img: 'https://preview.colorlib.com/theme/magdesign/images/img_6.jpg',
       profileImage:
         'https://res.cloudinary.com/rashot/image/upload/v1680566900/WhatsApp_Image_2023-03-19_at_7.41.40_PM_d2bqxd.jpg',
       author: {
@@ -280,9 +280,9 @@ export const blogData = {
     {
       id: 3,
       category: 'Movies, Fun fact',
-      img: 'https://preview.colorlib.com/theme/magdesign/images/img_7.jpg',
+      img: 'https://preview.colorlib.com/theme/magdesign/images/img_6.jpg',
       profileImage:
-        'https://preview.colorlib.com/theme/magdesign/images/person_1.jpg',
+        'https://res.cloudinary.com/rashot/image/upload/v1680566900/WhatsApp_Image_2023-03-19_at_7.41.40_PM_d2bqxd.jpg',
       author: {
         name: 'Rasheed Iskilu',
         profession: 'Frontend Dev & Freelancer',
@@ -296,12 +296,12 @@ export const blogData = {
     {
       id: 4,
       category: 'Movies, Fun fact',
-      img: 'https://preview.colorlib.com/theme/magdesign/images/img_7.jpg',
+      img: 'https://preview.colorlib.com/theme/magdesign/images/img_6.jpg',
       profileImage:
         'https://preview.colorlib.com/theme/magdesign/images/person_1.jpg',
       author: {
-        name: 'Rasheed Iskilu',
-        profession: 'Frontend Dev & Freelancer',
+        name: 'Kehinde',
+        profession: 'Technical Recruiter',
       },
       date: 'Feburary 10, 2023',
       title:
