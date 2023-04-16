@@ -3,7 +3,7 @@ import { DiscussionEmbed } from 'disqus-react';
 import React from 'react';
 
 const DisqusComments = () => {
-  const disqusShortname = 'your-disqus-shortname';
+  const disqusShortname = 'girls4leadership';
   const disqusConfig = {
     url: 'https://www.girls4leadership.org/blogdetails/2',
     identifier: '2', // Single post id
