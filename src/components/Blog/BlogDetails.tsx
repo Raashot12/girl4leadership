@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from '@emotion/styled';
-import { Box, Container, useMantineColorScheme } from '@mantine/core';
+import { Box, Container } from '@mantine/core';
 import DisqusComments from 'components/Discussion/DisqusComments';
 import React from 'react';
 
@@ -10,7 +10,6 @@ const BgColor = styled(Box as any)`
   }
 `;
 const BlogDetails = () => {
-  const { colorScheme } = useMantineColorScheme();
   return (
     <Container size={'xl'}>
       <Box mt={90}>
