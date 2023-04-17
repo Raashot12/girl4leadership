@@ -79,6 +79,7 @@ function Popular() {
         sx={{ textAlign: 'center' }}
         fz={{ base: 25, sm: 30, lg: 40 }}
         fw={700}
+        mb={40}
       >
         Most Popular Posts
       </Box>

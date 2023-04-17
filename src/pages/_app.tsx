@@ -20,7 +20,6 @@ import TagManager, { TagManagerArgs } from 'react-gtm-module';
 import { buttonStyles, checkboxStyles, defaultFonts, inputStyles } from 'theme';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { LoaderAnimation } from 'components/Shared/ScreenLoader';
-// import { gtmVirtualPageView } from 'components/Shared/gtmVirtualPage';
 import store from '../state/store';
 
 type NextPageWithLayout = NextPage & {

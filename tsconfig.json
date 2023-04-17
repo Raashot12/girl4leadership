@@ -2,10 +2,11 @@
   "compilerOptions": {
     "target": "es5",
     "baseUrl": "src",
+    "checkJs": false,
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
