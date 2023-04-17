@@ -102,16 +102,30 @@ const BlogPage = () => {
         <Container size={'xl'}>
           <Box
             px={{ base: 20, sm: 30, md: 40, lg: 60 }}
-            py={20}
-            sx={{ background: '#F8F9FA' }}
+            py={30}
+            sx={{ background: '#F8F9FA', borderRadius: 4 }}
             my={50}
           >
-            <Text fz={{ base: 20, sm: 24, md: 28 }} mb={16} fw={600}>
+            <Text
+              fz={{ base: 20, sm: 24, md: 28 }}
+              mb={16}
+              fw={600}
+              color="#051438"
+            >
               Subscribe to newsletter
             </Text>
             <Grid>
               <Grid.Col sm={8}>
-                <TextInput placeholder="Enter your mail" />
+                <TextInput
+                  placeholder="Enter your mail"
+                  sx={{
+                    '.mantine-TextInput-input': {
+                      background: 'white',
+                      color: '#051438',
+                      fontWeight: 500,
+                    },
+                  }}
+                />
               </Grid.Col>
               <Grid.Col sm={4}>
                 <Button

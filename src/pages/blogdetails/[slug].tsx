@@ -1,17 +1,13 @@
-import { Box } from '@mantine/core';
-import DisqusComments from 'components/Discussion/DisqusComments';
+import BlogDetails from 'components/Blog/BlogDetails';
 import { Layout } from 'components/Layout/Layout';
 import React from 'react';
 
-const BlogDetails = () => {
+const BlogInformation = () => {
   return (
     <Layout pageTitle="">
-      <Box mt={77}>
-        <Box>Hello</Box>
-        <DisqusComments />
-      </Box>
+      <BlogDetails />
     </Layout>
   );
 };
 
-export default BlogDetails;
+export default BlogInformation;
