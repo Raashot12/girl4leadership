@@ -67,7 +67,7 @@ const BlogDetails = () => {
               </Text>
               <Divider
                 orientation="vertical"
-                size={'sm'}
+                size={2}
                 color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
               />
               <Text
