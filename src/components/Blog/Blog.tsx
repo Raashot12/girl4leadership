@@ -145,7 +145,13 @@ const Blog = () => {
             {slicedData &&
               slicedData.map((value) => {
                 return (
-                  <Grid.Col xs={12} sm={6} md={4} key={value.id}>
+                  <Grid.Col
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    key={value.id}
+                    sx={{ cursor: 'pointer' }}
+                  >
                     <Link href={`/blogdetails/${value.id}`}>
                       <Image
                         src={value.img}

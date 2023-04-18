@@ -8,6 +8,7 @@ import {
   Flex,
   Text,
   Divider,
+  Group,
 } from '@mantine/core';
 import DisComments from 'components/Discussion/DisqusComments';
 import React from 'react';
@@ -52,13 +53,31 @@ const BlogDetails = () => {
             >
               {author.name}
             </Text>{' '}
-            <Text
-              fz={'0.975em'}
-              color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
-              fw={400}
+            <Group
+              align="center"
+              sx={{ justifyContent: 'center' }}
+              spacing={10}
             >
-              {date}
-            </Text>
+              <Text
+                fz={'0.975em'}
+                color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
+                fw={400}
+              >
+                {date}
+              </Text>
+              <Divider
+                orientation="vertical"
+                size={'sm'}
+                color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
+              />
+              <Text
+                fz={'0.975em'}
+                color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
+                fw={400}
+              >
+                8:45 pm
+              </Text>
+            </Group>
           </Box>
           <Box mb={25}>
             <Text
