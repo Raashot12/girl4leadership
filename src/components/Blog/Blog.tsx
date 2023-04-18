@@ -6,6 +6,7 @@ import React, { useRef } from 'react';
 import { usePagination } from 'hooks/usePagination';
 import Pagination from 'components/Pagination';
 import { useMediaQuery } from '@mantine/hooks';
+import Link from 'next/link';
 import { blogData } from './data';
 import Popular from './Popular';
 
@@ -145,71 +146,73 @@ const Blog = () => {
               slicedData.map((value) => {
                 return (
                   <Grid.Col xs={12} sm={6} md={4} key={value.id}>
-                    <Image
-                      src={value.img}
-                      alt={value.title}
-                      sx={{
-                        '& .mantine-Image-image': {
-                          borderRadius: '7px',
-                        },
-                      }}
-                    />
-                    <Box mt={25}>
-                      <Text>
-                        <span style={{ fontWeight: '600' }}>
-                          {value.category}
-                        </span>{' '}
-                        <span
-                          style={{
-                            color: ' #999',
-                            fontWeight: 400,
-                            fontSize: 14,
-                          }}
+                    <Link href={`/blogdetails/${value.id}`}>
+                      <Image
+                        src={value.img}
+                        alt={value.title}
+                        sx={{
+                          '& .mantine-Image-image': {
+                            borderRadius: '7px',
+                          },
+                        }}
+                      />
+                      <Box mt={25}>
+                        <Text>
+                          <span style={{ fontWeight: '600' }}>
+                            {value.category}
+                          </span>{' '}
+                          <span
+                            style={{
+                              color: ' #999',
+                              fontWeight: 400,
+                              fontSize: 14,
+                            }}
+                          >
+                            -- {value.date}
+                          </span>
+                        </Text>
+                        <Text
+                          fz={{ base: 18 }}
+                          fw={700}
+                          lh={1.2}
+                          mt={15}
+                          sx={{ whiteSpace: 'normal' }}
                         >
-                          -- {value.date}
-                        </span>
-                      </Text>
-                      <Text
-                        fz={{ base: 18 }}
-                        fw={700}
-                        lh={1.2}
-                        mt={15}
-                        sx={{ whiteSpace: 'normal' }}
-                      >
-                        {value.title}
-                      </Text>
-                      <Text
-                        fz={14}
-                        fw={400}
-                        lh={1.5}
-                        mt={15}
-                        color="#999"
-                        sx={{ whiteSpace: 'normal' }}
-                      >
-                        {value.subtitle.substring(0, 88)}.
-                      </Text>
-                      <Group mt={20}>
-                        <Image
-                          src={value.profileImage}
-                          alt="profile display picture"
-                          sx={{
-                            '& .mantine-Image-image': {
-                              borderRadius: '50%',
-                              height: '45px !important',
-                              width: '45px !important',
-                            },
-                          }}
-                        />
-                        <Box>
-                          <Text fw={700} lh={1}>
-                            {value.author.name}
-                          </Text>
-                          <Text fw={14} color="#888">
-                            {value.author.profession}
-                          </Text>
-                        </Box>
-                      </Group>
-                    </Box>
+                          {value.title}
+                        </Text>
+                        <Text
+                          fz={14}
+                          fw={400}
+                          lh={1.5}
+                          mt={15}
+                          color="#999"
+                          sx={{ whiteSpace: 'normal' }}
+                        >
+                          {value.subtitle.substring(0, 88)}.
+                        </Text>
+                        <Group mt={20}>
+                          <Image
+                            src={value.profileImage}
+                            alt="profile display picture"
+                            sx={{
+                              '& .mantine-Image-image': {
+                                borderRadius: '50%',
+                                height: '45px !important',
+                                width: '45px !important',
+                              },
+                            }}
+                          />
+                          <Box>
+                            <Text fw={700} lh={1}>
+                              {value.author.name}
+                            </Text>
+                            <Text fw={14} color="#888">
+                              {value.author.profession}
+                            </Text>
+                          </Box>
+                        </Group>
+                      </Box>
+                    </Link>
                   </Grid.Col>
                 );
               })}
