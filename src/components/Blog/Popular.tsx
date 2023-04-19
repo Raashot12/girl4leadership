@@ -6,6 +6,7 @@ import { Carousel, Embla } from '@mantine/carousel';
 import { Box, Group, Text, Image, Flex, keyframes } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 import { blogData } from './data';
 
 const progressForward = keyframes`
@@ -73,6 +74,9 @@ function Popular() {
     if (embla) embla.scrollNext();
   }, [embla]);
 
+  // Importing use Router
+  const router = useRouter();
+
   return (
     <Box pb={'3rem'} pt={'7rem'}>
       <Box
@@ -96,7 +100,11 @@ function Popular() {
         {blogData &&
           blogData.popularPost.map((value) => {
             return (
-              <Carousel.Slide key={value.id}>
+              <Carousel.Slide
+                onClick={() => router.push(`/blogdetails/${value.id}`)}
+                key={value.id}
+                sx={{ cursor: 'pointer' }}
+              >
                 <img
                   src={value.img}
                   alt={value.title}

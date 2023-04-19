@@ -63,77 +63,79 @@ const Blog = () => {
                       },
                     }}
                   >
-                    <Grid gutter={25} gutterMd={50} align={'center'}>
-                      <Grid.Col md={6} lg={4}>
-                        <img
-                          src={value.img}
-                          alt={value.title}
-                          loading="eager"
-                          style={{
-                            maxWidth: '100%',
-                            height: 'auto',
-                            width: '100%',
-                            borderRadius: 7,
-                          }}
-                        />
-                      </Grid.Col>
-                      <Grid.Col md={6} lg={8}>
-                        <Text>
-                          <span style={{ fontWeight: '600' }}>
-                            {value.category}
-                          </span>{' '}
-                          <span
+                    <Link href={`/blogdetails/${value.id}`}>
+                      <Grid gutter={25} gutterMd={50} align={'center'}>
+                        <Grid.Col md={6} lg={4}>
+                          <img
+                            src={value.img}
+                            alt={value.title}
+                            loading="eager"
                             style={{
-                              color: ' #999',
-                              fontWeight: 400,
-                              fontSize: 14,
-                            }}
-                          >
-                            -- {value.date}
-                          </span>
-                        </Text>
-                        <Text
-                          fz={{ base: 30, md: 40 }}
-                          fw={700}
-                          lh={1.2}
-                          mt={15}
-                          sx={{ whiteSpace: 'normal' }}
-                        >
-                          {value.title}
-                        </Text>
-                        <Text
-                          fz={14}
-                          fw={400}
-                          lh={1.5}
-                          mt={15}
-                          color="#999"
-                          sx={{ whiteSpace: 'normal' }}
-                        >
-                          {value.subtitle}
-                        </Text>
-                        <Group mt={20} id="blogs">
-                          <Image
-                            src={value.profileImage}
-                            alt="profile display picture"
-                            h={45}
-                            width={45}
-                            sx={{
-                              '& .mantine-Image-image': {
-                                borderRadius: '50%',
-                              },
+                              maxWidth: '100%',
+                              height: 'auto',
+                              width: '100%',
+                              borderRadius: 7,
                             }}
                           />
-                          <Box>
-                            <Text fw={700} lh={1}>
-                              {value.author.name}
-                            </Text>
-                            <Text fw={14} color="#888">
-                              {value.author.profession}
-                            </Text>
-                          </Box>
-                        </Group>
-                      </Grid.Col>
-                    </Grid>
+                        </Grid.Col>
+                        <Grid.Col md={6} lg={8}>
+                          <Text>
+                            <span style={{ fontWeight: '600' }}>
+                              {value.category}
+                            </span>{' '}
+                            <span
+                              style={{
+                                color: ' #999',
+                                fontWeight: 400,
+                                fontSize: 14,
+                              }}
+                            >
+                              -- {value.date}
+                            </span>
+                          </Text>
+                          <Text
+                            fz={{ base: 30, md: 40 }}
+                            fw={700}
+                            lh={1.2}
+                            mt={15}
+                            sx={{ whiteSpace: 'normal' }}
+                          >
+                            {value.title}
+                          </Text>
+                          <Text
+                            fz={14}
+                            fw={400}
+                            lh={1.5}
+                            mt={15}
+                            color="#999"
+                            sx={{ whiteSpace: 'normal' }}
+                          >
+                            {value.subtitle}
+                          </Text>
+                          <Group mt={20} id="blogs">
+                            <Image
+                              src={value.profileImage}
+                              alt="profile display picture"
+                              h={45}
+                              width={45}
+                              sx={{
+                                '& .mantine-Image-image': {
+                                  borderRadius: '50%',
+                                },
+                              }}
+                            />
+                            <Box>
+                              <Text fw={700} lh={1}>
+                                {value.author.name}
+                              </Text>
+                              <Text fw={14} color="#888">
+                                {value.author.profession}
+                              </Text>
+                            </Box>
+                          </Group>
+                        </Grid.Col>
+                      </Grid>
+                    </Link>
                   </Carousel.Slide>
                 </React.Fragment>
               );
