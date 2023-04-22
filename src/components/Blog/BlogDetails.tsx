@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from '@emotion/styled';
-
+import React from 'react';
 import {
   Box,
   useMantineColorScheme,
@@ -11,7 +11,10 @@ import {
   Group,
 } from '@mantine/core';
 import DisComments from 'components/Discussion/DisqusComments';
-import React from 'react';
+import { BsFacebook, BsTwitter } from 'react-icons/bs';
+import { FaLinkedin } from 'react-icons/fa';
+import { IoIosShareAlt } from 'react-icons/io';
+import { FacebookMessengerShareButton } from 'react-share';
 import { blogData } from './data';
 
 const BgColor = styled(Box as any)`
@@ -187,6 +190,34 @@ const BlogDetails = () => {
             it with the necessary regelialia. It is a paradisematic country, in
             which roasted parts of sentences fly into your mouth.
           </Text>
+        </Box>
+
+        <Divider orientation="horizontal" mt={40} />
+        <Box mt={20}>
+          <Flex align={'center'} columnGap={5}>
+            <Text
+              fz={'0.975em'}
+              fw={700}
+              color={colorScheme === 'dark' ? '#c4c4c4' : '#888893'}
+            >
+              Share
+            </Text>
+            <IoIosShareAlt
+              color={colorScheme === 'dark' ? '#c4c4c4' : '#888893'}
+            />
+          </Flex>
+          <Group mt={20}>
+            <FacebookMessengerShareButton
+              url={
+                'https://web.facebook.com/Girls-4-Leadership-Initiative-Nigeria-G4L-112036807207638/?ref=page_internal'
+              }
+              appId="1030"
+            >
+              <BsFacebook cursor={'pointer'} size={20} />
+            </FacebookMessengerShareButton>
+            <BsTwitter cursor={'pointer'} size={20} />
+            <FaLinkedin cursor={'pointer'} size={20} />
+          </Group>
         </Box>
         <BgColor
           size={'xl'}
