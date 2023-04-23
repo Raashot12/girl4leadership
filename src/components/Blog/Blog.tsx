@@ -226,7 +226,7 @@ const Blog = () => {
               })}
           </Grid>
         </Box>
-        <Flex justify="center" mt={40}></Flex>
+        <Flex justify="center" mt={39}></Flex>
         <Pagination
           idToClampTo="blogs"
           pagination={pagination}
