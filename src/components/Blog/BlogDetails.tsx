@@ -14,7 +14,11 @@ import DisComments from 'components/Discussion/DisqusComments';
 import { BsFacebook, BsTwitter } from 'react-icons/bs';
 import { FaLinkedin } from 'react-icons/fa';
 import { IoIosShareAlt } from 'react-icons/io';
-import { FacebookMessengerShareButton } from 'react-share';
+import {
+  TwitterShareButton,
+  FacebookShareButton,
+  LinkedinShareButton,
+} from 'react-share';
 import { blogData } from './data';
 
 const BgColor = styled(Box as any)`
@@ -206,18 +210,32 @@ const BlogDetails = () => {
               color={colorScheme === 'dark' ? '#c4c4c4' : '#888893'}
             />
           </Flex>
-          <Group mt={20}>
-            <FacebookMessengerShareButton
-              url={
-                'https://web.facebook.com/Girls-4-Leadership-Initiative-Nigeria-G4L-112036807207638/?ref=page_internal'
-              }
-              appId="1030"
+          <Flex mt={20} align="center" columnGap={20}>
+            <FacebookShareButton
+              url={'https://girls4leadership.org'}
+              title={title}
+              quote={'フェイスブックはタイトルが付けれるようです'}
+              hashtag={'#hashtag'}
+              style={{ display: 'flex', alignItems: 'center' }}
             >
               <BsFacebook cursor={'pointer'} size={20} />
-            </FacebookMessengerShareButton>
-            <BsTwitter cursor={'pointer'} size={20} />
-            <FaLinkedin cursor={'pointer'} size={20} />
-          </Group>
+            </FacebookShareButton>
+            <TwitterShareButton
+              title={title}
+              url="https://girls4leadership.org/"
+              hashtags={['hashtag1', 'hashtag2']}
+              style={{ display: 'flex', alignItems: 'center' }}
+            >
+              <BsTwitter cursor={'pointer'} size={20} />
+            </TwitterShareButton>
+            <LinkedinShareButton
+              title={title}
+              url="https://girls4leadership.org/"
+              style={{ display: 'flex', alignItems: 'center' }}
+            >
+              <FaLinkedin cursor={'pointer'} size={20} />
+            </LinkedinShareButton>
+          </Flex>
         </Box>
         <BgColor
           size={'xl'}
