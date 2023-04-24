@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable jsx-a11y/alt-text */
 import {
   Box,
   Container,
@@ -124,7 +126,7 @@ const Cards = (): JSX.Element => {
 
 export default Cards;
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   text: {
     marginBottom: '15px',
     fontSize: '18px',

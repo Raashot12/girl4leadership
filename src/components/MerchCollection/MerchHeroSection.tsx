@@ -3,7 +3,7 @@ import { Box, Container, Flex } from '@mantine/core';
 
 const MerchHeroSection = (): JSX.Element => {
   return (
-    <Box mt={77}>
+    <Box mt={90}>
       <Flex
         align="center"
         sx={{
