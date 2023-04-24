@@ -183,7 +183,7 @@ const Blog = () => {
                           fz={{ base: 18 }}
                           fw={700}
                           lh={1.2}
-                          mt={15}
+                          mt={14}
                           sx={{ whiteSpace: 'normal' }}
                         >
                           {value.title}
