@@ -18,7 +18,8 @@ import Link from 'next/link';
 import React from 'react';
 
 const text = 'Our Blog';
-const BlogPage = () => {
+const BlogPage = (props) => {
+  console.log(props.blogs);
   return (
     <Layout pageTitle="Blog">
       <Box mt={77}>
