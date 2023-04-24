@@ -1,29 +1,30 @@
 import {
   Box,
-  Button,
-  Container,
-  Flex,
-  Grid,
-  Text,
-  TextInput,
+  // Button,
+  // Container,
+  // Flex,
+  // Grid,
+  // Text,
+  // TextInput,
 } from '@mantine/core';
 import fs from 'fs';
-import { IconArrowForward, IconSend } from '@tabler/icons';
-import { container, child } from 'components/AboutUs/AboutUs';
-import Blog from 'components/Blog/Blog';
+// import { IconArrowForward, IconSend } from '@tabler/icons';
+// import { container, child } from 'components/AboutUs/AboutUs';
+// import Blog from 'components/Blog/Blog';
 import { Layout } from 'components/Layout/Layout';
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 import matter from 'gray-matter';
 import Link from 'next/link';
 import React from 'react';
+import Head from 'next/head';
 
-const text = 'Our Blog';
+// const text = 'Our Blog';
 const BlogPage = (props) => {
   console.log(props.blogs);
   return (
     <Layout pageTitle="Blog">
       <Box mt={77}>
-        <Flex
+        {/* <Flex
           align="center"
           sx={{
             position: 'relative',
@@ -152,7 +153,23 @@ const BlogPage = (props) => {
               </Grid.Col>
             </Grid>
           </Box>
-        </Container>
+        </Container> */}
+        <Head>
+          <title>Demo Blog</title>
+        </Head>
+        <h1>Welcome to my blog</h1>
+        <p>This is a subtitle idk what to type here</p>
+        <ul>
+          {props.blogs.map((blog) => (
+            <li key={blog.slug}>
+              <Link href={`/blogdetails/${blog.slug}`}>
+                <p>
+                  {blog.date}:{blog.title}
+                </p>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </Box>
     </Layout>
   );
