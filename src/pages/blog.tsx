@@ -162,7 +162,7 @@ const BlogPage = (props) => {
         <ul>
           {props.blogs.map((blog) => (
             <li key={blog.slug}>
-              <Link href={`/blogdetails/${blog.slug}`}>
+              <Link href={`/blog/${blog.slug}`}>
                 <p>
                   {blog.date}:{blog.title}
                 </p>
@@ -178,10 +178,10 @@ const BlogPage = (props) => {
 export default BlogPage;
 export async function getStaticProps() {
   // List of files in posts folder
-  const files = fs.readdirSync('./content/posts');
+  const filesInBlogs = fs.readdirSync('./content/blogs');
   // Get the front matter and slug (the filename without .md) of all files
-  const blogs = files.map((filename) => {
-    const file = fs.readFileSync(`./content/posts/${filename}`, 'utf8');
+  const blogs = filesInBlogs.map((filename) => {
+    const file = fs.readFileSync(`./content/blogs/${filename}`, 'utf8');
     const matterData = matter(file);
 
     return {

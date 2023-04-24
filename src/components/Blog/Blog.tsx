@@ -154,7 +154,7 @@ const Blog = () => {
                     key={value.id}
                     sx={{ cursor: 'pointer' }}
                   >
-                    <Link href={`/blogdetails/${value.id}`}>
+                    <Link href={`/blog/${value.id}`}>
                       <Image
                         src={value.img}
                         alt={value.title}
