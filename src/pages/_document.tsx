@@ -27,6 +27,10 @@ export default class AppDocument extends Document {
                     });
                 `}
           </Script>
+          <Script
+            async
+            src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+          />
           <script
             dangerouslySetInnerHTML={{
               __html: `

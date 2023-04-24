@@ -4,10 +4,28 @@ Project is built with [nextjs](https://nextjs.org/docs), with [redux](https://re
 
 To run the development server:
 
+
+
+
 ```bash
 npm run dev
 # or
 yarn dev
-```
+``` 
 
 Open [http://localhost:4200](http://localhost:4200) with your browser to see the result.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
