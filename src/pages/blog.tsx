@@ -178,10 +178,10 @@ const BlogPage = (props) => {
 export default BlogPage;
 export async function getStaticProps() {
   // List of files in posts folder
-  const files = fs.readdirSync('./content/blogs');
+  const files = fs.readdirSync('./content/posts');
   // Get the front matter and slug (the filename without .md) of all files
   const blogs = files.map((filename) => {
-    const file = fs.readFileSync(`./content/blogs/${filename}`, 'utf8');
+    const file = fs.readFileSync(`./content/posts/${filename}`, 'utf8');
     const matterData = matter(file);
 
     return {
