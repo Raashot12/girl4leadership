@@ -1,11 +1,12 @@
-import { Box } from '@mantine/core';
 import { Layout } from 'components/Layout/Layout';
-import React from 'react';
+import Cards from 'components/MerchCollection/Cards';
+import MerchHeroSection from 'components/MerchCollection/MerchHeroSection';
 
 const MerchCollectionPage = () => {
   return (
     <Layout pageTitle="Merch Collections">
-      <Box>Coming Soon !</Box>
+      <MerchHeroSection />
+      <Cards />
     </Layout>
   );
 };
