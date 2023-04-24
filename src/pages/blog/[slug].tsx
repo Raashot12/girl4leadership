@@ -30,7 +30,7 @@ export default BlogInformation;
 
 export async function getStaticProps({ params: { slug } }) {
   const fileContent = matter(
-    fs.readFileSync(`./content/posts/${slug}.md`, 'utf8')
+    fs.readFileSync(`./content/blogs/${slug}.md`, 'utf8')
   );
   let frontmatter = fileContent.data;
   const markdown = fileContent.content;
@@ -40,8 +40,8 @@ export async function getStaticProps({ params: { slug } }) {
   };
 }
 export async function getStaticPaths() {
-  const filesInProjects = fs.readdirSync('./content/posts');
-  console.log(filesInProjects);
+  const filesInBlogs = fs.readdirSync('./content/blogs');
+  console.log(filesInBlogs);
   // Getting the filenames excluding .md extension
   // and returning an array containing slug (the filename) as params for every route
   // It looks like this
@@ -50,7 +50,7 @@ export async function getStaticPaths() {
   //   { params: { slug: 'how-to-train-a-dragon' }},
   //   { params: { slug: 'how-to-catch-a-pokemon' }},
   // ]
-  const paths = filesInProjects.map((file) => {
+  const paths = filesInBlogs.map((file) => {
     const filename = file.slice(0, file.indexOf('.'));
     return { params: { slug: filename } };
   });
