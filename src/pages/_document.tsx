@@ -31,6 +31,14 @@ export default class AppDocument extends Document {
             async
             src="https://identity.netlify.com/v1/netlify-identity-widget.js"
           />
+
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="apple-touch-icon" href="/icon.png" />
+          <meta name="theme-color" content="#fff" />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -46,13 +54,6 @@ export default class AppDocument extends Document {
           `,
             }}
           />
-          <link rel="manifest" href="/manifest.json" />
-          <link rel="apple-touch-icon" href="/icon.png" />
-          <meta name="theme-color" content="#fff" />
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
         </body>
       </Html>
     );
