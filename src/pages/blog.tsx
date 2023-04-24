@@ -7,16 +7,19 @@ import {
   Text,
   TextInput,
 } from '@mantine/core';
+import fs from 'fs';
 import { IconArrowForward, IconSend } from '@tabler/icons';
 import { container, child } from 'components/AboutUs/AboutUs';
 import Blog from 'components/Blog/Blog';
 import { Layout } from 'components/Layout/Layout';
 import { motion } from 'framer-motion';
+import matter from 'gray-matter';
 import Link from 'next/link';
 import React from 'react';
 
 const text = 'Our Blog';
-const BlogPage = () => {
+const BlogPage = (props) => {
+  console.log(props);
   return (
     <Layout pageTitle="Blog">
       <Box mt={77}>
@@ -156,3 +159,22 @@ const BlogPage = () => {
 };
 
 export default BlogPage;
+export async function getStaticProps() {
+  // List of files in posts folder
+  const files = fs.readdirSync('./src/posts');
+  // Get the front matter and slug (the filename without .md) of all files
+  const blogs = files.map((filename) => {
+    const file = fs.readFileSync(`./src/posts/${filename}`, 'utf8');
+    const matterData = matter(file);
+
+    return {
+      ...matterData.data, // matterData.data contains front matter
+      slug: filename.slice(0, filename.indexOf('.')),
+    };
+  });
+  return {
+    props: {
+      blogs,
+    },
+  };
+}
