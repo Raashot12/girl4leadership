@@ -1,3 +1,7 @@
+---
+title: Rasheed Welldone
+date: April 24, 2023 11:40 AM
+---
 # Girls4Leadership Web app
 
 Project is built with [nextjs](https://nextjs.org/docs), with [redux](https://redux.js.org/api/api-reference) for state management and [mantine](https://mantine.dev/pages/basics/) as the component libary.
