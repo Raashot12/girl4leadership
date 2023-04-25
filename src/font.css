@@ -90,3 +90,9 @@ body{
 } 
 
 
+pre{
+  overflow-x: scroll;
+}
+pre::-webkit-scrollbar {
+  display: none;
+}
