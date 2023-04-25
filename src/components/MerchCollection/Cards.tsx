@@ -8,7 +8,7 @@ import {
   useMantineColorScheme,
   createStyles,
 } from '@mantine/core';
-import { card } from './staticData';
+import { card, featured } from './staticData';
 
 const Cards = (): JSX.Element => {
   const { colorScheme } = useMantineColorScheme();
@@ -118,6 +118,7 @@ const Cards = (): JSX.Element => {
               <Text className={classes.text}>NEW ARRIVALS</Text>
             </Box>
           </Box>
+          
         </Box>
       </Container>
     </Box>
