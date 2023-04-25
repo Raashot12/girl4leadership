@@ -4,8 +4,8 @@ import BlogDetails from 'components/Blog/BlogDetails';
 import { Layout } from 'components/Layout/Layout';
 import React from 'react';
 // import ReactMarkdown from 'react-markdown';
-import matter from 'gray-matter';
-import fs from 'fs';
+// import matter from 'gray-matter';
+// import fs from 'fs';
 
 const BlogInformation = () => {
   return (
@@ -39,26 +39,26 @@ const BlogInformation = () => {
 
 export default BlogInformation;
 
-export async function getStaticProps({ params: { slug } }) {
-  const fileContent = matter(
-    fs.readFileSync(`./content/blogs/${slug}.md`, 'utf8')
-  );
-  let frontmatter = fileContent.data;
-  const markdown = fileContent.content;
+// export async function getStaticProps({ params: { slug } }) {
+//   const fileContent = matter(
+//     fs.readFileSync(`./content/blogs/${slug}.md`, 'utf8')
+//   );
+//   let frontmatter = fileContent.data;
+//   const markdown = fileContent.content;
 
-  return {
-    props: { frontmatter, markdown },
-  };
-}
-export async function getStaticPaths() {
-  const filesInBlogs = fs.readdirSync('./content/blogs');
-  const paths = filesInBlogs.map((file) => {
-    const filename = file.slice(0, file.indexOf('.'));
-    return { params: { slug: filename } };
-  });
+//   return {
+//     props: { frontmatter, markdown },
+//   };
+// }
+// export async function getStaticPaths() {
+//   const filesInBlogs = fs.readdirSync('./content/blogs');
+//   const paths = filesInBlogs.map((file) => {
+//     const filename = file.slice(0, file.indexOf('.'));
+//     return { params: { slug: filename } };
+//   });
 
-  return {
-    paths,
-    fallback: false, // This shows a 404 page if the page is not found
-  };
-}
+//   return {
+//     paths,
+//     fallback: false, // This shows a 404 page if the page is not found
+//   };
+// }

@@ -63,7 +63,7 @@ const Blog = () => {
                       },
                     }}
                   >
-                    <Link href={`/blogdetails/${value.id}`}>
+                    <Link href={`/blog/${value.id}`}>
                       <Grid gutter={25} gutterMd={50} align={'center'}>
                         <Grid.Col md={6} lg={4}>
                           <img
