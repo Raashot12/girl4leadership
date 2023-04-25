@@ -1,13 +1,14 @@
 ---
-title: "React Portals Simplified | What It Is, How to Use It"
-date: "2022-07-08"
-cover: "95-react-portals.png"
-pageDescription: "React portals allow you to create doorways for a component to be rendered somewhere else in the DOM. Learn more in this article."
-pageKeywords: "react, portals, react portals, react modals, modals, doorways"
-tags: ["react"]
+title: React Portals Simplified | What It Is, How to Use It
+date: 2022-07-08
+cover: 95-react-portals.png
+pageDescription: React portals allow you to create doorways for a component to
+  be rendered somewhere else in the DOM. Learn more in this article.
+pageKeywords: react, portals, react portals, react modals, modals, doorways
+tags:
+  - react
 video: https://youtube.com/shorts/-qtdvR-am5A
 ---
-
 According to the dictionary, a portal is a **doorway to another place**. React has a feature, called **portals** which allows you to create a doorway for a component to be rendered in another place in the DOM.
 
 Consider the following component composition:
@@ -72,7 +73,7 @@ You create a portal using the `createPortal` method of the `ReactDOM` object. Th
 
 When you render this, in the DOM, you will find the following screenshot:
 
-![DOM structure changed have using portals](./dom-screenshot-with-portals.png)
+![DOM structure changed have using portals](/uploads/programmer-flat-color-icon-computer-expert-man-coding-on-laptop-freelance-software-developer-at-work-person-avatar-cartoon-style-clip-art-for-mobile-app-isolated-rgb-illustration-vector.webp)
 
 You notice that `ComponentA` (which contains the `h2` element) is nested directly under the `body` element and not in the `App` (with the div container) anymore. You have successfully created a doorway for that component to be nested somewhere else in the DOM, instead of where it was in the React tree. `ComponentA` has visually broken out of its parent.
 
@@ -85,7 +86,7 @@ There are a few things to note when you use React portals:
 * in the case of modals, be sure to handle [accessibility](https://www.w3.org/WAI/ARIA/apg/example-index/dialog-modal/dialog)
 * React portals only modify the DOM tree, but not the React tree. Here's the React tree after using the portals above:
 
-![The React tree screenshot after using portals remains the same](./react-tree-screenshot.png)
+![The React tree screenshot after using portals remains the same](/uploads/programmer-flat-color-icon-computer-expert-man-coding-on-laptop-freelance-software-developer-at-work-person-avatar-cartoon-style-clip-art-for-mobile-app-isolated-rgb-illustration-vector.webp)
 
 This means that `ComponentA` can still have access to context data from the `App` component (if it uses React Context).
 
