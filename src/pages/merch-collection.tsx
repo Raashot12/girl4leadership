@@ -1,35 +1,46 @@
+import { useEffect, useState } from 'react';
+import { Box, Container, useMantineColorScheme } from '@mantine/core';
 import { Layout } from 'components/Layout/Layout';
 import Cards from 'components/MerchCollection/Cards';
-import Categories from 'components/MerchCollection/Categories';
-import MerchHeroSection from 'components/MerchCollection/MerchHeroSection';
 import Products from 'components/MerchCollection/Products';
+import MerchHeroSection from 'components/MerchCollection/MerchHeroSection';
 import { featured } from 'components/MerchCollection/staticData';
-import { useEffect, useState } from 'react';
+import { CategoriesType } from 'types/merchSection';
 
 const allCategories = [...new Set(featured.map((item) => item.categories))];
 
 const MerchCollectionPage = () => {
+  const { colorScheme } = useMantineColorScheme();
+  const [allProducts, setAllProducts] = useState(featured);
+  const [categories, setCategories] = useState(allCategories);
+
   useEffect(() => {
-    const featu = featured.filter((a) => a.categories === 'featured');
-    setAllItems(featu);
+    const products = featured.filter(
+      (item: CategoriesType) => item.categories === 'featured'
+    );
+    setAllProducts(products);
     return;
   }, []);
 
-  const [allItems, setAllItems] = useState(featured);
-  const [categories, setCategories] = useState(allCategories);
-
-  const filterItems = (categories) => {
-    const newItems = featured.filter(
-      (feature) => feature.categories === categories
+  const filterItems = (categories: string) => {
+    const otherCategories = featured.filter(
+      (item) => item.categories === categories
     );
-    setAllItems(newItems);
+    setAllProducts(otherCategories);
   };
   return (
     <Layout pageTitle="Merch Collections">
       <MerchHeroSection />
-      <Cards />
-      <Categories categories={categories} filterItems={filterItems} />
-      <Products products={allItems} />
+      <Box sx={{ background: colorScheme === 'dark' ? '#232324' : '#ffff' }}>
+        <Container size="xl" sx={{ padding: '35px 20px' }}>
+          <Cards />
+          <Products
+            categories={categories}
+            filterItems={filterItems}
+            product={allProducts}
+          />
+        </Container>
+      </Box>
     </Layout>
   );
 };

@@ -97,6 +97,6 @@ pre::-webkit-scrollbar {
   display: none;
 }
 
-.activee{
+.is-active{
   color: #E25D24;
 }
