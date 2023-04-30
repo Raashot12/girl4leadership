@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable no-useless-return */
 import { useEffect, useState } from 'react';
@@ -14,7 +15,7 @@ const allCategories = [...new Set(featured.map((item) => item.categories))];
 const MerchCollectionPage = () => {
   const { colorScheme } = useMantineColorScheme();
   const [allProducts, setAllProducts] = useState(featured);
-  const [categories] = useState(allCategories);
+  const [categories, setCategories] = useState(allCategories);
 
   useEffect(() => {
     const products = featured.filter(
