@@ -3,6 +3,26 @@ import { Box, Image, createStyles, Button } from '@mantine/core';
 import { LoaderAnimation } from 'components/Shared/ScreenLoader';
 import Product from './Product';
 
+const useStyles = createStyles(() => ({
+  text: {
+    marginBottom: '15px',
+    letterSpacing: '0.4px',
+    color: '#c1cad1',
+    textTransform: 'uppercase',
+    ':hover': {
+      background: 'none',
+    },
+  },
+  wrap: {
+    marginBottom: '15px',
+    '@media (min-width: 767px)': {
+      display: 'flex',
+      columnGap: '25px',
+      alignItems: 'center',
+    },
+  },
+}));
+
 const Products = ({ categories, filterItems, product }) => {
   const { classes } = useStyles();
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
@@ -84,23 +104,3 @@ const Products = ({ categories, filterItems, product }) => {
 };
 
 export default Products;
-
-const useStyles = createStyles(() => ({
-  text: {
-    marginBottom: '15px',
-    letterSpacing: '0.4px',
-    color: '#c1cad1',
-    textTransform: 'uppercase',
-    ':hover': {
-      background: 'none',
-    },
-  },
-  wrap: {
-    marginBottom: '15px',
-    '@media (min-width: 767px)': {
-      display: 'flex',
-      columnGap: '25px',
-      alignItems: 'center',
-    },
-  },
-}));
