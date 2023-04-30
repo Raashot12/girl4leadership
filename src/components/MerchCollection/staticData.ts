@@ -26,7 +26,7 @@ export const featured = [
   {
     id: 1,
     bgImg:
-      'url(https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_D1-edit-min-300x400.jpg)',
+      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_D1-edit-min-300x400.jpg',
     isSale: true,
     name: 'Fitted Skirt',
     amount: '19',
@@ -35,7 +35,7 @@ export const featured = [
   {
     id: 2,
     bgImg:
-      'url(https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01-edit-min-300x400.jpg)',
+      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01-edit-min-300x400.jpg',
     isSale: true,
     name: 'Embroidered Panel Dress',
     amount: '49',
@@ -44,7 +44,7 @@ export const featured = [
   {
     id: 3,
     bgImg:
-      'url(https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-1-min-600x800.jpg)',
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-1-min-600x800.jpg',
     isSale: true,
     name: 'Printed Melange T-Shirt',
     amount: '29',
@@ -53,7 +53,7 @@ export const featured = [
   {
     id: 4,
     bgImg:
-      'url(https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11003721_02-99999999_01-edit-min-300x400.jpg)',
+      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11003721_02-99999999_01-edit-min-300x400.jpg',
     isSale: false,
     name: 'Flared Sleeve Blouse',
     amount: '54',
@@ -62,7 +62,7 @@ export const featured = [
   {
     id: 5,
     bgImg:
-      'url(https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_D1-edit-min-300x400.jpg)',
+      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_D1-edit-min-300x400.jpg',
     isSale: true,
     name: 'Fitted Skirt',
     amount: '19',
@@ -71,7 +71,7 @@ export const featured = [
   {
     id: 6,
     bgImg:
-      'url(https://preview.codeless.co/june/default/wp-content/uploads/2017/10/MINI-DRAPED-SKIRT2_1_1-600x800.jpg)',
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/MINI-DRAPED-SKIRT2_1_1-600x800.jpg',
     isSale: true,
     name: 'Faux Plain Leather Dress',
     amount: '90',
@@ -80,7 +80,7 @@ export const featured = [
   {
     id: 7,
     bgImg:
-      'url(https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01-edit-min-300x400.jpg)',
+      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01-edit-min-300x400.jpg',
     isSale: true,
     name: 'Embroidered Panel Dress',
     amount: '49',
@@ -89,7 +89,7 @@ export const featured = [
   {
     id: 8,
     bgImg:
-      'url(https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-1-min-600x800.jpg)',
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-1-min-600x800.jpg',
     isSale: true,
     name: 'Printed Melange T-Shirt',
     amount: '29',
@@ -98,7 +98,7 @@ export const featured = [
   {
     id: 9,
     bgImg:
-      'url(https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_D1-edit-min-300x400.jpg)',
+      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_D1-edit-min-300x400.jpg',
     isSale: true,
     name: 'Fitted Skirt',
     amount: '19',
@@ -107,7 +107,7 @@ export const featured = [
   {
     id: 10,
     bgImg:
-      'url(https://preview.codeless.co/june/default/wp-content/uploads/2017/10/MINI-DRAPED-SKIRT2_1_1-600x800.jpg)',
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/MINI-DRAPED-SKIRT2_1_1-600x800.jpg',
     isSale: true,
     name: 'Faux Plain Leather Dress',
     amount: '90',
@@ -116,7 +116,7 @@ export const featured = [
   {
     id: 11,
     bgImg:
-      'url(https://preview.codeless.co/june/default/wp-content/uploads/2017/12/product5-2-min-600x800.jpg)',
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/product5-2-min-600x800.jpg',
     isSale: false,
     name: 'Casual Spring Look 6',
     amount: '49',
@@ -125,7 +125,7 @@ export const featured = [
   {
     id: 12,
     bgImg:
-      'url(https://preview.codeless.co/june/default/wp-content/uploads/2017/12/p3-300x400.jpg)',
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/p3-300x400.jpg',
     isSale: false,
     name: 'Short Sleeve Linen Shirt',
     amount: '49',

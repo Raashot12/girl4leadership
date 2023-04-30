@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Text, Image, createStyles, Button } from '@mantine/core';
 import { LoaderAnimation } from 'components/Shared/ScreenLoader';
+import Product from './Product';
 
 const Products = ({ categories, filterItems, product }) => {
   const { classes } = useStyles();
@@ -72,60 +73,9 @@ const Products = ({ categories, filterItems, product }) => {
             },
           }}
         >
-          {product.map((item) => {
-            const { id, bgImg, isSale, name, amount } = item;
-            return (
-              <Box
-                key={id}
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                }}
-              >
-                <Box
-                  sx={{
-                    backgroundImage: `${bgImg}`,
-                    height: '353px',
-                    minWidth: '264px',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
-                    padding: '10px',
-                  }}
-                >
-                  {isSale && (
-                    <Box
-                      sx={{
-                        background: '#eb5a46',
-                        color: '#ffff',
-                        borderRadius: '3px',
-                        width: '48px',
-                        alignItems: 'center',
-                        textAlign: 'center',
-                      }}
-                    >
-                      SALE!
-                    </Box>
-                  )}
-                </Box>
-                <Box sx={{ textAlign: 'center' }}>
-                  <Text
-                    sx={{
-                      fontSize: '14px',
-                      fontWeight: 600,
-                      letterSpacing: '0.4px',
-                    }}
-                  >
-                    {name}
-                  </Text>
-                  <Text sx={{ color: '#eb5a46', fontWeight: 600 }}>
-                    ${amount}
-                  </Text>
-                </Box>
-              </Box>
-            );
-          })}
+          {product.map((item) => (
+            <Product key={item.id} {...item} />
+          ))}
         </Box>
       )}
     </Box>
