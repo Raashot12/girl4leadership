@@ -14,7 +14,7 @@ const allCategories = [...new Set(featured.map((item) => item.categories))];
 const MerchCollectionPage = () => {
   const { colorScheme } = useMantineColorScheme();
   const [allProducts, setAllProducts] = useState(featured);
-  const [categories, setCategories] = useState(allCategories);
+  const [categories] = useState(allCategories);
 
   useEffect(() => {
     const products = featured.filter(
