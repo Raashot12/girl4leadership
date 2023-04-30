@@ -1,6 +1,6 @@
 ---
 title: React Portals Simplified | What It Is, How to Use It
-date: 2022-07-08
+date: "2022-07-08"
 cover: 95-react-portals.png
 pageDescription: React portals allow you to create doorways for a component to
   be rendered somewhere else in the DOM. Learn more in this article.
