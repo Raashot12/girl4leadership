@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 title: React Portals Simplified | What It Is, How to Use It
 date: 2022-07-08
 cover: 95-react-portals.png
@@ -97,3 +98,23 @@ Also, event bubbling will work with the React tree and not the DOM tree. This me
 React portals are useful when you do not want a component to be affected by its parent's styles. Portals allow you to append a component to a different node of your choice in the DOM. A common use case of this feature is modals, dialog boxes, and popups which should always be completely visible when they should be.
 
 Although it's worth noting that portals only modify the HTML structure and not the React components tree. To react, the component is still a child of its parent, but to the DOM, the component is a child of another parent.
+=======
+title: How to catch a pokemon
+date: August 5, 2021 1:24 PM
+---
+
+# Seriously?
+
+Idk, install pokemon go and go outside you may find some pokemon.
+
+
+## I'm running out of ideas
+
+- I'm a developer
+- I make software and write blogs
+- What am I doing in my life
+
+```
+sudo apt install pokeballs
+```
+>>>>>>> 537839e4a13cad6434588ce97bb6c0355961a3a0

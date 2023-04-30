@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 title: "Web Share API"
 date: "2020-01-09"
 cover: "https://res.cloudinary.com/dillionmegida/image/upload/v1578574736/images/blogs_cover/web-share-api_eifaum.jpg"
@@ -114,3 +115,23 @@ This is amazing right? 🙂
 If you aren't adopting it on your website already, I guess you've seen reasons why you should.
 
 If your browser supports this API, you'd see a share button of which you can test the API by clicking on it. If your browser doesn't support it, you'd see the traditional share methods I have implemented on my site.
+=======
+title: How to catch a pokemon
+date: August 5, 2021 1:24 PM
+---
+
+# Seriously?
+
+Idk, install pokemon go and go outside you may find some pokemon.
+
+
+## I'm running out of ideas
+
+- I'm a developer
+- I make software and write blogs
+- What am I doing in my life
+
+```
+sudo apt install pokeballs
+```
+>>>>>>> 537839e4a13cad6434588ce97bb6c0355961a3a0
