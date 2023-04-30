@@ -1,14 +1,11 @@
-import React, { use, useEffect, useState } from 'react';
+/* eslint-disable no-useless-return */
+import React, { useState } from 'react';
 import { Box, Text, Loader } from '@mantine/core';
-import { IconArrowsDiagonal, IconCircleCheck } from '@tabler/icons';
-import { useDisclosure } from '@mantine/hooks';
+import { IconArrowsDiagonal } from '@tabler/icons';
 
 const Product = ({ id, bgImg, isSale, name, amount }) => {
-  const [opened, { open, close }] = useDisclosure(false);
   const [isHover, setIsHover] = useState(false);
   const [isLoading, setIsloading] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
-  const [qty, setQty] = useState(1);
 
   setTimeout(() => {
     setIsloading(false);

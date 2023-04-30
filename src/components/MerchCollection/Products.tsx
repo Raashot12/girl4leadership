@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Text, Image, createStyles, Button } from '@mantine/core';
+import { Box, Image, createStyles, Button } from '@mantine/core';
 import { LoaderAnimation } from 'components/Shared/ScreenLoader';
 import Product from './Product';
 
@@ -45,6 +45,7 @@ const Products = ({ categories, filterItems, product }) => {
                 src="https://preview.codeless.co/june/default/wp-content/themes/june/img/separator2.png"
                 width="24px"
                 height="14px"
+                alt="product image"
                 sx={{
                   display: `${index === categories.length - 1 && 'none'}`,
                   margin: '0 auto',

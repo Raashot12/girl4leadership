@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable no-useless-return */
 import { useEffect, useState } from 'react';
 import { Box, Container, useMantineColorScheme } from '@mantine/core';
 import { Layout } from 'components/Layout/Layout';
