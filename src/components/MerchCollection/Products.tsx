@@ -67,7 +67,7 @@ const Products = ({ categories, filterItems, product }) => {
                 height="14px"
                 alt="product image"
                 sx={{
-                  display: `${index === categories.length - 1 && 'none'}`,
+                  // display: `${index === categories.length - 1 && 'none'}`,
                   margin: '0 auto',
                   '@media (min-width: 767px)': {
                     marginTop: '-12px',
