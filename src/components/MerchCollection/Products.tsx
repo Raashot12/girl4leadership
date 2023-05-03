@@ -5,8 +5,9 @@ import Product from './Product';
 
 const useStyles = createStyles(() => ({
   text: {
-    marginBottom: '15px',
+    marginBottom: '10px',
     letterSpacing: '0.4px',
+    fontSize: '14px',
     color: '#c1cad1',
     textTransform: 'uppercase',
     ':hover': {
@@ -14,7 +15,8 @@ const useStyles = createStyles(() => ({
     },
   },
   wrap: {
-    marginBottom: '15px',
+    marginBottom: '16px',
+    fontSize: '14px',
     '@media (min-width: 767px)': {
       display: 'flex',
       columnGap: '25px',
@@ -33,7 +35,7 @@ const Products = ({ categories, filterItems, product }) => {
   }, 2000);
 
   return (
-    <Box sx={{ padding: '70px 0 0' }}>
+    <Box sx={{ padding: '60px 0 0' }}>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box
           sx={{
@@ -50,6 +52,13 @@ const Products = ({ categories, filterItems, product }) => {
             <Box className={classes.wrap} key={index}>
               <Button
                 variant="subtle"
+                sx={{
+                  '@media (max-width: 767px)': {
+                    '& .mantine-Button-label': {
+                      fontSize: 14,
+                    },
+                  },
+                }}
                 className={`${classes.text} ${
                   selectedIndex === index && 'is-active'
                 }`}
@@ -67,7 +76,7 @@ const Products = ({ categories, filterItems, product }) => {
                 height="14px"
                 alt="product image"
                 sx={{
-                  // display: `${index === categories.length - 1 && 'none'}`,
+                  display: `${index === categories.length - 1 && 'none'}`,
                   margin: '0 auto',
                   '@media (min-width: 767px)': {
                     marginTop: '-12px',
@@ -88,6 +97,7 @@ const Products = ({ categories, filterItems, product }) => {
             justifyContent: 'space-between',
             flexWrap: 'wrap',
             columnGap: '15px',
+
             '@media (max-width: 767px)': {
               flexDirection: 'column',
               rowGap: '15px',
