@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable jsx-a11y/alt-text */
 import { Box, Container, Text, useMantineColorScheme } from '@mantine/core';
 import { card } from './staticData';
 

@@ -101,7 +101,7 @@ function Popular() {
           blogData.popularPost.map((value) => {
             return (
               <Carousel.Slide
-                onClick={() => router.push(`/blogdetails/${value.id}`)}
+                onClick={() => router.push(`/blog/${value.id}`)}
                 key={value.id}
                 sx={{ cursor: 'pointer' }}
               >
