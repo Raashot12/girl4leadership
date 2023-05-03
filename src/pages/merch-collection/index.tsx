@@ -14,13 +14,11 @@ const allCategories = [...new Set(featured.map((item) => item.categories))];
 
 const MerchCollectionPage = () => {
   const { colorScheme } = useMantineColorScheme();
-  const [allProducts, setAllProducts] = useState(featured);
-  const [categories, setCategories] = useState(allCategories);
+  const [allProducts, setAllProducts] = useState<CategoriesType[]>(featured);
+  const [categories, setCategories] = useState<string[]>(allCategories);
 
   useEffect(() => {
-    const products = featured.filter(
-      (item: CategoriesType) => item.categories === 'featured'
-    );
+    const products = featured.filter((item) => item.categories === 'featured');
     setAllProducts(products);
     return;
   }, []);

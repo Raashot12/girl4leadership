@@ -96,3 +96,7 @@ pre{
 pre::-webkit-scrollbar {
   display: none;
 }
+
+.is-active{
+  color:#E25D24
+}
