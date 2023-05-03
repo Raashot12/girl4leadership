@@ -10,7 +10,6 @@ import { featured } from 'components/MerchCollection/staticData';
 import { CategoriesType } from 'types/merchSection';
 
 const allCategories = [...new Set(featured.map((item) => item.categories))];
-console.log(allCategories);
 
 const MerchCollectionPage = () => {
   const { colorScheme } = useMantineColorScheme();

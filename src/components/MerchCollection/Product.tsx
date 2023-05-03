@@ -1,5 +1,6 @@
 /* eslint-disable no-useless-return */
 import React, { useState } from 'react';
+import Link from 'next/link';
 import {
   Box,
   Text,
@@ -11,7 +12,6 @@ import {
   Input,
 } from '@mantine/core';
 import { IconArrowsDiagonal, IconCircleCheck, IconHeart } from '@tabler/icons';
-import { useDisclosure } from '@mantine/hooks';
 import { FaFacebookF, FaTwitter, FaGoogle, FaPinterestP } from 'react-icons/fa';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { labels } from './staticData';
@@ -191,7 +191,7 @@ const Product = ({
             <Box sx={{ padding: '10px 0' }}>
               <Text>Size</Text>
               <Box sx={{ margin: '12px 0' }}>
-                {size.map((itemSize) => (
+                {size.map((itemSize: string) => (
                   <Button
                     variant="outline"
                     sx={{
@@ -378,37 +378,41 @@ const Product = ({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          position: 'relative',
         }}
       >
-        <Box
-          sx={{
-            backgroundImage: `${`url(${allProductImages[0]})`}`,
-            height: '353px',
-            minWidth: '264px',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            padding: '10px',
-            position: 'relative',
-            '@media (max-width: 767px)': {
-              width: '100%',
-            },
-          }}
-        >
-          {isSale && (
-            <Box
-              sx={{
-                background: '#eb5a46',
-                color: '#ffff',
-                borderRadius: '3px',
-                width: '48px',
-                alignItems: 'center',
-                textAlign: 'center',
-              }}
-            >
-              SALE!
-            </Box>
-          )}
+        <Link href={`/merch-collection/item/${id}`}>
+          <Box
+            sx={{
+              backgroundImage: `${`url(${allProductImages[0]})`}`,
+              height: '353px',
+              minWidth: '264px',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              padding: '10px',
+              '@media (max-width: 767px)': {
+                width: '100%',
+              },
+            }}
+          >
+            {isSale && (
+              <Box
+                sx={{
+                  background: '#eb5a46',
+                  color: '#ffff',
+                  borderRadius: '3px',
+                  width: '48px',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                }}
+              >
+                SALE!
+              </Box>
+            )}
+          </Box>
+        </Link>
+        <Box sx={{ position: 'absolute', right: '10px', top: '30px' }}>
           {isHover && (
             <Box
               onClick={() => {
@@ -423,9 +427,6 @@ const Product = ({
                 width: '50px',
                 height: '50px',
                 background: '#ffff',
-                position: 'absolute',
-                right: '10px',
-                top: '30px',
                 display: 'grid',
                 placeItems: 'center',
                 cursor: 'pointer',
