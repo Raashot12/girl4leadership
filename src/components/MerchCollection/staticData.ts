@@ -1,5 +1,3 @@
-import { CategoriesType } from 'types/merchSection';
-
 export const card = [
   {
     id: 1,
