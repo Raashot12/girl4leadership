@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-useless-return */
 import React, { useState } from 'react';
 import Link from 'next/link';
