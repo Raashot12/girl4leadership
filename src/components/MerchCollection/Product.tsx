@@ -166,8 +166,9 @@ const Product = ({
             <Box sx={{ marginTop: '18px' }}>
               <Text>Color</Text>
               <Box sx={{ display: 'flex', columnGap: '5px' }}>
-                {color.map((itemColor) => (
+                {color.map((itemColor, index) => (
                   <Box
+                    key={index}
                     onClick={() => {
                       setIsSelectOtherColors(true);
                       if (itemColor.image === null) {
@@ -193,6 +194,7 @@ const Product = ({
               <Box sx={{ margin: '12px 0' }}>
                 {size.map((itemSize: string) => (
                   <Button
+                    key={itemSize}
                     variant="outline"
                     sx={{
                       marginRight: '15px',
@@ -338,7 +340,7 @@ const Product = ({
                   sx={{ display: 'flex', columnGap: '10px', cursor: 'pointer' }}
                 >
                   {modalCategories.map((modalCategory) => (
-                    <Text>{modalCategory}</Text>
+                    <Text key={modalCategory}>{modalCategory}</Text>
                   ))}
                 </Box>
               </Box>
@@ -346,9 +348,9 @@ const Product = ({
               <Text sx={{ display: 'flex' }}>
                 Tags:
                 <Box sx={{ display: 'flex', columnGap: '10px' }}>
-                  {labels.map((label, index) => (
+                  {labels.map((label) => (
                     <Text
-                      key={index}
+                      key={label}
                       sx={{
                         background: '#ffff',
                         padding: '0 5px',
