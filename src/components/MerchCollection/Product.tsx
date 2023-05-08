@@ -15,6 +15,7 @@ import { IconArrowsDiagonal, IconCircleCheck, IconHeart } from '@tabler/icons';
 import { FaFacebookF, FaTwitter, FaGoogle, FaPinterestP } from 'react-icons/fa';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { labels } from './staticData';
+import Star from './Star';
 
 const Product = ({
   id,
@@ -22,6 +23,7 @@ const Product = ({
   isSale,
   name,
   amount,
+  star,
   modalCategories,
   size,
   color,
@@ -60,6 +62,7 @@ const Product = ({
               backgroundPosition: 'center',
               display: 'flex',
               justifyContent: 'space-between',
+              border: '1px solid red',
             }}
           >
             <Button
@@ -78,9 +81,20 @@ const Product = ({
                 ':hover': {
                   background: 'none',
                 },
+                '@media (max-width:767px)': {
+                  left: '-30px',
+                },
               }}
             >
-              <IoIosArrowBack style={{ fontSize: '40px' }} />
+              {allProductImages.length === 1 ? (
+                ''
+              ) : (
+                <IoIosArrowBack
+                  style={{
+                    fontSize: '40px',
+                  }}
+                />
+              )}
             </Button>
             <Button
               variant="subtle"
@@ -100,9 +114,16 @@ const Product = ({
                 ':hover': {
                   background: 'none',
                 },
+                '@media (max-width:767px)': {
+                  right: '-30px',
+                },
               }}
             >
-              <IoIosArrowForward style={{ fontSize: '40px' }} />
+              {allProductImages.length === 1 ? (
+                ''
+              ) : (
+                <IoIosArrowForward style={{ fontSize: '40px' }} />
+              )}
             </Button>
           </Grid.Col>
 
@@ -121,6 +142,9 @@ const Product = ({
               '::-webkit-scrollbar-thumb': {
                 background: '#808080',
               },
+              '@media (max-width:767px)': {
+                padding: '15px 0',
+              },
             }}
           >
             <Text
@@ -129,26 +153,64 @@ const Product = ({
                 lineHeight: 1.3,
                 fontWeight: 600,
                 marginBottom: '10px',
+                '@media (max-width:767px)': {
+                  fontSize: '18px',
+                },
               }}
             >
               {name}
             </Text>
             <Divider />
-            <Text sx={{ margin: '20px 0', fontSize: '24px', fontWeight: 600 }}>
+            <Text
+              sx={{
+                margin: '20px 0',
+                fontSize: '24px',
+                fontWeight: 600,
+                '@media (max-width:767px)': { margin: '5px 0' },
+              }}
+            >
               ${amount}
             </Text>
-            <Box sx={{ display: 'flex' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                '@media (max-width: 767px)': {
+                  flexDirection: 'column',
+                },
+              }}
+            >
               <Box
                 sx={{
                   width: '100px',
                   borderRight: '1px solid #8b99a3',
                   display: 'flex',
+                  '@media (max-width:767px)': {
+                    borderRight: 'none',
+                  },
                 }}
               >
                 <IconCircleCheck style={{ color: '#8aba56' }} />
-                <Text sx={{ marginLeft: '10px' }}>In Stock</Text>
+                <Text
+                  sx={{
+                    marginLeft: '10px',
+                  }}
+                >
+                  In Stock
+                </Text>
               </Box>
-              <Text sx={{ marginLeft: '10px' }}>Write a Review?</Text>
+              <Box sx={{ display: 'flex', marginLeft: '10px' }}>
+                <Star star={star} />
+                <Text
+                  sx={{
+                    marginLeft: '10px',
+                    '@media (max-width: 767px)': {
+                      marginLeft: '10px',
+                    },
+                  }}
+                >
+                  Write a Review?
+                </Text>
+              </Box>
             </Box>
             <Text
               sx={{
@@ -204,6 +266,10 @@ const Product = ({
                       ':hover': {
                         background: '#ffff',
                       },
+                      '@media (max-width: 767px)': {
+                        padding: '5px',
+                        marginBottom: '15px',
+                      },
                     }}
                   >
                     {itemSize}
@@ -218,8 +284,7 @@ const Product = ({
                   display: 'flex',
                   columnGap: '20px',
                   '@media (max-width: 767px)': {
-                    flexDirection: 'column',
-                    rowGap: '20px',
+                    columnGap: '10px',
                   },
                 }}
               >
@@ -300,7 +365,7 @@ const Product = ({
                   marginTop: '20px',
                   display: 'flex',
                   alignItems: 'center',
-                  '@media (max-width: 767px)': {
+                  '@media (max-width: 1266px)': {
                     flexDirection: 'column',
                   },
                 }}
@@ -312,7 +377,7 @@ const Product = ({
                     padding: ' 10px',
                     display: 'flex',
                     marginRight: '30px',
-                    '@media (max-width:767px)': {
+                    '@media (max-width:1266px)': {
                       borderRight: 'none',
                     },
                   }}
@@ -320,7 +385,7 @@ const Product = ({
                   Add to Wishlist
                   <IconHeart style={{ marginLeft: '10px', color: '#E25D24' }} />
                 </Text>
-                <Box sx={{ display: 'flex' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <Text sx={{ marginRight: '20px' }}>Share this</Text>
                   <Box sx={{ display: 'flex', columnGap: '20px' }}>
                     <FaFacebookF />
@@ -452,6 +517,7 @@ const Product = ({
             {name}
           </Text>
           <Text sx={{ color: '#eb5a46', fontWeight: 600 }}>${amount}</Text>
+          <Star star={star} />
         </Box>
       </Box>
     </>

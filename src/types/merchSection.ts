@@ -4,6 +4,7 @@ export interface CategoriesType {
   isSale: boolean;
   name: string;
   amount: string;
+  star: number;
   categories: string;
   modalCategories: string[];
   size: string[];

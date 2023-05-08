@@ -8,7 +8,7 @@ const Cards = (): JSX.Element => {
 
   return (
     <Box sx={{ background: colorScheme === 'dark' ? '#232324' : '#ffff' }}>
-      <Container size="xl" sx={{ padding: '35px 20px' }}>
+      <Container size="xl" sx={{ padding: '35px 0' }}>
         <Box
           sx={{
             display: 'flex',
@@ -47,6 +47,16 @@ const Cards = (): JSX.Element => {
                     bottom: '15px',
                     width: '94%',
                     textAlign: 'center',
+                    '@media (max-width: 1100px)': {
+                      width: '92%',
+                    },
+                    '@media (max-width: 821px)': {
+                      width: '90%',
+                      padding: '0 5px',
+                    },
+                    '@media (max-width: 767px)': {
+                      width: '92%',
+                    },
                   }}
                 >
                   <Text

@@ -35,7 +35,7 @@ const Products = ({ categories, filterItems, product }) => {
   }, 2000);
 
   return (
-    <Box sx={{ padding: '60px 0 0' }}>
+    <Box pt={{ base: 10, md: 60 }} pb={{ base: 10, md: 60 }}>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box
           sx={{

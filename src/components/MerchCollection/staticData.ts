@@ -39,6 +39,7 @@ export const featured = [
     isSale: true,
     name: 'Fitted Skirt',
     amount: '19',
+    star: 0,
     categories: 'featured',
     modalCategories: ['Dress', 'Woman'],
     size: ['S', 'M', 'L'],
@@ -75,6 +76,7 @@ export const featured = [
     isSale: true,
     name: 'Embroidered Panel Dress',
     amount: '49',
+    star: 4,
     categories: 'featured',
     modalCategories: ['Dress', 'Woman'],
     size: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -104,6 +106,7 @@ export const featured = [
     isSale: true,
     name: 'Printed Melange T-Shirt',
     amount: '29',
+    star: 5,
     categories: 'featured',
     modalCategories: ['Dress', 'Man'],
     size: ['S', 'M', 'L'],
@@ -124,6 +127,7 @@ export const featured = [
     isSale: false,
     name: 'Flared Sleeve Blouse',
     amount: '54',
+    star: 5,
     categories: 'featured',
     modalCategories: ['Dress', 'Woman'],
     size: ['S', 'M', 'L'],
@@ -160,6 +164,7 @@ export const featured = [
     isSale: true,
     name: 'Fitted Skirt',
     amount: '19',
+    star: 0,
     categories: 'top sellers',
     modalCategories: ['Dress', 'Woman'],
     size: ['S', 'M', 'L'],
@@ -192,6 +197,7 @@ export const featured = [
     isSale: true,
     name: 'Faux Plain Leather Dress',
     amount: '90',
+    star: 5,
     categories: 'top sellers',
     modalCategories: ['Dress', 'Woman'],
     size: ['S', 'M', 'L', 'XL'],
@@ -209,6 +215,7 @@ export const featured = [
     isSale: true,
     name: 'Embroidered Panel Dress',
     amount: '49',
+    star: 4,
     categories: 'top sellers',
     modalCategories: ['Dress', 'Woman'],
     size: ['S', 'M'],
@@ -238,6 +245,7 @@ export const featured = [
     isSale: true,
     name: 'Printed Melange T-Shirt',
     amount: '29',
+    star: 5,
     categories: 'top sellers',
     modalCategories: ['Dress', 'Man'],
     size: ['S', 'M', 'L'],
@@ -258,6 +266,7 @@ export const featured = [
     isSale: true,
     name: 'Fitted Skirt',
     amount: '19',
+    star: 0,
     categories: 'new arrivals',
     modalCategories: ['Dress', 'Woman'],
     size: ['S', 'M', 'L'],
@@ -290,6 +299,7 @@ export const featured = [
     isSale: true,
     name: 'Faux Plain Leather Dress',
     amount: '90',
+    star: 5,
     categories: 'new arrivals',
     modalCategories: ['Dress', 'Woman'],
     size: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -306,6 +316,7 @@ export const featured = [
     isSale: false,
     name: 'Casual Spring Look 6',
     amount: '49',
+    star: 5,
     categories: 'new arrivals',
     modalCategories: ['Dress', 'Man'],
     size: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -321,9 +332,187 @@ export const featured = [
     isSale: false,
     name: 'Short Sleeve Linen Shirt',
     amount: '49',
+    star: 0,
     categories: 'new arrivals',
     modalCategories: ['Dress', 'Man'],
     size: ['S', 'M', 'L', 'XXL'],
     color: ['blue', 'grey'],
+  },
+];
+
+export const brand = [
+  {
+    id: 1,
+    brand:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/client3-1.png',
+  },
+  {
+    id: 2,
+    brand:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/client2-1.png',
+  },
+  {
+    id: 3,
+    brand:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/client1-1.png',
+  },
+  {
+    id: 4,
+    brand:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/client6.png',
+  },
+  {
+    id: 5,
+    brand:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/client5.png',
+  },
+  {
+    id: 6,
+    brand:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/client4.png',
+  },
+  {
+    id: 7,
+    brand:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/client3.png',
+  },
+  {
+    id: 8,
+    brand:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/client2.png',
+  },
+  {
+    id: 9,
+    brand:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/client1.png',
+  },
+];
+
+export const accessoriesData = [
+  {
+    id: 1,
+    image:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/11/accessories2.jpg',
+    isSale: true,
+  },
+  {
+    id: 2,
+    image:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/11/accessories1.jpg',
+    isSale: '',
+  },
+  {
+    id: 3,
+    image:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/63090225_99_B.jpg',
+    isSale: '',
+  },
+  {
+    id: 4,
+    image:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/accessories3-compressed.jpg',
+    isSale: '',
+  },
+  {
+    id: 5,
+    image:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/Braided-belt-edit-min.jpg',
+    isSale: '',
+  },
+  {
+    id: 6,
+    image:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/11/accessories5.jpg',
+    isSale: true,
+  },
+];
+
+export const blogAndNewsUpdate = [
+  {
+    id: 1,
+    image:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/09/mikuta-fringe-skirt-orange-sweater-compressed.jpg',
+    likes: 30,
+    share: 24,
+    tagOne: 'Clothes',
+    tagTwo: 'Fashion',
+    title: `10 Dresses that are not “Business as Usual”`,
+  },
+  {
+    id: 2,
+    image:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/09/smallcompressed.jpg',
+    likes: 19,
+    share: 6,
+    tagOne: 'Fashion',
+    tagTwo: 'Lifestyle',
+    title: `Sleepwear is here to stay`,
+  },
+  {
+    id: 3,
+    image:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/09/mikuta-wearing-verge-girl-3.jpg',
+    likes: 15,
+    share: 3,
+    tagOne: 'Clothes',
+    tagTwo: 'Winter',
+    title: `When it’s Winter but you feel like June`,
+  },
+  {
+    id: 4,
+    image:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/09/clicsdfdk.jpg',
+    likes: 15,
+    share: 3,
+    tagOne: 'Clothes',
+    tagTwo: 'Winter',
+    title: `When it’s Winter but you feel like June`,
+  },
+  {
+    id: 5,
+    image:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/09/fdgd.jpg',
+    likes: 15,
+    share: 3,
+    tagOne: 'Clothes',
+    tagTwo: 'Winter',
+    title: `When it’s Winter but you feel like June`,
+  },
+  {
+    id: 6,
+    image:
+      'https://preview.codeless.co/june/default/wp-content/uploads/2017/09/maravillas-bags-16.jpg',
+    likes: 15,
+    share: 3,
+    tagOne: 'Clothes',
+    tagTwo: 'Winter',
+    title: `When it’s Winter but you feel like June`,
+  },
+];
+
+export const giftWrapSection = [
+  {
+    id: 1,
+    bgColor: '#8079a5',
+    icon: 'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/png1.png',
+    iconAlt: 'Gift',
+    text: 'Gift wrap available',
+    subText: 'For all orders that can be shipped',
+  },
+  {
+    id: 2,
+    bgColor: '#aecbc7',
+    icon: 'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/png2.png',
+    iconAlt: 'Shipping',
+    text: 'Shipping is on US',
+    subText: 'Free shipping on Orders above $50',
+  },
+  {
+    id: 3,
+    bgColor: '#c7b79d',
+    icon: 'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/png3.png',
+    iconAlt: 'Customer support',
+    text: '24/7 Customer support',
+    subText: 'Live Chat and Telephonic support',
   },
 ];
