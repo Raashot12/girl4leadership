@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-useless-return */
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -39,6 +40,88 @@ const Product = ({
 
   return (
     <>
+      <Box
+        onMouseEnter={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
+        key={id}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          position: 'relative',
+        }}
+      >
+        <Link href={`/merch-collection/item/${id}`}>
+          <Box
+            sx={{
+              backgroundImage: `${`url(${allProductImages[0]})`}`,
+              height: '353px',
+              minWidth: '264px',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              padding: '10px',
+              '@media (max-width: 767px)': {
+                width: '100%',
+              },
+            }}
+          >
+            {isSale && (
+              <Box
+                sx={{
+                  background: '#eb5a46',
+                  color: '#ffff',
+                  borderRadius: '3px',
+                  width: '48px',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                }}
+              >
+                SALE!
+              </Box>
+            )}
+          </Box>
+        </Link>
+        <Box sx={{ position: 'absolute', right: '10px', top: '30px' }}>
+          {isHover && (
+            <Box
+              onClick={() => {
+                setIsloading(true);
+                setTimeout(() => {
+                  setIsloading(false);
+                  setOpenModal(true);
+                  return;
+                }, 1500);
+              }}
+              sx={{
+                width: '50px',
+                height: '50px',
+                background: '#ffff',
+                display: 'grid',
+                placeItems: 'center',
+                cursor: 'pointer',
+                ':hover': {
+                  color: '#eb5a46',
+                },
+              }}
+            >
+              {isLoading ? <Loader color="#E25D24" /> : <IconArrowsDiagonal />}
+            </Box>
+          )}
+        </Box>
+        <Box sx={{ textAlign: 'center' }}>
+          <Text
+            sx={{
+              fontSize: '14px',
+              fontWeight: 600,
+              letterSpacing: '0.4px',
+            }}
+          >
+            {name}
+          </Text>
+          <Text sx={{ color: '#eb5a46', fontWeight: 600 }}>${amount}</Text>
+        </Box>
+      </Box>
       <Modal
         opened={openModal}
         onClose={() => setOpenModal(false)}
@@ -254,10 +337,11 @@ const Product = ({
             <Box sx={{ padding: '10px 0' }}>
               <Text>Size</Text>
               <Box sx={{ margin: '12px 0' }}>
-                {size.map((itemSize: string) => (
+                {size.map((itemSize: string, index) => (
                   <Button
                     key={itemSize}
                     variant="outline"
+                    key={index}
                     sx={{
                       marginRight: '15px',
                       border: '1px solid #8b99a3',
@@ -291,7 +375,7 @@ const Product = ({
                 <Box sx={{ display: 'flex' }}>
                   <Input
                     value={qty}
-                    onChange={(e) => setQty(parseInt(e.target.value))}
+                    onChange={(e) => setQty(parseInt(e.target.value, 10))}
                     styles={{
                       input: {
                         width: '60px',
