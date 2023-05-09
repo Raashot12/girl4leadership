@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
-import { Box } from '@mantine/core';
 import { featured } from 'components/MerchCollection/staticData';
+import ProductDetails from 'components/MerchCollection/ProductDetails';
+import { Layout } from 'components/Layout/Layout';
 
 const SingleItem = (): JSX.Element => {
   const router = useRouter();
@@ -11,7 +12,11 @@ const SingleItem = (): JSX.Element => {
   if (!items) {
     return <div>Product not found</div>;
   }
-  return <Box></Box>;
+  return (
+    <Layout pageTitle={`Merch collection | ${items.name}`}>
+      <ProductDetails />
+    </Layout>
+  );
 };
 
 export default SingleItem;

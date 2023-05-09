@@ -12,9 +12,10 @@ import {
   Divider,
   Input,
 } from '@mantine/core';
-import { IconArrowsDiagonal, IconCircleCheck, IconHeart } from '@tabler/icons';
+// import { IconArrowsDiagonal, IconCircleCheck, IconHeart } from '@tabler/icons';
 import { FaFacebookF, FaTwitter, FaGoogle, FaPinterestP } from 'react-icons/fa';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
+import { IconArrowsDiagonal, IconCircleCheck, IconHeart } from '@tabler/icons';
 import { labels } from './staticData';
 
 const Product = ({
@@ -120,14 +121,7 @@ const Product = ({
           <Text sx={{ color: '#eb5a46', fontWeight: 600 }}>${amount}</Text>
         </Box>
       </Box>
-      <Modal
-        opened={openModal}
-        onClose={() => setOpenModal(false)}
-        size="80%"
-        transition="fade"
-        transitionDuration={600}
-        transitionTimingFunction="ease"
-      >
+      <Modal opened={openModal} onClose={() => setOpenModal(false)} size="80%">
         <Grid sx={{ width: '100%' }}>
           <Grid.Col
             md={6}
@@ -228,7 +222,7 @@ const Product = ({
                   display: 'flex',
                 }}
               >
-                <IconCircleCheck style={{ color: '#8aba56' }} />
+                <IconCircleCheck color={'#8aba56'} />
                 <Text sx={{ marginLeft: '10px' }}>In Stock</Text>
               </Box>
               <Text sx={{ marginLeft: '10px' }}>Write a Review?</Text>
