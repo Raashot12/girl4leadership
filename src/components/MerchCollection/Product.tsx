@@ -122,14 +122,7 @@ const Product = ({
           <Text sx={{ color: '#eb5a46', fontWeight: 600 }}>${amount}</Text>
         </Box>
       </Box>
-      <Modal
-        opened={openModal}
-        onClose={() => setOpenModal(false)}
-        size="80%"
-        transition="fade"
-        transitionDuration={600}
-        transitionTimingFunction="ease"
-      >
+      <Modal opened={openModal} onClose={() => setOpenModal(false)} size="80%">
         <Grid sx={{ width: '100%' }}>
           <Grid.Col
             md={6}
@@ -339,9 +332,8 @@ const Product = ({
               <Box sx={{ margin: '12px 0' }}>
                 {size.map((itemSize: string, index) => (
                   <Button
-                    key={itemSize}
-                    variant="outline"
                     key={index}
+                    variant="outline"
                     sx={{
                       marginRight: '15px',
                       border: '1px solid #8b99a3',
