@@ -18,6 +18,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { IconArrowForward, IconSend } from '@tabler/icons';
 import { IoMdMail } from 'react-icons/io';
+import 'aos/dist/aos.css';
 
 const text = 'Contact Us';
 const ContactUs = () => {

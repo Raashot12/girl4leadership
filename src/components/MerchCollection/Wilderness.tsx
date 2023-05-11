@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 import {
@@ -10,15 +11,9 @@ import {
   Image,
   useMantineColorScheme,
 } from '@mantine/core';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper';
-import { useState } from 'react';
+import { Carousel } from '@mantine/carousel';
 import { brand } from './staticData';
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import SwiperPrevBtn from './SwiperPrevBtn';
-import SwiperNextBtn from './SwiperNextBtn';
+import Animation from '../Shared/Animation/AnimationWrapper';
 
 const useStyle = createStyles(() => ({
   text: {
@@ -44,14 +39,8 @@ const useStyle = createStyles(() => ({
 
 const Wilderness = (): JSX.Element => {
   const { classes } = useStyle();
-  const [showControl, setShowControl] = useState(false);
   const { colorScheme } = useMantineColorScheme();
-  const mouseEnter = () => {
-    setShowControl(true);
-  };
-  const mouseLeave = () => {
-    setShowControl(false);
-  };
+
   return (
     <Box>
       <Flex
@@ -90,9 +79,22 @@ const Wilderness = (): JSX.Element => {
             src="https://preview.codeless.co/june/default/wp-content/uploads/2017/11/vc.png"
             style={{ marginBottom: '15px' }}
           />
-          <Text className={classes.text}>WILDERNESS</Text>
-          <Text className={classes.text}>PRINTED TEES</Text>
-          <Text className={classes.text}>STARTING $12</Text>
+          <Animation
+            direction="right"
+            width="auto"
+            duration={'1.2s'}
+            minScreenWidth="960px"
+            animate={true}
+            minScreenStyle={{
+              animate: true,
+            }}
+          >
+            <Box>
+              <Text className={classes.text}>WILDERNESS</Text>
+              <Text className={classes.text}>PRINTED TEES</Text>
+              <Text className={classes.text}>STARTING $12</Text>
+            </Box>
+          </Animation>
           <img
             src="https://preview.codeless.co/june/default/wp-content/uploads/2017/11/vc.png"
             style={{ marginTop: '15px' }}
@@ -131,59 +133,24 @@ const Wilderness = (): JSX.Element => {
             SHOP BY BRAND
           </Text>
 
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              position: 'relative',
-              padding: '0 15px',
-            }}
-            onMouseEnter={mouseEnter}
-            onMouseLeave={mouseLeave}
+          <Carousel
+            withIndicators={false}
+            height={140}
+            slideSize="180.5px"
+            slideGap="lg"
+            loop
+            align="center"
+            breakpoints={[
+              { maxWidth: 'md', slideSize: '25%' },
+              { maxWidth: 'sm', slideSize: '50%', slideGap: 10 },
+            ]}
           >
-            <Swiper
-              modules={[Navigation]}
-              spaceBetween={25}
-              slidesPerView={6}
-              breakpoints={{
-                365: {
-                  slidesPerView: 2,
-                },
-                767: {
-                  slidesPerView: 4,
-                },
-                1200: {
-                  slidesPerView: 6,
-                },
-              }}
-              style={{ position: 'relative' }}
-            >
-              <Flex
-                pos={'absolute'}
-                top={'45%'}
-                w={'100%'}
-                justify={'space-between'}
-                sx={{ zIndex: 999, cursor: 'pointer' }}
-                opacity={showControl ? 1 : 0}
-              >
-                <SwiperPrevBtn />
-                <SwiperNextBtn />
-              </Flex>
-              {brand.map((item) => (
-                <SwiperSlide
-                  key={item.id}
-                  style={{
-                    width: '167.5px',
-                    height: '140px',
-                    display: 'grid',
-                    placeContent: 'center',
-                  }}
-                >
-                  <Image src={item.brand} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </Box>
+            {brand.map((item) => (
+              <Carousel.Slide key={item.id}>
+                <Image src={item.brand} height={140} />
+              </Carousel.Slide>
+            ))}
+          </Carousel>
         </Box>
       </Container>
     </Box>

@@ -5,6 +5,7 @@ import {
   Input,
   Button,
   useMantineColorScheme,
+  Flex,
 } from '@mantine/core';
 import { accessoriesData } from './staticData';
 import Accessory from './Accessory';
@@ -17,27 +18,25 @@ const Accessories = () => {
       <Container size="xl" sx={{ padding: '30px 15px' }}>
         <Text
           sx={{
-            fontSize: '24px',
             lineHeight: '38px',
             fontWeight: 700,
             color: colorScheme === 'dark' ? '#c4c4c4' : '#262a2c',
           }}
           mb={20}
+          fz={{ base: '22px', sm: '24px' }}
         >
           ACCESSORIES
         </Text>
-        <Box
-          sx={{
-            display: 'flex',
-            columnGap: '40px',
-            flexWrap: 'wrap',
-            rowGap: '20px',
-          }}
+        <Flex
+          columnGap={40}
+          wrap={'wrap'}
+          rowGap={20}
+          justify={{ base: 'center', lg: 'start' }}
         >
           {accessoriesData.map((item) => {
             return <Accessory key={item.id} {...item} />;
           })}
-        </Box>
+        </Flex>
       </Container>
 
       <Box

@@ -53,13 +53,17 @@ const ReformedModal = styled(Modal)<{ colorMode?: string }>`
     position: relative;
   }
 `;
+const SwiperSlideCustom = styled(SwiperSlide)`
+  @media (max-width: 768px) {
+    height: 850px !important;
+  }
+`;
 const Product = ({
   id,
   bgImg,
   isSale,
   name,
   amount,
-  star,
   modalCategories,
   size,
   color,
@@ -69,7 +73,7 @@ const Product = ({
   const [openModal, setOpenModal] = useState(false);
   const [qty, setQty] = useState(1);
   const [allProductImages, setAllProductImages] = useState(bgImg);
-  const matches = useMediaQuery('(max-width: 758px)');
+  const matches = useMediaQuery('(max-width: 1024px)');
 
   return (
     <>
@@ -183,7 +187,7 @@ const Product = ({
             >
               {bgImg.map((value) => {
                 return (
-                  <SwiperSlide
+                  <SwiperSlideCustom
                     key={value.key}
                     style={{
                       backgroundImage: `url(${value.image})`,
@@ -194,7 +198,7 @@ const Product = ({
                       backgroundSize: 'cover',
                       height: '85vh',
                     }}
-                  ></SwiperSlide>
+                  ></SwiperSlideCustom>
                 );
               })}
             </Swiper>
@@ -205,11 +209,12 @@ const Product = ({
             sx={{
               padding: '30px',
               overflow: 'scroll',
-              height: '85vh',
+
               '::-webkit-scrollbar': {
                 display: 'none',
               },
             }}
+            h={{ base: '850px', lg: '85vh' }}
           >
             <Text component="a" sx={{ fontWeight: 400 }} fz={14}>
               Home
@@ -521,8 +526,8 @@ const Product = ({
           </Grid.Col>
         </Grid>
         <Flex
-          h={25}
-          w={25}
+          h={30}
+          w={30}
           sx={{ background: '#DFE2E9', borderRadius: '50%', zIndex: 999 }}
           align={'center'}
           justify={'center'}
