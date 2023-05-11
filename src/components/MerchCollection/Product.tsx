@@ -15,6 +15,7 @@ import {
   Flex,
   Group,
   Image,
+  Rating,
 } from '@mantine/core';
 import {
   IconArrowsDiagonal,
@@ -23,7 +24,6 @@ import {
   IconHeart,
 } from '@tabler/icons';
 import { FaFacebookF, FaTwitter, FaGoogle, FaPinterestP } from 'react-icons/fa';
-import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import styled from '@emotion/styled';
 import { useMediaQuery } from '@mantine/hooks';
 // import required modules
@@ -32,7 +32,6 @@ import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import IconCloseModal from 'components/Icons/IconCloseModal';
 import { labels } from './staticData';
-import Star from './Star';
 
 const ReformedModal = styled(Modal)<{ colorMode?: string }>`
   & .mantine-Paper-root {
@@ -272,7 +271,7 @@ const Product = ({
                 </Text>
               </Box>
               <Box sx={{ display: 'flex', marginLeft: '10px' }}>
-                <Star star={star} />
+                <Rating defaultValue={2} />
                 <Text
                   sx={{
                     marginLeft: '10px',

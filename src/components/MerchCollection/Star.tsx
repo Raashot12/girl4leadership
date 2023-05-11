@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
 
