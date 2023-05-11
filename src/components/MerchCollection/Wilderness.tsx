@@ -14,6 +14,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import { useState } from 'react';
 import { brand } from './staticData';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
 import SwiperPrevBtn from './SwiperPrevBtn';
 import SwiperNextBtn from './SwiperNextBtn';
 
