@@ -21,6 +21,10 @@ import { buttonStyles, checkboxStyles, defaultFonts, inputStyles } from 'theme';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { LoaderAnimation } from 'components/Shared/ScreenLoader';
 import store from '../state/store';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;

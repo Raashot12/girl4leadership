@@ -29,13 +29,12 @@ const Products = ({ categories, filterItems, product }) => {
   const { classes } = useStyles();
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
-
   setTimeout(() => {
     setLoading(false);
   }, 2000);
 
   return (
-    <Box sx={{ padding: '60px 0 0' }}>
+    <Box pt={{ base: 10, md: 60 }} pb={{ base: 10, md: 60 }}>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box
           sx={{
@@ -105,7 +104,9 @@ const Products = ({ categories, filterItems, product }) => {
           }}
         >
           {product.map((item) => (
-            <Product key={item.id} {...item} />
+            <React.Fragment key={item.id}>
+              <Product {...item} />
+            </React.Fragment>
           ))}
         </Box>
       )}

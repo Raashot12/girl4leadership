@@ -100,3 +100,14 @@ pre::-webkit-scrollbar {
 .is-active{
   color:#E25D24
 }
+
+/* .mm:hover{
+  opacity: 1;
+  cursor: pointer;
+} */
+.swiper-button-prev{
+  color:#E25D24 !important
+}
+.swiper-button-next{
+  color:#E25D24 !important
+}

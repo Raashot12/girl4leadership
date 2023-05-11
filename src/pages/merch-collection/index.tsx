@@ -9,6 +9,9 @@ import Products from 'components/MerchCollection/Products';
 import MerchHeroSection from 'components/MerchCollection/MerchHeroSection';
 import { featured } from 'components/MerchCollection/staticData';
 import { CategoriesType } from 'types/merchSection';
+import Wilderness from 'components/MerchCollection/Wilderness';
+import Accessories from 'components/MerchCollection/Accessories';
+import MerchCollectionBlog from 'components/MerchCollection/MerchCollectionBlog';
 
 const allCategories = [...new Set(featured.map((item) => item.categories))];
 
@@ -16,7 +19,6 @@ const MerchCollectionPage = () => {
   const { colorScheme } = useMantineColorScheme();
   const [allProducts, setAllProducts] = useState<CategoriesType[]>(featured);
   const [categories, setCategories] = useState<string[]>(allCategories);
-
   useEffect(() => {
     const products = featured.filter((item) => item.categories === 'featured');
     setAllProducts(products);
@@ -33,7 +35,7 @@ const MerchCollectionPage = () => {
     <Layout pageTitle="Merch Collections">
       <MerchHeroSection />
       <Box sx={{ background: colorScheme === 'dark' ? '#232324' : '#ffff' }}>
-        <Container size="xl" sx={{ padding: '35px 20px' }}>
+        <Container size="xl">
           <Cards />
           <Products
             categories={categories}
@@ -42,6 +44,9 @@ const MerchCollectionPage = () => {
           />
         </Container>
       </Box>
+      <Wilderness />
+      <Accessories />
+      <MerchCollectionBlog />
     </Layout>
   );
 };
