@@ -28,11 +28,24 @@ export const featured = [
   {
     id: 1,
     bgImg: [
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_D1-edit-min-300x400.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_R-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02-99999999_01-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_B-edit-min.jpg',
+      {
+        id: 1,
+        type: 'white',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_D1-edit-min-300x400.jpg',
+      },
+      {
+        id: 2,
+        type: 'grey',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_R-edit-min.jpg',
+      },
+      {
+        id: 3,
+        type: 'blue',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02-99999999_01-edit-min.jpg',
+      },
     ],
     isSale: true,
     name: 'Fitted Skirt',
@@ -41,35 +54,24 @@ export const featured = [
     categories: 'featured',
     modalCategories: ['Dress', 'Woman'],
     size: ['S', 'M', 'L'],
-    color: [
-      {
-        type: 'white',
-        image: [
-          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_D1-edit-min-300x400.jpg',
-        ],
-      },
-      {
-        type: 'grey',
-        image: [
-          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_92-99999999_01-edit-min-600x839.jpg',
-        ],
-      },
-      {
-        type: 'blue',
-        image: [
-          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_56_R-edit-min-600x839.jpg',
-        ],
-      },
-    ],
+    color: ['white', 'grey', 'blue'],
   },
   {
     id: 2,
     bgImg: [
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01-edit-min-300x400.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01-99999999_01-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01_R-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01_D2-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01_D1-edit-min.jpg',
+      {
+        id: 1,
+        type: 'white',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01-edit-min-732x1024.jpg',
+      },
+
+      {
+        id: 2,
+        type: 'yellow',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_15_B-edit-min-732x1024.jpg',
+      },
     ],
     isSale: true,
     name: 'Embroidered Panel Dress',
@@ -78,28 +80,41 @@ export const featured = [
     categories: 'featured',
     modalCategories: ['Dress', 'Woman'],
     size: ['S', 'M', 'L', 'XL', 'XXL'],
-    color: [
-      {
-        type: 'white',
-        image: [
-          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01-edit-min-300x400.jpg',
-        ],
-      },
-      {
-        type: 'yellow',
-        image: [
-          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_15_B-edit-min-600x839.jpg',
-        ],
-      },
-    ],
+    color: ['white', 'yellow'],
   },
   {
     id: 3,
     bgImg: [
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-1-min-600x800.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-2-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-3-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-4-min.jpg',
+      {
+        id: 1,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-1-min-600x800.jpg',
+      },
+      {
+        id: 2,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-1-min-600x800.jpg',
+      },
+      {
+        id: 3,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-2-min.jpg',
+      },
+      {
+        id: 4,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-3-min.jpg',
+      },
+      {
+        id: 5,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-4-min.jpg',
+      },
     ],
     isSale: true,
     name: 'Printed Melange T-Shirt',
@@ -108,19 +123,41 @@ export const featured = [
     categories: 'featured',
     modalCategories: ['Dress', 'Man'],
     size: ['S', 'M', 'L'],
-    color: [
-      { type: 'white', image: null },
-      { type: 'yellow', image: null },
-    ],
+    color: ['white', 'yellow'],
   },
   {
     id: 4,
     bgImg: [
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11003721_02-99999999_01-edit-min-300x400.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11003721_02-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11003721_02_R-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11003721_02_D2-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11003721_02_D1-edit-min.jpg',
+      {
+        id: 1,
+        type: 'white',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11003721_02-99999999_01-edit-min-300x400.jpg',
+      },
+      {
+        id: 2,
+        type: 'grey',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11003721_37_D1-edit-min-600x839.jpg',
+      },
+      {
+        id: 3,
+        type: 'yellow',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11003721_15_D1-edit-min.jpg',
+      },
+      {
+        id: 4,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11003721_02-edit-min.jpg',
+      },
+      {
+        id: 4,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11003721_02-edit-min.jpg',
+      },
     ],
     isSale: false,
     name: 'Flared Sleeve Blouse',
@@ -129,35 +166,35 @@ export const featured = [
     categories: 'featured',
     modalCategories: ['Dress', 'Woman'],
     size: ['S', 'M', 'L'],
-    color: [
-      {
-        type: 'white',
-        image: [
-          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11003721_02-99999999_01-edit-min-300x400.jpg',
-        ],
-      },
-      {
-        type: 'grey',
-        image: [
-          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11003721_37_D1-edit-min-600x839.jpg',
-        ],
-      },
-      {
-        type: 'yellow',
-        image: [
-          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11003721_15_D1-edit-min.jpg',
-        ],
-      },
-    ],
+    color: ['white', 'grey', 'yellow'],
   },
   {
     id: 5,
     bgImg: [
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_D1-edit-min-300x400.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_R-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02-99999999_01-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_B-edit-min.jpg',
+      {
+        id: 1,
+        type: 'white',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_D1-edit-min-300x400.jpg',
+      },
+      {
+        id: 2,
+        type: 'grey',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_92-99999999_01-edit-min-600x839.jpg',
+      },
+      {
+        id: 3,
+        type: 'blue',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_56_R-edit-min-600x839.jpg',
+      },
+      {
+        id: 4,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02-edit-min.jpg',
+      },
     ],
     isSale: true,
     name: 'Fitted Skirt',
@@ -166,31 +203,17 @@ export const featured = [
     categories: 'top sellers',
     modalCategories: ['Dress', 'Woman'],
     size: ['S', 'M', 'L'],
-    color: [
-      {
-        type: 'white',
-        image: [
-          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_D1-edit-min-300x400.jpg',
-        ],
-      },
-      {
-        type: 'grey',
-        image: [
-          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_92-99999999_01-edit-min-600x839.jpg',
-        ],
-      },
-      {
-        type: 'blue',
-        image: [
-          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_56_R-edit-min-600x839.jpg',
-        ],
-      },
-    ],
+    color: ['white', 'grey', 'blue'],
   },
   {
     id: 6,
     bgImg: [
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/MINI-DRAPED-SKIRT2_1_1-600x800.jpg',
+      {
+        id: 1,
+        type: 'grey',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/MINI-DRAPED-SKIRT2_1_1-600x800.jpg',
+      },
     ],
     isSale: true,
     name: 'Faux Plain Leather Dress',
@@ -204,11 +227,30 @@ export const featured = [
   {
     id: 7,
     bgImg: [
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01-edit-min-300x400.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01-99999999_01-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01_R-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01_D2-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01_D1-edit-min.jpg',
+      {
+        id: 1,
+        type: 'white',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01-edit-min-300x400.jpg',
+      },
+      {
+        id: 2,
+        type: 'yellow',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_15_B-edit-min-600x839.jpg',
+      },
+      {
+        id: 3,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01-99999999_01-edit-min.jpg',
+      },
+      {
+        id: 4,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01_R-edit-min.jpg',
+      },
     ],
     isSale: true,
     name: 'Embroidered Panel Dress',
@@ -217,28 +259,36 @@ export const featured = [
     categories: 'top sellers',
     modalCategories: ['Dress', 'Woman'],
     size: ['S', 'M'],
-    color: [
-      {
-        type: 'white',
-        image: [
-          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_01-edit-min-300x400.jpg',
-        ],
-      },
-      {
-        type: 'yellow',
-        image: [
-          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/13013030_15_B-edit-min-600x839.jpg',
-        ],
-      },
-    ],
+    color: ['white', 'yellow'],
   },
   {
     id: 8,
     bgImg: [
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-1-min-600x800.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-2-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-3-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-4-min.jpg',
+      {
+        id: 1,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-1-min-600x800.jpg',
+      },
+      {
+        id: 2,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-2-min.jpg',
+      },
+      {
+        id: 3,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-3-min.jpg',
+      },
+
+      {
+        id: 4,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/3-4-min.jpg',
+      },
     ],
     isSale: true,
     name: 'Printed Melange T-Shirt',
@@ -247,19 +297,41 @@ export const featured = [
     categories: 'top sellers',
     modalCategories: ['Dress', 'Man'],
     size: ['S', 'M', 'L'],
-    color: [
-      { type: 'white', image: null },
-      { type: 'yellow', image: null },
-    ],
+    color: ['white', 'yellow'],
   },
   {
     id: 9,
     bgImg: [
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_D1-edit-min-300x400.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_R-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02-99999999_01-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02-edit-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_B-edit-min.jpg',
+      {
+        id: 1,
+        type: 'white',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_D1-edit-min-300x400.jpg',
+      },
+      {
+        id: 2,
+        type: 'grey',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_92-99999999_01-edit-min-600x839.jpg',
+      },
+      {
+        id: 3,
+        type: 'blue',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_56_R-edit-min-600x839.jpg',
+      },
+      // {
+      //   id: 3,
+      //   type: null,
+      //   image:
+      //     'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02-edit-min.jpg',
+      // },
+      // {
+      //   id: 4,
+      //   type: null,
+      //   image:
+      //     'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_B-edit-min.jpg',
+      // },
     ],
     isSale: true,
     name: 'Fitted Skirt',
@@ -268,31 +340,17 @@ export const featured = [
     categories: 'new arrivals',
     modalCategories: ['Dress', 'Woman'],
     size: ['S', 'M', 'L'],
-    color: [
-      {
-        type: 'white',
-        image: [
-          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_02_D1-edit-min-300x400.jpg',
-        ],
-      },
-      {
-        type: 'grey',
-        image: [
-          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_92-99999999_01-edit-min-600x839.jpg',
-        ],
-      },
-      {
-        type: 'blue',
-        image: [
-          'https://preview.codeless.co/june/default/wp-content/uploads/2018/01/11023706_56_R-edit-min-600x839.jpg',
-        ],
-      },
-    ],
+    color: ['white', 'grey', 'blue'],
   },
   {
     id: 10,
     bgImg: [
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/MINI-DRAPED-SKIRT2_1_1-600x800.jpg',
+      {
+        id: 3,
+        type: 'blue',
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/10/MINI-DRAPED-SKIRT2_1_1-600x800.jpg',
+      },
     ],
     isSale: true,
     name: 'Faux Plain Leather Dress',
@@ -306,10 +364,30 @@ export const featured = [
   {
     id: 11,
     bgImg: [
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/product5-2-min-600x800.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/product5-1-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/product5-3-min.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/product5-4-min.jpg',
+      {
+        id: 1,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/product5-2-min-600x800.jpg',
+      },
+      {
+        id: 2,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/product5-1-min.jpg',
+      },
+      {
+        id: 3,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/product5-1-min.jpg',
+      },
+      {
+        id: 4,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/product5-3-min.jpg',
+      },
     ],
     isSale: false,
     name: 'Casual Spring Look 6',
@@ -323,9 +401,24 @@ export const featured = [
   {
     id: 12,
     bgImg: [
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/p3-300x400.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/p1.jpg',
-      'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/p2.jpg',
+      {
+        id: 1,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/p3-300x400.jpg',
+      },
+      {
+        id: 2,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/p1.jpg',
+      },
+      {
+        id: 2,
+        type: null,
+        image:
+          'https://preview.codeless.co/june/default/wp-content/uploads/2017/12/p2.jpg',
+      },
     ],
     isSale: false,
     name: 'Short Sleeve Linen Shirt',

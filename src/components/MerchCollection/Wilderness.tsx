@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/alt-text */
 import {
   Box,
   Container,
@@ -10,14 +12,43 @@ import {
 } from '@mantine/core';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
+import { useState } from 'react';
 import { brand } from './staticData';
 import SwiperPrevBtn from './SwiperPrevBtn';
 import SwiperNextBtn from './SwiperNextBtn';
 
+const useStyle = createStyles(() => ({
+  text: {
+    fontSize: '60px',
+    fontWeight: 600,
+    letterSpacing: '8px',
+    color: '#ffff',
+    lineHeight: 1,
+    '@media (max-width:767px)': {
+      fontSize: '30px',
+    },
+  },
+  iconWrap: {
+    background: '#ffff',
+    width: '48px',
+    height: '48px',
+    borderRadius: '50%',
+    display: 'grid',
+    placeContent: 'center',
+    cursor: 'pointer',
+  },
+}));
+
 const Wilderness = (): JSX.Element => {
   const { classes } = useStyle();
+  const [showControl, setShowControl] = useState(false);
   const { colorScheme } = useMantineColorScheme();
-
+  const mouseEnter = () => {
+    setShowControl(true);
+  };
+  const mouseLeave = () => {
+    setShowControl(false);
+  };
   return (
     <Box>
       <Flex
@@ -104,6 +135,8 @@ const Wilderness = (): JSX.Element => {
               position: 'relative',
               padding: '0 15px',
             }}
+            onMouseEnter={mouseEnter}
+            onMouseLeave={mouseLeave}
           >
             <Swiper
               modules={[Navigation]}
@@ -120,8 +153,19 @@ const Wilderness = (): JSX.Element => {
                   slidesPerView: 6,
                 },
               }}
+              style={{ position: 'relative' }}
             >
-              <SwiperPrevBtn />
+              <Flex
+                pos={'absolute'}
+                top={'45%'}
+                w={'100%'}
+                justify={'space-between'}
+                sx={{ zIndex: 999, cursor: 'pointer' }}
+                opacity={showControl ? 1 : 0}
+              >
+                <SwiperPrevBtn />
+                <SwiperNextBtn />
+              </Flex>
               {brand.map((item) => (
                 <SwiperSlide
                   key={item.id}
@@ -135,7 +179,6 @@ const Wilderness = (): JSX.Element => {
                   <Image src={item.brand} />
                 </SwiperSlide>
               ))}
-              <SwiperNextBtn />
             </Swiper>
           </Box>
         </Box>
@@ -143,27 +186,4 @@ const Wilderness = (): JSX.Element => {
     </Box>
   );
 };
-
-const useStyle = createStyles((theme) => ({
-  text: {
-    fontSize: '60px',
-    fontWeight: 600,
-    letterSpacing: '8px',
-    color: '#ffff',
-    lineHeight: 1,
-    '@media (max-width:767px)': {
-      fontSize: '30px',
-    },
-  },
-  iconWrap: {
-    background: '#ffff',
-    width: '48px',
-    height: '48px',
-    borderRadius: '50%',
-    display: 'grid',
-    placeContent: 'center',
-    cursor: 'pointer',
-  },
-}));
-
 export default Wilderness;

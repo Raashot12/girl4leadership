@@ -11,7 +11,6 @@ import { featured } from 'components/MerchCollection/staticData';
 import { CategoriesType } from 'types/merchSection';
 import Wilderness from 'components/MerchCollection/Wilderness';
 import Accessories from 'components/MerchCollection/Accessories';
-import Blog from 'components/Blog/Blog';
 import MerchCollectionBlog from 'components/MerchCollection/MerchCollectionBlog';
 
 const allCategories = [...new Set(featured.map((item) => item.categories))];
@@ -20,7 +19,6 @@ const MerchCollectionPage = () => {
   const { colorScheme } = useMantineColorScheme();
   const [allProducts, setAllProducts] = useState<CategoriesType[]>(featured);
   const [categories, setCategories] = useState<string[]>(allCategories);
-
   useEffect(() => {
     const products = featured.filter((item) => item.categories === 'featured');
     setAllProducts(products);

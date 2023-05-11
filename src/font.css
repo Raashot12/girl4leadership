@@ -105,3 +105,9 @@ pre::-webkit-scrollbar {
   opacity: 1;
   cursor: pointer;
 } */
+.swiper-button-prev{
+  color:#E25D24 !important
+}
+.swiper-button-next{
+  color:#E25D24 !important
+}

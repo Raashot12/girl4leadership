@@ -20,8 +20,9 @@ const Accessories = () => {
             fontSize: '24px',
             lineHeight: '38px',
             fontWeight: 700,
-            color: '#262a2c',
+            color: colorScheme === 'dark' ? '#c4c4c4' : '#262a2c',
           }}
+          mb={20}
         >
           ACCESSORIES
         </Text>

@@ -1,9 +1,12 @@
 import Link from 'next/link';
 import { Box, Container, Flex } from '@mantine/core';
+import { motion } from 'framer-motion';
+import { child, container } from 'components/AboutUs/AboutUs';
 
+const text = 'Exhale Style';
 const MerchHeroSection = (): JSX.Element => {
   return (
-    <Box mt={90}>
+    <Box mt={77}>
       <Flex
         align="center"
         sx={{
@@ -41,7 +44,17 @@ const MerchHeroSection = (): JSX.Element => {
                 lineHeight: 0.95,
               }}
             >
-              Exhale Style
+              <motion.div
+                variants={container}
+                initial="hidden"
+                animate="visible"
+              >
+                {Array.from(text).map((letter, index) => (
+                  <motion.span variants={child} key={index}>
+                    {letter === '' ? '\u00A0' : letter}
+                  </motion.span>
+                ))}
+              </motion.div>
             </Box>
             <Box
               sx={{
@@ -64,6 +77,10 @@ const MerchHeroSection = (): JSX.Element => {
                   margin: '0 auto',
                   fontSize: 14,
                   fontWeight: 600,
+                  ':hover': {
+                    background: '#E26426',
+                    transition: 'all 0.5s ease-in-out',
+                  },
                 }}
               >
                 SHOP COLLECTION

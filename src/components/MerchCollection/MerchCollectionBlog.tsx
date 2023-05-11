@@ -5,11 +5,28 @@ import {
   useMantineColorScheme,
   Image,
   createStyles,
+  Group,
 } from '@mantine/core';
 import { BsFillShareFill } from 'react-icons/bs';
 import { AiOutlineHeart } from 'react-icons/ai';
-import { blogAndNewsUpdate, giftWrapSection } from './staticData';
 import ScrollablComponents from 'components/Shared/ScrollableUI/ScrollablComponents';
+import { blogAndNewsUpdate, giftWrapSection } from './staticData';
+
+const useStyle = createStyles(() => ({
+  tagStyle: {
+    background: '#fff',
+    color: '#000',
+    marginRight: '15px',
+    padding: '5px 10px',
+    borderRadius: '20px',
+    cursor: 'pointer',
+    ':hover': {
+      background: '#e1621b',
+      color: '#fff',
+      transition: 'all 0.5s ease-out',
+    },
+  },
+}));
 
 const MerchCollectionBlog = () => {
   const { colorScheme } = useMantineColorScheme();
@@ -33,7 +50,7 @@ const MerchCollectionBlog = () => {
           textAlign: 'center',
           lineHeight: 1.2,
           color: '#8b99a3',
-          marginBottom: '20px',
+          marginBottom: '30px',
         }}
       >
         Checkout our blog & the latest in style and offers as they happen
@@ -72,6 +89,7 @@ const MerchCollectionBlog = () => {
                     display: 'flex',
                     justifyContent: 'space-between',
                   }}
+                  mt={16}
                 >
                   <Text sx={{ color: '#c1cad1', fontSize: '14px' }}>
                     By {` `}
@@ -82,32 +100,36 @@ const MerchCollectionBlog = () => {
                     >
                       ANITA GIBS
                     </em>
-                    / September 28, 2020
+                    /September 28, 2020
                   </Text>
-                  <Box sx={{ display: 'flex', columnGap: '20px' }}>
-                    <Text sx={{ color: '#8b99a3' }}>
-                      <AiOutlineHeart
-                        style={{
-                          color: colorScheme === 'dark' ? '#fff' : '#e1621b',
-                          marginRight: '5px',
-                        }}
-                      />
+                  <Group spacing={0} align="center">
+                    <AiOutlineHeart
+                      style={{
+                        color: colorScheme === 'dark' ? '#fff' : '#e1621b',
+                        marginRight: '5px',
+                      }}
+                      size={16}
+                    />
+                    <Text sx={{ color: '#8b99a3' }} fz={14}>
                       {likes}
                     </Text>
-                    <Text
-                      sx={{
-                        color: '#8b99a3',
+                  </Group>
+                  <Group
+                    sx={{
+                      color: '#8b99a3',
+                      cursor: 'pointer',
+                    }}
+                    spacing={0}
+                  >
+                    <BsFillShareFill
+                      style={{
+                        color: colorScheme === 'dark' ? '#fff' : '#e1621b',
+                        marginRight: '5px',
                       }}
-                    >
-                      <BsFillShareFill
-                        style={{
-                          color: colorScheme === 'dark' ? '#fff' : '#e1621b',
-                          marginRight: '5px',
-                        }}
-                      />
-                      {share}
-                    </Text>
-                  </Box>
+                      size={14}
+                    />
+                    <Text fz={14}>{share}</Text>
+                  </Group>
                 </Box>
                 <Text
                   sx={{
@@ -187,18 +209,3 @@ const MerchCollectionBlog = () => {
 };
 
 export default MerchCollectionBlog;
-
-const useStyle = createStyles((theme) => ({
-  tagStyle: {
-    background: '#fff',
-    color: '#000',
-    marginRight: '15px',
-    padding: '5px 10px',
-    borderRadius: '20px',
-    cursor: 'pointer',
-    ':hover': {
-      background: '#e1621b',
-      color: '#fff',
-    },
-  },
-}));

@@ -1,6 +1,10 @@
 export interface CategoriesType {
   id: number;
-  bgImg: string[];
+  bgImg: {
+    id: number;
+    type: string | null;
+    image: string;
+  }[];
   isSale: boolean;
   name: string;
   amount: string;
