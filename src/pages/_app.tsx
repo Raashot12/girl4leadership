@@ -137,8 +137,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
             headings: {
               fontFamily: defaultFonts,
               sizes: {
-                h2: { fontWeight: 700, fontSize: 24, lineHeight: 1.35 },
-                h3: { fontWeight: 600, fontSize: 18, lineHeight: 1.25 },
+                h2: { fontWeight: 700, fontSize: '24px', lineHeight: 1.35 },
+                h3: { fontWeight: 600, fontSize: '18px', lineHeight: 1.25 },
               },
             },
 
