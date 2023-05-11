@@ -69,10 +69,6 @@ const Product = ({
   const [openModal, setOpenModal] = useState(false);
   const [qty, setQty] = useState(1);
   const [allProductImages, setAllProductImages] = useState(bgImg);
-  // const [selectedIndex, setSelectedIndex] = useState(0);
-  // const [selectImage, setSeletImage] = useState(0);
-  // const [isSelectOtherColors, setIsSelectOtherColors] = useState(false);
-  // const [newSelectedColor, setNewSelectedColor] = useState(bgImg[0].image);
   const matches = useMediaQuery('(max-width: 758px)');
 
   return (
@@ -527,7 +523,7 @@ const Product = ({
         <Flex
           h={25}
           w={25}
-          sx={{ background: '#DFE2E9', borderRadius: '50%' }}
+          sx={{ background: '#DFE2E9', borderRadius: '50%', zIndex: 999 }}
           align={'center'}
           justify={'center'}
           pos={'absolute'}
