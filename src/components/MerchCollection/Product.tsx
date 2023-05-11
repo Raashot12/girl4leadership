@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-useless-return */
 import React, { useState } from 'react';
@@ -11,18 +12,55 @@ import {
   Button,
   Divider,
   Input,
+  Flex,
+  Group,
+  Image,
 } from '@mantine/core';
-import { IconArrowsDiagonal, IconCircleCheck, IconHeart } from '@tabler/icons';
+import {
+  IconArrowsDiagonal,
+  IconCheck,
+  IconCircleCheck,
+  IconHeart,
+} from '@tabler/icons';
 import { FaFacebookF, FaTwitter, FaGoogle, FaPinterestP } from 'react-icons/fa';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
+import styled from '@emotion/styled';
+import { useMediaQuery } from '@mantine/hooks';
+// import required modules
+import { Navigation } from 'swiper';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+import IconCloseModal from 'components/Icons/IconCloseModal';
 import { labels } from './staticData';
+import Star from './Star';
 
+const ReformedModal = styled(Modal)<{ colorMode?: string }>`
+  & .mantine-Paper-root {
+    padding: 0;
+  }
+  & .mantine-Grid-root {
+    margin: 0;
+  }
+
+  & .mantine-Modal-body {
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey;
+      border-radius: 5px;
+    }
+    position: relative;
+  }
+`;
 const Product = ({
   id,
   bgImg,
   isSale,
   name,
   amount,
+  star,
   modalCategories,
   size,
   color,
@@ -32,16 +70,17 @@ const Product = ({
   const [openModal, setOpenModal] = useState(false);
   const [qty, setQty] = useState(1);
   const [allProductImages, setAllProductImages] = useState(bgImg);
-  const [selectImage, setSeletImage] = useState(0);
-  const [isSelectOtherColors, setIsSelectOtherColors] = useState(false);
-  const [newSelectedColor, setNewSelectedColor] = useState(bgImg);
+  // const [selectedIndex, setSelectedIndex] = useState(0);
+  // const [selectImage, setSeletImage] = useState(0);
+  // const [isSelectOtherColors, setIsSelectOtherColors] = useState(false);
+  // const [newSelectedColor, setNewSelectedColor] = useState(bgImg[0].image);
+  const matches = useMediaQuery('(max-width: 758px)');
 
   return (
     <>
       <Box
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
-        key={id}
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -52,7 +91,7 @@ const Product = ({
         <Link href={`/merch-collection/item/${id}`}>
           <Box
             sx={{
-              backgroundImage: `${`url(${allProductImages[0]})`}`,
+              backgroundImage: `${`url(${allProductImages[0].image})`}`,
               height: '353px',
               minWidth: '264px',
               backgroundPosition: 'center',
@@ -103,7 +142,11 @@ const Product = ({
                 },
               }}
             >
-              {isLoading ? <Loader color="#E25D24" /> : <IconArrowsDiagonal />}
+              {isLoading ? (
+                <Loader color="#E25D24" size={'sm'} />
+              ) : (
+                <IconArrowsDiagonal />
+              )}
             </Box>
           )}
         </Box>
@@ -120,118 +163,127 @@ const Product = ({
           <Text sx={{ color: '#eb5a46', fontWeight: 600 }}>${amount}</Text>
         </Box>
       </Box>
-      <Modal
+      <ReformedModal
         opened={openModal}
         onClose={() => setOpenModal(false)}
-        size="80%"
-        transition="fade"
-        transitionDuration={600}
-        transitionTimingFunction="ease"
+        size={matches ? '100%' : '70%'}
+        withCloseButton={false}
+        padding={0}
+        centered
       >
-        <Grid sx={{ width: '100%' }}>
+        <Grid>
           <Grid.Col
-            md={6}
+            lg={6}
             sx={{
-              height: '699px',
-              backgroundImage: `${
-                isSelectOtherColors
-                  ? `url(${newSelectedColor})`
-                  : `url(${allProductImages[selectImage]})`
-              }`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              display: 'flex',
-              justifyContent: 'space-between',
+              '&.mantine-Grid-col': {
+                padding: 0,
+              },
             }}
+            pos={'relative'}
           >
-            <Button
-              variant="subtle"
-              onClick={() => {
-                if (selectImage > 0) {
-                  setSeletImage(selectImage - 1);
-                  return;
-                }
-              }}
-              sx={{
-                color: '#808080',
-                position: 'relative',
-                top: '50%',
-                opacity: `${selectImage < 1 ? 0.4 : 1}`,
-                ':hover': {
-                  background: 'none',
-                },
-              }}
+            <Swiper
+              navigation={true}
+              modules={[Navigation]}
+              className="mySwiper"
             >
-              <IoIosArrowBack style={{ fontSize: '40px' }} />
-            </Button>
-            <Button
-              variant="subtle"
-              onClick={() => {
-                if (selectImage < allProductImages.length - 1) {
-                  setSeletImage(selectImage + 1);
-                  return;
-                }
-              }}
-              sx={{
-                opacity: `${
-                  selectImage === allProductImages.length - 1 ? 0.4 : 1
-                }`,
-                color: '#808080',
-                position: 'relative',
-                top: '50%',
-                ':hover': {
-                  background: 'none',
-                },
-              }}
-            >
-              <IoIosArrowForward style={{ fontSize: '40px' }} />
-            </Button>
+              {bgImg.map((value) => {
+                return (
+                  <SwiperSlide
+                    key={value.key}
+                    style={{
+                      backgroundImage: `url(${value.image})`,
+                      border: '4px sold blue',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                      objectFit: 'scale-down',
+                      backgroundSize: 'cover',
+                      height: '85vh',
+                    }}
+                  ></SwiperSlide>
+                );
+              })}
+            </Swiper>
           </Grid.Col>
 
           <Grid.Col
-            md={6}
+            lg={6}
             sx={{
               padding: '30px',
               overflow: 'scroll',
-              height: '699px',
+              height: '85vh',
               '::-webkit-scrollbar': {
-                width: '5px',
-              },
-              '::-webkit-scrollbar-track': {
-                background: '#f1f1f1',
-              },
-              '::-webkit-scrollbar-thumb': {
-                background: '#808080',
+                display: 'none',
               },
             }}
           >
+            <Text component="a" sx={{ fontWeight: 400 }} fz={14}>
+              Home
+            </Text>
             <Text
+              mt={10}
+              mb={10}
               sx={{
                 fontSize: '36px',
                 lineHeight: 1.3,
                 fontWeight: 600,
-                marginBottom: '10px',
+                '@media (max-width:767px)': {
+                  fontSize: '18px',
+                },
               }}
             >
               {name}
             </Text>
             <Divider />
-            <Text sx={{ margin: '20px 0', fontSize: '24px', fontWeight: 600 }}>
+            <Text
+              sx={{
+                margin: '20px 0',
+                fontSize: '24px',
+                fontWeight: 600,
+                '@media (max-width:767px)': { margin: '5px 0' },
+              }}
+            >
               ${amount}
             </Text>
-            <Box sx={{ display: 'flex' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                '@media (max-width: 767px)': {
+                  flexDirection: 'column',
+                },
+              }}
+            >
               <Box
                 sx={{
                   width: '100px',
                   borderRight: '1px solid #8b99a3',
                   display: 'flex',
+                  '@media (max-width:767px)': {
+                    borderRight: 'none',
+                  },
                 }}
               >
                 <IconCircleCheck style={{ color: '#8aba56' }} />
-                <Text sx={{ marginLeft: '10px' }}>In Stock</Text>
+                <Text
+                  sx={{
+                    marginLeft: '10px',
+                  }}
+                >
+                  In Stock
+                </Text>
               </Box>
-              <Text sx={{ marginLeft: '10px' }}>Write a Review?</Text>
+              <Box sx={{ display: 'flex', marginLeft: '10px' }}>
+                <Star star={star} />
+                <Text
+                  sx={{
+                    marginLeft: '10px',
+                    '@media (max-width: 767px)': {
+                      marginLeft: '10px',
+                    },
+                  }}
+                >
+                  Write a Review?
+                </Text>
+              </Box>
             </Box>
             <Text
               sx={{
@@ -248,65 +300,76 @@ const Product = ({
             <Divider />
             <Box sx={{ marginTop: '18px' }}>
               <Text>Color</Text>
-              <Box sx={{ display: 'flex', columnGap: '5px' }}>
+              <Group spacing={10} mb={16}>
                 {color.map((itemColor, index) => (
-                  <Box
+                  <Flex
+                    align={'center'}
+                    justify={'center'}
                     key={index}
-                    onClick={() => {
-                      setIsSelectOtherColors(true);
-                      if (itemColor.image === null) {
-                        setNewSelectedColor(bgImg[0]);
-                      } else {
-                        setNewSelectedColor(itemColor.image[0]);
-                      }
-                    }}
                     sx={{
-                      width: '30px',
-                      height: '30px',
-                      background: itemColor.type,
+                      width: '25px',
+                      height: '25px',
+                      background: itemColor,
                       borderRadius: '50%',
-                      marginTop: '16px',
+                      marginTop: '14px',
                       cursor: 'pointer',
+                      border: itemColor === 'white' ? '1px solid #999' : 'none',
                     }}
-                  ></Box>
+                  >
+                    <IconCheck
+                      size={12}
+                      color={itemColor.type === 'white' ? 'black' : 'green'}
+                      display={index === 0 ? 'block' : 'none'}
+                    />
+                  </Flex>
                 ))}
-              </Box>
+              </Group>
             </Box>
             <Box sx={{ padding: '10px 0' }}>
               <Text>Size</Text>
-              <Box sx={{ margin: '12px 0' }}>
+              <Flex
+                sx={{ margin: '12px 0' }}
+                wrap={'nowrap'}
+                align={'center'}
+                columnGap={10}
+              >
                 {size.map((itemSize: string, index) => (
-                  <Button
-                    variant="outline"
+                  <Text
+                    component="span"
                     key={index}
+                    py={8}
+                    px={10}
                     sx={{
-                      marginRight: '15px',
-                      border: '1px solid #8b99a3',
+                      border: '1px solid #999',
                       color: '#8b99a3',
-                      padding: '14px',
+                      cursor: 'pointer',
+                      fontSize: 14,
+                      fontWeight: 300,
+                      whiteSpace: 'nowrap',
                       ':hover': {
                         background: '#ffff',
+                      },
+                      '@media (max-width: 767px)': {
+                        marginBottom: '15px',
                       },
                     }}
                   >
                     {itemSize}
-                  </Button>
+                  </Text>
                 ))}
-              </Box>
+              </Flex>
             </Box>
             <Box sx={{ padding: '10px 0 20px' }}>
               <Text sx={{ marginBottom: '10px' }}>Qty</Text>
-              <Box
+              <Flex
                 sx={{
-                  display: 'flex',
                   columnGap: '20px',
                   '@media (max-width: 767px)': {
-                    flexDirection: 'column',
-                    rowGap: '20px',
+                    columnGap: '10px',
                   },
                 }}
               >
-                <Box sx={{ display: 'flex' }}>
+                <Flex align={'center'}>
                   <Input
                     value={qty}
                     onChange={(e) => setQty(parseInt(e.target.value, 10))}
@@ -328,10 +391,14 @@ const Product = ({
                         height: '30px',
                         borderRadius: '0',
                         padding: '0',
-                        border: '1px solid gray',
+                        border: '1px solid #dbe1e6',
                         color: 'gray',
                         ':hover': {
                           background: 'none',
+                        },
+                        '.mantine-Button-label': {
+                          fontWeight: 400,
+                          fontSize: '1.2rem',
                         },
                       }}
                     >
@@ -350,17 +417,21 @@ const Product = ({
                         height: '30px',
                         borderRadius: '0',
                         padding: '0',
-                        border: '1px solid gray',
+                        border: '1px solid #dbe1e6',
                         color: 'gray',
                         ':hover': {
                           background: 'none',
+                        },
+                        '.mantine-Button-label': {
+                          fontWeight: 400,
+                          fontSize: '1.2rem',
                         },
                       }}
                     >
                       -
                     </Button>
                   </Box>
-                </Box>
+                </Flex>
                 <Button
                   fullWidth
                   sx={{
@@ -377,13 +448,13 @@ const Product = ({
                 >
                   ADD TO CART
                 </Button>
-              </Box>
+              </Flex>
               <Box
                 sx={{
                   marginTop: '20px',
                   display: 'flex',
                   alignItems: 'center',
-                  '@media (max-width: 767px)': {
+                  '@media (max-width: 1266px)': {
                     flexDirection: 'column',
                   },
                 }}
@@ -395,7 +466,7 @@ const Product = ({
                     padding: ' 10px',
                     display: 'flex',
                     marginRight: '30px',
-                    '@media (max-width:767px)': {
+                    '@media (max-width:1266px)': {
                       borderRight: 'none',
                     },
                   }}
@@ -403,45 +474,46 @@ const Product = ({
                   Add to Wishlist
                   <IconHeart style={{ marginLeft: '10px', color: '#E25D24' }} />
                 </Text>
-                <Box sx={{ display: 'flex' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <Text sx={{ marginRight: '20px' }}>Share this</Text>
-                  <Box sx={{ display: 'flex', columnGap: '20px' }}>
+                  <Group spacing={20}>
                     <FaFacebookF />
                     <FaTwitter />
                     <FaGoogle />
                     <FaPinterestP />
-                  </Box>
+                  </Group>
                 </Box>
               </Box>
             </Box>
             <Divider />
             <Box sx={{ padding: '20px 0' }}>
               <Text sx={{ marginBottom: '20px' }}>SKU: N/A</Text>
-              <Box sx={{ display: 'flex' }}>
-                <Text sx={{ marginBottom: '20px' }}>Categories: </Text>
+              <Flex align={'center'} columnGap={10} mb={20}>
+                <Text>Categories: </Text>
                 <Box
                   sx={{ display: 'flex', columnGap: '10px', cursor: 'pointer' }}
                 >
-                  {modalCategories.map((modalCategory, index) => (
-                    <Text key={index}>{modalCategory}</Text>
+                  {modalCategories.map((modalCategory) => (
+                    <Text key={modalCategory}>{modalCategory}</Text>
                   ))}
                 </Box>
-              </Box>
+              </Flex>
 
-              <Text sx={{ display: 'flex' }}>
+              <Flex sx={{ alignItems: 'center' }} columnGap={15}>
                 Tags:
                 <Box sx={{ display: 'flex', columnGap: '10px' }}>
-                  {labels.map((label, index) => (
+                  {labels.map((label) => (
                     <Text
-                      key={index}
+                      key={label}
                       sx={{
-                        background: '#ffff',
-                        padding: '0 5px',
+                        padding: '7px 14px',
                         width: 'fit-content',
-                        borderRadius: '5px',
+                        borderRadius: '25px',
                         cursor: 'pointer',
+                        color: '#8b99a3',
+                        background: '#F2F4F6',
                         ':hover': {
-                          background: '#8b99a3',
+                          background: '#F2F4F6',
                         },
                       }}
                     >
@@ -449,11 +521,24 @@ const Product = ({
                     </Text>
                   ))}
                 </Box>
-              </Text>
+              </Flex>
             </Box>
           </Grid.Col>
         </Grid>
-      </Modal>
+        <Flex
+          h={25}
+          w={25}
+          sx={{ background: '#DFE2E9', borderRadius: '50%' }}
+          align={'center'}
+          justify={'center'}
+          pos={'absolute'}
+          top={10}
+          right={10}
+          onClick={() => setOpenModal(false)}
+        >
+          <IconCloseModal />
+        </Flex>
+      </ReformedModal>
     </>
   );
 };
