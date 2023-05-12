@@ -5,7 +5,7 @@ import React from 'react';
 
 const ProductDetails = () => {
   return (
-    <Box mt={77}>
+    <Box mt={97}>
       <Container size={'xl'}>
         <Grid>
           <Grid.Col md={6}>
@@ -18,6 +18,12 @@ const ProductDetails = () => {
             </Carousel>
           </Grid.Col>
           <Grid.Col md={6}>
+            <Rating value={2} />
+            <Rating value={2} />
+            <Rating value={2} />
+            <Rating value={2} />
+            <Rating value={2} />
+            <Rating value={2} />
             <Rating value={2} />
           </Grid.Col>
         </Grid>
