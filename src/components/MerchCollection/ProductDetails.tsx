@@ -4,7 +4,7 @@ import React from 'react';
 
 const ProductDetails = () => {
   return (
-    <Box mt={90}>
+    <Box mt={77}>
       <Container size={'xl'}>
         <Grid>
           <Grid.Col md={6}></Grid.Col>
