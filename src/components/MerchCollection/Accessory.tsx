@@ -3,13 +3,37 @@ import React from 'react';
 import { Box, Flex, Group } from '@mantine/core';
 import { MdOutlineAddShoppingCart } from 'react-icons/md';
 import styled from '@emotion/styled';
+import { IconArrowsDiagonal, IconHeart } from '@tabler/icons';
 
 const FlexContainer = styled(Box as any)`
+  & .other-icons {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    transition: width 0s, opacity 0.7s linear;
+  }
+
   &:hover {
+    & .backdrop {
+      background: rgba(69, 69, 69, 0.5);
+      background-size: cover;
+      background-position: center;
+      height: 370px;
+      min-width: 265px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: all ease-in-out 0.7s;
+    }
+
+    .other-icons {
+      height: auto;
+      width: auto;
+      opacity: 1;
+      margin-left: 20px;
+    }
+
     .text-card {
-      /* height: 100%; */
-      -webkit-column-break-inside: avoid;
-      backface-visibility: hidden;
       -webkit-transition: background-color 2s ease-out;
       -moz-transition: background-color 2s ease-out;
       -o-transition: background-color 2s ease-out;
@@ -32,10 +56,12 @@ const Accessory = ({ id, image, isSale }) => {
           height: '370px',
           padding: '10px',
           '@media (max-width: 796px)': {
-            width: '100%',
+            maxWidth: '100%',
+            width: '280px',
           },
         }}
       >
+        <Box className="backdrop"></Box>
         {isSale && (
           <Box
             sx={{
@@ -45,6 +71,8 @@ const Accessory = ({ id, image, isSale }) => {
               width: '48px',
               alignItems: 'center',
               textAlign: 'center',
+              zIndex: 2,
+              position: 'relative',
             }}
           >
             SALE!
@@ -66,14 +94,15 @@ const Accessory = ({ id, image, isSale }) => {
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: '25px',
-            columnGap: 20,
             padding: 10,
+            width: 'fit-content',
           }}
         >
-          <MdOutlineAddShoppingCart />
-          <Group spacing={20}>
-            <MdOutlineAddShoppingCart />
-            <MdOutlineAddShoppingCart />
+          <MdOutlineAddShoppingCart size={18} />
+          <Group spacing={20} className="other-icons">
+            <IconArrowsDiagonal size={18} />
+
+            <IconHeart size={18} />
           </Group>
         </Flex>
       </FlexContainer>

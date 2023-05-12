@@ -93,13 +93,18 @@ const Products = ({ categories, filterItems, product }) => {
         <Box
           sx={{
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
+            alignItems: 'center',
             flexWrap: 'wrap',
-            columnGap: '15px',
+            columnGap: '40px',
 
-            '@media (max-width: 767px)': {
+            '@media (max-width: 768px)': {
               flexDirection: 'column',
               rowGap: '15px',
+              justifyContent: 'center !important',
+            },
+            '@media (min-width: 1024px)': {
+              justifyContent: 'start',
             },
           }}
         >

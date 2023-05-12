@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-useless-return */
 import React, { useState } from 'react';
-import Link from 'next/link';
 import {
   Box,
   Text,
@@ -14,7 +16,6 @@ import {
   Input,
   Flex,
   Group,
-  Image,
   Rating,
 } from '@mantine/core';
 import {
@@ -31,6 +32,7 @@ import { Navigation } from 'swiper';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import IconCloseModal from 'components/Icons/IconCloseModal';
+import { useRouter } from 'next/router';
 import { labels } from './staticData';
 
 const ReformedModal = styled(Modal)<{ colorMode?: string }>`
@@ -74,7 +76,10 @@ const Product = ({
   const [qty, setQty] = useState(1);
   const [allProductImages, setAllProductImages] = useState(bgImg);
   const matches = useMediaQuery('(max-width: 1024px)');
-
+  const router = useRouter();
+  const handleRouteToDetailedPage = (identifier: number) => {
+    router.push(`/merch-collection/item/${identifier}`);
+  };
   return (
     <>
       <Box
@@ -86,43 +91,44 @@ const Product = ({
           alignItems: 'center',
           position: 'relative',
         }}
+        onClick={() => handleRouteToDetailedPage(id)}
       >
-        <Link href={`/merch-collection/item/${id}`}>
-          <Box
-            sx={{
-              backgroundImage: `${`url(${allProductImages[0].image})`}`,
-              height: '353px',
-              minWidth: '264px',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              padding: '10px',
-              '@media (max-width: 767px)': {
-                width: '100%',
-              },
-            }}
-          >
-            {isSale && (
-              <Box
-                sx={{
-                  background: '#eb5a46',
-                  color: '#ffff',
-                  borderRadius: '3px',
-                  width: '48px',
-                  alignItems: 'center',
-                  textAlign: 'center',
-                }}
-              >
-                SALE!
-              </Box>
-            )}
-          </Box>
-        </Link>
+        <Box
+          sx={{
+            backgroundImage: `${`url(${allProductImages[0].image})`}`,
+            height: '353px',
+            minWidth: '264px',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            padding: '10px',
+            '@media (max-width: 767px)': {
+              width: '100%',
+            },
+          }}
+        >
+          {isSale && (
+            <Box
+              sx={{
+                background: '#eb5a46',
+                color: '#ffff',
+                borderRadius: '3px',
+                width: '48px',
+                alignItems: 'center',
+                textAlign: 'center',
+              }}
+            >
+              SALE!
+            </Box>
+          )}
+        </Box>
+
         <Box sx={{ position: 'absolute', right: '10px', top: '30px' }}>
           {isHover && (
             <Box
-              onClick={() => {
+              onClick={(event: any) => {
                 setIsloading(true);
+                event.stopPropagation();
                 setTimeout(() => {
                   setIsloading(false);
                   setOpenModal(true);
