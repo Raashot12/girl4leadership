@@ -61,8 +61,8 @@ const MerchCollectionBlog = () => {
           return (
             <Box key={id} sx={{ marginRight: '20px' }}>
               <Box
+                w={{ base: '320px', sm: '393px' }}
                 sx={{
-                  width: '393px',
                   minHeight: '242px',
                   background: `url(${image}) no-repeat`,
                   backgroundPosition: 'center',
@@ -83,7 +83,7 @@ const MerchCollectionBlog = () => {
                 </Box>
               </Box>
 
-              <Box sx={{ width: '393px' }}>
+              <Box w={{ base: '320px', sm: '393px' }}>
                 <Box
                   sx={{
                     display: 'flex',

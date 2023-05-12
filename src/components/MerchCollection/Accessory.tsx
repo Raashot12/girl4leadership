@@ -24,6 +24,10 @@ const FlexContainer = styled(Box as any)`
       left: 0;
       top: 0;
       transition: all ease-in-out 0.7s;
+      @media (max-width: 796px) {
+        max-width: 100%;
+        width: 280px;
+      }
     }
 
     .other-icons {
