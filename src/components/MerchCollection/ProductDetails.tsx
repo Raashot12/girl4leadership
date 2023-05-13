@@ -16,7 +16,7 @@ import {
   Text,
 } from '@mantine/core';
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
