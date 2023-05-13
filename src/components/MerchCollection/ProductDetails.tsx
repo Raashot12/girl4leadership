@@ -24,7 +24,6 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
-
 // import required modules
 import { FreeMode, Navigation, Thumbs } from 'swiper';
 import { IconCheck, IconCircleCheck, IconHeart } from '@tabler/icons';
