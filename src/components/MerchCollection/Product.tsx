@@ -197,7 +197,6 @@ const Product = ({
                     key={value.key}
                     style={{
                       backgroundImage: `url(${value.image})`,
-                      border: '4px sold blue',
                       backgroundPosition: 'center',
                       backgroundRepeat: 'no-repeat',
                       objectFit: 'scale-down',
@@ -520,7 +519,9 @@ const Product = ({
                         color: '#8b99a3',
                         background: '#F2F4F6',
                         ':hover': {
-                          background: '#F2F4F6',
+                          background: '#8b99a3',
+                          transition: 'all ease-in-out 0.5s',
+                          color: 'white',
                         },
                       }}
                     >

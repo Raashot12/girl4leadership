@@ -24,6 +24,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
+
 // import required modules
 import { FreeMode, Navigation, Thumbs } from 'swiper';
 import { IconCheck, IconCircleCheck, IconHeart } from '@tabler/icons';
@@ -421,7 +422,9 @@ const ProductDetails = () => {
                         color: '#8b99a3',
                         background: '#F2F4F6',
                         ':hover': {
-                          background: '#F2F4F6',
+                          background: '#8b99a3',
+                          transition: 'all ease-in-out 0.5s',
+                          color: 'white',
                         },
                       }}
                     >
