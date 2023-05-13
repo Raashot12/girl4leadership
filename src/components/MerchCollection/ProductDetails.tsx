@@ -28,6 +28,7 @@ import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper';
 import { IconCheck, IconCircleCheck, IconHeart } from '@tabler/icons';
 import { FaFacebookF, FaGoogle, FaPinterestP, FaTwitter } from 'react-icons/fa';
+import { SwiperCustom } from 'styles';
 import { labels } from './staticData';
 
 const ProductDetails = () => {
@@ -38,7 +39,7 @@ const ProductDetails = () => {
       <Container size={'xl'}>
         <Grid gutter={50}>
           <Grid.Col md={6}>
-            <Swiper
+            <SwiperCustom
               spaceBetween={10}
               navigation={true}
               thumbs={{
@@ -78,9 +79,9 @@ const ProductDetails = () => {
               <SwiperSlide>
                 <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
               </SwiperSlide>
-            </Swiper>
+            </SwiperCustom>
             <Box py={40}>
-              <Swiper
+              <SwiperCustom
                 onSwiper={setThumbsSwiper}
                 spaceBetween={10}
                 slidesPerView={4}
@@ -119,7 +120,7 @@ const ProductDetails = () => {
                 <SwiperSlide>
                   <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
                 </SwiperSlide>
-              </Swiper>
+              </SwiperCustom>
             </Box>
           </Grid.Col>
           <Grid.Col md={6}>
