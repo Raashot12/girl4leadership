@@ -1,7 +1,6 @@
 import { Carousel } from '@mantine/carousel';
 import { Box, Container, Grid, Rating } from '@mantine/core';
 import React from 'react';
-// import { createClient } from 'next-sanity';
 
 const ProductDetails = () => {
   return (

@@ -98,12 +98,11 @@ const Products = ({ categories, filterItems, product }) => {
             flexWrap: 'wrap',
             columnGap: '40px',
 
-            '@media (max-width: 768px)': {
-              flexDirection: 'column',
+            '@media (min-width: 768px)': {
               rowGap: '15px',
-              justifyContent: 'center !important',
+              justifyContent: 'center',
             },
-            '@media (min-width: 1024px)': {
+            '@media (min-width: 1200px)': {
               justifyContent: 'start',
             },
           }}

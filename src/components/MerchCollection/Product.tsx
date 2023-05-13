@@ -212,8 +212,8 @@ const Product = ({
 
           <Grid.Col
             lg={6}
+            p={{ base: 15, sm: 20, md: 30 }}
             sx={{
-              padding: '30px',
               overflow: 'scroll',
 
               '::-webkit-scrollbar': {
@@ -444,9 +444,10 @@ const Product = ({
                     height: '60px',
                     background: 'black',
                     ':hover': {
-                      background: 'black',
+                      background: '#E25D24',
+                      transition: 'all ease-in-out 0.5sN',
                     },
-                    '.mantine-i8vysf': {
+                    '.mantine-Button-label': {
                       fontSize: '14px',
                       padding: '0',
                     },
