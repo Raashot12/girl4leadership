@@ -129,9 +129,10 @@ function NavbarMenu() {
               />
             </Link>
 
-            <Group
-              spacing={25}
+            <Box
               sx={{
+                display: 'flex',
+                columnGap: 25,
                 '@media (max-width:900px)': {
                   display: 'none',
                 },
@@ -156,10 +157,11 @@ function NavbarMenu() {
                   </React.Fragment>
                 );
               })}
-            </Group>
-            <Group
-              spacing={18}
+            </Box>
+            <Box
               sx={{
+                display: 'flex',
+                columnGap: 18,
                 '@media (max-width:900px)': {
                   display: 'none',
                 },
@@ -196,7 +198,7 @@ function NavbarMenu() {
                 />
               </ActionIcon>
               <ColorSchemeToggle />
-            </Group>
+            </Box>
             <Burger
               color="#E25D24"
               opened={opened}

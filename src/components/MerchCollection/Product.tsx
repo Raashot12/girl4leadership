@@ -59,58 +59,8 @@ const SwiperSlideCustom = styled(SwiperSlide)`
   @media (max-width: 768px) {
     height: 850px !important;
   }
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  body {
-    background: #000;
-    color: #000;
-  }
-
-  .swiper {
-    width: 100%;
-    height: 300px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .swiper-slide {
-    background-size: cover;
-    background-position: center;
-  }
-
-  .mySwiper2 {
-    /* height: 80%; */
-    width: 100%;
-  }
-
-  .mySwiper {
-    height: 20%;
-    box-sizing: border-box;
-    padding: 10px 0;
-  }
-
-  .mySwiper .swiper-slide {
-    width: 25%;
-    height: 100%;
-    opacity: 0.4;
-  }
-
-  .mySwiper .swiper-slide-thumb-active {
-    opacity: 1;
-  }
-
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
 `;
+const ScopeSwiper = styled(Swiper)``;
 const Product = ({
   id,
   bgImg,
@@ -237,7 +187,7 @@ const Product = ({
             }}
             pos={'relative'}
           >
-            <Swiper
+            <ScopeSwiper
               navigation={true}
               modules={[Navigation]}
               className="mySwiper"
@@ -257,7 +207,7 @@ const Product = ({
                   ></SwiperSlideCustom>
                 );
               })}
-            </Swiper>
+            </ScopeSwiper>
           </Grid.Col>
 
           <Grid.Col

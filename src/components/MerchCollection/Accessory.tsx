@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import { Box, Flex, Group } from '@mantine/core';
+import { Box } from '@mantine/core';
 import { MdOutlineAddShoppingCart } from 'react-icons/md';
 import styled from '@emotion/styled';
 import { IconArrowsDiagonal, IconHeart } from '@tabler/icons';
@@ -82,10 +82,10 @@ const Accessory = ({ id, image, isSale }) => {
             SALE!
           </Box>
         )}
-        <Flex
-          align={'center'}
+        <Box
           className="text-card"
           sx={{
+            display: 'flex',
             position: 'absolute',
             bottom: '10px',
             left: '10px',
@@ -103,12 +103,12 @@ const Accessory = ({ id, image, isSale }) => {
           }}
         >
           <MdOutlineAddShoppingCart size={18} />
-          <Group spacing={20} className="other-icons">
+          <Box className="other-icons" sx={{ display: 'flex', columnGap: 20 }}>
             <IconArrowsDiagonal size={18} />
 
             <IconHeart size={18} />
-          </Group>
-        </Flex>
+          </Box>
+        </Box>
       </FlexContainer>
     </>
   );

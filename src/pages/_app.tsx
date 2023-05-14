@@ -1,5 +1,4 @@
 import '../font.css';
-import '../styles/carousel.css';
 import {
   ReactElement,
   ReactNode,
