@@ -16,19 +16,17 @@ import {
   Text,
 } from '@mantine/core';
 // Import Swiper React components
-import { SwiperSlide } from 'swiper/react';
+import { SwiperSlide, Swiper } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-
 // import required modules
 import { FreeMode, Navigation, Thumbs } from 'swiper';
 import { IconCheck, IconCircleCheck, IconHeart } from '@tabler/icons';
 import { FaFacebookF, FaGoogle, FaPinterestP, FaTwitter } from 'react-icons/fa';
-import { SwiperCustom } from 'styles';
 import { labels } from './staticData';
 
 const ProductDetails = () => {
@@ -39,7 +37,7 @@ const ProductDetails = () => {
       <Container size={'xl'}>
         <Grid gutter={50}>
           <Grid.Col md={6}>
-            <SwiperCustom
+            <Swiper
               spaceBetween={10}
               navigation={true}
               thumbs={{
@@ -79,9 +77,9 @@ const ProductDetails = () => {
               <SwiperSlide>
                 <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
               </SwiperSlide>
-            </SwiperCustom>
+            </Swiper>
             <Box py={40}>
-              <SwiperCustom
+              <Swiper
                 onSwiper={setThumbsSwiper}
                 spaceBetween={10}
                 slidesPerView={4}
@@ -120,7 +118,7 @@ const ProductDetails = () => {
                 <SwiperSlide>
                   <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
                 </SwiperSlide>
-              </SwiperCustom>
+              </Swiper>
             </Box>
           </Grid.Col>
           <Grid.Col md={6}>
