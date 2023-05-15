@@ -10,7 +10,6 @@ import {
   Image,
   Button,
   useMantineColorScheme,
-  Group,
 } from '@mantine/core';
 import {
   IconArrowForward,
