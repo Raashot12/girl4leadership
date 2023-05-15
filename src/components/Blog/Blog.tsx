@@ -64,8 +64,13 @@ const Blog = () => {
                     }}
                   >
                     <Link href={`/blog/${value.id}`}>
-                      <Grid gutter={25} gutterMd={50} align={'center'}>
-                        <Grid.Col md={6} lg={4}>
+                      <Flex
+                        align={'center'}
+                        columnGap={50}
+                        rowGap={20}
+                        wrap={{ base: 'wrap', md: 'nowrap' }}
+                      >
+                        <Box>
                           <img
                             src={value.img}
                             alt={value.title}
@@ -77,8 +82,8 @@ const Blog = () => {
                               borderRadius: 7,
                             }}
                           />
-                        </Grid.Col>
-                        <Grid.Col md={6} lg={8}>
+                        </Box>
+                        <Box>
                           <Text>
                             <span style={{ fontWeight: '600' }}>
                               {value.category}
@@ -112,7 +117,12 @@ const Blog = () => {
                           >
                             {value.subtitle}
                           </Text>
-                          <Group mt={20} id="blogs">
+                          <Flex
+                            mt={20}
+                            id="blogs"
+                            align={'center'}
+                            columnGap={16}
+                          >
                             <Image
                               src={value.profileImage}
                               alt="profile display picture"
@@ -132,9 +142,9 @@ const Blog = () => {
                                 {value.author.profession}
                               </Text>
                             </Box>
-                          </Group>
-                        </Grid.Col>
-                      </Grid>
+                          </Flex>
+                        </Box>
+                      </Flex>
                     </Link>
                   </Carousel.Slide>
                 </React.Fragment>
