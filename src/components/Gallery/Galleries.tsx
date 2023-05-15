@@ -259,32 +259,34 @@ const Galleries = () => {
         onWheel={handleWheel}
         onClose={() => setOpenModal(false)}
         fullScreen
-        title={
-          <Flex align={'center'} justify={'space-between'} w={'100%'}>
-            <Group>
-              <IconPlus
-                cursor={'pointer'}
-                onClick={() => handleZoomFunc('+')}
-              />
-              <IconResize
-                cursor={'pointer'}
-                onClick={() => handleZoomFunc('[]')}
-              />
-              <IconMinus
-                cursor={'pointer'}
-                onClick={() => handleZoomFunc('-')}
-              />
-            </Group>
-            <CloseIcon
-              onclick={() => {
-                setOpenModal(false);
-                setZoomLevel(1);
-              }}
-            />
-          </Flex>
-        }
+        // title={}
         withCloseButton={false}
       >
+        <Flex align={'center'} justify={'space-between'} w={'100%'}>
+          <Flex align={'center'} columnGap={20}>
+            <IconPlus
+              cursor={'pointer'}
+              onClick={() => handleZoomFunc('+')}
+              color={'white'}
+            />
+            <IconResize
+              cursor={'pointer'}
+              onClick={() => handleZoomFunc('[]')}
+              color={'white'}
+            />
+            <IconMinus
+              cursor={'pointer'}
+              onClick={() => handleZoomFunc('-')}
+              color={'white'}
+            />
+          </Flex>
+          <CloseIcon
+            onclick={() => {
+              setOpenModal(false);
+              setZoomLevel(1);
+            }}
+          />
+        </Flex>
         <Box
           sx={{
             width: '100%',
