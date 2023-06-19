@@ -7,7 +7,7 @@ import {
   Image,
 } from '@mantine/core';
 import React from 'react';
-import { IconBook, IconDatabase, IconOutlet, IconUsers } from '@tabler/icons';
+import { IconBook, IconOutlet, IconUsers } from '@tabler/icons';
 import Animation from '../Shared/Animation/AnimationWrapper';
 
 const WelcomeGirlsFourInitative = () => {
