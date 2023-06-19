@@ -38,7 +38,7 @@ export const child = {
     },
   },
 };
-const text = 'About Us';
+const text = 'Who We Are';
 const AboutUs = () => {
   return (
     <Box>
@@ -116,7 +116,7 @@ const AboutUs = () => {
                     },
                   }}
                 >
-                  About Us
+                  Who We Are
                 </Text>
               </Flex>
             </Box>

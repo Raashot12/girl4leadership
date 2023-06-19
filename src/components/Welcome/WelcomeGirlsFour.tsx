@@ -7,7 +7,7 @@ import {
   Image,
 } from '@mantine/core';
 import React from 'react';
-import { IconBook, IconDatabase, IconUsers } from '@tabler/icons';
+import { IconBook, IconDatabase, IconOutlet, IconUsers } from '@tabler/icons';
 import Animation from '../Shared/Animation/AnimationWrapper';
 
 const WelcomeGirlsFourInitative = () => {
@@ -35,7 +35,7 @@ const WelcomeGirlsFourInitative = () => {
                   lh={'1.5em'}
                   ta={{ sm: 'center', md: 'left' }}
                 >
-                  Welcome to Girls 4 Leadership
+                  Our Reach
                 </Text>
                 <Text
                   fz={14}
@@ -55,18 +55,18 @@ const WelcomeGirlsFourInitative = () => {
                 <Grid.Col md={4} sm={6}>
                   <Box sx={{ border: '1px solid #eeeeee' }} py={30} px={15}>
                     <Flex columnGap={20} direction={'column'} rowGap={10}>
-                      <IconDatabase
+                      <IconOutlet
                         color={colorScheme === 'dark' ? '#c4c4c4' : '#e25d24'}
                       />
                       <Box>
                         <Text fw={600} mb={5} fz={24}>
-                          $2.5M
+                          10000+
                         </Text>
                         <Text
                           fw={300}
                           color={colorScheme === 'dark' ? '#c4c4c4' : '#777777'}
                         >
-                          Total Donation
+                          People Reached
                         </Text>
                       </Box>
                     </Flex>
@@ -81,13 +81,13 @@ const WelcomeGirlsFourInitative = () => {
                       />
                       <Box>
                         <Text fw={600} mb={5} fz={24}>
-                          1465
+                          10+
                         </Text>
                         <Text
                           fw={300}
                           color={colorScheme === 'dark' ? '#c4c4c4' : '#777777'}
                         >
-                          Total Projects
+                          Projects
                         </Text>
                       </Box>
                     </Flex>
@@ -101,13 +101,13 @@ const WelcomeGirlsFourInitative = () => {
                       />
                       <Box>
                         <Text fw={600} mb={5} fz={24}>
-                          3950
+                          120+
                         </Text>
                         <Text
                           fw={300}
                           color={colorScheme === 'dark' ? '#c4c4c4' : '#777777'}
                         >
-                          Total Volunteers
+                          Volunteers
                         </Text>
                       </Box>
                     </Flex>

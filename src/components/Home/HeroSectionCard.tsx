@@ -24,14 +24,13 @@ const HeroSectionCard = () => {
             <Box sx={{ background: '#e7c12d', color: '#FFFFFF' }} p={30}>
               <Flex align="center" columnGap={20}>
                 <Box>
-                  <Text mb={15}>Total Donation</Text>
+                  <Text mb={15}>Our Mission</Text>
                   <Text>
-                    The French Revolutioncons tituted for the conscience of the
-                    dominant.
+                    Our mission is to Inspire a generation of female leaders
+                    through projects and advocacy programs
                   </Text>
                 </Box>
                 <Divider orientation="vertical" size="sm" color="#FFFFF" />
-                <Box>$2.5M</Box>
               </Flex>
             </Box>
           </Animation>
@@ -51,14 +50,13 @@ const HeroSectionCard = () => {
             <Box sx={{ background: '#e25d24', color: '#FFFFFF' }} p={30}>
               <Flex align="center" columnGap={20}>
                 <Box>
-                  <Text mb={15}>Total Volunteers</Text>
+                  <Text mb={15}>Our Vison</Text>
                   <Text>
-                    The French Revolutioncons tituted for the conscience of the
-                    dominant.
+                    We envsion an equal world that allows girls to be leaders
+                    and active decison makers
                   </Text>
                 </Box>
                 <Divider orientation="vertical" size="sm" color="#FFFFF" />
-                <Box>3268</Box>
               </Flex>
             </Box>
           </Animation>
@@ -77,14 +75,13 @@ const HeroSectionCard = () => {
             <Box sx={{ background: '#91d214', color: '#FFFFFF' }} p={30}>
               <Flex align="center" columnGap={20}>
                 <Box>
-                  <Text mb={15}>Future Plans</Text>
+                  <Text mb={15}>Our Future Plans</Text>
                   <Text>
-                    The French Revolutioncons tituted for the conscience of the
-                    dominant.
+                    We are on mission to equip 1 million gilrs with leadership
+                    capacities by 2030
                   </Text>
                 </Box>
                 <Divider orientation="vertical" size="sm" color="#FFFFF" />
-                <Box>$7.5M</Box>
               </Flex>
             </Box>
           </Animation>

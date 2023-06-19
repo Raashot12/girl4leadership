@@ -16,6 +16,7 @@ import { FaFacebookF, FaLinkedin } from 'react-icons/fa';
 import { IconSend } from '@tabler/icons';
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
+import { useRouter } from 'next/router';
 
 const ICON_LINKS: any = [
   {
@@ -95,6 +96,7 @@ const Footer = () => {
   const [email, setEmail] = useState('');
   const [, setIsSummitted] = useState(false);
   const getYear = new Date().getFullYear();
+  const router = useRouter();
   const handleSubmit = () => {
     if (!email) return;
     setEmail('');
@@ -104,6 +106,9 @@ const Footer = () => {
       'This is to notify you that your email is successfully submitted!',
       'success'
     );
+  };
+  const pathPushTo = (value: string) => {
+    router.push(`/${value}`);
   };
   return (
     <Box
@@ -126,9 +131,9 @@ const Footer = () => {
               lh={'26px'}
               sx={{ color: colorScheme === 'dark' ? '#c4c4c4' : '#fffff' }}
             >
-              The world has become so fast paced that people don’t want to stand
-              by reading a page of information, they would much rather look at a
-              presentation and understand the message. It has come to a point
+              The Girls 4 Leadership Initiative (G4L) is a non-governmental
+              organization that is dedicated to developing and advancing the
+              potential of women and girls in Nigeria.
             </Text>
           </Grid.Col>
           <Grid.Col sm={6} md={3}>
@@ -150,7 +155,13 @@ const Footer = () => {
                   },
                 }}
               >
-                <Text component="a" fw={300} fz={14} lh={'24px'}>
+                <Text
+                  component="a"
+                  fw={300}
+                  fz={14}
+                  lh={'24px'}
+                  onClick={() => pathPushTo('')}
+                >
                   Home
                 </Text>
               </Grid.Col>
@@ -162,8 +173,14 @@ const Footer = () => {
                   },
                 }}
               >
-                <Text component="a" fw={300} fz={14} lh={'24px'}>
-                  About
+                <Text
+                  component="a"
+                  fw={300}
+                  fz={14}
+                  lh={'24px'}
+                  onClick={() => pathPushTo('who-we-are')}
+                >
+                  Who We Are
                 </Text>
               </Grid.Col>
               <Grid.Col
@@ -175,7 +192,13 @@ const Footer = () => {
                 }}
               >
                 {' '}
-                <Text component="a" fw={300} fz={14} lh={'24px'}>
+                <Text
+                  component="a"
+                  fw={300}
+                  fz={14}
+                  lh={'24px'}
+                  onClick={() => pathPushTo('gallery')}
+                >
                   Gallery
                 </Text>
               </Grid.Col>
@@ -201,7 +224,13 @@ const Footer = () => {
                 }}
               >
                 {' '}
-                <Text component="a" fw={300} fz={14} lh={'24px'}>
+                <Text
+                  component="a"
+                  fw={300}
+                  fz={14}
+                  lh={'24px'}
+                  onClick={() => pathPushTo('merch-collection')}
+                >
                   Merch Collections
                 </Text>
               </Grid.Col>
@@ -214,7 +243,13 @@ const Footer = () => {
                 }}
               >
                 {' '}
-                <Text component="a" fw={300} fz={14} lh={'24px'}>
+                <Text
+                  component="a"
+                  fw={300}
+                  fz={14}
+                  lh={'24px'}
+                  onClick={() => pathPushTo('contact')}
+                >
                   Contact
                 </Text>
               </Grid.Col>

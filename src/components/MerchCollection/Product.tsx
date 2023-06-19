@@ -379,6 +379,7 @@ const Product = ({
                   <Input
                     value={qty}
                     onChange={(e) => setQty(parseInt(e.target.value, 10))}
+                    type="number"
                     styles={{
                       input: {
                         width: '60px',

@@ -51,8 +51,8 @@ const navMenu = [
     id: 1,
   },
   {
-    pathName: 'About',
-    route: '/about_us',
+    pathName: 'Who We Are',
+    route: '/who-we-are',
     id: 2,
   },
 

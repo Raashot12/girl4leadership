@@ -8,11 +8,8 @@ import {
   Text,
 } from '@mantine/core';
 import fs from 'fs';
-// import { IconArrowForward, IconSend } from '@tabler/icons';
 import { container, child } from 'components/AboutUs/AboutUs';
-// import Blog from 'components/Blog/Blog';
 import { Layout } from 'components/Layout/Layout';
-// import { motion } from 'framer-motion';
 import matter from 'gray-matter';
 import Link from 'next/link';
 import React from 'react';
