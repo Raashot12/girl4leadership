@@ -139,7 +139,7 @@ const AboutUs = () => {
                   <Box>
                     <Box mb={20}>
                       <Text fw={600} fz={{ base: 24, md: 36 }} lh={'1.5em'}>
-                        Who we are
+                        Who We Are
                       </Text>
                       <Text
                         fz={14}
