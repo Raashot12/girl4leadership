@@ -38,17 +38,15 @@ const WelcomeGirlsFourInitative = () => {
                   Our Reach
                 </Text>
                 <Text
-                  fz={14}
+                  fz={15}
                   fw={300}
                   lh={'24px'}
-                  sx={{ width: '100%', maxWidth: '470px' }}
+                  sx={{ width: '100%', maxWidth: '480px' }}
                   mx={{ sm: 'auto', md: '0' }}
                 >
-                  inappropriate behavior is often laughed off as “boys will be
-                  boys,” women face higher conduct standards especially in the
-                  workplace. That’s why it’s crucial that, as women, our
-                  behavior on the job is beyond reproach. inappropriate behavior
-                  is often laughed.
+                  We are committed to achieving tangible and measurable results.
+                  We aim to empower and equip 1 million girls with leadership
+                  capacities by 2030.
                 </Text>
               </Box>
               <Grid gutterLg={20}>

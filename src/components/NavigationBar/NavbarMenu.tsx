@@ -21,7 +21,11 @@ import { IconSearch, IconShoppingCart } from '@tabler/icons';
 import Logo from '../../images/logo.png';
 import { ColorSchemeToggle } from '../ColorSchemeToggle';
 
-const HeaderComponent = styled(Box as any)<{ scrollDirection: string }>`
+const HeaderComponent = styled(Box as any)<{
+  scrollDirection: string;
+  scrollheight: number;
+}>`
+  box-shadow: 0 0 22px rgb(0 0 0 / 10%);
   &.global-nav--sticky {
     position: fixed;
     width: 100%;
@@ -36,7 +40,8 @@ const HeaderComponent = styled(Box as any)<{ scrollDirection: string }>`
     transition: transform 500ms ease, background 500ms ease,
       -webkit-transform 500ms ease;
   }
-  position: absolute;
+  position: ${({ scrollheight }) => (scrollheight <= 0 ? `fixed` : `absolute`)};
+
   width: 100%;
   top: 0;
   z-index: 100;
@@ -116,8 +121,8 @@ function NavbarMenu() {
     <>
       <HeaderComponent
         className={scrollHeight >= 140 ? 'global-nav--sticky' : ''}
-        sx={{ position: 'fixed' }}
         position={scrollDirection}
+        scrollheight={scrollHeight}
       >
         <Container size="xl">
           <Flex align={'center'} justify={'space-between'} py={3}>

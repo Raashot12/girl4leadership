@@ -159,8 +159,8 @@ const ContactUs = () => {
               fz={{ base: 20, md: 30, lg: 30 }}
               lh={{ base: '36px', sm: '46px' }}
             >
-              We always want to hear from you! Let us know how we can best help
-              you and we will do our very best.
+              Join us on our journey towards creating a brighter future for
+              girls
             </Text>
           </Box>
           <Box component="form" pb={50}>

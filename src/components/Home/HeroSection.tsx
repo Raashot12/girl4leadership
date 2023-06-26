@@ -11,6 +11,7 @@ import IconModalClose from 'components/Icons/IconModalClose';
 const HeroSection = () => {
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
+
   return (
     <>
       <Box mt={76}>
@@ -100,33 +101,37 @@ const HeroSection = () => {
         fullScreen
         withCloseButton={false}
         title={
-          <Flex
-            justify={'space-between'}
-            align={'center'}
-            sx={{ width: '100%' }}
-          >
-            <Girls4leadershipLogo />
-            <IconModalClose onclick={() => setOpenModal(false)} />
-          </Flex>
+          <Container size={'xl'}>
+            <Flex
+              justify={'space-between'}
+              align={'center'}
+              sx={{ width: '100%' }}
+            >
+              <Girls4leadershipLogo />
+              <IconModalClose onclick={() => setOpenModal(false)} />
+            </Flex>
+          </Container>
         }
       >
-        <Text
-          fw={800}
-          m={0}
-          ta="center"
-          tt={'uppercase'}
-          fs={'italic'}
-          fz={{ base: '16px', lg: '18px' }}
-        >
-          Donation form
-        </Text>
-        <Box mt={20}>
-          <Stack mt={20} fw={600} spacing={20}>
-            <Box>Transfer to: 0301030...</Box>
-            <Box>Bank Name: Access Bank Plc</Box>
-            <Box>Account Name: Girls4Leadership</Box>
-          </Stack>
-        </Box>
+        <Container size={'xl'}>
+          <Text
+            fw={800}
+            m={0}
+            ta="center"
+            tt={'uppercase'}
+            fs={'italic'}
+            fz={{ base: '16px', lg: '18px' }}
+          >
+            Donation form
+          </Text>
+          <Box mt={20}>
+            <Stack mt={20} fw={600} spacing={20}>
+              <Box>Transfer to: 0301030...</Box>
+              <Box>Bank Name: Access Bank Plc</Box>
+              <Box>Account Name: Girls4Leadership</Box>
+            </Stack>
+          </Box>
+        </Container>
       </ReformedModal>
     </>
   );
@@ -191,6 +196,9 @@ export const ReformedModal = styled(Modal)<{ colorMode?: string }>`
   & .mantine-Modal-title {
     width: 100%;
     margin-right: 4px;
+  }
+  & .mantine-Modal-header {
+    padding-top: 0;
   }
   & .mantine-Modal-body {
     max-height: calc(100vh - 210px);

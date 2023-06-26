@@ -25,11 +25,12 @@ const Blog = () => {
     <Box pt={40}>
       <Text
         ta={'center'}
-        fz={{ base: 30, lg: 40 }}
+        fz={{ base: 20, lg: 25 }}
         fw={{ base: 700 }}
         mb={'2.5rem'}
       >
-        Trending
+        Our Leadership Chronicles: Inspiring Stories and Insights for Empowering
+        Girls & Women
       </Text>
       <Container size={'xl'} sx={{ overflowY: 'hidden', overflowX: 'hidden' }}>
         <Carousel

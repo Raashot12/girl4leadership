@@ -43,9 +43,10 @@ const OurMajorCauses = () => {
                 Our Major Causes
               </Text>
               <Text fz={14} fw={300}>
-                The French Revolution constituted for the conscience of the
-                dominant aristocratic class a fall from innocence, and upturning
-                of the natural chain of events that resounded.
+                We are committed to equipping girls and women with the necessary
+                tools and capacities to excel as leaders. We provide a nurturing
+                environment where they can learn, grow, and develop their skills
+                to their fullest potential
               </Text>
             </Box>
           </Container>
@@ -89,7 +90,7 @@ const OurMajorCauses = () => {
                       w={'100%'}
                       loading="lazy"
                     />
-                    <HoverCard width={280} shadow="md" withArrow>
+                    {/* <HoverCard width={280} shadow="md" withArrow>
                       <HoverCard.Target>
                         <Box
                           pos={'absolute'}
@@ -102,7 +103,7 @@ const OurMajorCauses = () => {
                             borderRadius: 4,
                             cursor: 'pointer',
                             '&:hover': {
-                              transform: 'scale(1.2)',
+                              transform: 'scale(1.1)',
                               transition: 'all ease-in-out 0.5s',
                             },
                           }}
@@ -117,17 +118,17 @@ const OurMajorCauses = () => {
                           achieved so far. Our target is to hit 100 percent.
                         </Text>
                       </HoverCard.Dropdown>
-                    </HoverCard>
+                    </HoverCard> */}
                   </Box>
-                  <Box px={25} pt={29} pb={32}>
+                  <Box px={15} pt={19} pb={32}>
                     <Text fz={18} fw={600} mb={15} sx={{ cursor: 'pointer' }}>
                       {value.title}
                     </Text>
                     <Text fz={14} fw={300} sx={{ cursor: 'pointer' }}>
-                      {value.content}
+                      {value.content.substring(0, 100)}
                     </Text>
                   </Box>
-                  <Flex>
+                  {/* <Flex>
                     <Box
                       component="a"
                       sx={{
@@ -163,7 +164,7 @@ const OurMajorCauses = () => {
                     >
                       Total: {`${value.total}`}
                     </Box>
-                  </Flex>
+                  </Flex> */}
                 </Box>
               );
             })}
@@ -181,7 +182,7 @@ const causesScrollData = [
     id: 1,
     pics: 'https://res.cloudinary.com/rashot/image/upload/v1678078067/26FA5F0B-E1E6-4F1B-94AA-4D34378B5245_yepkjc.jpg',
     raised: '$50,689',
-    title: 'Did not find your package',
+    title: 'Leadership Skills for Women & Girls ',
     total: '$500k',
     content:
       'Inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace that’s why it’s crucial.',
@@ -189,7 +190,7 @@ const causesScrollData = [
   {
     id: 2,
     pics: 'https://res.cloudinary.com/rashot/image/upload/v1678089210/Copy_of_IMG_1572_lohyq8.jpg',
-    title: 'Did not find your package',
+    title: 'Girls Education',
     raised: '$50,689',
     total: '$500k',
     content:
@@ -198,7 +199,7 @@ const causesScrollData = [
   {
     id: 3,
     pics: 'https://res.cloudinary.com/rashot/image/upload/v1678078067/26FA5F0B-E1E6-4F1B-94AA-4D34378B5245_yepkjc.jpg',
-    title: 'Did not find your package',
+    title: 'Girls in Tech',
     raised: '$50,689',
     total: '$500k',
     content:
@@ -207,7 +208,7 @@ const causesScrollData = [
   {
     id: 4,
     pics: 'https://res.cloudinary.com/rashot/image/upload/v1678078057/C09662A8-F55F-46FE-8B22-A74ADB1AA304_cmcp6i.jpg',
-    title: 'Did not find your package',
+    title: 'Women & Girls Economic Empowerment',
     raised: '$50,689',
     total: '$500k',
     content:
@@ -216,7 +217,7 @@ const causesScrollData = [
   {
     id: 5,
     pics: 'https://res.cloudinary.com/rashot/image/upload/v1678089210/Copy_of_IMG_1572_lohyq8.jpg',
-    title: 'Did not find your package',
+    title: 'Women in Politics',
     raised: '$50,689',
     total: '$500k',
     content:
@@ -225,7 +226,7 @@ const causesScrollData = [
   {
     id: 6,
     pics: 'https://res.cloudinary.com/rashot/image/upload/v1678078067/26FA5F0B-E1E6-4F1B-94AA-4D34378B5245_yepkjc.jpg',
-    title: 'Did not find your package',
+    title: 'Girls Mentoring Community',
     raised: '$50,689',
     total: '$500k',
     content:
