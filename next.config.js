@@ -11,6 +11,9 @@ const withPWA = require('next-pwa')({
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    domains: ['cloudinary.com', 'preview.colorlib.com'],
+  },
 };
 
 module.exports = withPWA(nextConfig);
