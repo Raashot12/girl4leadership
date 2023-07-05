@@ -1,10 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import {
-  Box,
-  Container,
-  Text,
-  useMantineColorScheme,
-} from '@mantine/core';
+import { Box, Container, Text, useMantineColorScheme } from '@mantine/core';
 import React from 'react';
 import Animation from '../Shared/Animation/AnimationWrapper';
 import ScrollablComponents from '../Shared/ScrollableUI/ScrollablComponents';
