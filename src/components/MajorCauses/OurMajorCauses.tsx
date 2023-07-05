@@ -2,8 +2,6 @@
 import {
   Box,
   Container,
-  Flex,
-  HoverCard,
   Text,
   useMantineColorScheme,
 } from '@mantine/core';
