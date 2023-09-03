@@ -84,13 +84,10 @@ const UpComingEvent = () => {
             }}
           >
             <Text fw={600} fz={{ base: 24, md: 36 }} mb={8}>
-              Upcoming Events
+              {null}
             </Text>
             <Text fz={14} fw={300}>
-              If you are a serious astronomy fanatic like a lot of us are, you
-              can probably.
-              <br />
-              remember that one event in childhood that started.
+              {null}
             </Text>
           </Box>
         </Animation>
@@ -135,13 +132,13 @@ const UpComingEvent = () => {
                 </Box>
                 <Box>
                   <Text mb={10} fz={13} fw={300}>
-                    {value.timeStamp}
+                    {null}
                   </Text>
                   <Text fw={600} fz={18} mb={15}>
-                    {value.title}
+                    {null}
                   </Text>
                   <Text fz={14} fw={300} lh={'24px'}>
-                    {value.content}
+                    {null}
                   </Text>
                 </Box>
               </Flex>

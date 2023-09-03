@@ -66,9 +66,7 @@ const OurKeyFeatures = () => {
                 Our Key Features
               </Text>
               <Text fz={14} color={'#fff'}>
-                The French Revolution constituted for the conscience of the
-                dominant aristocratic class a fall from innocence, and upturning
-                of the natural chain of events that resounded.
+                {null}
               </Text>
             </Box>
           </Animation>
@@ -87,12 +85,9 @@ const OurKeyFeatures = () => {
                 <FeaturedItem sx={{ color: '#fff' }}>
                   <IconDiamond size={30} style={{ marginBottom: 14 }} />
                   <Text fw={600} fz={18} tt={'uppercase'} mb={15}>
-                    Sponsorship
+                    {null}
                   </Text>
-                  <Text color=" #8a8888">
-                    The French Revolutioncons tituted for the conscience of the
-                    dominant. aristocr atic class a fall from.
-                  </Text>
+                  <Text color=" #8a8888">{null}</Text>
                 </FeaturedItem>
               </Animation>
             </Grid.Col>
@@ -110,12 +105,9 @@ const OurKeyFeatures = () => {
                 <FeaturedItem>
                   <IconCup size={30} style={{ marginBottom: 14 }} />
                   <Text fw={600} fz={18} tt={'uppercase'} mb={15}>
-                    DONATE AMOUNT
+                    {null}
                   </Text>
-                  <Text color=" #8a8888">
-                    The French Revolutioncons tituted for the conscience of the
-                    dominant. aristocr atic class a fall from.
-                  </Text>
+                  <Text color=" #8a8888">{null}</Text>
                 </FeaturedItem>
               </Animation>
             </Grid.Col>
@@ -133,12 +125,9 @@ const OurKeyFeatures = () => {
                 <FeaturedItem>
                   <IconDiamond size={30} style={{ marginBottom: 14 }} />
                   <Text fw={600} fz={18} tt={'uppercase'} mb={15}>
-                    BECOME A VOLUNTEER
+                    {null}
                   </Text>
-                  <Text color=" #8a8888">
-                    The French Revolutioncons tituted for the conscience of the
-                    dominant. aristocr atic class a fall from.
-                  </Text>
+                  <Text color=" #8a8888">{null}</Text>
                 </FeaturedItem>
               </Animation>
             </Grid.Col>

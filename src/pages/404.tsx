@@ -7,7 +7,7 @@ import {
   Button,
   SimpleGrid,
 } from '@mantine/core';
-import { Layout } from 'components/Layout/Layout';
+import HeadTitle from 'components/Shared/HeaderTitle';
 import { useRouter } from 'next/router';
 
 const useStyles = createStyles((theme) => ({
@@ -50,8 +50,14 @@ function NotFoundImage() {
   const { classes } = useStyles();
   const router = useRouter();
   return (
-    <Layout pageTitle="Error Page">
-      <Container className={classes.root} size="lg" mt={90}>
+    <>
+      <HeadTitle title="Girls4leadership | 404" />
+      <Container
+        className={classes.root}
+        size="lg"
+        h={'100vh'}
+        sx={{ display: 'flex', alignItems: 'center' }}
+      >
         <SimpleGrid
           spacing={80}
           cols={2}
@@ -98,7 +104,7 @@ function NotFoundImage() {
           />
         </SimpleGrid>
       </Container>
-    </Layout>
+    </>
   );
 }
 export default NotFoundImage;

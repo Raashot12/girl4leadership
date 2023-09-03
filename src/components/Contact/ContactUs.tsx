@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unneeded-ternary */
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Button,
@@ -18,11 +19,79 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { IconArrowForward, IconSend } from '@tabler/icons';
 import { IoMdMail } from 'react-icons/io';
+import Swal from 'sweetalert2';
 import 'aos/dist/aos.css';
+import Airtable from 'airtable';
+import { validateForErrors } from 'util/validation';
 
 const text = 'Contact Us';
 const ContactUs = () => {
   const { colorScheme } = useMantineColorScheme();
+  const [contact, setContact] = useState({
+    fullName: '',
+    email: '',
+    message: '',
+  });
+  const [errors, setErrors] = useState({
+    fullName: '',
+    email: '',
+    message: '',
+  });
+  const [isSubmitting, setIsubmitting] = useState(false);
+  console.log(process.env.NEXT_PUBLIC_API_KEY);
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setContact({
+      ...contact,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const getAirTableClient = (): Promise<Airtable.Base> => {
+    return new Promise<Airtable.Base>((resolve, reject) => {
+      resolve(
+        new Airtable({
+          apiKey:
+            'pattd8pw4kdUcPgjl.564cb0b2feae320e9a1e32c5f99bbad27688c96b8e70785594c3a857285f0c02',
+        }).base('appQqSPqkNRlhnQrZ')
+      );
+    });
+  };
+  const handleFormSubmit = (e: React.FormEvent) => {
+    if (Object.keys(validateForErrors(contact, setErrors)).length === 0) {
+      setIsubmitting(true);
+      e.preventDefault();
+      getAirTableClient()
+        .then((airtable) => {
+          airtable('ContactUs').create(
+            contact,
+            { typecast: true },
+            (error: Airtable.Error) => {
+              if (error) {
+                Swal.fire(
+                  `${error.message}`,
+                  'You clicked the button!',
+                  'error'
+                );
+                setIsubmitting(false);
+                return;
+              }
+              Swal.fire(
+                'Submitted Successfully!',
+                'You clicked the button!',
+                'success'
+              );
+              setIsubmitting(false);
+              setContact({ fullName: '', email: '', message: '' });
+            }
+          );
+        })
+        .catch((error: Airtable.Error) => {
+          Swal.fire(`${error.message}`, 'You clicked the button!', 'error');
+          setIsubmitting(false);
+        });
+    }
+  };
   AOSInit({
     disable: false,
   });
@@ -77,9 +146,10 @@ const ContactUs = () => {
               <Flex justify={'center'} align={'center'} columnGap={16} fz={14}>
                 <Link href={'/'}>
                   <Text
-                    component="a"
+                    component="div"
                     sx={{
                       cursor: 'pointer',
+                      display: 'inline-block',
                       color: 'white',
                       ':hover': {
                         color: '#E16247',
@@ -92,10 +162,11 @@ const ContactUs = () => {
                 </Link>
                 <IconArrowForward />
                 <Text
-                  component="a"
+                  component="div"
                   sx={{
                     cursor: 'pointer',
                     color: 'white',
+                    display: 'inline-block',
                     ':hover': {
                       color: '#E16247',
                       fontWeight: 500,
@@ -169,6 +240,10 @@ const ContactUs = () => {
                 <TextInput
                   withAsterisk
                   placeholder="Full Name"
+                  name={'fullName'}
+                  onChange={handleChange}
+                  error={errors?.fullName}
+                  value={contact.fullName}
                   sx={{
                     '&.mantine-Input-input:focus-within': {
                       borderColor: '#aeadad',
@@ -188,6 +263,10 @@ const ContactUs = () => {
                 <TextInput
                   withAsterisk
                   placeholder="Email"
+                  name={'email'}
+                  error={errors?.email}
+                  onChange={handleChange}
+                  value={contact.email}
                   sx={{
                     '&.mantine-Input-input:focus-within': {
                       borderColor: '#aeadad',
@@ -206,6 +285,10 @@ const ContactUs = () => {
               <Grid.Col>
                 <Textarea
                   placeholder="Type message"
+                  name="message"
+                  value={contact.message}
+                  error={errors?.message}
+                  onChange={handleChange}
                   sx={{
                     '& .mantine-Textarea-input': {
                       height: 78,
@@ -229,6 +312,7 @@ const ContactUs = () => {
                 }}
               >
                 <Button
+                  onClick={handleFormSubmit}
                   sx={{
                     '&.mantine-Button-root': {
                       background: '#E25D24',

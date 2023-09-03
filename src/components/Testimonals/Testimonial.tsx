@@ -39,13 +39,13 @@ const Card = ({ item }: any) => {
       </Box>
       <Box>
         <Text align="center" mt={30} mb={25}>
-          {item.content}
+          {null}
         </Text>
         <Text align="center" mb={15} fz={18} fw={600}>
-          {item.name}
+          {null}
         </Text>
         <Text align="center" fz={14} fw={300}>
-          {item.name}
+          {null}
         </Text>
       </Box>
     </Box>
@@ -127,11 +127,10 @@ const Testimonial = () => {
             }}
           >
             <Text fw={600} fz={{ base: 24, md: 36 }} mb={8}>
-              Testimonial from our Donors
+              {null}
             </Text>
             <Text fz={14} fw={300}>
-              Las Vegas has more than 100,000 hotel rooms to choose from.
-              <br /> There is something for every budget, and enough.
+              {null}
             </Text>
           </Box>
         </Animation>

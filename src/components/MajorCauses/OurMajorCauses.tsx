@@ -33,13 +33,10 @@ const OurMajorCauses = () => {
               color={colorScheme === 'dark' ? '#c4c4c4' : '#777777'}
             >
               <Text fw={600} fz={{ base: 24, md: 36 }} mb={8}>
-                Our Major Causes
+                {null}
               </Text>
               <Text fz={14} fw={300}>
-                We are committed to equipping girls and women with the necessary
-                tools and capacities to excel as leaders. We provide a nurturing
-                environment where they can learn, grow, and develop their skills
-                to their fullest potential
+                {null}
               </Text>
             </Box>
           </Container>
@@ -118,7 +115,8 @@ const OurMajorCauses = () => {
                       {value.title}
                     </Text>
                     <Text fz={14} fw={300} sx={{ cursor: 'pointer' }}>
-                      {value.content.substring(0, 100)}
+                      {/* {value.content.substring(0, 100)} */}
+                      {null}
                     </Text>
                   </Box>
                   {/* <Flex>

@@ -126,7 +126,7 @@ function NavbarMenu() {
       >
         <Container size="xl">
           <Flex align={'center'} justify={'space-between'} py={3}>
-            <Link href="/">
+            <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
               <Image
                 src={Logo}
                 alt="Girls 4 leadership Initiative"

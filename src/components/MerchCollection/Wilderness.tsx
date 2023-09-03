@@ -135,6 +135,7 @@ const Wilderness = (): JSX.Element => {
 
           <Carousel
             withIndicators={false}
+            withControls={false}
             height={140}
             slideSize="180.5px"
             slideGap="lg"

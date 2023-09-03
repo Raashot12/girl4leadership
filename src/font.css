@@ -113,4 +113,7 @@ pre::-webkit-scrollbar {
 }
 
 
-
+.mantine-InputWrapper-error{
+  color: red;
+  font-weight: 500;
+}

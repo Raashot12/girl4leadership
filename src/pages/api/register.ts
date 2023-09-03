@@ -4,11 +4,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import bcrypt from 'bcryptjs';
 import { MongoClient } from 'mongodb';
 
-// const registerUserSchema = z.object({
-//   email: z.string().regex(/^[a-z0-9_-]{3,15}$/g, 'Invalid username'),
-//   password: z.string().min(5, 'Password should be minimum 5 characters'),
-// });
-
 export default async function registerUser(
   req: NextApiRequest,
   res: NextApiResponse
@@ -46,13 +41,4 @@ export default async function registerUser(
     client.close();
     return res.status(201).json({ message: 'User registered successfully' });
   }
-  // Create a new user document
-  const newUser = { email, name, image } as {
-    email: string;
-    name: string;
-    image?: string;
-  };
-  await db.collection('users').insertOne(newUser);
-  client.close();
-  return res.status(201).json({ message: 'User registered successfully' });
 }
