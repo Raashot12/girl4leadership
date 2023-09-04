@@ -78,6 +78,11 @@ const ContactUs = () => {
             'success'
           );
           setIsubmitting(false);
+          setContact({
+            fullName: '',
+            email: '',
+            message: '',
+          });
         }
       } catch (error) {
         const axiosError = error as AxiosError;
