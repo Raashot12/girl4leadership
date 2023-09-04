@@ -21,8 +21,8 @@ import { IconArrowForward, IconSend } from '@tabler/icons';
 import { IoMdMail } from 'react-icons/io';
 import Swal from 'sweetalert2';
 import 'aos/dist/aos.css';
-import Airtable from 'airtable';
 import { validateForErrors } from 'util/validation';
+import axios, { AxiosError } from 'axios';
 
 const text = 'Contact Us';
 const ContactUs = () => {
@@ -38,7 +38,6 @@ const ContactUs = () => {
     message: '',
   });
   const [isSubmitting, setIsubmitting] = useState(false);
-  console.log(process.env.NEXT_PUBLIC_API_KEY);
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -47,48 +46,44 @@ const ContactUs = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const getAirTableClient = (): Promise<Airtable.Base> => {
-    return new Promise<Airtable.Base>((resolve, reject) => {
-      resolve(
-        new Airtable({
-          apiKey: 'key5HjiQR8IA7r0Zx',
-        }).base('app7slHC9hSRyErEm')
-      );
-    });
-  };
-  const handleFormSubmit = (e: React.FormEvent) => {
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
     if (Object.keys(validateForErrors(contact, setErrors)).length === 0) {
       setIsubmitting(true);
       e.preventDefault();
-      getAirTableClient()
-        .then((airtable) => {
-          airtable('ContactUs').create(
-            contact,
-            { typecast: true },
-            (error: Airtable.Error) => {
-              if (error) {
-                Swal.fire(
-                  `${error.message}`,
-                  'You clicked the button!',
-                  'error'
-                );
-                setIsubmitting(false);
-                return;
-              }
-              Swal.fire(
-                'Submitted Successfully!',
-                'You clicked the button!',
-                'success'
-              );
-              setIsubmitting(false);
-              setContact({ fullName: '', email: '', message: '' });
-            }
+      const baseId = 'appQqSPqkNRlhnQrZ';
+      const tableName = 'Table 1';
+
+      const endpoint = `https://api.airtable.com/v0/${baseId}/${tableName}`;
+      const headers = {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
+        'Content-Type': 'application/json',
+      };
+      const serializedData = {
+        FullName: contact.fullName,
+        Email: contact.email,
+        Message: contact.message,
+      };
+      try {
+        const response = await axios.post(
+          endpoint,
+          { fields: serializedData },
+          { headers }
+        );
+
+        if (response.status === 200) {
+          Swal.fire(
+            'Submitted Successfully!',
+            'You clicked the button!',
+            'success'
           );
-        })
-        .catch((error: Airtable.Error) => {
-          Swal.fire(`${error.message}`, 'You clicked the button!', 'error');
           setIsubmitting(false);
-        });
+        }
+      } catch (error) {
+        const axiosError = error as AxiosError;
+        Swal.fire(`${axiosError.message}`, 'You clicked the button!', 'error');
+        setIsubmitting(false);
+      }
     }
   };
   AOSInit({
@@ -312,6 +307,7 @@ const ContactUs = () => {
               >
                 <Button
                   onClick={handleFormSubmit}
+                  loading={isSubmitting}
                   sx={{
                     '&.mantine-Button-root': {
                       background: '#E25D24',
