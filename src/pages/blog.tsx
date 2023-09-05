@@ -170,7 +170,7 @@ const BlogPage = () => {
             </li>
           ))}
         </ul> */}
-      <Box component="h1" py={90} ta={'center'}>
+      <Box component="h1" py={91} ta={'center'}>
         Coming Soon!
       </Box>
     </Layout>
