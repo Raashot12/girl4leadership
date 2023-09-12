@@ -4,14 +4,14 @@
 import { useEffect, useState } from 'react';
 import { Box, Container, useMantineColorScheme } from '@mantine/core';
 import { Layout } from 'components/Layout/Layout';
-// import Cards from 'components/MerchCollection/Cards';
-// import Products from 'components/MerchCollection/Products';
-// import MerchHeroSection from 'components/MerchCollection/MerchHeroSection';
+import Products from 'components/MerchCollection/Products';
 import { featured } from 'components/MerchCollection/staticData';
 import { CategoriesType } from 'types/merchSection';
-// import Wilderness from 'components/MerchCollection/Wilderness';
-// import Accessories from 'components/MerchCollection/Accessories';
-// import MerchCollectionBlog from 'components/MerchCollection/MerchCollectionBlog';
+import MerchHeroSection from 'components/MerchCollection/MerchHeroSection';
+import Cards from 'components/MerchCollection/Cards';
+import Wilderness from 'components/MerchCollection/Wilderness';
+import Accessories from 'components/MerchCollection/Accessories';
+import MerchCollectionBlog from 'components/MerchCollection/MerchCollectionBlog';
 
 const allCategories = [...new Set(featured.map((item) => item.categories))];
 
@@ -33,7 +33,7 @@ const MerchCollectionPage = () => {
   };
   return (
     <Layout pageTitle="Merch Collections">
-      {/* <MerchHeroSection />
+      <MerchHeroSection />
       <Box sx={{ background: colorScheme === 'dark' ? '#232324' : '#ffff' }}>
         <Container size="xl">
           <Cards />
@@ -46,10 +46,10 @@ const MerchCollectionPage = () => {
       </Box>
       <Wilderness />
       <Accessories />
-      <MerchCollectionBlog /> */}
-      <Box component="h1" py={90} ta={'center'}>
+      <MerchCollectionBlog />
+      {/* <Box component="h1" py={90} ta={'center'}>
         Coming Soon!
-      </Box>
+      </Box> */}
     </Layout>
   );
 };

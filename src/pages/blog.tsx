@@ -1,28 +1,27 @@
-// import {
-//   Box,
-//   Button,
-//   Container,
-//   Flex,
-//   Grid,
-//   TextInput,
-//   Text,
-// } from '@mantine/core';
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Grid,
+  TextInput,
+  Text,
+} from '@mantine/core';
 import fs from 'fs';
-// import { container, child } from 'components/AboutUs/AboutUs';
+import { container, child } from 'components/AboutUs/AboutUs';
 import { Layout } from 'components/Layout/Layout';
 import matter from 'gray-matter';
-// import Link from 'next/link';
+import Link from 'next/link';
 import React from 'react';
-import { Box } from '@mantine/core';
-// import { IconArrowForward, IconSend } from '@tabler/icons';
-// import Blog from 'components/Blog/Blog';
-// import { motion } from 'framer-motion';
+import { IconArrowForward, IconSend } from '@tabler/icons';
+import Blog from 'components/Blog/Blog';
+import { motion } from 'framer-motion';
 
-// const text = 'Our Blog';
+const text = 'Our Blog';
 const BlogPage = () => {
   return (
     <Layout pageTitle="Blog">
-      {/* <Box mt={77}>
+      <Box mt={77}>
         <Flex
           align="center"
           sx={{
@@ -153,7 +152,7 @@ const BlogPage = () => {
             </Grid>
           </Box>
         </Container>
-      </Box> */}
+      </Box>
       {/* <Head>
           <title>Demo Blog</title>
         </Head>
@@ -169,10 +168,10 @@ const BlogPage = () => {
               </Link>
             </li>
           ))}
-        </ul> */}
-      <Box component="h1" py={91} ta={'center'}>
+        </ul>
+      {/* <Box component="h1" py={91} ta={'center'}>
         Coming Soon!
-      </Box>
+      </Box> */}
     </Layout>
   );
 };
