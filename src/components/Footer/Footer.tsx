@@ -9,6 +9,7 @@ import {
   TextInput,
   Flex,
   Divider,
+  Button,
 } from '@mantine/core';
 import { BsTwitter } from 'react-icons/bs';
 import { AiFillInstagram } from 'react-icons/ai';
@@ -17,6 +18,9 @@ import { IconSend } from '@tabler/icons';
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
+import { useForm, zodResolver } from '@mantine/form';
+import axios, { AxiosError } from 'axios';
+import { z } from 'zod';
 
 const ICON_LINKS: any = [
   {
@@ -93,19 +97,54 @@ const PageSocialMedia = ({ children }: { children: React.ReactElement }) => {
 };
 const Footer = () => {
   const { colorScheme } = useMantineColorScheme();
-  const [email, setEmail] = useState('');
-  const [, setIsSummitted] = useState(false);
+
   const getYear = new Date().getFullYear();
   const router = useRouter();
-  const handleSubmit = () => {
-    if (!email) return;
-    setEmail('');
-    setIsSummitted(true);
-    Swal.fire(
-      'Newsletter Notification!',
-      'This is to notify you that your email is successfully submitted!',
-      'success'
-    );
+  const addInviteSchema = z.object({
+    emailAddress: z
+      .string()
+      .email({ message: 'Please enter valid email address' }),
+  });
+  const [isSubmitting, setIsubmitting] = useState(false);
+  const form = useForm({
+    validate: zodResolver(addInviteSchema),
+    initialValues: {
+      emailAddress: '',
+    },
+  });
+  const handleSubmit = async (values: { emailAddress: string }) => {
+    const baseId = 'appYi5UJUgW3d1yGc';
+    const tableName = 'Newsletter';
+    setIsubmitting(true);
+    const endpoint = `https://api.airtable.com/v0/${baseId}/${tableName}`;
+    const headers = {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
+      'Content-Type': 'application/json',
+    };
+    const serializedData = {
+      Email: values.emailAddress,
+    };
+    try {
+      const response = await axios.post(
+        endpoint,
+        { fields: serializedData },
+        { headers }
+      );
+
+      if (response.status === 200) {
+        Swal.fire(
+          'Submitted Successfully!',
+          'You clicked the button!',
+          'success'
+        );
+        setIsubmitting(false);
+        form.reset();
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      Swal.fire(`${axiosError.message}`, 'You clicked the button!', 'error');
+      setIsubmitting(false);
+    }
   };
   const pathPushTo = (value: string) => {
     router.push(`/${value}`);
@@ -268,37 +307,50 @@ const Footer = () => {
               For business professionals caught between high OEM price and
               mediocre print and graphic output,
             </Text>
-            <TextInput
-              sx={{
-                marginTop: 15,
+            <Box component="form" onSubmit={form.onSubmit(handleSubmit)}>
+              <TextInput
+                {...form.getInputProps('emailAddress')}
+                sx={{
+                  marginTop: 15,
 
-                '.mantine-Input-input:focus-within': {
-                  borderColor: '#c4c4c4',
-                },
-                '.mantine-Input-input': {
-                  background: colorScheme === 'dark' ? '#25262B' : 'none',
-                  color: colorScheme === 'dark' ? '#c4c4c4' : 'white',
-                  height: '2.5rem',
-                },
-                '.mantine-Input-input::placeholder': {
-                  color: colorScheme === 'dark' ? '#c4c4c4' : 'white',
-                  fontSize: 14,
-                },
-              }}
-              rightSection={
-                <IconSend
-                  style={{ cursor: 'pointer' }}
-                  size={16}
-                  onClick={handleSubmit}
-                />
-              }
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              placeholder="Email Address"
-              type="email"
-            />{' '}
+                  '.mantine-Input-input:focus-within': {
+                    borderColor: '#c4c4c4',
+                  },
+                  '.mantine-Input-input': {
+                    background: colorScheme === 'dark' ? '#25262B' : 'none',
+                    color: colorScheme === 'dark' ? '#c4c4c4' : 'white',
+                    height: '2.5rem',
+                  },
+                  '.mantine-Input-input::placeholder': {
+                    color: colorScheme === 'dark' ? '#c4c4c4' : 'white',
+                    fontSize: 14,
+                  },
+                }}
+                rightSection={
+                  <Button
+                    disabled={isSubmitting}
+                    type="submit"
+                    h={25}
+                    w={25}
+                    pos={'relative'}
+                    sx={{
+                      '&.mantine-Button-root': {
+                        background: 'none',
+                        ':hover': {
+                          background: 'none',
+                        },
+                      },
+                    }}
+                    left={'-5'}
+                    rightIcon={
+                      <IconSend style={{ cursor: 'pointer' }} size={16} />
+                    }
+                  ></Button>
+                }
+                placeholder="Email Address"
+                type="email"
+              />
+            </Box>
           </Grid.Col>
           <Grid.Col sm={6} md={3}>
             <Text component="a" fw={600}>

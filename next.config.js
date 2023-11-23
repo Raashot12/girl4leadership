@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /** @type {import('next').NextConfig} */
 
-const withPWA = require('next-pwa')({
+const withPWA = require( 'next-pwa' )( {
   dest: 'public',
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
-});
+} );
 
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['cloudinary.com', 'preview.colorlib.com'],
+    domains: ['res.cloudinary.com', 'preview.colorlib.com',],
   },
 };
 
-module.exports = withPWA(nextConfig);
+module.exports = withPWA( nextConfig );

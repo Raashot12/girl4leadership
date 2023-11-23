@@ -51,8 +51,8 @@ const ContactUs = () => {
     if (Object.keys(validateForErrors(contact, setErrors)).length === 0) {
       setIsubmitting(true);
       e.preventDefault();
-      const baseId = 'appQqSPqkNRlhnQrZ';
-      const tableName = 'Table 1';
+      const baseId = 'appYi5UJUgW3d1yGc';
+      const tableName = 'Contact Information';
 
       const endpoint = `https://api.airtable.com/v0/${baseId}/${tableName}`;
       const headers = {

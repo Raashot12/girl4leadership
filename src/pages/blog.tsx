@@ -12,13 +12,63 @@ import { container, child } from 'components/AboutUs/AboutUs';
 import { Layout } from 'components/Layout/Layout';
 import matter from 'gray-matter';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { IconArrowForward, IconSend } from '@tabler/icons';
 import Blog from 'components/Blog/Blog';
 import { motion } from 'framer-motion';
+import { useForm, zodResolver } from '@mantine/form';
+import { z } from 'zod';
+import axios, { AxiosError } from 'axios';
+import Swal from 'sweetalert2';
 
 const text = 'Our Blog';
 const BlogPage = () => {
+  const addInviteSchema = z.object({
+    emailAddress: z
+      .string()
+      .email({ message: 'Please enter valid email address' }),
+  });
+  const [isSubmitting, setIsubmitting] = useState(false);
+  const form = useForm({
+    validate: zodResolver(addInviteSchema),
+    initialValues: {
+      emailAddress: '',
+    },
+  });
+  const handleSubmit = async (values: { emailAddress: string }) => {
+    const baseId = 'appYi5UJUgW3d1yGc';
+    const tableName = 'Newsletter';
+    setIsubmitting(true);
+    const endpoint = `https://api.airtable.com/v0/${baseId}/${tableName}`;
+    const headers = {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
+      'Content-Type': 'application/json',
+    };
+    const serializedData = {
+      Email: values.emailAddress,
+    };
+    try {
+      const response = await axios.post(
+        endpoint,
+        { fields: serializedData },
+        { headers }
+      );
+
+      if (response.status === 200) {
+        Swal.fire(
+          'Submitted Successfully!',
+          'You clicked the button!',
+          'success'
+        );
+        setIsubmitting(false);
+        form.reset();
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      Swal.fire(`${axiosError.message}`, 'You clicked the button!', 'error');
+      setIsubmitting(false);
+    }
+  };
   return (
     <Layout pageTitle="Blog">
       <Box mt={77}>
@@ -103,6 +153,8 @@ const BlogPage = () => {
         <Blog />
         <Container size={'xl'}>
           <Box
+            component="form"
+            onSubmit={form.onSubmit(handleSubmit)}
             px={{ base: 20, sm: 30, md: 40, lg: 60 }}
             py={30}
             sx={{ background: '#F8F9FA', borderRadius: 4 }}
@@ -127,11 +179,13 @@ const BlogPage = () => {
                       fontWeight: 500,
                     },
                   }}
+                  {...form.getInputProps('emailAddress')}
                 />
               </Grid.Col>
               <Grid.Col sm={4}>
                 <Button
                   fullWidth
+                  type="submit"
                   sx={{
                     '&.mantine-Button-root': {
                       background: '#E25D24',
@@ -142,6 +196,7 @@ const BlogPage = () => {
                     },
                     borderRadius: '10px',
                   }}
+                  loading={isSubmitting}
                   rightIcon={
                     <IconSend style={{ cursor: 'pointer' }} size={16} />
                   }
@@ -153,25 +208,6 @@ const BlogPage = () => {
           </Box>
         </Container>
       </Box>
-      {/* <Head>
-          <title>Demo Blog</title>
-        </Head>
-        <h1>Welcome to my blog</h1>
-        <p>This is a subtitle idk what to type here</p>
-        <ul>
-          {props.blogs.map((blog) => (
-            <li key={blog.slug}>
-              <Link href={`/blog/${blog.slug}`}>
-                <p>
-                  {blog.date}:{blog.title}
-                </p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      {/* <Box component="h1" py={91} ta={'center'}>
-        Coming Soon!
-      </Box> */}
     </Layout>
   );
 };
