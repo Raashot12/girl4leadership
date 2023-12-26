@@ -1,23 +1,32 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
-import { Box, Text, Container, Group, Image, Grid, Flex } from '@mantine/core';
+import {
+  Box,
+  Text,
+  Container,
+  Group,
+  Image,
+  Grid,
+  Flex,
+  Avatar,
+} from '@mantine/core';
 import Autoplay from 'embla-carousel-autoplay';
 import { Carousel } from '@mantine/carousel';
 import React, { useRef } from 'react';
 import { usePagination } from 'hooks/usePagination';
 import Pagination from 'components/Pagination';
-import { useMediaQuery } from '@mantine/hooks';
 import Link from 'next/link';
-import { blogData } from './data';
+import { Article } from 'types/merchSection';
+import dayjs from 'dayjs';
 import Popular from './Popular';
 
-const Blog = () => {
+const Blog = ({ data }: { data: Article[] }) => {
   const autoplay = useRef(Autoplay({ delay: 2000 }));
-  const { trendingPost, blogPostItem } = blogData;
-  const matches = useMediaQuery('(max-width: 991.5px)');
+  const trendingPost = data.filter((value) => value?.attributes?.IsFeatured);
   const { slicedData, pagination, prevPage, nextPage, changePage } =
     usePagination({
-      itemsPerPage: matches ? 4 : 3,
-      data: blogPostItem,
+      itemsPerPage: 4,
+      data,
       startFrom: 1,
     });
 
@@ -56,7 +65,7 @@ const Blog = () => {
           {trendingPost &&
             trendingPost.map((value) => {
               return (
-                <React.Fragment key={value.id}>
+                <React.Fragment key={value?.id}>
                   <Carousel.Slide
                     sx={{
                       '.mantine-Carousel-viewport': {
@@ -64,7 +73,7 @@ const Blog = () => {
                       },
                     }}
                   >
-                    <Link href={`/blog/${value.id}`}>
+                    <Link href={`/blog/${value?.attributes?.slug}`}>
                       <Flex
                         align={'center'}
                         columnGap={50}
@@ -73,8 +82,14 @@ const Blog = () => {
                       >
                         <Box>
                           <img
-                            src={value.img}
-                            alt={value.title}
+                            src={
+                              value?.attributes?.FeaturedImage?.data?.attributes
+                                ?.url
+                            }
+                            alt={
+                              value?.attributes?.Thumbnail?.data?.attributes
+                                ?.format?.thumbnail?.url
+                            }
                             loading="eager"
                             style={{
                               maxWidth: '100%',
@@ -87,7 +102,7 @@ const Blog = () => {
                         <Box>
                           <Text>
                             <span style={{ fontWeight: '600' }}>
-                              {value.category}
+                              {value.attributes?.Category}
                             </span>{' '}
                             <span
                               style={{
@@ -96,7 +111,10 @@ const Blog = () => {
                                 fontSize: 14,
                               }}
                             >
-                              -- {value.date}
+                              --
+                              {dayjs(value.attributes?.publishedAt).format(
+                                'YYYY-MM-DD HH:mm'
+                              )}
                             </span>
                           </Text>
                           <Text
@@ -106,7 +124,7 @@ const Blog = () => {
                             mt={15}
                             sx={{ whiteSpace: 'normal' }}
                           >
-                            {value.title}
+                            {value?.attributes?.Title}
                           </Text>
                           <Text
                             fz={14}
@@ -116,7 +134,7 @@ const Blog = () => {
                             color="#999"
                             sx={{ whiteSpace: 'normal' }}
                           >
-                            {value.subtitle}
+                            {value.attributes?.Summary}
                           </Text>
                           <Flex
                             mt={20}
@@ -124,8 +142,9 @@ const Blog = () => {
                             align={'center'}
                             columnGap={16}
                           >
-                            <Image
-                              src={value.profileImage}
+                            <Avatar h={45} w={45} radius={'50%'} />
+                            {/* <Image
+                              // src={value.profileImage}
                               alt="profile display picture"
                               h={45}
                               width={45}
@@ -134,13 +153,19 @@ const Blog = () => {
                                   borderRadius: '50%',
                                 },
                               }}
-                            />
+                            /> */}
                             <Box>
                               <Text fw={700} lh={1}>
-                                {value.author.name}
+                                {
+                                  value?.attributes?.author?.data?.attributes
+                                    ?.Name
+                                }
                               </Text>
                               <Text fw={14} color="#888">
-                                {value.author.profession}
+                                {
+                                  value?.attributes?.author?.data?.attributes
+                                    ?.Occupation
+                                }
                               </Text>
                             </Box>
                           </Flex>
@@ -152,7 +177,6 @@ const Blog = () => {
               );
             })}
         </Carousel>
-        {/* Blog Items Section */}
         <Box mt={50}>
           <Grid gutter={45}>
             {slicedData &&
@@ -165,20 +189,27 @@ const Blog = () => {
                     key={value.id}
                     sx={{ cursor: 'pointer' }}
                   >
-                    <Link href={`/blog/${value.id}`}>
+                    <Link href={`/blog/${value?.attributes?.slug}`}>
                       <Image
-                        src={value.img}
-                        alt={value.title}
+                        src={
+                          value?.attributes?.FeaturedImage?.data?.attributes
+                            ?.url
+                        }
+                        alt={
+                          value?.attributes?.FeaturedImage?.data?.attributes
+                            ?.url
+                        }
                         sx={{
                           '& .mantine-Image-image': {
                             borderRadius: '7px',
+                            height: '225px !important',
                           },
                         }}
                       />
                       <Box mt={25}>
                         <Text>
                           <span style={{ fontWeight: '600' }}>
-                            {value.category}
+                            {value?.attributes?.Category}
                           </span>{' '}
                           <span
                             style={{
@@ -187,7 +218,10 @@ const Blog = () => {
                               fontSize: 14,
                             }}
                           >
-                            -- {value.date}
+                            --
+                            {dayjs(value.attributes?.publishedAt).format(
+                              'YYYY-MM-DD HH:mm'
+                            )}
                           </span>
                         </Text>
                         <Text
@@ -197,7 +231,7 @@ const Blog = () => {
                           mt={14}
                           sx={{ whiteSpace: 'normal' }}
                         >
-                          {value.title}
+                          {value.attributes?.Title}
                         </Text>
                         <Text
                           fz={14}
@@ -207,11 +241,14 @@ const Blog = () => {
                           color="#999"
                           sx={{ whiteSpace: 'normal' }}
                         >
-                          {value.subtitle.substring(0, 88)}.
+                          {value.attributes?.Summary?.substring(0, 88)}
                         </Text>
                         <Group mt={20}>
                           <Image
-                            src={value.profileImage}
+                            src={
+                              value?.attributes?.author?.data?.attributes
+                                ?.profileUrl
+                            }
                             alt="profile display picture"
                             sx={{
                               '& .mantine-Image-image': {
@@ -221,12 +258,19 @@ const Blog = () => {
                               },
                             }}
                           />
+
                           <Box>
                             <Text fw={700} lh={1}>
-                              {value.author.name}
+                              {
+                                value?.attributes?.author?.data?.attributes
+                                  ?.Name
+                              }
                             </Text>
                             <Text fw={14} color="#888">
-                              {value.author.profession}
+                              {
+                                value?.attributes?.author?.data?.attributes
+                                  ?.Occupation
+                              }
                             </Text>
                           </Box>
                         </Group>
@@ -247,7 +291,7 @@ const Blog = () => {
         />
       </Container>
       <Box>
-        <Popular />
+        <Popular data={data} />
       </Box>
     </Box>
   );

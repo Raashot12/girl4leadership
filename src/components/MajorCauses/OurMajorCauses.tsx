@@ -33,10 +33,10 @@ const OurMajorCauses = () => {
               color={colorScheme === 'dark' ? '#c4c4c4' : '#777777'}
             >
               <Text fw={600} fz={{ base: 24, md: 36 }} mb={8}>
-                {null}
+                PlaceHolder One
               </Text>
               <Text fz={14} fw={300}>
-                {null}
+                PlaceHolder Two
               </Text>
             </Box>
           </Container>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Box,
   Button,
@@ -7,10 +8,8 @@ import {
   TextInput,
   Text,
 } from '@mantine/core';
-import fs from 'fs';
 import { container, child } from 'components/AboutUs/AboutUs';
 import { Layout } from 'components/Layout/Layout';
-import matter from 'gray-matter';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { IconArrowForward, IconSend } from '@tabler/icons';
@@ -20,9 +19,10 @@ import { useForm, zodResolver } from '@mantine/form';
 import { z } from 'zod';
 import axios, { AxiosError } from 'axios';
 import Swal from 'sweetalert2';
+import { GetStaticProps } from 'next';
 
 const text = 'Our Blog';
-const BlogPage = () => {
+const BlogPage = ({ data }) => {
   const addInviteSchema = z.object({
     emailAddress: z
       .string()
@@ -69,6 +69,7 @@ const BlogPage = () => {
       setIsubmitting(false);
     }
   };
+  console.log(data);
   return (
     <Layout pageTitle="Blog">
       <Box mt={77}>
@@ -150,7 +151,7 @@ const BlogPage = () => {
             </Box>
           </Container>
         </Flex>
-        <Blog />
+        <Blog data={data} />
         <Container size={'xl'}>
           <Box
             component="form"
@@ -211,24 +212,14 @@ const BlogPage = () => {
     </Layout>
   );
 };
+export const getStaticProps: GetStaticProps<any> = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_APP_API_SERVICE_BASE_URL}/api/blogs?populate=*`
+  );
+  const productsData: any = await res.json();
+  return {
+    props: { data: productsData.data },
+  };
+};
 
 export default BlogPage;
-export async function getStaticProps() {
-  // List of files in posts folder
-  const filesInBlogs = fs.readdirSync('./content/blogs');
-  // Get the front matter and slug (the filename without .md) of all files
-  const blogs = filesInBlogs.map((filename) => {
-    const file = fs.readFileSync(`./content/blogs/${filename}`, 'utf8');
-    const matterData = matter(file);
-
-    return {
-      ...matterData.data, // matterData.data contains front matter
-      slug: filename.slice(0, filename.indexOf('.')),
-    };
-  });
-  return {
-    props: {
-      blogs,
-    },
-  };
-}

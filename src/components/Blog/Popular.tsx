@@ -3,11 +3,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { useCallback, useEffect, useState } from 'react';
 import { Carousel, Embla } from '@mantine/carousel';
-import { Box, Group, Text, Image, Flex, keyframes } from '@mantine/core';
+import { Box, Group, Text, Flex, keyframes, Image } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
-import { blogData } from './data';
+import { Article } from 'types/merchSection';
+import dayjs from 'dayjs';
 
 const progressForward = keyframes`
   0% {
@@ -44,7 +45,7 @@ const BoxFill = styled(Box as any)<{ scrollprogress: number }>`
   background: #e25d24;
   border-radius: 15px;
 `;
-function Popular() {
+function Popular({ data }: { data: Article[] }) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [embla, setEmbla] = useState<Embla | null>(null);
   const matches = useMediaQuery('(min-width: 1200px)', true, {
@@ -97,21 +98,21 @@ function Popular() {
         withControls={false}
         onNextSlide={() => null}
       >
-        {blogData &&
-          blogData.popularPost.map((value) => {
+        {data &&
+          data.map((value) => {
             return (
               <Carousel.Slide
-                onClick={() => router.push(`/blog/${value.id}`)}
+                onClick={() => router.push(`/blog/${value?.attributes?.slug}`)}
                 key={value.id}
                 sx={{ cursor: 'pointer' }}
               >
                 <img
-                  src={value.img}
-                  alt={value.title}
+                  src={value?.attributes?.FeaturedImage?.data?.attributes?.url}
+                  alt={value?.attributes?.FeaturedImage?.data?.attributes?.url}
                   loading="eager"
                   style={{
                     maxWidth: '100%',
-                    maxHeight: 'auto',
+                    maxHeight: '300px',
                     width: '100%',
                     marginBottom: 30,
                     borderRadius: 7,
@@ -120,7 +121,10 @@ function Popular() {
                 />
                 <Box w={'100%'}>
                   <Text>
-                    <span style={{ fontWeight: '600' }}>{value.category}</span>{' '}
+                    <span style={{ fontWeight: '600' }}>
+                      {' '}
+                      {value?.attributes?.Category}
+                    </span>{' '}
                     <span
                       style={{
                         color: ' #999',
@@ -128,7 +132,10 @@ function Popular() {
                         fontSize: 14,
                       }}
                     >
-                      -- {value.date}
+                      --
+                      {dayjs(value.attributes?.publishedAt).format(
+                        'YYYY-MM-DD HH:mm'
+                      )}
                     </span>
                   </Text>
                   <Text
@@ -138,7 +145,7 @@ function Popular() {
                     mt={15}
                     sx={{ whiteSpace: 'normal' }}
                   >
-                    {value.title}
+                    {value.attributes?.Title}
                   </Text>
                   <Text
                     fz={14}
@@ -148,11 +155,13 @@ function Popular() {
                     color="#999"
                     sx={{ whiteSpace: 'normal' }}
                   >
-                    {`${value.subtitle.substring(0, 40)}...`}
+                    {value.attributes?.Summary?.substring(0, 88)}
                   </Text>
                   <Group mt={20} id="blogs">
                     <Image
-                      src={value.profileImage}
+                      src={
+                        value?.attributes?.author?.data?.attributes?.profileUrl
+                      }
                       alt="profile display picture"
                       height={45}
                       width={45}
@@ -164,10 +173,13 @@ function Popular() {
                     />
                     <Box>
                       <Text fw={700} lh={1}>
-                        {value.author.name}
+                        {value?.attributes?.author?.data?.attributes?.Name}
                       </Text>
                       <Text fw={14} color="#888">
-                        {value.author.profession}
+                        {
+                          value?.attributes?.author?.data?.attributes
+                            ?.Occupation
+                        }
                       </Text>
                     </Box>
                   </Group>

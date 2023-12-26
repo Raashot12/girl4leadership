@@ -127,10 +127,10 @@ const Testimonial = () => {
             }}
           >
             <Text fw={600} fz={{ base: 24, md: 36 }} mb={8}>
-              {null}
+              PlaceHolder
             </Text>
             <Text fz={14} fw={300}>
-              {null}
+              PlaceHolder One
             </Text>
           </Box>
         </Animation>

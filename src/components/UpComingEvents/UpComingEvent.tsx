@@ -84,10 +84,10 @@ const UpComingEvent = () => {
             }}
           >
             <Text fw={600} fz={{ base: 24, md: 36 }} mb={8}>
-              {null}
+              PlaceHolder
             </Text>
             <Text fz={14} fw={300}>
-              {null}
+              PlaceHolder Two
             </Text>
           </Box>
         </Animation>
@@ -132,13 +132,13 @@ const UpComingEvent = () => {
                 </Box>
                 <Box>
                   <Text mb={10} fz={13} fw={300}>
-                    {null}
+                    TitleOne
                   </Text>
                   <Text fw={600} fz={18} mb={15}>
-                    {null}
+                    TitleTwo
                   </Text>
                   <Text fz={14} fw={300} lh={'24px'}>
-                    {null}
+                    TitleThree
                   </Text>
                 </Box>
               </Flex>

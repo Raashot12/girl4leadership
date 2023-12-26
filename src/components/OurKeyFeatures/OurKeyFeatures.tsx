@@ -66,7 +66,7 @@ const OurKeyFeatures = () => {
                 Our Key Features
               </Text>
               <Text fz={14} color={'#fff'}>
-                {null}
+                Placeholder one
               </Text>
             </Box>
           </Animation>
@@ -85,9 +85,9 @@ const OurKeyFeatures = () => {
                 <FeaturedItem sx={{ color: '#fff' }}>
                   <IconDiamond size={30} style={{ marginBottom: 14 }} />
                   <Text fw={600} fz={18} tt={'uppercase'} mb={15}>
-                    {null}
+                    TitleOne
                   </Text>
-                  <Text color=" #8a8888">{null}</Text>
+                  <Text color=" #8a8888">SubTitle</Text>
                 </FeaturedItem>
               </Animation>
             </Grid.Col>
@@ -105,9 +105,9 @@ const OurKeyFeatures = () => {
                 <FeaturedItem>
                   <IconCup size={30} style={{ marginBottom: 14 }} />
                   <Text fw={600} fz={18} tt={'uppercase'} mb={15}>
-                    {null}
+                    TitleTwo
                   </Text>
-                  <Text color=" #8a8888">{null}</Text>
+                  <Text color=" #8a8888">SubTitle</Text>
                 </FeaturedItem>
               </Animation>
             </Grid.Col>
@@ -125,9 +125,9 @@ const OurKeyFeatures = () => {
                 <FeaturedItem>
                   <IconDiamond size={30} style={{ marginBottom: 14 }} />
                   <Text fw={600} fz={18} tt={'uppercase'} mb={15}>
-                    {null}
+                    TitleThree
                   </Text>
-                  <Text color=" #8a8888">{null}</Text>
+                  <Text color=" #8a8888">SubTitle</Text>
                 </FeaturedItem>
               </Animation>
             </Grid.Col>
