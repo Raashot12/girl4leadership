@@ -45,7 +45,7 @@ const BoxFill = styled(Box as any)<{ scrollprogress: number }>`
   background: #e25d24;
   border-radius: 15px;
 `;
-function Popular({ data }: { data: Article[] }) {
+function Popular({ article }: { article: Article[] }) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [embla, setEmbla] = useState<Embla | null>(null);
   const matches = useMediaQuery('(min-width: 1200px)', true, {
@@ -98,8 +98,8 @@ function Popular({ data }: { data: Article[] }) {
         withControls={false}
         onNextSlide={() => null}
       >
-        {data &&
-          data.map((value) => {
+        {article &&
+          article.map((value) => {
             return (
               <Carousel.Slide
                 onClick={() => router.push(`/blog/${value?.attributes?.slug}`)}

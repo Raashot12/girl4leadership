@@ -1,15 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
-import {
-  Box,
-  Text,
-  Container,
-  Group,
-  Image,
-  Grid,
-  Flex,
-  Avatar,
-} from '@mantine/core';
+import { Box, Text, Container, Group, Image, Grid, Flex } from '@mantine/core';
 import Autoplay from 'embla-carousel-autoplay';
 import { Carousel } from '@mantine/carousel';
 import React, { useRef } from 'react';
@@ -20,13 +11,15 @@ import { Article } from 'types/merchSection';
 import dayjs from 'dayjs';
 import Popular from './Popular';
 
-const Blog = ({ data }: { data: Article[] }) => {
+const Blog = ({ article }: { article: Article[] }) => {
   const autoplay = useRef(Autoplay({ delay: 2000 }));
-  const trendingPost = data.filter((value) => value?.attributes?.IsFeatured);
+  const trendingPost = article?.filter(
+    (value) => value?.attributes?.IsFeatured
+  );
   const { slicedData, pagination, prevPage, nextPage, changePage } =
     usePagination({
       itemsPerPage: 4,
-      data,
+      data: article,
       startFrom: 1,
     });
 
@@ -87,8 +80,8 @@ const Blog = ({ data }: { data: Article[] }) => {
                                 ?.url
                             }
                             alt={
-                              value?.attributes?.Thumbnail?.data?.attributes
-                                ?.format?.thumbnail?.url
+                              value?.attributes?.FeaturedImage?.data?.attributes
+                                ?.url
                             }
                             loading="eager"
                             style={{
@@ -142,9 +135,11 @@ const Blog = ({ data }: { data: Article[] }) => {
                             align={'center'}
                             columnGap={16}
                           >
-                            <Avatar h={45} w={45} radius={'50%'} />
-                            {/* <Image
-                              // src={value.profileImage}
+                            <Image
+                              src={
+                                value?.attributes?.author?.data?.attributes
+                                  ?.profileUrl
+                              }
                               alt="profile display picture"
                               h={45}
                               width={45}
@@ -153,7 +148,7 @@ const Blog = ({ data }: { data: Article[] }) => {
                                   borderRadius: '50%',
                                 },
                               }}
-                            /> */}
+                            />
                             <Box>
                               <Text fw={700} lh={1}>
                                 {
@@ -291,7 +286,7 @@ const Blog = ({ data }: { data: Article[] }) => {
         />
       </Container>
       <Box>
-        <Popular data={data} />
+        <Popular article={article} />
       </Box>
     </Box>
   );

@@ -19,13 +19,11 @@ import {
   FacebookShareButton,
   LinkedinShareButton,
 } from 'react-share';
+import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 import { Article } from 'types/merchSection';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { blogData } from './data';
+import dayjs from 'dayjs';
+import { RootNode } from '@strapi/blocks-react-renderer/dist/BlocksRenderer';
 
-type ArticleProps = {
-  article: Article;
-};
 const BgColor = styled(Box as any)`
   & iframe {
     background-color: ${({ theme }) =>
@@ -34,19 +32,20 @@ const BgColor = styled(Box as any)`
       theme.colorScheme === 'dark' ? '#1A1B1E !important' : 'white !important'};
   }
 `;
-const BlogDetails: React.FC<Article> = () => {
+const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
   const { colorScheme } = useMantineColorScheme();
-  const { img, profileImage, author, date, title, subtitle } =
-    blogData.blogPostItem[0];
-
   return (
     <>
       <Box mt={90} pb={50} pt={30}>
         <Box>
           <Box sx={{ textAlign: 'center' }} mb={40}>
             <Image
-              src={profileImage}
-              alt={title}
+              src={
+                singleBlogPost?.attributes?.author?.data?.attributes?.profileUrl
+              }
+              alt={
+                singleBlogPost?.attributes?.FeaturedImage?.data?.attributes?.url
+              }
               sx={{
                 '& .mantine-Image-image': {
                   borderRadius: '50%',
@@ -63,7 +62,7 @@ const BlogDetails: React.FC<Article> = () => {
               color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
               fw={500}
             >
-              {author.name}
+              {singleBlogPost?.attributes?.author?.data?.attributes?.Name}
             </Text>{' '}
             <Group
               align="center"
@@ -75,7 +74,9 @@ const BlogDetails: React.FC<Article> = () => {
                 color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
                 fw={400}
               >
-                {date}
+                {dayjs(singleBlogPost?.attributes?.publishedAt).format(
+                  'YYYY-MM-DD'
+                )}
               </Text>
               <Divider
                 orientation="vertical"
@@ -87,7 +88,7 @@ const BlogDetails: React.FC<Article> = () => {
                 color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
                 fw={400}
               >
-                8:45 pm
+                {dayjs(singleBlogPost?.attributes?.publishedAt).format('HH:mm')}
               </Text>
             </Group>
           </Box>
@@ -99,7 +100,7 @@ const BlogDetails: React.FC<Article> = () => {
               fw={700}
               color={colorScheme === 'dark' ? '#c4c4c4' : '#051438'}
             >
-              {title}
+              {singleBlogPost?.attributes?.Title}
             </Text>{' '}
             <Text
               sx={{ textAlign: 'center' }}
@@ -107,14 +108,17 @@ const BlogDetails: React.FC<Article> = () => {
               mt={10}
               lh={'1.5'}
               fw={300}
-              color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
             >
-              {subtitle}
+              {singleBlogPost?.attributes?.Summary}
             </Text>
           </Box>
           <Image
-            src={img}
-            alt={title}
+            src={
+              singleBlogPost?.attributes?.FeaturedImage?.data?.attributes?.url
+            }
+            alt={
+              singleBlogPost?.attributes?.FeaturedImage?.data?.attributes?.url
+            }
             sx={{
               '& .mantine-Image-image': {
                 borderRadius: '10px',
@@ -123,37 +127,20 @@ const BlogDetails: React.FC<Article> = () => {
           />
         </Box>
         <Box mt={20}>
-          <Text
+          <Box
+            component="div"
             fz={{ base: '1rem', sm: '1.25rem' }}
             mt={10}
             lh={'1.5'}
             fw={300}
             color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
           >
-            Far far away, behind the word mountains, far from the countries
-            Vokalia and Consonantia, there live the blind texts. Separated they
-            live in Bookmarksgrove right at the coast of the Semantics, a large
-            language ocean. <br></br>
-            <br></br>A small river named Duden flows by their place and supplies
-            it with the necessary regelialia. It is a paradisematic country, in
-            which roasted parts of sentences fly into your mouth.
-          </Text>
-
-          {/* <Image
-            src="https://preview.colorlib.com/theme/magdesign/images/post_lg_2.jpg"
-            alt={title}
-            sx={{
-              '& .mantine-Image-image': {
-                height: '500px !important',
-                width: '600px !important',
-                marginRight: 'auto !important',
-                marginLeft: 'auto !important',
-                maxWidth: '100%',
-                borderRadius: 10,
-              },
-            }}
-            mt={20}
-          /> */}
+            <BlocksRenderer
+              content={
+                singleBlogPost?.attributes?.Content as unknown as RootNode[]
+              }
+            />
+          </Box>
         </Box>
 
         <Divider orientation="horizontal" mt={40} />
@@ -172,8 +159,8 @@ const BlogDetails: React.FC<Article> = () => {
           </Flex>
           <Flex mt={20} align="center" columnGap={20}>
             <FacebookShareButton
-              url={'https://girls4leadership.org'}
-              title={title}
+              url={`https://girls4leadership.org/${singleBlogPost?.attributes?.slug}`}
+              title={singleBlogPost?.attributes?.Title}
               quote={'フェイスブックはタイトルが付けれるようです'}
               hashtag={'#hashtag'}
               style={{ display: 'flex', alignItems: 'center' }}
@@ -181,16 +168,16 @@ const BlogDetails: React.FC<Article> = () => {
               <BsFacebook cursor={'pointer'} size={20} />
             </FacebookShareButton>
             <TwitterShareButton
-              title={title}
-              url="https://girls4leadership.org/"
-              hashtags={['hashtag1', 'hashtag2']}
+              title={singleBlogPost?.attributes?.Title}
+              url={`https://girls4leadership.org/${singleBlogPost?.attributes?.slug}`}
+              hashtags={['girls4leadership', 'news']}
               style={{ display: 'flex', alignItems: 'center' }}
             >
               <BsTwitter cursor={'pointer'} size={20} />
             </TwitterShareButton>
             <LinkedinShareButton
-              title={title}
-              url="https://girls4leadership.org/"
+              title={singleBlogPost?.attributes?.Title}
+              url={`https://girls4leadership.org/${singleBlogPost?.attributes?.slug}`}
               style={{ display: 'flex', alignItems: 'center' }}
             >
               <FaLinkedin cursor={'pointer'} size={20} />
@@ -214,33 +201,4 @@ const BlogDetails: React.FC<Article> = () => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  // Fetch the list of products from the dummyjson.com API
-  const res = await fetch('https://dummyjson.com/api/products');
-  const products: Article[] = await res.json();
-
-  // Generate paths for each product
-  const paths = products.map((product) => ({
-    params: { id: product.id.toString() },
-  }));
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps<ArticleProps> = async ({
-  params,
-}) => {
-  // Fetch data for a specific article based on the ID from the dummyjson.com API
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_API_SERVICE_BASE_URL}/api/blogs/slugify/slugs/${params?.id}`
-  );
-  const article: Article = await res.json();
-
-  return {
-    props: { article },
-  };
-};
 export default BlogDetails;

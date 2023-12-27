@@ -20,9 +20,13 @@ import { z } from 'zod';
 import axios, { AxiosError } from 'axios';
 import Swal from 'sweetalert2';
 import { GetStaticProps } from 'next';
+import { Article } from 'types/merchSection';
 
+type ArticleProps = {
+  article: Article[];
+};
 const text = 'Our Blog';
-const BlogPage = ({ data }) => {
+const BlogPage: React.FC<ArticleProps> = ({ article }) => {
   const addInviteSchema = z.object({
     emailAddress: z
       .string()
@@ -69,7 +73,7 @@ const BlogPage = ({ data }) => {
       setIsubmitting(false);
     }
   };
-  console.log(data);
+
   return (
     <Layout pageTitle="Blog">
       <Box mt={77}>
@@ -151,7 +155,7 @@ const BlogPage = ({ data }) => {
             </Box>
           </Container>
         </Flex>
-        <Blog data={data} />
+        <Blog article={article} />
         <Container size={'xl'}>
           <Box
             component="form"
@@ -212,13 +216,13 @@ const BlogPage = ({ data }) => {
     </Layout>
   );
 };
-export const getStaticProps: GetStaticProps<any> = async () => {
+export const getStaticProps: GetStaticProps<ArticleProps> = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_APP_API_SERVICE_BASE_URL}/api/blogs?populate=*`
   );
-  const productsData: any = await res.json();
+  const article = await res.json();
   return {
-    props: { data: productsData.data },
+    props: { article: article.data as Article[] },
   };
 };
 

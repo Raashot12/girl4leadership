@@ -28,13 +28,174 @@ export type Article = {
     Summary: string;
     IsFeatured: boolean;
     TimeStamp: string;
-    Content: any[]; // Replace `any` with the actual type if you know the structure of the Content array
+    Content: Array<{
+      type: string;
+      children: Array<{
+        text: string;
+        type: string;
+      }>;
+    }>;
     slug: string;
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
-    Thumbnail: any; // Replace `any` with the actual type for Thumbnail if you know it
-    author: any; // Replace `any` with the actual type for author if you know it
-    FeaturedImage: any; // Replace `any` with the actual type for FeaturedImage if you know it
+    Popular: boolean | null;
+    Thumbnail: {
+      data: {
+        id: number;
+        attributes: {
+          name: string;
+          alternativeText: string | null;
+          caption: string | null;
+          width: number;
+          height: number;
+          formats: {
+            small: {
+              ext: string;
+              url: string;
+              hash: string;
+              mime: string;
+              name: string;
+              path: string | null;
+              size: number;
+              width: number;
+              height: number;
+              provider_metadata: {
+                public_id: string;
+                resource_type: string;
+              };
+            };
+            medium: {
+              ext: string;
+              url: string;
+              hash: string;
+              mime: string;
+              name: string;
+              path: string | null;
+              size: number;
+              width: number;
+              height: number;
+              provider_metadata: {
+                public_id: string;
+                resource_type: string;
+              };
+            };
+            thumbnail: {
+              ext: string;
+              url: string;
+              hash: string;
+              mime: string;
+              name: string;
+              path: string | null;
+              size: number;
+              width: number;
+              height: number;
+              provider_metadata: {
+                public_id: string;
+                resource_type: string;
+              };
+            };
+          };
+          hash: string;
+          ext: string;
+          mime: string;
+          size: number;
+          url: string;
+          previewUrl: string | null;
+          provider: string;
+          provider_metadata: {
+            public_id: string;
+            resource_type: string;
+          };
+          createdAt: string;
+          updatedAt: string;
+        };
+      };
+    };
+    author: {
+      data: {
+        id: number;
+        attributes: {
+          Name: string;
+          Occupation: string;
+          createdAt: string;
+          updatedAt: string;
+          publishedAt: string;
+          profileUrl: string;
+        };
+      };
+    };
+    FeaturedImage: {
+      data: {
+        id: number;
+        attributes: {
+          name: string;
+          alternativeText: string | null;
+          caption: string | null;
+          width: number;
+          height: number;
+          formats: {
+            small: {
+              ext: string;
+              url: string;
+              hash: string;
+              mime: string;
+              name: string;
+              path: string | null;
+              size: number;
+              width: number;
+              height: number;
+              provider_metadata: {
+                public_id: string;
+                resource_type: string;
+              };
+            };
+            medium: {
+              ext: string;
+              url: string;
+              hash: string;
+              mime: string;
+              name: string;
+              path: string | null;
+              size: number;
+              width: number;
+              height: number;
+              provider_metadata: {
+                public_id: string;
+                resource_type: string;
+              };
+            };
+            thumbnail: {
+              ext: string;
+              url: string;
+              hash: string;
+              mime: string;
+              name: string;
+              path: string | null;
+              size: number;
+              width: number;
+              height: number;
+              provider_metadata: {
+                public_id: string;
+                resource_type: string;
+              };
+            };
+          };
+          hash: string;
+          ext: string;
+          mime: string;
+          size: number;
+          url: string;
+          previewUrl: string | null;
+          provider: string;
+          provider_metadata: {
+            public_id: string;
+            resource_type: string;
+          };
+          createdAt: string;
+          updatedAt: string;
+        };
+      };
+    };
   };
 };
