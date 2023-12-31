@@ -10,7 +10,27 @@ import React from 'react';
 import { IconBook, IconOutlet, IconUsers } from '@tabler/icons';
 import Animation from '../Shared/Animation/AnimationWrapper';
 
-const WelcomeGirlsFourInitative = () => {
+const WelcomeGirlsFourInitative = ({
+  ourReach,
+}: {
+  ourReach: {
+    image: string;
+    title: string;
+    people: {
+      count: string;
+      label: string;
+    };
+    content: string;
+    projects: {
+      count: string;
+      label: string;
+    };
+    volunteers: {
+      count: string;
+      label: string;
+    };
+  };
+}) => {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Box mt={{ base: 30, md: 80 }} pb={{ base: 70, md: 100, lg: 120 }}>
@@ -35,7 +55,7 @@ const WelcomeGirlsFourInitative = () => {
                   lh={'1.5em'}
                   ta={{ sm: 'center', md: 'left' }}
                 >
-                  Our Reach
+                  {ourReach.title}
                 </Text>
                 <Text
                   fz={15}
@@ -44,9 +64,7 @@ const WelcomeGirlsFourInitative = () => {
                   sx={{ width: '100%', maxWidth: '480px' }}
                   mx={{ sm: 'auto', md: '0' }}
                 >
-                  We are committed to achieving tangible and measurable results.
-                  We aim to empower and equip 1 million girls with leadership
-                  capacities by 2030.
+                  {ourReach.content}
                 </Text>
               </Box>
               <Grid gutterLg={20}>
@@ -58,13 +76,13 @@ const WelcomeGirlsFourInitative = () => {
                       />
                       <Box>
                         <Text fw={600} mb={5} fz={24}>
-                          10000+
+                          {ourReach.people.count}
                         </Text>
                         <Text
                           fw={300}
                           color={colorScheme === 'dark' ? '#c4c4c4' : '#777777'}
                         >
-                          People Reached
+                          {ourReach.people.label}
                         </Text>
                       </Box>
                     </Flex>
@@ -79,13 +97,13 @@ const WelcomeGirlsFourInitative = () => {
                       />
                       <Box>
                         <Text fw={600} mb={5} fz={24}>
-                          10+
+                          {ourReach.projects.count}
                         </Text>
                         <Text
                           fw={300}
                           color={colorScheme === 'dark' ? '#c4c4c4' : '#777777'}
                         >
-                          Projects
+                          {ourReach.projects.label}
                         </Text>
                       </Box>
                     </Flex>
@@ -99,13 +117,13 @@ const WelcomeGirlsFourInitative = () => {
                       />
                       <Box>
                         <Text fw={600} mb={5} fz={24}>
-                          120+
+                          {ourReach.volunteers.count}
                         </Text>
                         <Text
                           fw={300}
                           color={colorScheme === 'dark' ? '#c4c4c4' : '#777777'}
                         >
-                          Volunteers
+                          {ourReach.volunteers.label}
                         </Text>
                       </Box>
                     </Flex>
@@ -135,12 +153,12 @@ const WelcomeGirlsFourInitative = () => {
             }}
           >
             <Image
-              src="https://res.cloudinary.com/rashot/image/upload/v1678048270/IMG_4759_1_aad_dkqvtw.jpg"
+              src={ourReach.image}
               alt="welcome Image"
               style={{ borderRadius: 10 }}
               sx={{
                 '.mantine-Image-image': {
-                  borderRadius: 4,
+                  borderRadius: 10,
                 },
               }}
             />

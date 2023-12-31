@@ -8,7 +8,20 @@ import { useRouter } from 'next/router';
 import Girls4leadershipLogo from 'components/Icons/Girls4leadershipLogo';
 import IconModalClose from 'components/Icons/IconModalClose';
 
-const HeroSection = () => {
+const HeroSection = ({
+  title,
+  mainTitle,
+  subject,
+  buttonTextOne,
+  buttonTextTwo,
+}: {
+  title: string;
+  subject: string;
+  heroImage: string;
+  mainTitle: string;
+  buttonTextOne: string;
+  buttonTextTwo: string;
+}) => {
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
 
@@ -55,7 +68,7 @@ const HeroSection = () => {
             >
               <Box sx={{ textAlign: 'center', color: 'white' }}>
                 <Box fw={600} sx={{ textTransform: 'uppercase' }}>
-                  We are inspring a generstion of female leaders.
+                  {title}
                 </Box>
                 <Box
                   sx={{
@@ -67,26 +80,28 @@ const HeroSection = () => {
                   mb={20}
                   fw={600}
                 >
-                  Leadership does not have a gender
+                  {mainTitle}
                 </Box>
-                <Box sx={{ fontSize: 16, lineHeight: '24px' }} fw={300} mb={25}>
-                  Gilrs 4 Leadership is increasing girls skills and capacity to
-                  be leaders.<br></br> When girls leads we rise althogether.
-                </Box>
+                <Box
+                  sx={{ fontSize: 16, lineHeight: '24px' }}
+                  fw={300}
+                  mb={25}
+                  dangerouslySetInnerHTML={{ __html: subject }}
+                ></Box>
                 <Flex align={'center'} columnGap={20} justify={'center'}>
                   <BtnMain
                     component="a"
                     sx={{ zIndex: 1 }}
                     onClick={() => setOpenModal(true)}
                   >
-                    DONATE NOW
+                    {buttonTextOne}
                   </BtnMain>
                   <BtnWhite
                     component="a"
                     sx={{ zIndex: 1 }}
                     onClick={() => router.push('/blog')}
                   >
-                    VIEW ACTIVITY
+                    {buttonTextTwo}
                   </BtnWhite>
                 </Flex>
               </Box>

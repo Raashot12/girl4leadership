@@ -159,7 +159,7 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
           </Flex>
           <Flex mt={20} align="center" columnGap={20}>
             <FacebookShareButton
-              url={`https://girls4leadership.org/${singleBlogPost?.attributes?.slug}`}
+              url={`https://girls4leadership.org/blog/${singleBlogPost?.attributes?.slug}`}
               title={singleBlogPost?.attributes?.Title}
               quote={'フェイスブックはタイトルが付けれるようです'}
               hashtag={'#hashtag'}
@@ -169,7 +169,7 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
             </FacebookShareButton>
             <TwitterShareButton
               title={singleBlogPost?.attributes?.Title}
-              url={`https://girls4leadership.org/${singleBlogPost?.attributes?.slug}`}
+              url={`https://girls4leadership.org/blog/${singleBlogPost?.attributes?.slug}`}
               hashtags={['girls4leadership', 'news']}
               style={{ display: 'flex', alignItems: 'center' }}
             >
@@ -177,7 +177,7 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
             </TwitterShareButton>
             <LinkedinShareButton
               title={singleBlogPost?.attributes?.Title}
-              url={`https://girls4leadership.org/${singleBlogPost?.attributes?.slug}`}
+              url={`https://girls4leadership.org/blog/${singleBlogPost?.attributes?.slug}`}
               style={{ display: 'flex', alignItems: 'center' }}
             >
               <FaLinkedin cursor={'pointer'} size={20} />

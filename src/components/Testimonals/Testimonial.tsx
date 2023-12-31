@@ -7,7 +7,17 @@ import React from 'react';
 import { useMediaQuery } from '@mantine/hooks';
 import Animation from '../Shared/Animation/AnimationWrapper';
 
-const Card = ({ item }: any) => {
+const Card = ({
+  item,
+}: {
+  item: {
+    id: number;
+    name: string;
+    image: string;
+    content: string;
+    workPosition: string;
+  };
+}) => {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Box
@@ -38,59 +48,73 @@ const Card = ({ item }: any) => {
         />
       </Box>
       <Box>
-        <Text align="center" mt={30} mb={25}>
-          {null}
+        <Text align="center" mt={30} mb={5}>
+          {item.name}
         </Text>
-        <Text align="center" mb={15} fz={18} fw={600}>
-          {null}
+        <Text align="center" mb={15} fz={16} fw={600}>
+          {item.workPosition}
         </Text>
         <Text align="center" fz={14} fw={300}>
-          {null}
+          {item.content}
         </Text>
       </Box>
     </Box>
   );
 };
-const testimonialCards = [
-  {
-    id: 1,
-    name: 'Cordelia Barton',
-    workPosition: 'CEO at Google',
-    image:
-      'https://res.cloudinary.com/rashot/image/upload/v1678362430/Screenshot_2022-08-20_at_12.46.08_jxpkw0.png',
-    content:
-      'It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its',
-  },
-  {
-    id: 2,
-    name: 'Cordelia Barton',
-    workPosition: 'CEO at Google',
-    image:
-      'https://res.cloudinary.com/rashot/image/upload/v1678362430/Screenshot_2022-08-20_at_12.46.08_jxpkw0.png',
-    content:
-      'It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its',
-  },
-  {
-    id: 3,
-    name: 'Cordelia Barton',
-    workPosition: 'CEO at Google',
-    image:
-      'https://res.cloudinary.com/rashot/image/upload/v1678362430/Screenshot_2022-08-20_at_12.46.08_jxpkw0.png',
-    content:
-      'It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its',
-  },
-  {
-    id: 4,
-    name: 'Cordelia Barton',
-    workPosition: 'CEO at Google',
-    image:
-      'https://res.cloudinary.com/rashot/image/upload/v1678357985/testi-1.png_j0uy1x.webp',
-    content:
-      'It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its',
-  },
-];
+// const testimonialCards = [
+//   {
+//     id: 1,
+//     name: 'Cordelia Barton',
+//     workPosition: 'CEO at Google',
+//     image:
+//       'https://res.cloudinary.com/rashot/image/upload/v1678362430/Screenshot_2022-08-20_at_12.46.08_jxpkw0.png',
+//     content:
+//       'It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its',
+//   },
+//   {
+//     id: 2,
+//     name: 'Cordelia Barton',
+//     workPosition: 'CEO at Google',
+//     image:
+//       'https://res.cloudinary.com/rashot/image/upload/v1678362430/Screenshot_2022-08-20_at_12.46.08_jxpkw0.png',
+//     content:
+//       'It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its',
+//   },
+//   {
+//     id: 3,
+//     name: 'Cordelia Barton',
+//     workPosition: 'CEO at Google',
+//     image:
+//       'https://res.cloudinary.com/rashot/image/upload/v1678362430/Screenshot_2022-08-20_at_12.46.08_jxpkw0.png',
+//     content:
+//       'It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its',
+//   },
+//   {
+//     id: 4,
+//     name: 'Cordelia Barton',
+//     workPosition: 'CEO at Google',
+//     image:
+//       'https://res.cloudinary.com/rashot/image/upload/v1678357985/testi-1.png_j0uy1x.webp',
+//     content:
+//       'It won’t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its',
+//   },
+// ];
 
-const Testimonial = () => {
+const Testimonial = ({
+  testimonialCards,
+}: {
+  testimonialCards: {
+    data: {
+      id: number;
+      name: string;
+      image: string;
+      content: string;
+      workPosition: string;
+    }[];
+    title: string;
+    subTitle: string;
+  };
+}) => {
   const { colorScheme } = useMantineColorScheme();
   const largeScreen = useMediaQuery('(min-width: 1200px)', true, {
     getInitialValueInEffect: false,
@@ -127,10 +151,10 @@ const Testimonial = () => {
             }}
           >
             <Text fw={600} fz={{ base: 24, md: 36 }} mb={8}>
-              PlaceHolder
+              {testimonialCards.title}
             </Text>
             <Text fz={14} fw={300}>
-              PlaceHolder One
+              {testimonialCards.subTitle}
             </Text>
           </Box>
         </Animation>
@@ -145,7 +169,7 @@ const Testimonial = () => {
           align="center"
           slidesToScroll={largeScreen ? 3 : mediumScreen ? 2 : 1}
         >
-          {testimonialCards.map((value) => {
+          {testimonialCards.data.map((value) => {
             return (
               <Carousel.Slide key={value.id}>
                 <Card item={value} key={value.id} />

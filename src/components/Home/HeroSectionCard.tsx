@@ -2,7 +2,24 @@ import { Grid, Text, Box, Flex, Divider } from '@mantine/core';
 import React from 'react';
 import Animation from '../Shared/Animation/AnimationWrapper';
 
-const HeroSectionCard = () => {
+const HeroSectionCard = ({
+  cardData,
+}: {
+  cardData: {
+    ourFuture: {
+      title: string;
+      content: string;
+    };
+    ourVision: {
+      title: string;
+      content: string;
+    };
+    ourMission: {
+      title: string;
+      content: string;
+    };
+  };
+}) => {
   return (
     <Box
       mt={{ lg: -60, base: 20 }}
@@ -24,11 +41,8 @@ const HeroSectionCard = () => {
             <Box sx={{ background: '#e7c12d', color: '#FFFFFF' }} p={30}>
               <Flex align="center" columnGap={20}>
                 <Box>
-                  <Text mb={15}>Our Mission</Text>
-                  <Text>
-                    Our mission is to Inspire a generation of female leaders
-                    through projects and advocacy programs
-                  </Text>
+                  <Text mb={15}>{cardData.ourMission.title}</Text>
+                  <Text>{cardData.ourMission.content}</Text>
                 </Box>
                 <Divider orientation="vertical" size="sm" color="#FFFFF" />
               </Flex>
@@ -50,11 +64,8 @@ const HeroSectionCard = () => {
             <Box sx={{ background: '#e25d24', color: '#FFFFFF' }} p={30}>
               <Flex align="center" columnGap={20}>
                 <Box>
-                  <Text mb={15}>Our Vison</Text>
-                  <Text>
-                    We envsion an equal world that allows girls to be leaders
-                    and active decison makers
-                  </Text>
+                  <Text mb={15}>{cardData.ourVision.title}</Text>
+                  <Text>{cardData.ourVision.content}</Text>
                 </Box>
                 <Divider orientation="vertical" size="sm" color="#FFFFF" />
               </Flex>
@@ -75,11 +86,8 @@ const HeroSectionCard = () => {
             <Box sx={{ background: '#91d214', color: '#FFFFFF' }} p={30}>
               <Flex align="center" columnGap={20}>
                 <Box>
-                  <Text mb={15}>Our Future Plans</Text>
-                  <Text>
-                    We are on mission to equip 1 million gilrs with leadership
-                    capacities by 2030
-                  </Text>
+                  <Text mb={15}>{cardData.ourFuture.title}</Text>
+                  <Text>{cardData.ourFuture.content}</Text>
                 </Box>
                 <Divider orientation="vertical" size="sm" color="#FFFFF" />
               </Flex>

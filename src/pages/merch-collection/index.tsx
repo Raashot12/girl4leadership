@@ -47,9 +47,6 @@ const MerchCollectionPage = () => {
       <Wilderness />
       <Accessories />
       <MerchCollectionBlog />
-      {/* <Box component="h1" py={90} ta={'center'}>
-        Coming Soon!
-      </Box> */}
     </Layout>
   );
 };

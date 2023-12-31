@@ -199,3 +199,97 @@ export type Article = {
     };
   };
 };
+
+type HeroSection = {
+  heroData: {
+    title: string;
+    subject: string;
+    heroImage: string;
+    mainTitle: string;
+    buttonTextOne: string;
+    buttonTextTwo: string;
+  };
+  ourReach: {
+    image: string;
+    title: string;
+    people: {
+      count: string;
+      label: string;
+    };
+    content: string;
+    projects: {
+      count: string;
+      label: string;
+    };
+    volunteers: {
+      count: string;
+      label: string;
+    };
+  };
+  statement: {
+    ourFuture: {
+      title: string;
+      content: string;
+    };
+    ourVision: {
+      title: string;
+      content: string;
+    };
+    ourMission: {
+      title: string;
+      content: string;
+    };
+  };
+  upComingEvent: {
+    data: {
+      id: number;
+      image: string;
+      title: string;
+      content: string;
+      timeStamp: string;
+    }[];
+    title: string;
+    subTitle: string;
+  };
+  causesScrollData: {
+    data: {
+      id: number;
+      pics: string;
+      title: string;
+      total: string;
+      raised: string;
+      content: string;
+    }[];
+    title: string;
+    subTitle: string;
+  };
+  testimonialCards: {
+    data: {
+      id: number;
+      name: string;
+      image: string;
+      content: string;
+      workPosition: string;
+    }[];
+    title: string;
+    subTitle: string;
+  };
+  keyfeatures: {
+    title: string;
+    features: {
+      title: string;
+      subtitle: string;
+    }[];
+    subTitle: string;
+  };
+};
+
+export type DataType = {
+  id: number;
+  attributes: {
+    HeroSection: HeroSection;
+  };
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+};

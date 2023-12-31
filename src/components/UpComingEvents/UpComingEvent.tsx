@@ -9,55 +9,69 @@ import {
 import Animation from '../Shared/Animation/AnimationWrapper';
 import ScrollablComponents from '../Shared/ScrollableUI/ScrollablComponents';
 
-const upComingEvent = [
-  {
-    id: 1,
-    timeStamp: '25th March, 2017',
-    title: 'The Universe Through A Child S Eyes',
-    image:
-      'https://res.cloudinary.com/rashot/image/upload/v1678348968/1889cc92-96f6-4b33-86b8-ff6b902a9763_ojgxcg.jpg',
-    content:
-      'For most of us, the idea of astronomy is something we directly connect to “stargazing”, telescopes',
-  },
-  {
-    id: 4,
-    timeStamp: '25th March, 2017',
-    title: 'The Universe Through A Child S Eyes',
-    image:
-      'https://res.cloudinary.com/rashot/image/upload/v1678348968/1889cc92-96f6-4b33-86b8-ff6b902a9763_ojgxcg.jpg',
-    content:
-      'For most of us, the idea of astronomy is something we directly connect to “stargazing”, telescopes',
-  },
-  {
-    id: 3,
-    timeStamp: '25th March, 2017',
-    title: 'The Universe Through A Child S Eyes',
-    image:
-      'https://res.cloudinary.com/rashot/image/upload/v1678348607/5418bce6-e0fa-42b9-b756-70f868b83efa_patry4.jpg',
-    content:
-      'For most of us, the idea of astronomy is something we directly connect to “stargazing”, telescopes',
-  },
-  {
-    id: 5,
-    timeStamp: '25th March, 2017',
-    title: 'The Universe Through A Child S Eyes',
-    image:
-      'https://res.cloudinary.com/rashot/image/upload/v1678348971/IMG_2324_idaxek.jpg',
-    content:
-      'For most of us, the idea of astronomy is something we directly connect to “stargazing”, telescopes',
-  },
-  {
-    id: 6,
-    timeStamp: '25th March, 2017',
-    title: 'The Universe Through A Child S Eyes',
-    image:
-      'https://res.cloudinary.com/rashot/image/upload/v1678348607/5418bce6-e0fa-42b9-b756-70f868b83efa_patry4.jpg',
-    content:
-      'For most of us, the idea of astronomy is something we directly connect to “stargazing”, telescopes',
-  },
-];
+// const upComingEvent = [
+//   {
+//     id: 1,
+//     timeStamp: '25th March, 2017',
+//     title: 'The Universe Through A Child S Eyes',
+//     image:
+//       'https://res.cloudinary.com/rashot/image/upload/v1678348968/1889cc92-96f6-4b33-86b8-ff6b902a9763_ojgxcg.jpg',
+//     content:
+//       'For most of us, the idea of astronomy is something we directly connect to “stargazing”, telescopes',
+//   },
+//   {
+//     id: 4,
+//     timeStamp: '25th March, 2017',
+//     title: 'The Universe Through A Child S Eyes',
+//     image:
+//       'https://res.cloudinary.com/rashot/image/upload/v1678348968/1889cc92-96f6-4b33-86b8-ff6b902a9763_ojgxcg.jpg',
+//     content:
+//       'For most of us, the idea of astronomy is something we directly connect to “stargazing”, telescopes',
+//   },
+//   {
+//     id: 3,
+//     timeStamp: '25th March, 2017',
+//     title: 'The Universe Through A Child S Eyes',
+//     image:
+//       'https://res.cloudinary.com/rashot/image/upload/v1678348607/5418bce6-e0fa-42b9-b756-70f868b83efa_patry4.jpg',
+//     content:
+//       'For most of us, the idea of astronomy is something we directly connect to “stargazing”, telescopes',
+//   },
+//   {
+//     id: 5,
+//     timeStamp: '25th March, 2017',
+//     title: 'The Universe Through A Child S Eyes',
+//     image:
+//       'https://res.cloudinary.com/rashot/image/upload/v1678348971/IMG_2324_idaxek.jpg',
+//     content:
+//       'For most of us, the idea of astronomy is something we directly connect to “stargazing”, telescopes',
+//   },
+//   {
+//     id: 6,
+//     timeStamp: '25th March, 2017',
+//     title: 'The Universe Through A Child S Eyes',
+//     image:
+//       'https://res.cloudinary.com/rashot/image/upload/v1678348607/5418bce6-e0fa-42b9-b756-70f868b83efa_patry4.jpg',
+//     content:
+//       'For most of us, the idea of astronomy is something we directly connect to “stargazing”, telescopes',
+//   },
+// ];
 
-const UpComingEvent = () => {
+const UpComingEvent = ({
+  upComingEvent,
+}: {
+  upComingEvent: {
+    data: {
+      id: number;
+      image: string;
+      title: string;
+      content: string;
+      timeStamp: string;
+    }[];
+    title: string;
+    subTitle: string;
+  };
+}) => {
   const { colorScheme } = useMantineColorScheme();
   return (
     <Box
@@ -84,17 +98,17 @@ const UpComingEvent = () => {
             }}
           >
             <Text fw={600} fz={{ base: 24, md: 36 }} mb={8}>
-              PlaceHolder
+              {upComingEvent.title}
             </Text>
             <Text fz={14} fw={300}>
-              PlaceHolder Two
+              {upComingEvent.subTitle}
             </Text>
           </Box>
         </Animation>
       </Container>
       <Container size="xl">
         <ScrollablComponents>
-          {upComingEvent.map((value) => {
+          {upComingEvent.data?.map((value) => {
             return (
               <Flex
                 align={'center'}
@@ -131,14 +145,14 @@ const UpComingEvent = () => {
                   />
                 </Box>
                 <Box>
-                  <Text mb={10} fz={13} fw={300}>
-                    TitleOne
+                  <Text mb={10} fz={13} fw={500}>
+                    {value.title}
                   </Text>
-                  <Text fw={600} fz={18} mb={15}>
-                    TitleTwo
+                  <Text fw={600} fz={16} mb={15}>
+                    {value.content}
                   </Text>
                   <Text fz={14} fw={300} lh={'24px'}>
-                    TitleThree
+                    {value.timeStamp}
                   </Text>
                 </Box>
               </Flex>

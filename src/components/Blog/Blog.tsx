@@ -146,6 +146,8 @@ const Blog = ({ article }: { article: Article[] }) => {
                               sx={{
                                 '& .mantine-Image-image': {
                                   borderRadius: '50%',
+                                  height: '45px !important',
+                                  width: '45px !important',
                                 },
                               }}
                             />

@@ -38,7 +38,18 @@ const FeaturedItem = styled(Box as any)`
     margin: auto;
   }
 `;
-const OurKeyFeatures = () => {
+const OurKeyFeatures = ({
+  keyfeatures,
+}: {
+  keyfeatures: {
+    title: string;
+    features: {
+      title: string;
+      subtitle: string;
+    }[];
+    subTitle: string;
+  };
+}) => {
   return (
     <>
       <FeaturedArea pt={{ base: 40, sm: 80 }} pb={30}>
@@ -63,10 +74,10 @@ const OurKeyFeatures = () => {
               }}
             >
               <Text fw={600} fz={{ base: 24, md: 36 }} mb={8} color={'#fff'}>
-                Our Key Features
+                {keyfeatures.title}
               </Text>
               <Text fz={14} color={'#fff'}>
-                Placeholder one
+                {keyfeatures.subTitle}
               </Text>
             </Box>
           </Animation>
@@ -85,9 +96,12 @@ const OurKeyFeatures = () => {
                 <FeaturedItem sx={{ color: '#fff' }}>
                   <IconDiamond size={30} style={{ marginBottom: 14 }} />
                   <Text fw={600} fz={18} tt={'uppercase'} mb={15}>
-                    TitleOne
+                    {keyfeatures.features[0].title}
                   </Text>
-                  <Text color=" #8a8888">SubTitle</Text>
+                  <Text color=" #8a8888">
+                    {' '}
+                    {keyfeatures.features[0].subtitle}
+                  </Text>
                 </FeaturedItem>
               </Animation>
             </Grid.Col>
@@ -105,9 +119,11 @@ const OurKeyFeatures = () => {
                 <FeaturedItem>
                   <IconCup size={30} style={{ marginBottom: 14 }} />
                   <Text fw={600} fz={18} tt={'uppercase'} mb={15}>
-                    TitleTwo
+                    {keyfeatures.features[1].title}
                   </Text>
-                  <Text color=" #8a8888">SubTitle</Text>
+                  <Text color=" #8a8888">
+                    {keyfeatures.features[1].subtitle}
+                  </Text>
                 </FeaturedItem>
               </Animation>
             </Grid.Col>
@@ -125,9 +141,11 @@ const OurKeyFeatures = () => {
                 <FeaturedItem>
                   <IconDiamond size={30} style={{ marginBottom: 14 }} />
                   <Text fw={600} fz={18} tt={'uppercase'} mb={15}>
-                    TitleThree
+                    {keyfeatures.features[2].title}
                   </Text>
-                  <Text color=" #8a8888">SubTitle</Text>
+                  <Text color=" #8a8888">
+                    {keyfeatures.features[2].subtitle}
+                  </Text>
                 </FeaturedItem>
               </Animation>
             </Grid.Col>
