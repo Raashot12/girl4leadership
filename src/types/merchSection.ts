@@ -293,3 +293,10 @@ export type DataType = {
   updatedAt: string;
   publishedAt: string;
 };
+export type AboutUsType = {
+  content: string;
+  summary: {
+    title: string;
+    content: string;
+  };
+};

@@ -194,7 +194,10 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
                 : '#fffff !important',
           }}
         >
-          <DisComments />
+          <DisComments
+            postTitle={singleBlogPost?.attributes?.Title}
+            postSlug={singleBlogPost?.attributes?.slug}
+          />
         </BgColor>
       </Box>
     </>
