@@ -53,6 +53,8 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
                   width: '65px !important',
                   marginRight: 'auto !important',
                   marginLeft: 'auto !important',
+                  boxShadow:
+                    'rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px',
                 },
               }}
             />
@@ -122,6 +124,8 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
             sx={{
               '& .mantine-Image-image': {
                 borderRadius: '10px',
+                boxShadow:
+                  'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
               },
             }}
           />

@@ -7,10 +7,11 @@ import { AboutUsType } from 'types/merchSection';
 type AboutUsProps = {
   about: AboutUsType;
 };
-const AboutPage = () => {
+const AboutPage: React.FC<AboutUsProps> = ({ about }) => {
+  console.log(about);
   return (
     <Layout pageTitle="Who We Are">
-      <AboutUs />
+      <AboutUs about={about} />
     </Layout>
   );
 };
@@ -19,9 +20,9 @@ export const getStaticProps: GetStaticProps<AboutUsProps> = async () => {
     `${process.env.NEXT_PUBLIC_APP_API_SERVICE_BASE_URL}/api/about-us`
   );
   const value = await res.json();
-  console.log(value);
+
   return {
-    props: { about: value.data as AboutUsType },
+    props: { about: value.data.attributes.aboutUsData as AboutUsType },
   };
 };
 export default AboutPage;

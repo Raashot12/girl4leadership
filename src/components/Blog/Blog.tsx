@@ -148,6 +148,8 @@ const Blog = ({ article }: { article: Article[] }) => {
                                   borderRadius: '50%',
                                   height: '45px !important',
                                   width: '45px !important',
+                                  boxShadow:
+                                    'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
                                 },
                               }}
                             />
@@ -200,6 +202,8 @@ const Blog = ({ article }: { article: Article[] }) => {
                           '& .mantine-Image-image': {
                             borderRadius: '7px',
                             height: '225px !important',
+                            boxShadow:
+                              'rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px',
                           },
                         }}
                       />
@@ -252,6 +256,8 @@ const Blog = ({ article }: { article: Article[] }) => {
                                 borderRadius: '50%',
                                 height: '45px !important',
                                 width: '45px !important',
+                                boxShadow:
+                                  'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
                               },
                             }}
                           />

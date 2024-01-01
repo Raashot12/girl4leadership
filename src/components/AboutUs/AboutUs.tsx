@@ -4,6 +4,7 @@ import { IconArrowForward } from '@tabler/icons';
 import Animation from 'components/Shared/Animation/AnimationWrapper';
 import React from 'react';
 import Link from 'next/link';
+import { AboutUsType } from 'types/merchSection';
 
 export const container = {
   hidden: { opacity: 0 },
@@ -39,7 +40,7 @@ export const child = {
   },
 };
 const text = 'Who We Are';
-const AboutUs = () => {
+const AboutUs = ({ about }: { about: AboutUsType }) => {
   return (
     <Box>
       <Box mt={77}>
@@ -106,7 +107,6 @@ const AboutUs = () => {
                 <IconArrowForward />
 
                 <Text
-                  component="a"
                   sx={{
                     cursor: 'pointer',
                     color: 'white',
@@ -143,60 +143,9 @@ const AboutUs = () => {
                         fw={300}
                         lh={'24px'}
                         sx={{ width: '100%', maxWidth: '600px' }}
-                      >
-                        We are an inspiring Non Governmnetal Oragnization
-                        dedicated to empowering girls and women by increasing
-                        their leadership skills. <br></br>
-                        <br></br>Our mission is to inspire a generation of
-                        female leaders through impactful projects and advocacy
-                        programs. We firmly believe in creating an equal world
-                        that not only recognizes but actively encourages girls
-                        to become leaders and influential decision-makers.{' '}
-                        <br></br> <br></br> We offer leadership training
-                        workshops, mentoring programs, and networking
-                        opportunities to help girlsand women build their
-                        knowledge, skills, and connections. <br></br>
-                        <br></br> Our programs cover a wide range of domains,
-                        including &nbsp;
-                        <Text component="a" fw={600}>
-                          education, entrepreneurship, science, technology,
-                          arts, and social activism.
-                        </Text>
-                      </Text>
+                        dangerouslySetInnerHTML={{ __html: about?.content }}
+                      ></Text>
                     </Box>
-                    {/* <Box>
-                      <Text fz={16} fw={300} lh={'24px'}>
-                        <Text fw={600} component="span">
-                          1.1 Mission
-                        </Text>
-                        : Our mission is to build a generation of women and
-                        girls who can steer up leadership positions at different
-                        levels of life with our mantra as ‘building the next
-                        generation of female leaders.
-                      </Text>
-                      <Text mt={10} fz={16} fw={300} lh={'24px'}>
-                        <Text fw={600} component="span">
-                          1.2 Vision
-                        </Text>
-                        : Our vision is to see a Nigeria that provides an
-                        environment that enables women and girls to thrive
-                        without any form of gender limitations or hindrances.
-                      </Text>
-                      <Text mt={10} fz={16} fw={300} lh={'24px'}>
-                        <Text fw={600} component="span">
-                          1.3 Nature of our Activities
-                        </Text>
-                        : As a social community that wants to positively
-                        influence our environment, our programs are
-                        gender-centric with special emphasis on the promotion of
-                        the welfare of the girl-child and women. We believe that
-                        gender equality is central to development and thus, we
-                        champion Goal 5 (Achieving gender equality and the
-                        empowerment of women) of the sustainable development
-                        goals as a catalyst for the achievement of the 17
-                        Sustainable Development Goals by 2030.
-                      </Text>
-                    </Box> */}
                   </Box>
                 </Animation>
               </Grid.Col>
@@ -234,19 +183,15 @@ const AboutUs = () => {
             </Grid>
             <Box>
               <Text fw={600} fz={16} mt={25}>
-                Summary
+                {about.summary.title}
               </Text>
             </Box>
-            <Text fz={16} fw={300} lh={'24px'}>
-              We work on projects and programs that are targetted at addressing
-              the challenges of women and girls which hinders them from
-              maximizing their potential.
-            </Text>
-            <Text fz={16} fw={300} lh={'24px'}>
-              Girls 4 Leadership Initiative (G4L) imbibes a culture of inclusion
-              which allows us to engage boys and men in our programs and
-              projects.
-            </Text>
+            <Text
+              fz={16}
+              fw={300}
+              lh={'24px'}
+              dangerouslySetInnerHTML={{ __html: about.summary?.content }}
+            ></Text>
           </Box>
         </Container>
       </Box>

@@ -20,35 +20,46 @@ import {
 } from '@tabler/icons';
 import { motion } from 'framer-motion';
 import { container, child } from 'components/AboutUs/AboutUs';
-import Link from 'next/link';
 import React, { useState } from 'react';
 import { FaExpandAlt } from 'react-icons/fa';
 import { CustomizedModalPreviewer, GridWrapper } from 'styles';
 import CloseIcon from 'components/Icons/CloseIcon';
 import PreviousArrow from 'components/Icons/PreviousArrow';
 import NextArrow from 'components/Icons/NextArrow';
-import { data } from './data';
+import { useRouter } from 'next/router';
+import { useLocalStorage } from '@mantine/hooks';
 
 const text = 'Image Gallery';
-const Galleries = () => {
+const routes = {
+  query: {
+    gallery: 'image',
+  },
+};
+const Galleries = ({
+  galleryData,
+}: {
+  galleryData: {
+    id: number;
+    imageURL: string;
+  }[];
+}) => {
   const [showMore, setShowMore] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
   const { colorScheme } = useMantineColorScheme();
-  const [visibleImages, setVisibleImages] = useState(data.slice(0, 8));
-  const [selectedImg, setSelectedImage] = useState<{
-    id: number;
-    imageURL: string;
-  }>({ id: 1, imageURL: '' });
-  const [openModal, setOpenModal] = useState(false);
-
+  const [visibleImages, setVisibleImages] = useState(galleryData?.slice(0, 8));
+  const [selectedImg, setSelectedImage] = useLocalStorage({
+    key: 'image-page',
+    defaultValue: { id: 1, imageURL: '' },
+  });
+  const router = useRouter();
   const handleShowMore = () => {
-    setVisibleImages(data.slice(0, visibleImages.length - 1 + 8));
-    if (data.length - 1 === visibleImages.length) {
+    setVisibleImages(galleryData.slice(0, visibleImages.length - 1 + 8));
+    if (galleryData.length - 1 === visibleImages.length) {
       setShowMore(true);
     }
   };
   const imageToPreiview = (id: number) => {
-    data.forEach((item) => {
+    galleryData?.forEach((item) => {
       if (item.id === id) {
         setSelectedImage(item);
       }
@@ -91,16 +102,20 @@ const Galleries = () => {
   };
 
   const handleImageClickedOpenModal = (id: number) => {
-    setOpenModal(true);
+    router.push({
+      query: {
+        gallery: 'image',
+      },
+    });
     imageToPreiview(id);
   };
 
   const handleShowLess = () => {
-    setVisibleImages(data.slice(0, 8));
+    setVisibleImages(galleryData.slice(0, 8));
     setShowMore(false);
     window.scrollTo({ top: 359, left: 0, behavior: 'smooth' });
   };
-
+  const isQueryAvailable = Object.keys(router.query).length !== 0;
   const renderImages = () => {
     return visibleImages.map((value) => (
       <Box key={value.id} className="card-container">
@@ -170,21 +185,21 @@ const Galleries = () => {
                 </motion.div>
               </Box>
               <Flex justify={'center'} align={'center'} columnGap={16} fz={14}>
-                <Link href={'/'}>
-                  <Text
-                    component="div"
-                    sx={{
-                      cursor: 'pointer',
-                      color: 'white',
-                      ':hover': {
-                        color: '#E16247',
-                        fontWeight: 500,
-                      },
-                    }}
-                  >
-                    Home
-                  </Text>
-                </Link>
+                <Text
+                  onClick={() => router.push('/')}
+                  component="div"
+                  sx={{
+                    cursor: 'pointer',
+                    color: 'white',
+                    ':hover': {
+                      color: '#E16247',
+                      fontWeight: 500,
+                    },
+                  }}
+                >
+                  Home
+                </Text>
+
                 <IconArrowForward />
                 <Text
                   component="div"
@@ -207,7 +222,7 @@ const Galleries = () => {
           <Box py={{ base: 40, md: 90 }}>
             <GridWrapper>{renderImages()}</GridWrapper>
             <Flex align={'center'} justify={'center'} mt={{ base: 30, sm: 40 }}>
-              {!showMore && data.length > 8 && (
+              {!showMore && galleryData.length > 8 && (
                 <Button
                   onClick={handleShowMore}
                   sx={{
@@ -254,11 +269,14 @@ const Galleries = () => {
         </Container>
       </Box>
       <CustomizedModalPreviewer
-        opened={openModal}
+        opened={
+          isQueryAvailable && router.query.gallery === routes.query.gallery
+        }
         onWheel={handleWheel}
-        onClose={() => setOpenModal(false)}
+        onClose={() => {
+          router.push({ query: {} });
+        }}
         fullScreen
-        // title={}
         withCloseButton={false}
       >
         <Flex align={'center'} justify={'space-between'} w={'100%'}>
@@ -281,7 +299,7 @@ const Galleries = () => {
           </Flex>
           <CloseIcon
             onclick={() => {
-              setOpenModal(false);
+              router.push({ query: {} });
               setZoomLevel(1);
             }}
           />

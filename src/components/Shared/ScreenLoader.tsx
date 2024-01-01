@@ -1,4 +1,8 @@
-import { Loader, MantineNumberSize } from '@mantine/core';
+import {
+  Loader,
+  MantineNumberSize,
+  useMantineColorScheme,
+} from '@mantine/core';
 import styled from '@emotion/styled';
 
 const Wrapper = styled.div<{ bg: string }>`
@@ -19,8 +23,9 @@ export const LoaderAnimation = ({
 }: {
   size?: MantineNumberSize;
 }) => {
+  const { colorScheme } = useMantineColorScheme();
   return (
-    <Wrapper bg={'#fffff'}>
+    <Wrapper bg={colorScheme !== 'dark' ? '#ffff' : '#000'}>
       <Loader size={size} variant="bars" color="#E25D24" />
     </Wrapper>
   );

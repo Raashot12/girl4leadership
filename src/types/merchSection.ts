@@ -300,3 +300,7 @@ export type AboutUsType = {
     content: string;
   };
 };
+export type GalleryDataTypes = {
+  id: number;
+  imageURL: string;
+}[];
