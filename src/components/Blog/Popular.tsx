@@ -117,6 +117,7 @@ function Popular({ article }: { article: Article[] }) {
                     marginBottom: 30,
                     borderRadius: 7,
                     verticalAlign: 'middle',
+                    objectFit: 'cover',
                   }}
                 />
                 <Box w={'100%'}>

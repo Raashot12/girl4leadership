@@ -1,13 +1,66 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { Box, Container, Flex, Modal, Stack, Text } from '@mantine/core';
+import {
+  Box,
+  Button,
+  Collapse,
+  Container,
+  Flex,
+  Grid,
+  Group,
+  Modal,
+  Stack,
+  Text,
+  TextInput,
+  Textarea,
+  useMantineColorScheme,
+} from '@mantine/core';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import styled from '@emotion/styled';
+import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 import Girls4leadershipLogo from 'components/Icons/Girls4leadershipLogo';
 import IconModalClose from 'components/Icons/IconModalClose';
+import axios, { AxiosError } from 'axios';
+import { IconCopy, IconSend } from '@tabler/icons';
+import { validateForErrors } from 'util/validation';
+import IconDonate from 'components/Icons/IconDonate';
+import { child, container } from 'components/AboutUs/AboutUs';
+import IconBankTransfer from 'components/Icons/IconBankTransfer';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import Image from 'next/image';
 
+const text = 'Donate';
+
+const payMethods = [
+  {
+    id: 1,
+    gatewayName: 'Bank transfer',
+    subtitle: 'Pay via Bank transfer',
+    icon: <IconBankTransfer />,
+  },
+];
+const PaymentGatewayContainer = styled.div<{ isActive: boolean }>`
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border: ${(props) =>
+    props.isActive ? `2px dotted #FF8B00` : `2px dotted #DFE2E9`};
+  border-radius: 10px;
+  box-shadow: ${(props) =>
+    props.isActive ? `0px 6px 20px 0px rgba(11, 12, 125, 0.12)` : `none`};
+  background: #ffffff;
+  width: 100%;
+  margin-bottom: 19px;
+  cursor: pointer;
+  &:hover {
+    border: 2px dotted #ff8b00;
+    box-shadow: 0px 6px 20px rgba(11, 12, 125, 0.12);
+  }
+  flex-wrap: wrap;
+  margin-top: 12px;
+`;
 const HeroSection = ({
   title,
   mainTitle,
@@ -23,7 +76,84 @@ const HeroSection = ({
   buttonTextTwo: string;
 }) => {
   const router = useRouter();
-  const [openModal, setOpenModal] = useState(false);
+  const [activePayment, setActivePayment] = useState(0);
+  const { colorScheme } = useMantineColorScheme();
+  const [contact, setContact] = useState({
+    fullName: '',
+    email: '',
+    message: '',
+  });
+  const [errors, setErrors] = useState({
+    fullName: '',
+    email: '',
+    message: '',
+  });
+  const [isCopied, setIsCopied] = useState(false);
+
+  const [isSubmitting, setIsubmitting] = useState(false);
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setContact({
+      ...contact,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleCopy = () => {
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000); // Reset copy status after 2 seconds
+  };
+  const isActive = (activeTextId: number) => activeTextId === activePayment;
+  const handleClick = (arg: number) => {
+    setActivePayment(arg);
+  };
+  const isQueryAvailable = Object.keys(router.query).length !== 0;
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    if (Object.keys(validateForErrors(contact, setErrors)).length === 0) {
+      setIsubmitting(true);
+      e.preventDefault();
+      const baseId = 'appYi5UJUgW3d1yGc';
+      const tableName = 'Donation';
+
+      const endpoint = `https://api.airtable.com/v0/${baseId}/${tableName}`;
+      const headers = {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
+        'Content-Type': 'application/json',
+      };
+      const serializedData = {
+        FullName: contact.fullName,
+        Email: contact.email,
+        Message: contact.message,
+      };
+      try {
+        const response = await axios.post(
+          endpoint,
+          { fields: serializedData },
+          { headers }
+        );
+
+        if (response.status === 200) {
+          Swal.fire(
+            'Submitted Successfully!',
+            'You clicked the button!',
+            'success'
+          );
+          setIsubmitting(false);
+          setContact({
+            fullName: '',
+            email: '',
+            message: '',
+          });
+        }
+      } catch (error) {
+        const axiosError = error as AxiosError;
+        Swal.fire(`${axiosError.message}`, 'You clicked the button!', 'error');
+        setIsubmitting(false);
+      }
+    }
+  };
 
   return (
     <>
@@ -92,7 +222,13 @@ const HeroSection = ({
                   <BtnMain
                     component="a"
                     sx={{ zIndex: 1 }}
-                    onClick={() => setOpenModal(true)}
+                    onClick={() => {
+                      router.push({
+                        query: {
+                          donate: 'form',
+                        },
+                      });
+                    }}
                   >
                     {buttonTextOne}
                   </BtnMain>
@@ -111,8 +247,10 @@ const HeroSection = ({
       </Box>
 
       <ReformedModal
-        opened={openModal}
-        onClose={() => setOpenModal(false)}
+        opened={isQueryAvailable && router.query.donate === 'form'}
+        onClose={() => {
+          router.push({ query: {} });
+        }}
         fullScreen
         withCloseButton={false}
         title={
@@ -122,29 +260,202 @@ const HeroSection = ({
               align={'center'}
               sx={{ width: '100%' }}
             >
-              <Girls4leadershipLogo />
-              <IconModalClose onclick={() => setOpenModal(false)} />
+              <Box sx={{ visibility: 'hidden' }}>
+                <Girls4leadershipLogo />
+              </Box>
+              <IconModalClose
+                onclick={() => {
+                  router.push({ query: {} });
+                }}
+              />
             </Flex>
           </Container>
         }
       >
         <Container size={'xl'}>
-          <Text
-            fw={800}
-            m={0}
-            ta="center"
-            tt={'uppercase'}
-            fs={'italic'}
-            fz={{ base: '16px', lg: '18px' }}
-          >
-            Donation form
-          </Text>
+          <Group>
+            <Text
+              fw={800}
+              m={0}
+              ta="center"
+              tt={'uppercase'}
+              fs={'italic'}
+              fz={{ base: '16px', lg: '18px' }}
+              color={colorScheme === 'dark' ? 'white' : '#051438'}
+            >
+              <motion.div
+                variants={container}
+                initial="hidden"
+                animate="visible"
+              >
+                {Array.from(text).map((letter, index) => (
+                  <motion.span variants={child} key={index}>
+                    {letter === ' ' ? '\u00A0' : letter}
+                  </motion.span>
+                ))}
+              </motion.div>
+            </Text>
+
+            <IconDonate />
+          </Group>
           <Box mt={20}>
-            <Stack mt={20} fw={600} spacing={20}>
-              <Box>Transfer to: 0301030...</Box>
-              <Box>Bank Name: Access Bank Plc</Box>
-              <Box>Account Name: Girls4Leadership</Box>
-            </Stack>
+            <Box component="form" pb={50}>
+              <Grid gutter={25}>
+                <Grid.Col sm={6}>
+                  <TextInput
+                    withAsterisk
+                    placeholder="Full Name"
+                    name={'fullName'}
+                    onChange={handleChange}
+                    error={errors?.fullName}
+                    value={contact.fullName}
+                    sx={{
+                      '&.mantine-Input-input:focus-within': {
+                        borderColor: '#aeadad',
+                      },
+                      '& .mantine-Input-input:focus': {
+                        borderColor: '#c4c4c4',
+                      },
+                      '& .mantine-Input-input': {
+                        background: colorScheme === 'dark' ? '#242629' : 'none',
+                        color: colorScheme === 'dark' ? '#c4c4c4' : '#051438',
+                        fontWeight: 400,
+                      },
+                    }}
+                  ></TextInput>
+                </Grid.Col>
+                <Grid.Col sm={6}>
+                  <TextInput
+                    withAsterisk
+                    placeholder="Email"
+                    name={'email'}
+                    error={errors?.email}
+                    onChange={handleChange}
+                    value={contact.email}
+                    sx={{
+                      '&.mantine-Input-input:focus-within': {
+                        borderColor: '#aeadad',
+                      },
+                      '& .mantine-Input-input:focus': {
+                        borderColor: '#c4c4c4',
+                      },
+                      '& .mantine-Input-input': {
+                        background: colorScheme === 'dark' ? '#242629' : 'none',
+                        color: colorScheme === 'dark' ? '#c4c4c4' : '#051438',
+                        fontWeight: 400,
+                      },
+                    }}
+                  ></TextInput>
+                </Grid.Col>
+                <Grid.Col>
+                  <Textarea
+                    placeholder="Type message"
+                    name="message"
+                    value={contact.message}
+                    error={errors?.message}
+                    onChange={handleChange}
+                    sx={{
+                      '& .mantine-Textarea-input': {
+                        height: 78,
+                      },
+                      '& .mantine-Input-input:focus': {
+                        borderColor: '#aeadad',
+                      },
+                      '& .mantine-Input-input': {
+                        background: colorScheme === 'dark' ? '#242629' : 'none',
+                        color: colorScheme === 'dark' ? '#c4c4c4' : '#051438',
+                        fontWeight: 400,
+                      },
+                    }}
+                  />
+                </Grid.Col>
+                <Grid.Col
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Button
+                    onClick={handleFormSubmit}
+                    loading={isSubmitting}
+                    sx={{
+                      '&.mantine-Button-root': {
+                        background: '#E25D24',
+                        height: 40,
+                      },
+                      '& .mantine-Button-label': {
+                        fontSize: 16,
+                        fontWeight: 600,
+                      },
+                      borderRadius: '10px',
+                    }}
+                    rightIcon={
+                      <IconSend style={{ cursor: 'pointer' }} size={16} />
+                    }
+                  >
+                    Send
+                  </Button>
+                </Grid.Col>
+              </Grid>
+            </Box>
+            <Text fw={600}>Choose payment method</Text>
+            {payMethods.map((value) => {
+              return (
+                <PaymentGatewayContainer
+                  isActive={isActive(value.id)}
+                  key={value.id}
+                  onClick={() => handleClick(value.id)}
+                >
+                  <Group spacing={12}>
+                    {value.icon}
+                    <Stack spacing={0}>
+                      <Box
+                        sx={{
+                          color: colorScheme === 'dark' ? '#C1C2C5' : '#051438',
+                          fontWeight: 500,
+                        }}
+                      >
+                        {value.gatewayName}
+                      </Box>
+                      <Box fz={13} color={'#677597'} fw={400}>
+                        {value.subtitle}
+                      </Box>
+                    </Stack>
+                  </Group>
+                </PaymentGatewayContainer>
+              );
+            })}
+            <Collapse in={activePayment === 1}>
+              <Group align="center">
+                <Image
+                  src="https://res.cloudinary.com/drhgdrlef/image/upload/v1704186880/GTBank-plc-Logo-web2_czldzb.jpg"
+                  alt="logo"
+                  width={'55'}
+                  height={'55'}
+                />
+                <Stack spacing={2}>
+                  <Text fw={800}>Account Name: Girls 4 Leadership</Text>
+                  <Group>
+                    <Text fw={500}>Account Number: 0213189533</Text>
+                    <CopyToClipboard text={'0213189533'} onCopy={handleCopy}>
+                      {!isCopied ? (
+                        <Flex
+                          align={'center'}
+                          justify={'center'}
+                          sx={{ cursor: 'pointer' }}
+                          onCopy={handleCopy}
+                        >
+                          <IconCopy />
+                        </Flex>
+                      ) : (
+                        <Text fw={500}>{'Copied!'}</Text>
+                      )}
+                    </CopyToClipboard>
+                  </Group>
+                </Stack>
+              </Group>
+            </Collapse>
           </Box>
         </Container>
       </ReformedModal>

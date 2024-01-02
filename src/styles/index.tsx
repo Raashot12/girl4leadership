@@ -10,6 +10,7 @@ import {
   Flex,
   MantineNumberSize,
   Modal,
+  BoxProps,
 } from '@mantine/core';
 import React from 'react';
 import styled from '@emotion/styled';
@@ -395,5 +396,59 @@ export const CustomTwoSlider = styled(Swiper)`
   }
   @media (max-width: 768px) {
     height: 850px !important;
+  }
+`;
+export const WrapperBox = styled(Box)<BoxProps>`
+  .mySwiper {
+    margin-top: 30px;
+  }
+  img {
+    width: 100%;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    --swiper-theme-color: #c1cad1 !important;
+    font-size: '18px';
+  }
+
+  .mySwiper2 {
+    height: 66%;
+    width: 100%;
+    margin-bottom: 5%;
+  }
+
+  .mySwiper {
+    height: 20%;
+  }
+
+  .swiper-slide {
+    background-size: cover;
+    background-position: 50%;
+  }
+
+  .mySwiper .swiper-slide-thumb-active {
+    border-bottom: 3px solid #000 !important;
+    padding-bottom: 15px;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 767px) {
+    .swiper-slide img {
+      max-width: 100%;
+    }
+  }
+
+  .mantine-Paper-root {
+    z-index: 999 !important;
+  }
+  .swiper {
+    z-index: 0 !important;
   }
 `;

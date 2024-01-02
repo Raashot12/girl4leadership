@@ -1,115 +1,80 @@
-/* eslint-disable no-useless-return */
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @next/next/no-img-element */
-import React, { useState } from 'react';
-import {
-  Box,
-  Button,
-  Container,
-  Divider,
-  Flex,
-  Grid,
-  Group,
-  Input,
-  Rating,
-  Text,
-} from '@mantine/core';
-// Import Swiper React components
-import { SwiperSlide, Swiper } from 'swiper/react';
-
-// Import Swiper styles
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable no-unsafe-optional-chaining */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-extra-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-// import required modules
+import React, { useState, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode, Navigation, Thumbs } from 'swiper';
-import { IconCheck, IconCircleCheck, IconHeart } from '@tabler/icons';
-import { FaFacebookF, FaGoogle, FaPinterestP, FaTwitter } from 'react-icons/fa';
-import styled from '@emotion/styled';
-import { labels } from './staticData';
+import { FaFacebookF, FaPinterestP } from 'react-icons/fa';
+import { AiOutlineTwitter, AiOutlineGoogle } from 'react-icons/ai';
+import {
+  Box,
+  Container,
+  Grid,
+  Text,
+  Rating,
+  Button,
+  createStyles,
+  Flex,
+  Input,
+} from '@mantine/core';
+import { IconCircleCheck, IconHeart } from '@tabler/icons';
+import Image from 'next/image';
+import { WrapperBox } from 'styles';
 
-const GridWrapper = styled(Grid)`
-  .swiper {
-    width: 100%;
-    height: 100%;
-  }
+type ProductDeatils = {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  thumbnail: string;
+  images: string[];
+};
 
-  .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-
-    /* Center slide text vertically */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  body {
-    background: #000;
-    color: #000;
-  }
-
-  .swiper {
-    width: 100%;
-    height: 300px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .swiper-slide {
-    background-size: cover;
-    background-position: center;
-  }
-
-  .mySwiper2 {
-    height: 80%;
-    width: 100%;
-  }
-
-  .mySwiper {
-    height: 20%;
-    box-sizing: border-box;
-    padding: 10px 0;
-  }
-
-  .mySwiper .swiper-slide {
-    width: 25%;
-    height: 100%;
-    opacity: 0.4;
-  }
-
-  .mySwiper .swiper-slide-thumb-active {
-    opacity: 1;
-  }
-
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-const ProductDetails = () => {
+const Product = ({
+  title,
+  images,
+  category,
+  description,
+  rating,
+  price,
+}: ProductDeatils): JSX.Element => {
+  const { classes } = useStyles();
   const [thumbsSwiper, setThumbsSwiper] = useState<any>();
-  const [qty, setQty] = useState(1);
+  const [qty, setQty] = useState<number>(1);
+  const [swiperItems, setSwiperItems] = useState<string[]>([]);
+
+  useEffect(() => {
+    setSwiperItems(images);
+  }, []);
+
   return (
-    <Box mt={97}>
-      <Container size={'xl'}>
-        <GridWrapper gutter={50}>
+    <WrapperBox sx={{ background: '#fff' }}>
+      <Container size="xl">
+        <Grid
+          sx={{
+            margin: '30px 0',
+            '@media (max-width: 767px)': {
+              margin: '25px 0',
+            },
+          }}
+        >
           <Grid.Col md={6}>
             <Swiper
               spaceBetween={10}
-              navigation={true}
+              navigation
               thumbs={{
                 swiper:
                   thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
@@ -117,396 +82,337 @@ const ProductDetails = () => {
               modules={[FreeMode, Navigation, Thumbs]}
               className="mySwiper2"
             >
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-              </SwiperSlide>
+              {swiperItems?.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <Image
+                    src={item}
+                    width={600}
+                    height={650}
+                    alt="Product Image"
+                  />
+                </SwiperSlide>
+              ))}
             </Swiper>
-            <Box py={40}>
-              <Swiper
-                onSwiper={setThumbsSwiper}
-                spaceBetween={10}
-                slidesPerView={4}
-                freeMode={true}
-                watchSlidesProgress={true}
-                modules={[FreeMode, Navigation, Thumbs]}
-                className="mySwiper"
-              >
-                <SwiperSlide>
-                  <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+
+            <Swiper
+              onSwiper={setThumbsSwiper}
+              spaceBetween={10}
+              slidesPerView={4}
+              freeMode
+              watchSlidesProgress
+              modules={[FreeMode, Navigation, Thumbs]}
+              className="mySwiper"
+            >
+              {swiperItems.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <Image
+                    src={item}
+                    width={118.5}
+                    height={170}
+                    alt="Product Image"
+                  />
                 </SwiperSlide>
-                <SwiperSlide>
-                  <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-                </SwiperSlide>
-              </Swiper>
-            </Box>
+              ))}
+            </Swiper>
           </Grid.Col>
-          <Grid.Col md={6}>
-            <Text component="a" sx={{ fontWeight: 400 }} fz={14}>
-              Home
-            </Text>
-            <Text
-              mt={10}
-              mb={10}
-              sx={{
-                fontSize: '36px',
-                lineHeight: 1.3,
-                fontWeight: 600,
-                '@media (max-width:767px)': {
-                  fontSize: '18px',
-                },
-              }}
-            >
-              Flared Sleeve Blouse
-            </Text>
-            <Divider />
-            <Text
-              sx={{
-                margin: '20px 0',
-                fontSize: '24px',
-                fontWeight: 600,
-                '@media (max-width:767px)': { margin: '5px 0' },
-              }}
-            >
-              $54
-            </Text>
-            <Box
-              sx={{
-                display: 'flex',
-                '@media (max-width: 767px)': {
-                  flexDirection: 'column',
-                },
-              }}
-            >
-              <Box
-                sx={{
-                  width: '100px',
-                  borderRight: '1px solid #8b99a3',
-                  display: 'flex',
-                  '@media (max-width:767px)': {
-                    borderRight: 'none',
-                  },
-                }}
-              >
+          <Grid.Col
+            md={6}
+            sx={{
+              paddingLeft: '32px',
+              '@media (max-width: 767px)': { paddingLeft: '0' },
+            }}
+          >
+            <Text className={classes.home}>Home</Text>
+            <Text className={classes.title}>{title}</Text>
+            <Text sx={{ fontSize: '25px' }}>${price}</Text>
+            <Box className={classes.stockWrap}>
+              <Box className={classes.stockSub}>
                 <IconCircleCheck style={{ color: '#8aba56' }} />
-                <Text
-                  sx={{
-                    marginLeft: '10px',
-                  }}
-                >
-                  In Stock
-                </Text>
+                <Text sx={{ color: '#c1cad1' }}>In Stock</Text>
               </Box>
-              <Box sx={{ display: 'flex', marginLeft: '10px' }}>
-                <Rating defaultValue={2} />
-                <Text
-                  sx={{
-                    marginLeft: '10px',
-                    '@media (max-width: 767px)': {
-                      marginLeft: '10px',
-                    },
-                  }}
-                >
-                  Write a Review?
-                </Text>
+              <Box className={classes.ratings}>
+                <Rating value={rating} />
+
+                <Text>(1) Write a Review?</Text>
               </Box>
             </Box>
-            <Text
-              sx={{
-                margin: '16px 0',
-                lineHeight: 1.4,
-                color: '#8b99a3',
-              }}
-            >
+            <Box className={classes.text}>
               This amazing dress is sure to make you stand out from the crowd.
               Intricately designed, this stylish number is an idiosyncratic
               piece. Team it with a pair of heels or boots and minimal
               accessories for a sassy look.
-            </Text>
-            <Divider />
-            <Box sx={{ marginTop: '18px' }}>
-              <Text>Color</Text>
-              <Group spacing={10} mb={16}>
-                {['white', 'yellow'].map((itemColor, index) => (
-                  <Flex
-                    align={'center'}
-                    justify={'center'}
-                    key={index}
-                    sx={{
-                      width: '25px',
-                      height: '25px',
-                      background: itemColor,
-                      borderRadius: '50%',
-                      marginTop: '14px',
-                      cursor: 'pointer',
-                      border: itemColor === 'white' ? '1px solid #999' : 'none',
-                    }}
-                  >
-                    <IconCheck
-                      size={12}
-                      color={itemColor ? 'black' : 'green'}
-                      display={index === 0 ? 'block' : 'none'}
-                    />
-                  </Flex>
-                ))}
-              </Group>
             </Box>
+
+            {/* <Text sx={{ padding: '20px 0' }}>Size</Text>
+            <Box sx={{ display: 'flex', columnGap: '20px' }}>
+              {productItem?.size.map((item) => (
+                <TextInput
+                  key={item}
+                  value={item}
+                  readOnly
+                  className={classes.sizeBox}
+                />
+              ))}
+            </Box> */}
             <Box sx={{ padding: '10px 0' }}>
-              <Text>Size</Text>
-              <Flex
-                sx={{ margin: '12px 0' }}
-                wrap={'nowrap'}
-                align={'center'}
-                columnGap={10}
-              >
-                {['S', 'M', 'L'].map((itemSize: string, index) => (
-                  <Text
-                    component="span"
-                    key={index}
-                    py={8}
-                    px={10}
-                    sx={{
-                      border: '1px solid #999',
-                      color: '#8b99a3',
-                      cursor: 'pointer',
-                      fontSize: 14,
-                      fontWeight: 300,
-                      whiteSpace: 'nowrap',
-                      ':hover': {
-                        background: '#ffff',
-                      },
-                      '@media (max-width: 767px)': {
-                        marginBottom: '15px',
-                      },
-                    }}
+              <Text sx={{ padding: '20px 0' }}>Qty</Text>
+              <Flex align={'center'}>
+                <Input
+                  value={qty}
+                  onChange={(e) => setQty(parseInt(e.target.value, 10))}
+                  styles={{
+                    input: {
+                      width: '60px',
+                      height: '60px',
+                      borderRadius: '0',
+                      textAlign: 'center',
+                    },
+                  }}
+                />
+                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                  <Button
+                    variant="outline"
+                    onClick={() => setQty(qty + 1)}
+                    className={classes.btnStyle}
                   >
-                    {itemSize}
-                  </Text>
-                ))}
-              </Flex>
-            </Box>
-            <Box sx={{ padding: '10px 0 20px' }}>
-              <Text sx={{ marginBottom: '10px' }}>Qty</Text>
-              <Flex
-                sx={{
-                  columnGap: '20px',
-                  '@media (max-width: 767px)': {
-                    columnGap: '10px',
-                  },
-                }}
-              >
-                <Flex align={'center'}>
-                  <Input
-                    value={qty}
-                    onChange={(e) => setQty(parseInt(e.target.value, 10))}
-                    styles={{
-                      input: {
-                        width: '60px',
-                        height: '60px',
-                        borderRadius: '0',
-                        textAlign: 'center',
-                      },
+                    +
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      if (qty > 1) {
+                        setQty(qty - 1);
+                      }
                     }}
-                  />
-                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <Button
-                      variant="outline"
-                      onClick={() => setQty(qty + 1)}
-                      sx={{
-                        width: '30px',
-                        height: '30px',
-                        borderRadius: '0',
-                        padding: '0',
-                        border: '1px solid #dbe1e6',
-                        color: 'gray',
-                        ':hover': {
-                          background: 'none',
-                        },
-                        '.mantine-Button-label': {
-                          fontWeight: 400,
-                          fontSize: '1.2rem',
-                        },
-                      }}
-                    >
-                      +
-                    </Button>
-                    <Button
-                      variant="outline"
-                      onClick={() => {
-                        if (qty > 1) {
-                          setQty(qty - 1);
-                          return;
-                        }
-                      }}
-                      sx={{
-                        width: '30px',
-                        height: '30px',
-                        borderRadius: '0',
-                        padding: '0',
-                        border: '1px solid #dbe1e6',
-                        color: 'gray',
-                        ':hover': {
-                          background: 'none',
-                        },
-                        '.mantine-Button-label': {
-                          fontWeight: 400,
-                          fontSize: '1.2rem',
-                        },
-                      }}
-                    >
-                      -
-                    </Button>
-                  </Box>
-                </Flex>
-                <Button
-                  fullWidth
-                  sx={{
-                    height: '60px',
-                    background: 'black',
-                    ':hover': {
-                      background: '#E25D24',
-                      transition: 'all ease-in-out 0.5s',
-                    },
-                    '.mantine-Button-label': {
-                      fontSize: '14px',
-                      padding: '0',
-                    },
-                  }}
-                >
-                  ADD TO CART
-                </Button>
-              </Flex>
-              <Box
-                sx={{
-                  marginTop: '20px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  '@media (max-width: 1266px)': {
-                    flexDirection: 'column',
-                  },
-                }}
-              >
-                <Text
-                  sx={{
-                    borderRight: '1px solid #808080',
-                    width: 'fit-content',
-                    padding: ' 10px',
-                    display: 'flex',
-                    marginRight: '30px',
-                    '@media (max-width:1266px)': {
-                      borderRight: 'none',
-                    },
-                  }}
-                >
-                  Add to Wishlist
-                  <IconHeart style={{ marginLeft: '10px', color: '#E25D24' }} />
-                </Text>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Text sx={{ marginRight: '20px' }}>Share this</Text>
-                  <Group spacing={20}>
-                    <FaFacebookF />
-                    <FaTwitter />
-                    <FaGoogle />
-                    <FaPinterestP />
-                  </Group>
+                    className={classes.btnStyle}
+                  >
+                    -
+                  </Button>
                 </Box>
+              </Flex>
+              <Button
+                variant="filled"
+                fullWidth
+                className={classes.cta}
+                mt={20}
+              >
+                ADD TO CART
+              </Button>
+            </Box>
+
+            <Box className={classes.wishlistWrap}>
+              <Box className={classes.wishlist}>
+                <Text>Add to Wishlist</Text>
+                <IconHeart size={20} style={{ color: '#eb5a46' }} />
+              </Box>
+              <Box className={classes.share}>
+                <Text>Share this</Text>
+                <FaFacebookF style={{ fontSize: '20px' }} />
+                <AiOutlineTwitter style={{ fontSize: '20px' }} />
+                <AiOutlineGoogle style={{ fontSize: '20px' }} />
+                <FaPinterestP style={{ fontSize: '20px' }} />
               </Box>
             </Box>
-            <Divider />
-            <Box sx={{ padding: '20px 0' }}>
-              <Text sx={{ marginBottom: '20px' }}>SKU: N/A</Text>
-              <Flex align={'center'} columnGap={10} mb={20}>
-                <Text>Categories: </Text>
+            <Flex gap={20} align={'center'} wrap={'wrap'} mt={30}>
+              <Text>SKU: N/A</Text>
+              <Flex align={'center'} columnGap={10}>
+                <Text component="span" fw={500}>
+                  Categories:{' '}
+                </Text>
                 <Box
                   sx={{ display: 'flex', columnGap: '10px', cursor: 'pointer' }}
                 >
-                  {['Dress', 'Woman'].map((modalCategory) => (
-                    <Text key={modalCategory}>{modalCategory}</Text>
-                  ))}
+                  <Text>{category}</Text>
                 </Box>
               </Flex>
-
-              <Flex sx={{ alignItems: 'center' }} columnGap={15}>
-                Tags:
-                <Box sx={{ display: 'flex', columnGap: '10px' }}>
-                  {labels.map((label) => (
-                    <Text
-                      key={label}
-                      sx={{
-                        padding: '7px 14px',
-                        width: 'fit-content',
-                        borderRadius: '25px',
-                        cursor: 'pointer',
-                        color: '#8b99a3',
-                        background: '#F2F4F6',
-                        ':hover': {
-                          background: '#8b99a3',
-                          transition: 'all ease-in-out 0.5s',
-                          color: 'white',
-                        },
-                      }}
-                    >
-                      {label}
-                    </Text>
-                  ))}
-                </Box>
-              </Flex>
-            </Box>
+            </Flex>
           </Grid.Col>
-        </GridWrapper>
+        </Grid>
+        <Text className={classes.titles}>DESCRIPTION</Text>
+        <Text className={classes.texts}>{description}</Text>
       </Container>
-    </Box>
+    </WrapperBox>
   );
 };
 
-export default ProductDetails;
+export default Product;
+
+const useStyles = createStyles((theme) => ({
+  home: {
+    color: '#c1cad1',
+    lineHeight: 1.3,
+  },
+  title: {
+    borderBottom: '1px solid #c1cad1',
+    padding: '15px 0 20px',
+    marginBottom: '30px',
+    fontSize: '36px',
+    lineHeight: 1.2,
+    fontWeight: 600,
+    margin: '0.67em 0',
+  },
+  stockWrap: {
+    padding: '30px 0',
+    display: 'flex',
+    flexWrap: 'wrap',
+
+    [theme.fn.smallerThan('md')]: {
+      padding: '0',
+    },
+  },
+  stockSub: {
+    display: 'flex',
+    alignItems: 'center',
+    columnGap: '15px',
+    padding: '10px 20px 10px 0',
+    borderRight: '1px solid #8b99a3',
+
+    [theme.fn.smallerThan('md')]: {
+      borderRight: 'none',
+    },
+  },
+  ratings: {
+    display: 'flex',
+    alignItems: 'center',
+    columnGap: '10px',
+    padding: '15px 0 15px 20px',
+
+    [theme.fn.smallerThan('md')]: {
+      paddingLeft: '0',
+    },
+  },
+  text: {
+    color: '#c1cad1',
+    paddingBottom: '30px',
+    borderBottom: '1px solid #c1cad1',
+  },
+  colorBox: {
+    width: '30px',
+    height: '30px',
+    borderRadius: '50%',
+    display: 'grid',
+    placeContent: 'center',
+    cursor: 'pointer',
+  },
+  sizeBox: {
+    width: '50px',
+    cursor: 'pointer',
+    '& .mantine-Input-input': {
+      padding: '0 2px',
+      textAlign: 'center',
+      height: '50px',
+    },
+  },
+  qtyWrap: {
+    display: 'flex',
+    alignItems: 'center',
+    columnGap: '20px',
+  },
+  input: {
+    width: '60px',
+    borderRadius: '0',
+    '& .mantine-Input-input': {
+      height: '60px',
+      padding: '0',
+      textAlign: 'center',
+    },
+  },
+  symbolWrap: {
+    width: '30px',
+    height: '30px',
+    borderRadius: '0',
+    padding: '0',
+    textAlign: 'center',
+    fontSize: '18px',
+    '& .mantine-1wpc1xj': {
+      borderColor: '#8b99a3',
+    },
+  },
+  cta: {
+    background: '#000',
+    height: '60px',
+    ':hover': {
+      background: '#000',
+    },
+  },
+  wishlistWrap: {
+    padding: '25px 0 40px ',
+    display: 'flex',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    borderBottom: '1px solid #8b99a3',
+
+    [theme.fn.smallerThan('sm')]: {
+      paddingBottom: '10px',
+    },
+  },
+  wishlist: {
+    padding: '5px 0 5px',
+    marginRight: '20px',
+    borderBottom: '1px dashed #000',
+    display: 'flex',
+    alignItems: 'center',
+    columnGap: '10px',
+    width: 'fit-content',
+  },
+  share: {
+    display: 'flex',
+    alignItems: 'center',
+    columnGap: '15px',
+    padding: '5px 0 5px 20px',
+    borderLeft: '1px solid #8b99a3',
+
+    [theme.fn.smallerThan('sm')]: {
+      borderLeft: 'none',
+      paddingLeft: '0',
+    },
+  },
+  sku: {
+    display: 'flex',
+    columnGap: '10px',
+    paddingBottom: '20px',
+    color: '#8b99a3',
+  },
+  tagWrap: {
+    display: 'flex',
+    columnGap: '10px',
+    color: '#8b99a3',
+  },
+  tag: {
+    ':hover': {
+      background: '#F2F4F6',
+      padding: '5px 10px',
+      color: 'white',
+    },
+  },
+  titles: {
+    paddingBottom: '5px',
+    fontWeight: 600,
+  },
+  texts: {
+    color: '#8b99a3',
+    margin: '5px 0',
+    lineHeight: 2,
+  },
+  content: {
+    color: '#8b99a3',
+    margin: '5px 0',
+    lineHeight: 2,
+    paddingBottom: '15px',
+  },
+  btnStyle: {
+    width: '30px',
+    height: '30px',
+    borderRadius: '0',
+    padding: '0',
+    border: '1px solid #dbe1e6',
+    color: 'gray',
+    ':hover': {
+      background: 'none',
+    },
+    '.mantine-Button-label': {
+      fontWeight: 400,
+      fontSize: '1.2rem',
+    },
+  },
+}));
