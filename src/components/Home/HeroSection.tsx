@@ -412,7 +412,7 @@ const HeroSection = ({
                     <Stack spacing={0}>
                       <Box
                         sx={{
-                          color: colorScheme === 'dark' ? '#C1C2C5' : '#051438',
+                          color: colorScheme === 'dark' ? '#051438' : '#C1C2C5',
                           fontWeight: 500,
                         }}
                       >

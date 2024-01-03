@@ -87,6 +87,7 @@ function NavbarMenu() {
   const { colorScheme } = useMantineColorScheme();
   const [scrollHeight, setScrollHeight] = useState(0);
   const [scrollDirection, setScrollDirection] = useState('');
+  const [searchActive, setSearchActive] = useState(false);
   const [opened, setOpened] = useState(false);
   const { pathname } = useRouter();
   useEffect(() => {
@@ -183,7 +184,12 @@ function NavbarMenu() {
                   },
                 }}
               >
-                <IconSearch fontWeight={400} cursor={'pointer'} size="18" />
+                <IconSearch
+                  fontWeight={400}
+                  cursor={'pointer'}
+                  size="18"
+                  onClick={() => setSearchActive(true)}
+                />
               </ActionIcon>
               <ActionIcon
                 size="lg"
@@ -281,6 +287,9 @@ function NavbarMenu() {
               <ColorSchemeToggle />
             </Group>
           </Box>
+        </Collapse>
+        <Collapse in={searchActive}>
+          <Box sx={{ borderTop: '2px dashed red' }}>hello</Box>
         </Collapse>
       </HeaderComponent>
     </>

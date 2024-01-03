@@ -24,22 +24,23 @@ import {
   createStyles,
   Flex,
   Input,
+  useMantineColorScheme,
 } from '@mantine/core';
 import { IconCircleCheck, IconHeart } from '@tabler/icons';
 import Image from 'next/image';
 import { WrapperBox } from 'styles';
 
 type ProductDeatils = {
-  id: number;
+  id?: number;
   title: string;
   description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
+  price: string;
+  discountPercentage: string;
+  rating: string;
+  stock?: number;
+  brand?: string;
   category: string;
-  thumbnail: string;
+  thumbnail?: string;
   images: string[];
 };
 
@@ -55,13 +56,19 @@ const Product = ({
   const [thumbsSwiper, setThumbsSwiper] = useState<any>();
   const [qty, setQty] = useState<number>(1);
   const [swiperItems, setSwiperItems] = useState<string[]>([]);
-
+  const { colorScheme } = useMantineColorScheme();
   useEffect(() => {
     setSwiperItems(images);
   }, []);
 
   return (
-    <WrapperBox sx={{ background: '#fff' }}>
+    <WrapperBox
+      pt={140}
+      sx={{
+        backgroundColor: colorScheme === 'dark' ? '#A1B1E' : 'white',
+        borderTop: colorScheme === 'dark' ? '2px dashed gray' : 'none',
+      }}
+    >
       <Container size="xl">
         <Grid
           sx={{
@@ -131,7 +138,7 @@ const Product = ({
                 <Text sx={{ color: '#c1cad1' }}>In Stock</Text>
               </Box>
               <Box className={classes.ratings}>
-                <Rating value={rating} />
+                <Rating value={Number(rating)} />
 
                 <Text>(1) Write a Review?</Text>
               </Box>
@@ -329,10 +336,10 @@ const useStyles = createStyles((theme) => ({
     },
   },
   cta: {
-    background: '#000',
+    background: '#E25D24',
     height: '60px',
     ':hover': {
-      background: '#000',
+      background: '#E25D24',
     },
   },
   wishlistWrap: {

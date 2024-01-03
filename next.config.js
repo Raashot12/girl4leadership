@@ -12,7 +12,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['res.cloudinary.com', 'preview.colorlib.com',],
+    domains: ['res.cloudinary.com', 'preview.colorlib.com', 'th.bing.com'],
   },
 };
 
