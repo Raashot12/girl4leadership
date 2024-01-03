@@ -298,8 +298,8 @@ const HeroSection = ({
 
             <IconDonate />
           </Group>
-          <Box mt={20}>
-            <Box component="form" pb={50}>
+          <Box mt={10}>
+            <Box component="form" pb={30}>
               <Grid gutter={25}>
                 <Grid.Col sm={6}>
                   <TextInput
@@ -427,7 +427,7 @@ const HeroSection = ({
               );
             })}
             <Collapse in={activePayment === 1}>
-              <Group align="center">
+              <Group align="center" noWrap>
                 <Image
                   src="https://res.cloudinary.com/drhgdrlef/image/upload/v1704186880/GTBank-plc-Logo-web2_czldzb.jpg"
                   alt="logo"
@@ -436,7 +436,7 @@ const HeroSection = ({
                 />
                 <Stack spacing={2}>
                   <Text fw={800}>Account Name: Girls 4 Leadership</Text>
-                  <Group>
+                  <Group noWrap>
                     <Text fw={500}>Account Number: 0213189533</Text>
                     <CopyToClipboard text={'0213189533'} onCopy={handleCopy}>
                       {!isCopied ? (
@@ -519,16 +519,19 @@ export const ReformedModal = styled(Modal)<{ colorMode?: string }>`
       width: 99%;
     }
   }
+  & .mantine-Container-root {
+    padding: 0;
+  }
   & .mantine-Modal-title {
     width: 100%;
-    margin-right: 4px;
   }
   & .mantine-Modal-header {
+    padding-left: 0;
     padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 20;
   }
   & .mantine-Modal-body {
-    max-height: calc(100vh - 210px);
-
     ::-webkit-scrollbar {
       display: none;
     }
