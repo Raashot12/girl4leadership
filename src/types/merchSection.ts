@@ -23,12 +23,12 @@ export interface CategoriesType {
 export type Article = {
   id: number;
   attributes: {
-    Title: string;
-    Category: string;
-    Summary: string;
-    IsFeatured: boolean;
-    TimeStamp: string;
-    Content: Array<{
+    title: string;
+    category: string;
+    summary: string;
+    isFeatured: boolean;
+    timeStamp: string;
+    content: Array<{
       type: string;
       children: Array<{
         text: string;
@@ -39,8 +39,8 @@ export type Article = {
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
-    Popular: boolean | null;
-    Thumbnail: {
+    popular: boolean | null;
+    thumbnail: {
       data: {
         id: number;
         attributes: {
@@ -116,8 +116,8 @@ export type Article = {
       data: {
         id: number;
         attributes: {
-          Name: string;
-          Occupation: string;
+          name: string;
+          occupation: string;
           createdAt: string;
           updatedAt: string;
           publishedAt: string;
@@ -125,7 +125,7 @@ export type Article = {
         };
       };
     };
-    FeaturedImage: {
+    featuredImage: {
       data: {
         id: number;
         attributes: {

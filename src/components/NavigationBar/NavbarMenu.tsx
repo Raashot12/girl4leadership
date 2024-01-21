@@ -13,11 +13,21 @@ import {
   Burger,
   Stack,
   Collapse,
+  TextInput,
+  Tabs,
+  Text,
 } from '@mantine/core';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-import { IconSearch, IconShoppingCart } from '@tabler/icons';
+import {
+  IconBucket,
+  IconNews,
+  IconSearch,
+  IconShoppingCart,
+} from '@tabler/icons';
+import IconCloseModal from 'components/Icons/IconCloseModal';
+import { useClickOutside } from '@mantine/hooks';
 import Logo from '../../images/logo.png';
 import { ColorSchemeToggle } from '../ColorSchemeToggle';
 
@@ -88,6 +98,7 @@ function NavbarMenu() {
   const [scrollHeight, setScrollHeight] = useState(0);
   const [scrollDirection, setScrollDirection] = useState('');
   const [searchActive, setSearchActive] = useState(false);
+  const ref = useClickOutside(() => setSearchActive(false));
   const [opened, setOpened] = useState(false);
   const { pathname } = useRouter();
   useEffect(() => {
@@ -177,25 +188,21 @@ function NavbarMenu() {
                 size="lg"
                 variant="outline"
                 color={colorScheme === 'dark' ? 'brand.7' : 'brand.3'}
-                title="Toggle color scheme"
+                title="Search"
+                onClick={() => setSearchActive(true)}
                 sx={{
                   '&:hover': {
                     background: 'none',
                   },
                 }}
               >
-                <IconSearch
-                  fontWeight={400}
-                  cursor={'pointer'}
-                  size="18"
-                  onClick={() => setSearchActive(true)}
-                />
+                <IconSearch fontWeight={400} cursor={'pointer'} size="18" />
               </ActionIcon>
               <ActionIcon
                 size="lg"
                 variant="outline"
                 color={colorScheme === 'dark' ? 'brand.7' : 'brand.3'}
-                title="Toggle color scheme"
+                title="Shopping cart"
                 sx={{
                   '&:hover': {
                     background: 'none',
@@ -222,74 +229,161 @@ function NavbarMenu() {
             />
           </Flex>
         </Container>
-        <Collapse in={opened} pt={20}>
+        <Collapse in={opened} pt={!searchActive ? 20 : 5}>
+          {searchActive ? (
+            <>{null}</>
+          ) : (
+            <Box
+              sx={{
+                '@media (min-width:901px)': {
+                  display: 'none',
+                },
+                width: '100%',
+              }}
+              px={16}
+            >
+              <Stack spacing={25}>
+                {navMenu.map((value) => {
+                  return (
+                    <React.Fragment key={value.id}>
+                      <MobileLink
+                        href={value.route}
+                        className={
+                          pathname === '/' && value.route === '/'
+                            ? 'active'
+                            : pathname.includes(value.route) &&
+                              value.route !== '/'
+                            ? 'active'
+                            : 'not-active'
+                        }
+                      >
+                        {value.pathName}
+                      </MobileLink>
+                    </React.Fragment>
+                  );
+                })}
+              </Stack>
+              <Group spacing={18} mt={20} pb={20}>
+                <ActionIcon
+                  size="lg"
+                  variant="outline"
+                  color={colorScheme === 'dark' ? 'brand.7' : 'brand.3'}
+                  title="Search"
+                  sx={{
+                    '&:hover': {
+                      background: 'none',
+                    },
+                  }}
+                  onClick={() => setSearchActive(true)}
+                >
+                  <IconSearch fontWeight={400} cursor={'pointer'} size="18" />
+                </ActionIcon>
+                <ActionIcon
+                  size="lg"
+                  variant="outline"
+                  color={colorScheme === 'dark' ? 'brand.7' : 'brand.3'}
+                  title="ShoppingCart"
+                  sx={{
+                    '&:hover': {
+                      background: 'none',
+                    },
+                  }}
+                >
+                  <IconShoppingCart
+                    fontWeight={400}
+                    cursor={'pointer'}
+                    size="18"
+                  />
+                </ActionIcon>
+                <ColorSchemeToggle />
+              </Group>
+            </Box>
+          )}
+        </Collapse>
+        <Collapse in={searchActive} ref={ref}>
           <Box
             sx={{
-              '@media (min-width:901px)': {
-                display: 'none',
-              },
-              width: '100%',
+              borderTop: '2px dashed red',
+              position: 'relative',
             }}
+            pt={50}
             px={16}
+            pb={50}
           >
-            <Stack spacing={25}>
-              {navMenu.map((value) => {
-                return (
-                  <React.Fragment key={value.id}>
-                    <MobileLink
-                      href={value.route}
-                      className={
-                        pathname === '/' && value.route === '/'
-                          ? 'active'
-                          : pathname.includes(value.route) &&
-                            value.route !== '/'
-                          ? 'active'
-                          : 'not-active'
-                      }
-                    >
-                      {value.pathName}
-                    </MobileLink>
-                  </React.Fragment>
-                );
-              })}
-            </Stack>
-            <Group spacing={18} mt={20} pb={20}>
-              <ActionIcon
-                size="lg"
-                variant="outline"
-                color={colorScheme === 'dark' ? 'brand.7' : 'brand.3'}
-                title="Toggle color scheme"
+            <Flex
+              pos={'absolute'}
+              right={{ base: 16, sm: 30, md: 50 }}
+              top={20}
+            >
+              <ActionIcon onClick={() => setSearchActive(false)} title="Close">
+                <IconCloseModal size={14} fill="#E25D24" />
+              </ActionIcon>
+            </Flex>
+            <Container>
+              <Text fw={500} mb={16}>
+                Select search categories
+              </Text>
+              <Tabs
+                color="red"
+                variant="pills"
+                defaultValue="blog"
                 sx={{
-                  '&:hover': {
-                    background: 'none',
+                  '.mantine-Tabs-tab[data-active]': {
+                    backgroundColor: '#E25D24',
+                    ':hover': {
+                      background: '#E25D24',
+                    },
                   },
                 }}
               >
-                <IconSearch fontWeight={400} cursor={'pointer'} size="18" />
-              </ActionIcon>
-              <ActionIcon
-                size="lg"
-                variant="outline"
-                color={colorScheme === 'dark' ? 'brand.7' : 'brand.3'}
-                title="Toggle color scheme"
-                sx={{
-                  '&:hover': {
-                    background: 'none',
-                  },
-                }}
-              >
-                <IconShoppingCart
-                  fontWeight={400}
-                  cursor={'pointer'}
-                  size="18"
-                />
-              </ActionIcon>
-              <ColorSchemeToggle />
-            </Group>
+                <Tabs.List>
+                  <Tabs.Tab value="blog" icon={<IconNews size="0.8rem" />}>
+                    Blog
+                  </Tabs.Tab>
+                  <Tabs.Tab
+                    value="merch-collection"
+                    icon={<IconBucket size="0.8rem" />}
+                  >
+                    Merch collection
+                  </Tabs.Tab>
+                </Tabs.List>
+
+                <Tabs.Panel value="blog" pt="xs">
+                  <TextInput
+                    sx={{
+                      '& .mantine-Input-input': {
+                        borderRight: 'none',
+                        borderLeft: 'none',
+                        borderTop: 'none',
+                        borderRadius: 0,
+                      },
+                    }}
+                    placeholder="Enter Search Keyword for Blogs"
+                    rightSection={
+                      <IconSearch size={18} style={{ cursor: 'pointer' }} />
+                    }
+                  />
+                </Tabs.Panel>
+
+                <Tabs.Panel value="merch-collection" pt="xs">
+                  <TextInput
+                    sx={{
+                      '& .mantine-Input-input': {
+                        borderRight: 'none',
+                        borderLeft: 'none',
+                        borderTop: 'none',
+                        borderRadius: 0,
+                      },
+                    }}
+                    placeholder="Enter Search Keyword for Merch collection"
+                    rightSection={
+                      <IconSearch size={18} style={{ cursor: 'pointer' }} />
+                    }
+                  />
+                </Tabs.Panel>
+              </Tabs>
+            </Container>
           </Box>
-        </Collapse>
-        <Collapse in={searchActive}>
-          <Box sx={{ borderTop: '2px dashed red' }}>hello</Box>
         </Collapse>
       </HeaderComponent>
     </>

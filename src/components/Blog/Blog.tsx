@@ -14,7 +14,7 @@ import Popular from './Popular';
 const Blog = ({ article }: { article: Article[] }) => {
   const autoplay = useRef(Autoplay({ delay: 2000 }));
   const trendingPost = article?.filter(
-    (value) => value?.attributes?.IsFeatured
+    (value) => value?.attributes?.isFeatured
   );
   const { slicedData, pagination, prevPage, nextPage, changePage } =
     usePagination({
@@ -76,11 +76,11 @@ const Blog = ({ article }: { article: Article[] }) => {
                         <Box>
                           <img
                             src={
-                              value?.attributes?.FeaturedImage?.data?.attributes
+                              value?.attributes?.featuredImage?.data?.attributes
                                 ?.url
                             }
                             alt={
-                              value?.attributes?.FeaturedImage?.data?.attributes
+                              value?.attributes?.featuredImage?.data?.attributes
                                 ?.url
                             }
                             loading="eager"
@@ -95,7 +95,7 @@ const Blog = ({ article }: { article: Article[] }) => {
                         <Box>
                           <Text>
                             <span style={{ fontWeight: '600' }}>
-                              {value.attributes?.Category}
+                              {value.attributes?.category}
                             </span>{' '}
                             <span
                               style={{
@@ -117,7 +117,7 @@ const Blog = ({ article }: { article: Article[] }) => {
                             mt={15}
                             sx={{ whiteSpace: 'normal' }}
                           >
-                            {value?.attributes?.Title}
+                            {value?.attributes?.title}
                           </Text>
                           <Text
                             fz={14}
@@ -127,7 +127,7 @@ const Blog = ({ article }: { article: Article[] }) => {
                             color="#999"
                             sx={{ whiteSpace: 'normal' }}
                           >
-                            {value.attributes?.Summary}
+                            {value.attributes?.summary}
                           </Text>
                           <Flex
                             mt={20}
@@ -157,13 +157,13 @@ const Blog = ({ article }: { article: Article[] }) => {
                               <Text fw={700} lh={1}>
                                 {
                                   value?.attributes?.author?.data?.attributes
-                                    ?.Name
+                                    ?.name
                                 }
                               </Text>
                               <Text fw={14} color="#888">
                                 {
                                   value?.attributes?.author?.data?.attributes
-                                    ?.Occupation
+                                    ?.occupation
                                 }
                               </Text>
                             </Box>
@@ -191,11 +191,11 @@ const Blog = ({ article }: { article: Article[] }) => {
                     <Link href={`/blog/${value?.attributes?.slug}`}>
                       <Image
                         src={
-                          value?.attributes?.FeaturedImage?.data?.attributes
+                          value?.attributes?.featuredImage?.data?.attributes
                             ?.url
                         }
                         alt={
-                          value?.attributes?.FeaturedImage?.data?.attributes
+                          value?.attributes?.featuredImage?.data?.attributes
                             ?.url
                         }
                         sx={{
@@ -232,7 +232,7 @@ const Blog = ({ article }: { article: Article[] }) => {
                           mt={14}
                           sx={{ whiteSpace: 'normal' }}
                         >
-                          {value.attributes?.Title}
+                          {value.attributes?.title}
                         </Text>
                         <Text
                           fz={14}
@@ -242,7 +242,7 @@ const Blog = ({ article }: { article: Article[] }) => {
                           color="#999"
                           sx={{ whiteSpace: 'normal' }}
                         >
-                          {value.attributes?.Summary?.substring(0, 88)}
+                          {value.attributes?.summary?.substring(0, 88)}
                         </Text>
                         <Group mt={20}>
                           <Image

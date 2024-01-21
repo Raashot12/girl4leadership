@@ -44,7 +44,7 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
                 singleBlogPost?.attributes?.author?.data?.attributes?.profileUrl
               }
               alt={
-                singleBlogPost?.attributes?.FeaturedImage?.data?.attributes?.url
+                singleBlogPost?.attributes?.featuredImage?.data?.attributes?.url
               }
               sx={{
                 '& .mantine-Image-image': {
@@ -64,7 +64,7 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
               color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
               fw={500}
             >
-              {singleBlogPost?.attributes?.author?.data?.attributes?.Name}
+              {singleBlogPost?.attributes?.author?.data?.attributes?.name}
             </Text>{' '}
             <Group
               align="center"
@@ -102,7 +102,7 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
               fw={700}
               color={colorScheme === 'dark' ? '#c4c4c4' : '#051438'}
             >
-              {singleBlogPost?.attributes?.Title}
+              {singleBlogPost?.attributes?.title}
             </Text>{' '}
             <Text
               sx={{ textAlign: 'center' }}
@@ -111,15 +111,15 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
               lh={'1.5'}
               fw={300}
             >
-              {singleBlogPost?.attributes?.Summary}
+              {singleBlogPost?.attributes?.summary}
             </Text>
           </Box>
           <Image
             src={
-              singleBlogPost?.attributes?.FeaturedImage?.data?.attributes?.url
+              singleBlogPost?.attributes?.featuredImage?.data?.attributes?.url
             }
             alt={
-              singleBlogPost?.attributes?.FeaturedImage?.data?.attributes?.url
+              singleBlogPost?.attributes?.featuredImage?.data?.attributes?.url
             }
             sx={{
               '& .mantine-Image-image': {
@@ -141,7 +141,7 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
           >
             <BlocksRenderer
               content={
-                singleBlogPost?.attributes?.Content as unknown as RootNode[]
+                singleBlogPost?.attributes?.content as unknown as RootNode[]
               }
             />
           </Box>
@@ -164,7 +164,7 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
           <Flex mt={20} align="center" columnGap={20}>
             <FacebookShareButton
               url={`https://girls4leadership.org/blog/${singleBlogPost?.attributes?.slug}`}
-              title={singleBlogPost?.attributes?.Title}
+              title={singleBlogPost?.attributes?.title}
               quote={'フェイスブックはタイトルが付けれるようです'}
               hashtag={'#hashtag'}
               style={{ display: 'flex', alignItems: 'center' }}
@@ -172,7 +172,7 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
               <BsFacebook cursor={'pointer'} size={20} />
             </FacebookShareButton>
             <TwitterShareButton
-              title={singleBlogPost?.attributes?.Title}
+              title={singleBlogPost?.attributes?.title}
               url={`https://girls4leadership.org/blog/${singleBlogPost?.attributes?.slug}`}
               hashtags={['girls4leadership', 'news']}
               style={{ display: 'flex', alignItems: 'center' }}
@@ -180,7 +180,7 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
               <BsTwitter cursor={'pointer'} size={20} />
             </TwitterShareButton>
             <LinkedinShareButton
-              title={singleBlogPost?.attributes?.Title}
+              title={singleBlogPost?.attributes?.title}
               url={`https://girls4leadership.org/blog/${singleBlogPost?.attributes?.slug}`}
               style={{ display: 'flex', alignItems: 'center' }}
             >
@@ -199,7 +199,7 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
           }}
         >
           <DisComments
-            postTitle={singleBlogPost?.attributes?.Title}
+            postTitle={singleBlogPost?.attributes?.title}
             postSlug={singleBlogPost?.attributes?.slug}
           />
         </BgColor>
