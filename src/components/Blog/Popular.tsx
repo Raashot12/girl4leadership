@@ -77,7 +77,6 @@ function Popular({ article }: { article: Article[] }) {
 
   // Importing use Router
   const router = useRouter();
-
   return (
     <Box pb={'3rem'} pt={'7rem'}>
       <Box
@@ -107,8 +106,8 @@ function Popular({ article }: { article: Article[] }) {
                 sx={{ cursor: 'pointer' }}
               >
                 <img
-                  src={value?.attributes?.FeaturedImage?.data?.attributes?.url}
-                  alt={value?.attributes?.FeaturedImage?.data?.attributes?.url}
+                  src={value?.attributes?.featuredImage?.data?.attributes?.url}
+                  alt={value?.attributes?.featuredImage?.data?.attributes?.url}
                   loading="eager"
                   style={{
                     maxWidth: '100%',
@@ -124,7 +123,7 @@ function Popular({ article }: { article: Article[] }) {
                   <Text>
                     <span style={{ fontWeight: '600' }}>
                       {' '}
-                      {value?.attributes?.Category}
+                      {value?.attributes?.category}
                     </span>{' '}
                     <span
                       style={{
@@ -146,7 +145,7 @@ function Popular({ article }: { article: Article[] }) {
                     mt={15}
                     sx={{ whiteSpace: 'normal' }}
                   >
-                    {value.attributes?.Title}
+                    {value.attributes?.title}
                   </Text>
                   <Text
                     fz={14}
@@ -156,7 +155,7 @@ function Popular({ article }: { article: Article[] }) {
                     color="#999"
                     sx={{ whiteSpace: 'normal' }}
                   >
-                    {value.attributes?.Summary?.substring(0, 88)}
+                    {value.attributes?.summary?.substring(0, 88)}
                   </Text>
                   <Group mt={20} id="blogs">
                     <Image
@@ -174,12 +173,12 @@ function Popular({ article }: { article: Article[] }) {
                     />
                     <Box>
                       <Text fw={700} lh={1}>
-                        {value?.attributes?.author?.data?.attributes?.Name}
+                        {value?.attributes?.author?.data?.attributes?.name}
                       </Text>
                       <Text fw={14} color="#888">
                         {
                           value?.attributes?.author?.data?.attributes
-                            ?.Occupation
+                            ?.occupation
                         }
                       </Text>
                     </Box>

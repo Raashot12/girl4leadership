@@ -210,7 +210,7 @@ const Blog = ({ article }: { article: Article[] }) => {
                       <Box mt={25}>
                         <Text>
                           <span style={{ fontWeight: '600' }}>
-                            {value?.attributes?.Category}
+                            {value?.attributes?.category}
                           </span>{' '}
                           <span
                             style={{
