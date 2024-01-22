@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import navReducer from './features/nav/navSlice';
-import { tokenAuthApi } from './services/tokenAuthApi';
+import { baseApi as api } from './services/baseApi';
 
 const store = configureStore({
   reducer: {
     nav: navReducer,
-    [tokenAuthApi.reducerPath]: tokenAuthApi.reducer,
+    [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(tokenAuthApi.middleware),
+    getDefaultMiddleware().concat(api.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;

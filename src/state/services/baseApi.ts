@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const apiUrl = 'http://api.plateaumed-dev.com';
-
 export const baseApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: apiUrl }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.NEXT_PUBLIC_APP_API_SERVICE_BASE_URL,
+  }),
   endpoints: () => ({}),
 });

@@ -134,7 +134,7 @@ function Popular({ article }: { article: Article[] }) {
                     >
                       --
                       {dayjs(value.attributes?.publishedAt).format(
-                        'YYYY-MM-DD HH:mm'
+                        'YYYY-MM-DD HH:mma'
                       )}
                     </span>
                   </Text>
@@ -155,7 +155,7 @@ function Popular({ article }: { article: Article[] }) {
                     color="#999"
                     sx={{ whiteSpace: 'normal' }}
                   >
-                    {value.attributes?.summary?.substring(0, 88)}
+                    {value.attributes?.summary?.substring(0, 150)}...
                   </Text>
                   <Group mt={20} id="blogs">
                     <Image

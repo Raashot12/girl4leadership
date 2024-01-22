@@ -12,6 +12,7 @@ type ArticleProps = {
 const BlogInformation: React.FC<ArticleProps> = ({ article }) => {
   if (article.length === 0) return null;
   const singleBlogPost = article[0];
+  console.log(article);
   return (
     <Layout pageTitle="Blog Details">
       <Container size="md">

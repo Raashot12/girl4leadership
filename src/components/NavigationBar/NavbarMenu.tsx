@@ -16,20 +16,29 @@ import {
   TextInput,
   Tabs,
   Text,
+  Center,
+  Alert,
+  Loader,
+  ScrollArea,
+  Button,
 } from '@mantine/core';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import {
+  IconAlertCircle,
   IconBucket,
   IconNews,
+  IconRefresh,
   IconSearch,
   IconShoppingCart,
 } from '@tabler/icons';
 import IconCloseModal from 'components/Icons/IconCloseModal';
-import { useClickOutside } from '@mantine/hooks';
+import { useClickOutside, useDebouncedValue } from '@mantine/hooks';
+import { useApiServicesAppBlogSearchApiQuery } from 'state/services/blogsApi';
 import Logo from '../../images/logo.png';
 import { ColorSchemeToggle } from '../ColorSchemeToggle';
+import BlogSearchItem from './BlogSearchItem';
 
 const HeaderComponent = styled(Box as any)<{
   scrollDirection: string;
@@ -97,10 +106,23 @@ function NavbarMenu() {
   const { colorScheme } = useMantineColorScheme();
   const [scrollHeight, setScrollHeight] = useState(0);
   const [scrollDirection, setScrollDirection] = useState('');
+  const [blogSearch, setBlogSearch] = useState('');
+  const [debounceQuery] = useDebouncedValue(blogSearch, 1000);
   const [searchActive, setSearchActive] = useState(false);
   const ref = useClickOutside(() => setSearchActive(false));
   const [opened, setOpened] = useState(false);
   const { pathname } = useRouter();
+
+  const { data, isLoading, isError, refetch } =
+    useApiServicesAppBlogSearchApiQuery(
+      {
+        searchParam: debounceQuery,
+      },
+      {
+        skip: debounceQuery.trim() === '',
+      }
+    );
+  console.log(data);
   useEffect(() => {
     const scrollableElement = document.body;
     function checkScrollDirectionIsUp(event: any) {
@@ -191,6 +213,7 @@ function NavbarMenu() {
                 title="Search"
                 onClick={() => setSearchActive(true)}
                 sx={{
+                  visibility: searchActive ? 'hidden' : 'visible',
                   '&:hover': {
                     background: 'none',
                   },
@@ -198,6 +221,7 @@ function NavbarMenu() {
               >
                 <IconSearch fontWeight={400} cursor={'pointer'} size="18" />
               </ActionIcon>
+
               <ActionIcon
                 size="lg"
                 variant="outline"
@@ -270,6 +294,7 @@ function NavbarMenu() {
                   color={colorScheme === 'dark' ? 'brand.7' : 'brand.3'}
                   title="Search"
                   sx={{
+                    visibility: searchActive ? 'hidden' : 'visible',
                     '&:hover': {
                       background: 'none',
                     },
@@ -306,9 +331,9 @@ function NavbarMenu() {
               borderTop: '2px dashed red',
               position: 'relative',
             }}
-            pt={50}
+            pt={30}
             px={16}
-            pb={50}
+            pb={30}
           >
             <Flex
               pos={'absolute'}
@@ -349,24 +374,102 @@ function NavbarMenu() {
                 </Tabs.List>
 
                 <Tabs.Panel value="blog" pt="xs">
-                  <TextInput
-                    sx={{
-                      '& .mantine-Input-input': {
-                        borderRight: 'none',
-                        borderLeft: 'none',
-                        borderTop: 'none',
-                        borderRadius: 0,
-                      },
-                    }}
-                    placeholder="Enter Search Keyword for Blogs"
-                    rightSection={
-                      <IconSearch size={18} style={{ cursor: 'pointer' }} />
-                    }
-                  />
+                  <>
+                    <TextInput
+                      mb={20}
+                      sx={{
+                        '& .mantine-Input-input': {
+                          borderRight: 'none',
+                          borderLeft: 'none',
+                          borderTop: 'none',
+                          borderRadius: 0,
+                        },
+                      }}
+                      placeholder="Enter Search Keyword for Blog"
+                      value={blogSearch}
+                      onChange={(e) => {
+                        setBlogSearch(e.target.value);
+                      }}
+                      rightSection={
+                        <IconSearch size={18} style={{ cursor: 'pointer' }} />
+                      }
+                    />
+                    {isLoading ? (
+                      <Center>
+                        <Loader
+                          color="rgba(250, 7, 7, 1)"
+                          size="md"
+                          type="dots"
+                        />
+                      </Center>
+                    ) : isError ? (
+                      <Alert
+                        icon={<IconAlertCircle size="1rem" />}
+                        title="Error"
+                        color="red.6"
+                        variant="outline"
+                        withCloseButton
+                      >
+                        <Flex
+                          align={'center'}
+                          justify={'space-between'}
+                          columnGap={'40'}
+                        >
+                          <Text>Error querying the search for the blog</Text>
+                          <Button
+                            onClick={() => refetch()}
+                            fw={600}
+                            sx={{
+                              '&.mantine-Button-root': {
+                                background: '#E25D24',
+                                height: 30,
+                              },
+                              '& .mantine-Button-label': {
+                                fontSize: 14,
+                                fontWeight: 600,
+                              },
+                              borderRadius: '10px',
+                            }}
+                            rightIcon={<IconRefresh size={14} />}
+                          >
+                            Refetch
+                          </Button>
+                        </Flex>
+                      </Alert>
+                    ) : (
+                      <>
+                        {!isLoading && (data?.data?.length as number) <= 0 ? (
+                          <Alert
+                            icon={<IconAlertCircle size="1rem" />}
+                            title="Search"
+                            color="red.6"
+                            variant="outline"
+                            withCloseButton={true}
+                          >
+                            No result found in the database
+                          </Alert>
+                        ) : (
+                          <ScrollArea h={data ? 300 : 0}>
+                            <Stack>
+                              {data?.data?.map((value) => {
+                                return (
+                                  <BlogSearchItem
+                                    value={value}
+                                    key={value.id}
+                                  />
+                                );
+                              })}
+                            </Stack>
+                          </ScrollArea>
+                        )}
+                      </>
+                    )}
+                  </>
                 </Tabs.Panel>
 
                 <Tabs.Panel value="merch-collection" pt="xs">
                   <TextInput
+                    mb={20}
                     sx={{
                       '& .mantine-Input-input': {
                         borderRight: 'none',

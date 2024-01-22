@@ -106,7 +106,7 @@ const Blog = ({ article }: { article: Article[] }) => {
                             >
                               --
                               {dayjs(value.attributes?.publishedAt).format(
-                                'YYYY-MM-DD HH:mm'
+                                'YYYY-MM-DD HH:mma'
                               )}
                             </span>
                           </Text>
@@ -127,7 +127,7 @@ const Blog = ({ article }: { article: Article[] }) => {
                             color="#999"
                             sx={{ whiteSpace: 'normal' }}
                           >
-                            {value.attributes?.summary}
+                            {value.attributes?.summary?.substring(0, 150)}...
                           </Text>
                           <Flex
                             mt={20}
@@ -221,7 +221,7 @@ const Blog = ({ article }: { article: Article[] }) => {
                           >
                             --
                             {dayjs(value.attributes?.publishedAt).format(
-                              'YYYY-MM-DD HH:mm'
+                              'YYYY-MM-DD HH:mma'
                             )}
                           </span>
                         </Text>
@@ -242,7 +242,7 @@ const Blog = ({ article }: { article: Article[] }) => {
                           color="#999"
                           sx={{ whiteSpace: 'normal' }}
                         >
-                          {value.attributes?.summary?.substring(0, 88)}
+                          {value.attributes?.summary?.substring(0, 150)}...
                         </Text>
                         <Group mt={20}>
                           <Image

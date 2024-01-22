@@ -145,10 +145,10 @@ const UpComingEvent = ({
                   />
                 </Box>
                 <Box>
-                  <Text mb={10} fz={13} fw={500}>
+                  <Text mb={10} fz={14} fw={600}>
                     {value.title}
                   </Text>
-                  <Text fw={600} fz={16} mb={15}>
+                  <Text fw={500} fz={13} mb={15}>
                     {value.content}
                   </Text>
                   <Text fz={14} fw={300} lh={'24px'}>
