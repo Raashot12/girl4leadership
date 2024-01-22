@@ -9,8 +9,8 @@ const BlogSearchItem = ({ value }: { value: Article }) => {
   return (
     <Flex align={'flex-start'} columnGap={25} wrap={{ base: 'wrap' }}>
       <Box
-        w={{ base: '100%', sm: '12rem' }}
-        h={{ base: '9rem', sm: '12rem' }}
+        w={{ base: '100%', sm: '12rem', md: '12rem' }}
+        h={{ base: '9rem', sm: '12rem', md: '8rem' }}
         pos={'relative'}
         sx={{ overflow: 'hidden' }}
       >
@@ -27,7 +27,7 @@ const BlogSearchItem = ({ value }: { value: Article }) => {
               inset: '0px',
               width: '100%',
               boxShadow:
-                'rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px',
+                'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
             },
           }}
         />
