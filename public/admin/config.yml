@@ -1,27 +1,101 @@
 backend:
   name: git-gateway
   branch: main # Branch to update (optional; defaults to master)
-media_folder: "public/uploads" # Where media files will be stored
-public_folder: "/uploads" # Where the media files can be accesed from the server
+media_folder: 'public/uploads' # Where media files will be stored
+public_folder: '/uploads' # Where the media files can be accesed from the server
 publish_mode: editorial_workflow # For Drafts
 collections:
-  - name: "blogs"
-    label: "Blogs"
-    description: "Blog posts"
-    folder: "content/blogs"
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}}" # Filename template, e.g., YYYY-MM-DD-title.md
+  - name: 'blogs'
+    label: 'Blogs'
+    description: 'Blog posts'
+    folder: 'content/blogs'
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}}' # Filename template, e.g., YYYY-MM-DD-title.md
     create: true
     fields:
-      - { name: title, label: Title, widget: "string" }
-      - { name: pageDescription, label: Excerpt / Page Description }
-      - {label: "Publish Date", name: "date", widget: "datetime", date_format: "DD.MM.YYYY", time_format: "HH:mm", format: "LLL"}
-      - { name: pageKeywords, label: SEO Keywords, widget: list }
+      - { name: title, label: Title, widget: 'string' }
+      - {
+          name: pageDescription,
+          label: Excerpt / Page Description,
+          required: false,
+        }
+      - {
+          label: 'Publish Date',
+          name: 'date',
+          widget: 'datetime',
+          date_format: 'DD.MM.YYYY',
+          time_format: 'HH:mm',
+          format: 'LLL',
+        }
+      - {
+          label: SEO Keywords,
+          label_singular: Tag,
+          name: pageKeywords,
+          widget: list,
+        }
       - { name: author, label: Author Name }
       - { name: profession, label: Author profession }
-      - { name: authorAvatar, label: Author Avatar, widget: "image", required: false }
-      - { name: category, label: Blog category,  required: false }
-      - { label: "Featured Image", name: "thumbnail", widget: "image", required: false }
-      - { name: contentDescription, label: Content Description mini, widget: markdown }
+      - {
+          name: authorAvatar,
+          label: Author Avatar,
+          widget: 'image',
+          required: false,
+        }
+      - { name: category, label: Blog category, required: false }
+      - {
+          label: 'Featured Image',
+          name: 'thumbnail',
+          widget: 'image',
+          required: false,
+        }
+      - {
+          name: contentDescription,
+          label: Content Description mini,
+          widget: markdown,
+        }
       - { name: tags, label: Blog Tags, widget: list, required: false }
       - { name: cover, label: Blog Cover Link, required: false }
       - { name: body, label: Body, widget: markdown }
+
+  - name: 'product'
+    label: 'Products'
+    description: 'Ecommerce product'
+    folder: 'content/products'
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}}'
+    create: true
+    fields:
+      - { name: title, label: Title, widget: 'string' }
+      - {
+          name: pageDescription,
+          label: Excerpt / Page Description,
+          required: false,
+        }
+      - {
+          label: 'Publish Date',
+          name: 'date',
+          widget: 'datetime',
+          date_format: 'DD.MM.YYYY',
+          time_format: 'HH:mm',
+          format: 'LLL',
+        }
+      - {
+          label: SEO Keywords,
+          label_singular: Tag,
+          name: pageKeywords,
+          widget: list,
+        }
+      - { name: category, label: Product category, required: false }
+      - {
+          label: 'Featured Image',
+          name: 'thumbnail',
+          widget: 'image',
+          required: false,
+        }
+      - {
+          name: contentDescription,
+          label: Content Description mini,
+          widget: markdown,
+        }
+      - { name: images, label: Product Images, widget: list, 
+          field: { name: image, label: Image, widget: image } }
+      - { name: cover, label: Product Cover Link, required: false }
+      - { name: body, label: Product details, widget: markdown }
