@@ -215,7 +215,7 @@ type ArticleProps = {
 const BlogInformation: React.FC<ArticleProps> = ({ article }) => {
   if (article.length === 0) return null;
   const singleBlogPost = article[0];
-  console.log(article);
+
   return (
     <Layout pageTitle="Blog Details">
       <Container size="md">
@@ -225,10 +225,6 @@ const BlogInformation: React.FC<ArticleProps> = ({ article }) => {
   );
 };
 export const getStaticPaths: GetStaticPaths = async () => {
-  // const res = await fetch(
-  //   `${process.env.NEXT_PUBLIC_APP_API_SERVICE_BASE_URL}/api/blogs?populate=*`
-  // );
-  // const article = await res.json();
   const articleDataSource = [articleData];
 
   const paths = articleDataSource?.map((item) => ({
@@ -242,11 +238,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps<ArticleProps> = async () => {
-  // const res = await fetch(
-  //   `${process.env.NEXT_PUBLIC_APP_API_SERVICE_BASE_URL}/api/blogs?populate=*&filters[slug][$eq]=${params?.slug}`
-  // );
-  // const article = await res.json();
-
   return {
     props: { article: articleData as unknown as Article[] },
   };

@@ -21,7 +21,6 @@ import {
   Loader,
   ScrollArea,
   Button,
-  Modal,
 } from '@mantine/core';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
