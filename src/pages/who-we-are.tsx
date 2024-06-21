@@ -8,7 +8,6 @@ type AboutUsProps = {
   about: AboutUsType;
 };
 const AboutPage: React.FC<AboutUsProps> = ({ about }) => {
-  console.log(about);
   return (
     <Layout pageTitle="Who We Are">
       <AboutUs about={about} />
@@ -22,11 +21,11 @@ export const getStaticProps: GetStaticProps<AboutUsProps> = async () => {
   // const value = await res.json();
   const aboutUsData: AboutUsType = {
     content:
-      'Welcome to our company! We are a leading provider of innovative software solutions for businesses of all sizes. Our mission is to empower our clients with cutting-edge technology and exceptional customer service.',
+      'We are an inspiring Non Governmental Organization dedicated to empowering girls and women by increasing their leadership skills.<br><br>Our mission is to inspire a generation of female leaders through impactful projects and advocacy programs. We firmly believe in creating an equal world that not only recognizes but actively encourages girls to become leaders and influential decision-makers.<br><br>We offer leadership training workshops, mentoring programs, and networking opportunities to help girls and women build their knowledge, skills, and connections.<br><br>Our programs cover a wide range of domains, including <b style="font-weight:bold">education, entrepreneurship, science, technology, arts, and social activism.</b>',
     summary: {
-      title: 'About Our Company',
+      title: 'Summary',
       content:
-        'Established in 2010, we have grown from a small startup to a renowned name in the industry. Our team of highly skilled professionals is dedicated to delivering top-notch products and services that meet the unique needs of our clients. We pride ourselves on our commitment to excellence, integrity, and customer satisfaction.',
+        'We work on projects and programs that are targetted at addressing the challenges of women and girls which hinders them from maximizing their potential.Girls 4 Leadership Initiative (G4L) imbibes a culture of inclusion which allows us to engage boys and men in our programs and projects.',
     },
   };
   return {
