@@ -3,13 +3,11 @@
 import {
   Box,
   Button,
-  Collapse,
   Container,
   Flex,
   Grid,
   Group,
   Modal,
-  Stack,
   Text,
   TextInput,
   Textarea,
@@ -23,44 +21,13 @@ import { useRouter } from 'next/router';
 import Girls4leadershipLogo from 'components/Icons/Girls4leadershipLogo';
 import IconModalClose from 'components/Icons/IconModalClose';
 import axios, { AxiosError } from 'axios';
-import { IconCopy, IconSend } from '@tabler/icons';
+import { IconSend } from '@tabler/icons';
 import { validateForErrors } from 'util/validation';
 import IconDonate from 'components/Icons/IconDonate';
 import { child, container } from 'components/AboutUs/AboutUs';
-import IconBankTransfer from 'components/Icons/IconBankTransfer';
-import CopyToClipboard from 'react-copy-to-clipboard';
-import Image from 'next/image';
 
 const text = 'Donate';
 
-const payMethods = [
-  {
-    id: 1,
-    gatewayName: 'Bank transfer',
-    subtitle: 'Pay via Bank transfer',
-    icon: <IconBankTransfer />,
-  },
-];
-const PaymentGatewayContainer = styled.div<{ isActive: boolean }>`
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 16px;
-  border: ${(props) =>
-    props.isActive ? `2px dotted #FF8B00` : `2px dotted #DFE2E9`};
-  border-radius: 10px;
-  box-shadow: ${(props) =>
-    props.isActive ? `0px 6px 20px 0px rgba(11, 12, 125, 0.12)` : `none`};
-  background: #ffffff;
-  width: 100%;
-  margin-bottom: 19px;
-  cursor: pointer;
-  &:hover {
-    border: 2px dotted #ff8b00;
-    box-shadow: 0px 6px 20px rgba(11, 12, 125, 0.12);
-  }
-  flex-wrap: wrap;
-  margin-top: 12px;
-`;
 const HeroSection = ({
   title,
   mainTitle,
@@ -76,7 +43,6 @@ const HeroSection = ({
   buttonTextTwo: string;
 }) => {
   const router = useRouter();
-  const [activePayment, setActivePayment] = useState(0);
   const { colorScheme } = useMantineColorScheme();
   const [contact, setContact] = useState({
     fullName: '',
@@ -88,7 +54,6 @@ const HeroSection = ({
     email: '',
     message: '',
   });
-  const [isCopied, setIsCopied] = useState(false);
 
   const [isSubmitting, setIsubmitting] = useState(false);
   const handleChange = (
@@ -98,16 +63,6 @@ const HeroSection = ({
       ...contact,
       [e.target.name]: e.target.value,
     });
-  };
-  const handleCopy = () => {
-    setIsCopied(true);
-    setTimeout(() => {
-      setIsCopied(false);
-    }, 2000); // Reset copy status after 2 seconds
-  };
-  const isActive = (activeTextId: number) => activeTextId === activePayment;
-  const handleClick = (arg: number) => {
-    setActivePayment(arg);
   };
   const isQueryAvailable = Object.keys(router.query).length !== 0;
   const handleFormSubmit = async (e: React.FormEvent) => {
@@ -399,7 +354,7 @@ const HeroSection = ({
                 </Grid.Col>
               </Grid>
             </Box>
-            <Text fw={600}>Choose payment method</Text>
+            {/* <Text fw={600}>Choose payment method</Text>
             {payMethods.map((value) => {
               return (
                 <PaymentGatewayContainer
@@ -425,8 +380,8 @@ const HeroSection = ({
                   </Group>
                 </PaymentGatewayContainer>
               );
-            })}
-            <Collapse in={activePayment === 1}>
+            })} */}
+            {/* <Collapse in={activePayment === 1}>
               <Group align="center" noWrap>
                 <Image
                   src="https://res.cloudinary.com/drhgdrlef/image/upload/v1704186880/GTBank-plc-Logo-web2_czldzb.jpg"
@@ -455,7 +410,7 @@ const HeroSection = ({
                   </Group>
                 </Stack>
               </Group>
-            </Collapse>
+            </Collapse> */}
           </Box>
         </Container>
       </ReformedModal>

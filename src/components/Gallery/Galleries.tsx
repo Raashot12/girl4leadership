@@ -28,6 +28,7 @@ import PreviousArrow from 'components/Icons/PreviousArrow';
 import NextArrow from 'components/Icons/NextArrow';
 import { useRouter } from 'next/router';
 import { useLocalStorage } from '@mantine/hooks';
+import { data } from './data';
 
 const text = 'Image Gallery';
 const routes = {
@@ -35,31 +36,24 @@ const routes = {
     gallery: 'image',
   },
 };
-const Galleries = ({
-  galleryData,
-}: {
-  galleryData: {
-    id: number;
-    imageURL: string;
-  }[];
-}) => {
+const Galleries = () => {
   const [showMore, setShowMore] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
   const { colorScheme } = useMantineColorScheme();
-  const [visibleImages, setVisibleImages] = useState(galleryData?.slice(0, 8));
+  const [visibleImages, setVisibleImages] = useState(data?.slice(0, 8));
   const [selectedImg, setSelectedImage] = useLocalStorage({
     key: 'image-page',
     defaultValue: { id: 1, imageURL: '' },
   });
   const router = useRouter();
   const handleShowMore = () => {
-    setVisibleImages(galleryData.slice(0, visibleImages.length - 1 + 8));
-    if (galleryData.length - 1 === visibleImages.length) {
+    setVisibleImages(data.slice(0, visibleImages.length - 1 + 8));
+    if (data.length - 1 === visibleImages.length) {
       setShowMore(true);
     }
   };
   const imageToPreiview = (id: number) => {
-    galleryData?.forEach((item) => {
+    data?.forEach((item) => {
       if (item.id === id) {
         setSelectedImage(item);
       }
@@ -111,7 +105,7 @@ const Galleries = ({
   };
 
   const handleShowLess = () => {
-    setVisibleImages(galleryData.slice(0, 8));
+    setVisibleImages(data.slice(0, 8));
     setShowMore(false);
     window.scrollTo({ top: 359, left: 0, behavior: 'smooth' });
   };
@@ -222,7 +216,7 @@ const Galleries = ({
           <Box py={{ base: 40, md: 90 }}>
             <GridWrapper>{renderImages()}</GridWrapper>
             <Flex align={'center'} justify={'center'} mt={{ base: 30, sm: 40 }}>
-              {!showMore && galleryData.length > 8 && (
+              {!showMore && data.length > 8 && (
                 <Button
                   onClick={handleShowMore}
                   sx={{
