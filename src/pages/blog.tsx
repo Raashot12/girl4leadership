@@ -25,6 +25,200 @@ import { Article } from 'types/merchSection';
 type ArticleProps = {
   article: Article[];
 };
+
+const sampleArticle: Article = {
+  id: 1,
+  attributes: {
+    title: 'Introduction to TypeScript',
+    category: 'Programming',
+    summary: 'Learn the basics of TypeScript and its benefits over JavaScript.',
+    isFeatured: true,
+    timeStamp: '2023-05-18T10:30:00.000Z',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            text: 'TypeScript is a superset of JavaScript that adds optional static typing to the language.',
+            type: 'text',
+          },
+        ],
+      },
+      {
+        type: 'heading',
+        children: [
+          {
+            text: 'Benefits of TypeScript',
+            type: 'text',
+          },
+        ],
+      },
+      // Add more content blocks as needed
+    ],
+    slug: 'introduction-to-typescript',
+    createdAt: '2023-05-15T08:00:00.000Z',
+    updatedAt: '2023-05-16T12:00:00.000Z',
+    publishedAt: '2023-05-17T00:00:00.000Z',
+    popular: true,
+    thumbnail: {
+      data: {
+        id: 1,
+        attributes: {
+          name: 'typescript-logo.png',
+          alternativeText: null,
+          caption: null,
+          width: 200,
+          height: 200,
+          formats: {
+            small: {
+              ext: '.png',
+              url: 'https://example.com/images/small/typescript-logo.png',
+              hash: 'small_hash',
+              mime: 'image/png',
+              name: 'small_typescript-logo.png',
+              path: null,
+              size: 10000,
+              width: 100,
+              height: 100,
+              provider_metadata: {
+                public_id: 'small_public_id',
+                resource_type: 'image',
+              },
+            },
+            medium: {
+              ext: '.png',
+              url: 'https://example.com/images/medium/typescript-logo.png',
+              hash: 'medium_hash',
+              mime: 'image/png',
+              name: 'medium_typescript-logo.png',
+              path: null,
+              size: 20000,
+              width: 150,
+              height: 150,
+              provider_metadata: {
+                public_id: 'medium_public_id',
+                resource_type: 'image',
+              },
+            },
+            thumbnail: {
+              ext: '.png',
+              url: 'https://example.com/images/thumbnail/typescript-logo.png',
+              hash: 'thumbnail_hash',
+              mime: 'image/png',
+              name: 'thumbnail_typescript-logo.png',
+              path: null,
+              size: 5000,
+              width: 80,
+              height: 80,
+              provider_metadata: {
+                public_id: 'thumbnail_public_id',
+                resource_type: 'image',
+              },
+            },
+          },
+          hash: 'main_hash',
+          ext: '.png',
+          mime: 'image/png',
+          size: 30000,
+          url: 'https://example.com/images/typescript-logo.png',
+          previewUrl: null,
+          provider: 'cloudinary',
+          provider_metadata: {
+            public_id: 'main_public_id',
+            resource_type: 'image',
+          },
+          createdAt: '2023-05-10T08:00:00.000Z',
+          updatedAt: '2023-05-10T08:00:00.000Z',
+        },
+      },
+    },
+    author: {
+      data: {
+        id: 1,
+        attributes: {
+          name: 'John Doe',
+          occupation: 'Software Engineer',
+          createdAt: '2023-04-01T00:00:00.000Z',
+          updatedAt: '2023-04-01T00:00:00.000Z',
+          publishedAt: '2023-04-01T00:00:00.000Z',
+          profileUrl: 'https://example.com/authors/john-doe',
+        },
+      },
+    },
+    featuredImage: {
+      data: {
+        id: 2,
+        attributes: {
+          name: 'typescript-code.png',
+          alternativeText: null,
+          caption: 'TypeScript code example',
+          width: 800,
+          height: 400,
+          formats: {
+            small: {
+              ext: '.png',
+              url: 'https://example.com/images/small/typescript-code.png',
+              hash: 'small_hash',
+              mime: 'image/png',
+              name: 'small_typescript-code.png',
+              path: null,
+              size: 20000,
+              width: 400,
+              height: 200,
+              provider_metadata: {
+                public_id: 'small_public_id',
+                resource_type: 'image',
+              },
+            },
+            medium: {
+              ext: '.png',
+              url: 'https://example.com/images/medium/typescript-code.png',
+              hash: 'medium_hash',
+              mime: 'image/png',
+              name: 'medium_typescript-code.png',
+              path: null,
+              size: 40000,
+              width: 600,
+              height: 300,
+              provider_metadata: {
+                public_id: 'medium_public_id',
+                resource_type: 'image',
+              },
+            },
+            thumbnail: {
+              ext: '.png',
+              url: 'https://example.com/images/thumbnail/typescript-code.png',
+              hash: 'thumbnail_hash',
+              mime: 'image/png',
+              name: 'thumbnail_typescript-code.png',
+              path: null,
+              size: 10000,
+              width: 200,
+              height: 100,
+              provider_metadata: {
+                public_id: 'thumbnail_public_id',
+                resource_type: 'image',
+              },
+            },
+          },
+          hash: 'main_hash',
+          ext: '.png',
+          mime: 'image/png',
+          size: 60000,
+          url: 'https://example.com/images/typescript-code.png',
+          previewUrl: null,
+          provider: 'cloudinary',
+          provider_metadata: {
+            public_id: 'main_public_id',
+            resource_type: 'image',
+          },
+          createdAt: '2023-05-10T08:00:00.000Z',
+          updatedAt: '2023-05-10T08:00:00.000Z',
+        },
+      },
+    },
+  },
+};
 const text = 'Our Blog';
 const BlogPage: React.FC<ArticleProps> = ({ article }) => {
   const addInviteSchema = z.object({
@@ -217,12 +411,12 @@ const BlogPage: React.FC<ArticleProps> = ({ article }) => {
   );
 };
 export const getStaticProps: GetStaticProps<ArticleProps> = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_API_SERVICE_BASE_URL}/api/blogs?populate=*`
-  );
-  const article = await res.json();
+  // const res = await fetch(
+  //   `${process.env.NEXT_PUBLIC_APP_API_SERVICE_BASE_URL}/api/blogs?populate=*`
+  // );
+  // const article = await res.json();
   return {
-    props: { article: article.data as Article[] },
+    props: { article: sampleArticle as unknown as Article[] },
   };
 };
 

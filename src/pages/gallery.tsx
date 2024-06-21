@@ -22,14 +22,14 @@ const GalleryPage: React.FC<GalleryProps> = ({ galleryData }) => {
   );
 };
 export const getStaticProps: GetStaticProps<GalleryProps> = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_API_SERVICE_BASE_URL}/api/gallery`
-  );
-  const value = await res.json();
+  // const res = await fetch(
+  //   `${process.env.NEXT_PUBLIC_APP_API_SERVICE_BASE_URL}/api/gallery`
+  // );
+  // const value = await res.json();
 
   return {
     props: {
-      galleryData: value.data.attributes.galleryData as GalleryDataTypes[],
+      galleryData: [] as GalleryDataTypes[],
     },
   };
 };

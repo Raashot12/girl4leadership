@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /** @type {import('next').NextConfig} */
 
-const withPWA = require( 'next-pwa' )( {
+const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
-} );
+});
 
 const nextConfig = {
   reactStrictMode: true,
@@ -16,4 +16,14 @@ const nextConfig = {
   },
 };
 
-module.exports = withPWA( nextConfig );
+module.exports = withPWA(nextConfig);
+module.exports = {
+  webpack: (cfg) => {
+    cfg.module.rules.push({
+      test: /\.md$/,
+      loader: 'frontmatter-markdown-loader',
+      options: { mode: ['react-component'] },
+    });
+    return cfg;
+  },
+};
