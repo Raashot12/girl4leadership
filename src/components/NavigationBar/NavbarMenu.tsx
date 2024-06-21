@@ -21,6 +21,7 @@ import {
   Loader,
   ScrollArea,
   Button,
+  Modal,
 } from '@mantine/core';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -106,6 +107,7 @@ function NavbarMenu() {
   const { colorScheme } = useMantineColorScheme();
   const [scrollHeight, setScrollHeight] = useState(0);
   const [scrollDirection, setScrollDirection] = useState('');
+  const [, setOpenCart] = useState(false);
   const [blogSearch, setBlogSearch] = useState('');
   const [debounceQuery] = useDebouncedValue(blogSearch, 1000);
   const [searchActive, setSearchActive] = useState(false);
@@ -122,7 +124,7 @@ function NavbarMenu() {
         skip: debounceQuery.trim() === '',
       }
     );
-  console.log(data);
+
   useEffect(() => {
     const scrollableElement = document.body;
     function checkScrollDirectionIsUp(event: any) {
@@ -313,6 +315,7 @@ function NavbarMenu() {
                       background: 'none',
                     },
                   }}
+                  onClick={() => setOpenCart(true)}
                 >
                   <IconShoppingCart
                     fontWeight={400}
@@ -489,6 +492,7 @@ function NavbarMenu() {
           </Box>
         </Collapse>
       </HeaderComponent>
+      {/* <Modal fullScreen>openCart</Modal> */}
     </>
   );
 }
