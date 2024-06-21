@@ -1,7 +1,6 @@
 backend:
   name: git-gateway
   branch: main # Branch to update (optional; defaults to master)
-<<<<<<< HEAD
 media_folder: "public/uploads" # Where media files will be stored
 public_folder: "/uploads" # Where the media files can be accesed from the server
 publish_mode: editorial_workflow # For Drafts
@@ -44,9 +43,6 @@ collections:
       - { name: tags, label: Blog Tags, widget: list, required: false }
       - { name: cover, label: Blog Cover Link, required: false }
       - { name: body, label: Body, widget: markdown }
-      
-=======
-
 media_folder: "public/uploads" # Where media files will be stored
 public_folder: "/uploads" # Where the media files can be accesed from the server
 publish_mode: editorial_workflow # For Drafts
@@ -61,4 +57,3 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime", date_format: "DD.MM.YYYY", time_format: "HH:mm", format: "LLL"}
       - {label: "Body", name: "body", widget: "markdown"}
->>>>>>> 537839e4a13cad6434588ce97bb6c0355961a3a0
