@@ -3,7 +3,7 @@ const checkGlobal = () => typeof window !== `undefined`;
 
 // This function converts dates like 2001-01-13 to 13th January, 2001
 // I guess there's a better way to do it in GatsbyJS, but I haven't figured out yet.
-const formatBlogDate = (date: Date) => {
+const formatBlogDate = (date: Date | string) => {
   const dateArr = String(date).split('');
 
   // Slice the array to break the date
@@ -95,5 +95,31 @@ const formatBlogDate = (date: Date) => {
   const fullDate = `${monthName} ${day}${daySuffix}, ${year}`;
   return fullDate;
 };
+const formatDateDecampCms = (dateTimeString: string) => {
+  // Split the date and time parts
+  const [datePart, timePart] = dateTimeString.split('T');
 
-export { formatBlogDate, checkGlobal };
+  // Split the date part into day, month, and year
+  const [day, month, year] = datePart.split('.').map(Number);
+
+  // Split the time part into hours and minutes
+  const [hours, minutes] = timePart.split(':').map(Number);
+
+  // Create a Date object
+  const date = new Date(year, month - 1, day, hours, minutes);
+
+  // Format the date using Intl.DateTimeFormat
+  const formattedDate = new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true,
+  }).format(date);
+
+  return formattedDate;
+};
+
+export { formatBlogDate, checkGlobal, formatDateDecampCms };

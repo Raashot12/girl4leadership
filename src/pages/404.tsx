@@ -9,6 +9,7 @@ import {
 } from '@mantine/core';
 import HeadTitle from 'components/Shared/HeaderTitle';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -49,6 +50,27 @@ const useStyles = createStyles((theme) => ({
 function NotFoundImage() {
   const { classes } = useStyles();
   const router = useRouter();
+  const [basePath, setBasePath] = useState('');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      // Calculate the base path by removing the last segment
+      const pathSegments = path.split('/').filter((segment) => segment !== '');
+      pathSegments.pop();
+      const basePathName = pathSegments.join('/');
+      setBasePath(basePathName);
+    }
+  }, []);
+  const path = ['blog', 'merch-collection', 'contact', 'gallery', 'who-we-are'];
+
+  const PathToPushTo = (param: string) => {
+    if (path.includes(param)) {
+      router.push(`/${param}`);
+    } else {
+      router.push(`/`);
+    }
+  };
   return (
     <>
       <HeadTitle title="Girls4leadership | 404" />
@@ -79,7 +101,7 @@ function NotFoundImage() {
             </Text>
             <Button
               size="md"
-              onClick={() => router.push('/')}
+              onClick={() => PathToPushTo(basePath)}
               mt="xl"
               sx={{
                 height: '60px',
@@ -94,7 +116,7 @@ function NotFoundImage() {
                 },
               }}
             >
-              Get back to home page
+              Get back to {path.includes(basePath) ? basePath : `home`} page
             </Button>
           </div>
           <Image

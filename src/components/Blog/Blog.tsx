@@ -10,6 +10,8 @@ import Link from 'next/link';
 import { BlogIPRops } from 'types/blog';
 import moment from 'moment';
 import Popular from './Popular';
+import { formatDateDecampCms } from 'util/dates';
+import { IconClock } from '@tabler/icons';
 
 const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
   const autoplay = useRef(Autoplay({ delay: 2000 }));
@@ -20,7 +22,7 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
       data: blogs,
       startFrom: 1,
     });
-  console.log(trendingPost);
+
   return (
     <Box pt={40}>
       <Text
@@ -64,41 +66,54 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                       },
                     }}
                   >
-                    <Link href={`/blog`}>
+                    <Link href={`/blog/${value.slug}`}>
                       <Flex
                         align={'center'}
                         columnGap={50}
                         rowGap={20}
                         wrap={{ base: 'wrap', md: 'nowrap' }}
                       >
-                        <Box>
+                        <Box
+                          sx={{
+                            width: '50%',
+                            height: '400px',
+                            position: 'relative',
+                          }}
+                        >
                           <img
                             src={value?.thumbnail}
                             alt={value?.contentDescription}
                             loading="eager"
                             style={{
-                              maxWidth: '100%',
-                              height: '300px',
+                              height: '100%',
                               width: '100%',
                               borderRadius: 7,
                             }}
                           />
                         </Box>
-                        <Box>
+                        <Box
+                          sx={{
+                            width: '50%',
+                          }}
+                        >
                           <Text>
                             <span style={{ fontWeight: '600' }}>
                               {value?.category}
                             </span>{' '}
-                            <span
-                              style={{
-                                color: ' #999',
-                                fontWeight: 400,
-                                fontSize: 14,
-                              }}
-                            >
-                              --
-                              {moment(value?.date).format('YYYY-MM-DD HH:mma')}
-                            </span>
+                            <Text>
+                              <Group spacing={5}>
+                                <IconClock color="#999" />
+                                <span
+                                  style={{
+                                    color: ' #999',
+                                    fontWeight: 500,
+                                    fontSize: 14,
+                                  }}
+                                >
+                                  {formatDateDecampCms(value?.date)}
+                                </span>
+                              </Group>
+                            </Text>
                           </Text>
                           <Text
                             fz={{ base: 30, md: 40 }}
@@ -117,7 +132,7 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                             color="#999"
                             sx={{ whiteSpace: 'normal' }}
                           >
-                            {value?.contentDescription?.substring(0, 150)}...
+                            {value?.contentDescription?.substring(0, 400)}...
                           </Text>
                           <Flex
                             mt={20}
@@ -169,7 +184,7 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                     key={index}
                     sx={{ cursor: 'pointer' }}
                   >
-                    <Link href={`/blog/`}>
+                    <Link href={`/blog/${value?.slug}`}>
                       <Image
                         src={value?.thumbnail}
                         alt={value?.contentDescription}
@@ -187,16 +202,20 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                           <span style={{ fontWeight: '600' }}>
                             {value?.category}
                           </span>{' '}
-                          <span
-                            style={{
-                              color: ' #999',
-                              fontWeight: 400,
-                              fontSize: 14,
-                            }}
-                          >
-                            --
-                            {moment(value?.date).format('YYYY-MM-DD HH:mma')}
-                          </span>
+                          <Text>
+                            <Group spacing={5}>
+                              <IconClock color="#999" />
+                              <span
+                                style={{
+                                  color: ' #999',
+                                  fontWeight: 500,
+                                  fontSize: 14,
+                                }}
+                              >
+                                {formatDateDecampCms(value?.date)}
+                              </span>
+                            </Group>
+                          </Text>
                         </Text>
                         <Text
                           fz={{ base: 18 }}
@@ -257,9 +276,9 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
           changePage={changePage}
         />
       </Container>
-      {/* <Box>
-        <Popular article={blogs} />
-      </Box> */}
+      <Box>
+        <Popular blogs={blogs} />
+      </Box>
     </Box>
   );
 };

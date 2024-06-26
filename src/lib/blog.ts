@@ -16,10 +16,10 @@ export function getBlogBySlug(slug: string): BlogIPRops {
   const fullPath = path.join(blogsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
-
   return {
     ...data,
     body: content,
+    slug: realSlug,
   } as BlogIPRops;
 }
 

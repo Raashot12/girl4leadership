@@ -19,8 +19,6 @@ import { useForm, zodResolver } from '@mantine/form';
 import { z } from 'zod';
 import axios, { AxiosError } from 'axios';
 import Swal from 'sweetalert2';
-import { GetStaticProps } from 'next';
-import { Article } from 'types/merchSection';
 import { getAllBlogs } from 'lib/blog';
 import { BlogIPRops } from 'types/blog';
 
@@ -221,7 +219,6 @@ const BlogPage: React.FC<BlogPageProps> = ({ blogs }) => {
 
 export async function getStaticProps() {
   const blogs = getAllBlogs();
-  console.log(blogs);
   return {
     props: {
       blogs,

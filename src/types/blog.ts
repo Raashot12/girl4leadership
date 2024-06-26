@@ -12,4 +12,5 @@ export interface BlogIPRops {
   tags?: string[];
   cover?: string;
   body: string;
+  slug?: string;
 }
