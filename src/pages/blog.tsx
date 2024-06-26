@@ -1,80 +1,82 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  Grid,
-  TextInput,
-  Text,
-} from '@mantine/core';
-import { container, child } from 'components/AboutUs/AboutUs';
+// import {
+//   Box,
+//   Button,
+//   Container,
+//   Flex,
+//   Grid,
+//   TextInput,
+//   Text,
+// } from '@mantine/core';
+// import { container, child } from 'components/AboutUs/AboutUs';
 import { Layout } from 'components/Layout/Layout';
-import Link from 'next/link';
-import React, { useState } from 'react';
-import { IconArrowForward, IconSend } from '@tabler/icons';
-import Blog from 'components/Blog/Blog';
-import { motion } from 'framer-motion';
-import { useForm, zodResolver } from '@mantine/form';
-import { z } from 'zod';
-import axios, { AxiosError } from 'axios';
-import Swal from 'sweetalert2';
-import { GetStaticProps } from 'next';
-import { Article } from 'types/merchSection';
+// import Link from 'next/link';
+import React from 'react';
+// import { IconArrowForward, IconSend } from '@tabler/icons';
+// import Blog from 'components/Blog/Blog';
+// import { motion } from 'framer-motion';
+// import { useForm, zodResolver } from '@mantine/form';
+// import { z } from 'zod';
+// import axios, { AxiosError } from 'axios';
+// import Swal from 'sweetalert2';
+// import { GetStaticProps } from 'next';
+// import { Article } from 'types/merchSection';
 import { getAllBlogs } from 'lib/blog';
+import { Blog } from 'types/blog';
 
-const text = 'Our Blog';
-const BlogPage: React.FC<> = ({ article }) => {
-  const addInviteSchema = z.object({
-    emailAddress: z
-      .string()
-      .email({ message: 'Please enter valid email address' }),
-  });
-  const [isSubmitting, setIsubmitting] = useState(false);
-  const form = useForm({
-    validate: zodResolver(addInviteSchema),
-    initialValues: {
-      emailAddress: '',
-    },
-  });
-  const handleSubmit = async (values: { emailAddress: string }) => {
-    const baseId = 'appYi5UJUgW3d1yGc';
-    const tableName = 'Newsletter';
-    setIsubmitting(true);
-    const endpoint = `https://api.airtable.com/v0/${baseId}/${tableName}`;
-    const headers = {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
-      'Content-Type': 'application/json',
-    };
-    const serializedData = {
-      Email: values.emailAddress,
-    };
-    try {
-      const response = await axios.post(
-        endpoint,
-        { fields: serializedData },
-        { headers }
-      );
+// const text = 'Our Blog';
+const BlogPage: React.FC<Blog[]> = () => {
+  // const addInviteSchema = z.object({
+  //   emailAddress: z
+  //     .string()
+  //     .email({ message: 'Please enter valid email address' }),
+  // });
+  // const [isSubmitting, setIsubmitting] = useState(false);
+  // const form = useForm({
+  //   validate: zodResolver(addInviteSchema),
+  //   initialValues: {
+  //     emailAddress: '',
+  //   },
+  // });
+  // const handleSubmit = async (values: { emailAddress: string }) => {
+  //   const baseId = 'appYi5UJUgW3d1yGc';
+  //   const tableName = 'Newsletter';
+  //   setIsubmitting(true);
+  //   const endpoint = `https://api.airtable.com/v0/${baseId}/${tableName}`;
+  //   const headers = {
+  //     Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
+  //     'Content-Type': 'application/json',
+  //   };
+  //   const serializedData = {
+  //     Email: values.emailAddress,
+  //   };
+  //   try {
+  //     const response = await axios.post(
+  //       endpoint,
+  //       { fields: serializedData },
+  //       { headers }
+  //     );
 
-      if (response.status === 200) {
-        Swal.fire(
-          'Submitted Successfully!',
-          'You clicked the button!',
-          'success'
-        );
-        setIsubmitting(false);
-        form.reset();
-      }
-    } catch (error) {
-      const axiosError = error as AxiosError;
-      Swal.fire(`${axiosError.message}`, 'You clicked the button!', 'error');
-      setIsubmitting(false);
-    }
-  };
+  //     if (response.status === 200) {
+  //       Swal.fire(
+  //         'Submitted Successfully!',
+  //         'You clicked the button!',
+  //         'success'
+  //       );
+  //       setIsubmitting(false);
+  //       form.reset();
+  //     }
+  //   } catch (error) {
+  //     const axiosError = error as AxiosError;
+  //     Swal.fire(`${axiosError.message}`, 'You clicked the button!', 'error');
+  //     setIsubmitting(false);
+  //   }
+  // };
 
   return (
     <Layout pageTitle="Blog">
-      <Box mt={77}>
+      <>hi</>
+      {/* <Box mt={77}>
         <Flex
           align="center"
           sx={{
@@ -210,7 +212,7 @@ const BlogPage: React.FC<> = ({ article }) => {
             </Grid>
           </Box>
         </Container>
-      </Box>
+      </Box> */}
     </Layout>
   );
 };
