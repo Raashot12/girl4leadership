@@ -1,10 +1,5 @@
 ---
 title: "Streamlining Payment Processes: Why Backend Checkout Handling Matters"
-pageDescription: In the digital age, providing a seamless and secure payment
-  experience is crucial for any business. One key aspect often overlooked is the
-  importance of handling payment checkout from the backend. Leveraging platforms
-  like Monnify can significantly enhance the efficiency and security of this
-  process.
 date: 23.06.2024T13:11
 pageKeywords:
   - Backend payment
@@ -13,8 +8,14 @@ pageKeywords:
   - Node
 author: Rasheed Iskilu
 profession: Software Engineer
+isFeatured: true
 thumbnail: /uploads/r-1-.jpeg
 contentDescription: In the digital age, providing a seamless and secure payment
+  experience is crucial for any business. One key aspect often overlooked is the
+  importance of handling payment checkout from the backend. Leveraging platforms
+  like Monnify can significantly enhance the efficiency and security of this
+  process.
+pageDescription: In the digital age, providing a seamless and secure payment
   experience is crucial for any business. One key aspect often overlooked is the
   importance of handling payment checkout from the backend. Leveraging platforms
   like Monnify can significantly enhance the efficiency and security of this
