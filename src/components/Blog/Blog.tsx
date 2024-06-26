@@ -7,8 +7,8 @@ import React, { useRef } from 'react';
 import { usePagination } from 'hooks/usePagination';
 import Pagination from 'components/Pagination';
 import Link from 'next/link';
-import dayjs from 'dayjs';
 import { BlogIPRops } from 'types/blog';
+import moment from 'moment';
 import Popular from './Popular';
 
 const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
@@ -78,7 +78,7 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                             loading="eager"
                             style={{
                               maxWidth: '100%',
-                              height: 'auto',
+                              height: '300px',
                               width: '100%',
                               borderRadius: 7,
                             }}
@@ -97,7 +97,7 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                               }}
                             >
                               --
-                              {dayjs(value?.date).format('YYYY-MM-DD HH:mma')}
+                              {moment(value?.date).format('YYYY-MM-DD HH:mma')}
                             </span>
                           </Text>
                           <Text
@@ -160,25 +160,19 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
         <Box mt={50}>
           <Grid gutter={45}>
             {slicedData &&
-              slicedData.map((value) => {
+              slicedData.map((value: BlogIPRops, index) => {
                 return (
                   <Grid.Col
                     xs={12}
                     sm={6}
                     md={4}
-                    key={value.id}
+                    key={index}
                     sx={{ cursor: 'pointer' }}
                   >
-                    <Link href={`/blog/${value?.attributes?.slug}`}>
+                    <Link href={`/blog/`}>
                       <Image
-                        src={
-                          value?.attributes?.featuredImage?.data?.attributes
-                            ?.url
-                        }
-                        alt={
-                          value?.attributes?.featuredImage?.data?.attributes
-                            ?.url
-                        }
+                        src={value?.thumbnail}
+                        alt={value?.contentDescription}
                         sx={{
                           '& .mantine-Image-image': {
                             borderRadius: '7px',
@@ -191,7 +185,7 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                       <Box mt={25}>
                         <Text>
                           <span style={{ fontWeight: '600' }}>
-                            {value?.attributes?.category}
+                            {value?.category}
                           </span>{' '}
                           <span
                             style={{
@@ -201,9 +195,7 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                             }}
                           >
                             --
-                            {dayjs(value.attributes?.publishedAt).format(
-                              'YYYY-MM-DD HH:mma'
-                            )}
+                            {moment(value?.date).format('YYYY-MM-DD HH:mma')}
                           </span>
                         </Text>
                         <Text
@@ -213,7 +205,7 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                           mt={14}
                           sx={{ whiteSpace: 'normal' }}
                         >
-                          {value.attributes?.title}
+                          {value?.title}
                         </Text>
                         <Text
                           fz={14}
@@ -223,14 +215,11 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                           color="#999"
                           sx={{ whiteSpace: 'normal' }}
                         >
-                          {value.attributes?.summary?.substring(0, 150)}...
+                          {value?.contentDescription?.substring(0, 150)}...
                         </Text>
                         <Group mt={20}>
                           <Image
-                            src={
-                              value?.attributes?.author?.data?.attributes
-                                ?.profileUrl
-                            }
+                            src={value?.authorAvatar}
                             alt="profile display picture"
                             sx={{
                               '& .mantine-Image-image': {
@@ -245,16 +234,10 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
 
                           <Box>
                             <Text fw={700} lh={1}>
-                              {
-                                value?.attributes?.author?.data?.attributes
-                                  ?.Name
-                              }
+                              {value?.author}
                             </Text>
                             <Text fw={14} color="#888">
-                              {
-                                value?.attributes?.author?.data?.attributes
-                                  ?.Occupation
-                              }
+                              {value?.profession}
                             </Text>
                           </Box>
                         </Group>
