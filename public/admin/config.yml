@@ -14,11 +14,6 @@ collections:
     fields:
       - { name: title, label: Title, widget: 'string' }
       - {
-          name: pageDescription,
-          label: Excerpt / Page Description,
-          required: false,
-        }
-      - {
           label: 'Publish Date',
           name: 'date',
           widget: 'datetime',
@@ -41,6 +36,13 @@ collections:
           required: false,
         }
       - { name: category, label: Blog category, required: false }
+      - {
+          name: isFeatured,
+          label: Is Featured,
+          widget: 'boolean',
+          required: true,
+          default: false,
+        }
       - {
           label: 'Featured Image',
           name: 'thumbnail',
@@ -95,7 +97,11 @@ collections:
           label: Content Description mini,
           widget: markdown,
         }
-      - { name: images, label: Product Images, widget: list, 
-          field: { name: image, label: Image, widget: image } }
+      - {
+          name: images,
+          label: Product Images,
+          widget: list,
+          field: { name: image, label: Image, widget: image },
+        }
       - { name: cover, label: Product Cover Link, required: false }
       - { name: body, label: Product details, widget: markdown }
