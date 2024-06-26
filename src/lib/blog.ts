@@ -3,7 +3,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { Blog } from '../types/blog';
+import { BlogIPRops } from '../types/blog';
 
 const blogsDirectory = path.join(process.cwd(), 'content/blogs');
 
@@ -11,7 +11,7 @@ export function getBlogSlugs() {
   return fs.readdirSync(blogsDirectory);
 }
 
-export function getBlogBySlug(slug: string): Blog {
+export function getBlogBySlug(slug: string): BlogIPRops {
   const realSlug = slug.replace(/\.md$/, '');
   const fullPath = path.join(blogsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
@@ -20,10 +20,10 @@ export function getBlogBySlug(slug: string): Blog {
   return {
     ...data,
     body: content,
-  } as Blog;
+  } as BlogIPRops;
 }
 
-export function getAllBlogs(): Blog[] {
+export function getAllBlogs(): BlogIPRops[] {
   const slugs = getBlogSlugs();
   const blogs = slugs.map((slug) => getBlogBySlug(slug));
   return blogs;

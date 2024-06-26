@@ -1,6 +1,6 @@
-export interface Blog {
+export interface BlogIPRops {
   title: string;
-  pageDescription?: string;
+  isFeatured?: boolean;
   date: string;
   pageKeywords: string[];
   author: string;

@@ -7,22 +7,20 @@ import React, { useRef } from 'react';
 import { usePagination } from 'hooks/usePagination';
 import Pagination from 'components/Pagination';
 import Link from 'next/link';
-import { Article } from 'types/merchSection';
 import dayjs from 'dayjs';
+import { BlogIPRops } from 'types/blog';
 import Popular from './Popular';
 
-const Blog = ({ article }: { article: Article[] }) => {
+const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
   const autoplay = useRef(Autoplay({ delay: 2000 }));
-  const trendingPost = article?.filter(
-    (value) => value?.attributes?.isFeatured
-  );
+  const trendingPost = blogs?.filter((value) => value?.isFeatured);
   const { slicedData, pagination, prevPage, nextPage, changePage } =
     usePagination({
       itemsPerPage: 4,
-      data: article,
+      data: blogs,
       startFrom: 1,
     });
-
+  console.log(trendingPost);
   return (
     <Box pt={40}>
       <Text
@@ -58,7 +56,7 @@ const Blog = ({ article }: { article: Article[] }) => {
           {trendingPost &&
             trendingPost.map((value) => {
               return (
-                <React.Fragment key={value?.id}>
+                <React.Fragment key={value?.contentDescription}>
                   <Carousel.Slide
                     sx={{
                       '.mantine-Carousel-viewport': {
@@ -66,7 +64,7 @@ const Blog = ({ article }: { article: Article[] }) => {
                       },
                     }}
                   >
-                    <Link href={`/blog/${value?.attributes?.slug}`}>
+                    <Link href={`/blog`}>
                       <Flex
                         align={'center'}
                         columnGap={50}
@@ -75,14 +73,8 @@ const Blog = ({ article }: { article: Article[] }) => {
                       >
                         <Box>
                           <img
-                            src={
-                              value?.attributes?.featuredImage?.data?.attributes
-                                ?.url
-                            }
-                            alt={
-                              value?.attributes?.featuredImage?.data?.attributes
-                                ?.url
-                            }
+                            src={value?.thumbnail}
+                            alt={value?.contentDescription}
                             loading="eager"
                             style={{
                               maxWidth: '100%',
@@ -95,7 +87,7 @@ const Blog = ({ article }: { article: Article[] }) => {
                         <Box>
                           <Text>
                             <span style={{ fontWeight: '600' }}>
-                              {value.attributes?.category}
+                              {value?.category}
                             </span>{' '}
                             <span
                               style={{
@@ -105,9 +97,7 @@ const Blog = ({ article }: { article: Article[] }) => {
                               }}
                             >
                               --
-                              {dayjs(value.attributes?.publishedAt).format(
-                                'YYYY-MM-DD HH:mma'
-                              )}
+                              {dayjs(value?.date).format('YYYY-MM-DD HH:mma')}
                             </span>
                           </Text>
                           <Text
@@ -117,7 +107,7 @@ const Blog = ({ article }: { article: Article[] }) => {
                             mt={15}
                             sx={{ whiteSpace: 'normal' }}
                           >
-                            {value?.attributes?.title}
+                            {value?.title}
                           </Text>
                           <Text
                             fz={14}
@@ -127,7 +117,7 @@ const Blog = ({ article }: { article: Article[] }) => {
                             color="#999"
                             sx={{ whiteSpace: 'normal' }}
                           >
-                            {value.attributes?.summary?.substring(0, 150)}...
+                            {value?.contentDescription?.substring(0, 150)}...
                           </Text>
                           <Flex
                             mt={20}
@@ -136,10 +126,7 @@ const Blog = ({ article }: { article: Article[] }) => {
                             columnGap={16}
                           >
                             <Image
-                              src={
-                                value?.attributes?.author?.data?.attributes
-                                  ?.profileUrl
-                              }
+                              src={value?.authorAvatar}
                               alt="profile display picture"
                               h={45}
                               width={45}
@@ -155,16 +142,10 @@ const Blog = ({ article }: { article: Article[] }) => {
                             />
                             <Box>
                               <Text fw={700} lh={1}>
-                                {
-                                  value?.attributes?.author?.data?.attributes
-                                    ?.name
-                                }
+                                {value?.author}
                               </Text>
                               <Text fw={14} color="#888">
-                                {
-                                  value?.attributes?.author?.data?.attributes
-                                    ?.occupation
-                                }
+                                {value?.profession}
                               </Text>
                             </Box>
                           </Flex>
@@ -293,9 +274,9 @@ const Blog = ({ article }: { article: Article[] }) => {
           changePage={changePage}
         />
       </Container>
-      <Box>
-        <Popular article={article} />
-      </Box>
+      {/* <Box>
+        <Popular article={blogs} />
+      </Box> */}
     </Box>
   );
 };
