@@ -8,6 +8,7 @@ pageKeywords:
   - Node
 author: Rasheed Iskilu
 profession: Software Engineer
+authorAvatar: /uploads/t01pzunv03b-u03fvfcew3z-f8720a035c6d-512.jpeg
 isFeatured: true
 thumbnail: /uploads/r-1-.jpeg
 contentDescription: In the digital age, providing a seamless and secure payment
