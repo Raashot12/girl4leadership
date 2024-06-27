@@ -19,10 +19,10 @@ import {
   FacebookShareButton,
   LinkedinShareButton,
 } from 'react-share';
-import { BlocksRenderer } from '@strapi/blocks-react-renderer';
-import { Article } from 'types/merchSection';
-import dayjs from 'dayjs';
-import { RootNode } from '@strapi/blocks-react-renderer/dist/BlocksRenderer';
+import { BlogIPRops } from 'types/blog';
+import { formatDateDecampCms } from 'util/dates';
+import ReactMarkdown from 'react-markdown';
+import { IconClock } from '@tabler/icons';
 
 const BgColor = styled(Box as any)`
   & iframe {
@@ -32,7 +32,7 @@ const BgColor = styled(Box as any)`
       theme.colorScheme === 'dark' ? '#1A1B1E !important' : 'white !important'};
   }
 `;
-const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
+const BlogDetails = ({ singleBlogPost }: { singleBlogPost: BlogIPRops }) => {
   const { colorScheme } = useMantineColorScheme();
   return (
     <>
@@ -40,12 +40,8 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
         <Box>
           <Box sx={{ textAlign: 'center' }} mb={40}>
             <Image
-              src={
-                singleBlogPost?.attributes?.author?.data?.attributes?.profileUrl
-              }
-              alt={
-                singleBlogPost?.attributes?.featuredImage?.data?.attributes?.url
-              }
+              src={singleBlogPost?.authorAvatar}
+              alt={singleBlogPost?.title}
               sx={{
                 '& .mantine-Image-image': {
                   borderRadius: '50%',
@@ -64,33 +60,16 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
               color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
               fw={500}
             >
-              {singleBlogPost?.attributes?.author?.data?.attributes?.name}
+              {singleBlogPost?.author}
             </Text>{' '}
-            <Group
-              align="center"
-              sx={{ justifyContent: 'center' }}
-              spacing={10}
-            >
+            <Group align="center" sx={{ justifyContent: 'center' }} spacing={5}>
+              <IconClock color="#999" />
               <Text
                 fz={'0.975em'}
                 color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
                 fw={400}
               >
-                {dayjs(singleBlogPost?.attributes?.publishedAt).format(
-                  'YYYY-MM-DD'
-                )}
-              </Text>
-              <Divider
-                orientation="vertical"
-                size={2}
-                color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
-              />
-              <Text
-                fz={'0.975em'}
-                color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
-                fw={400}
-              >
-                {dayjs(singleBlogPost?.attributes?.publishedAt).format('HH:mm')}
+                {formatDateDecampCms(singleBlogPost?.date)}
               </Text>
             </Group>
           </Box>
@@ -102,28 +81,18 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
               fw={700}
               color={colorScheme === 'dark' ? '#c4c4c4' : '#051438'}
             >
-              {singleBlogPost?.attributes?.title}
+              {singleBlogPost?.title}
             </Text>{' '}
-            <Text
-              sx={{ textAlign: 'center' }}
-              fz={{ base: '1rem', sm: '1.25rem' }}
-              mt={10}
-              lh={'1.5'}
-              fw={300}
-            >
-              {singleBlogPost?.attributes?.summary}
-            </Text>
           </Box>
+
           <Image
-            src={
-              singleBlogPost?.attributes?.featuredImage?.data?.attributes?.url
-            }
-            alt={
-              singleBlogPost?.attributes?.featuredImage?.data?.attributes?.url
-            }
+            src={singleBlogPost?.thumbnail}
+            alt={singleBlogPost?.title}
             sx={{
               '& .mantine-Image-image': {
                 borderRadius: '10px',
+                height: '100%',
+                width: '100%',
                 boxShadow:
                   'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
               },
@@ -139,11 +108,7 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
             fw={300}
             color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
           >
-            <BlocksRenderer
-              content={
-                singleBlogPost?.attributes?.content as unknown as RootNode[]
-              }
-            />
+            <ReactMarkdown>{singleBlogPost.body}</ReactMarkdown>
           </Box>
         </Box>
 
@@ -163,8 +128,8 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
           </Flex>
           <Flex mt={20} align="center" columnGap={20}>
             <FacebookShareButton
-              url={`https://girls4leadership.org/blog/${singleBlogPost?.attributes?.slug}`}
-              title={singleBlogPost?.attributes?.title}
+              url={`https://girls4leadership.org/blog/${singleBlogPost?.slug}`}
+              title={singleBlogPost?.title}
               quote={'フェイスブックはタイトルが付けれるようです'}
               hashtag={'#hashtag'}
               style={{ display: 'flex', alignItems: 'center' }}
@@ -172,16 +137,16 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
               <BsFacebook cursor={'pointer'} size={20} />
             </FacebookShareButton>
             <TwitterShareButton
-              title={singleBlogPost?.attributes?.title}
-              url={`https://girls4leadership.org/blog/${singleBlogPost?.attributes?.slug}`}
+              title={singleBlogPost?.title}
+              url={`https://girls4leadership.org/blog/${singleBlogPost?.slug}`}
               hashtags={['girls4leadership', 'news']}
               style={{ display: 'flex', alignItems: 'center' }}
             >
               <BsTwitter cursor={'pointer'} size={20} />
             </TwitterShareButton>
             <LinkedinShareButton
-              title={singleBlogPost?.attributes?.title}
-              url={`https://girls4leadership.org/blog/${singleBlogPost?.attributes?.slug}`}
+              title={singleBlogPost?.title}
+              url={`https://girls4leadership.org/blog/${singleBlogPost?.slug}`}
               style={{ display: 'flex', alignItems: 'center' }}
             >
               <FaLinkedin cursor={'pointer'} size={20} />
@@ -199,8 +164,8 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: Article }) => {
           }}
         >
           <DisComments
-            postTitle={singleBlogPost?.attributes?.title}
-            postSlug={singleBlogPost?.attributes?.slug}
+            postTitle={singleBlogPost?.title}
+            postSlug={singleBlogPost?.slug}
           />
         </BgColor>
       </Box>

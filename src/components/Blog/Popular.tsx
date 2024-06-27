@@ -108,6 +108,7 @@ function Popular({ blogs }: { blogs: BlogIPRops[] }) {
                 <img
                   src={value?.thumbnail}
                   alt={value?.title}
+                  sizes="cover"
                   loading="eager"
                   style={{
                     maxWidth: '100%',

@@ -21,6 +21,7 @@ import {
   Loader,
   ScrollArea,
   Button,
+  Overlay,
 } from '@mantine/core';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -36,9 +37,12 @@ import {
 import IconCloseModal from 'components/Icons/IconCloseModal';
 import { useClickOutside, useDebouncedValue } from '@mantine/hooks';
 import { useApiServicesAppBlogSearchApiQuery } from 'state/services/blogsApi';
-import Logo from '../../images/logo.png';
-import { ColorSchemeToggle } from '../ColorSchemeToggle';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectShowCart, toggleShowCart } from 'state/features/nav/navSlice';
+import { RootState } from 'state/store';
 import BlogSearchItem from './BlogSearchItem';
+import { ColorSchemeToggle } from '../ColorSchemeToggle';
+import Logo from '../../images/logo.png';
 
 const HeaderComponent = styled(Box as any)<{
   scrollDirection: string;
@@ -102,17 +106,68 @@ const navMenu = [
   },
 ];
 
+const Cart = ({ showCart }: { showCart: boolean }) => {
+  const dispatch = useDispatch();
+  const ref = useClickOutside(() =>
+    dispatch(toggleShowCart({ showCart: false }))
+  );
+  return (
+    <Box
+      sx={{
+        position: 'fixed',
+        top: 0,
+        right: showCart ? 0 : '-100vw',
+        width: '100vw',
+        height: '100vh',
+        boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px',
+        transition: 'right 0.3s ease-in-out',
+        zIndex: 100,
+      }}
+    >
+      <Overlay
+        color="#000"
+        sx={{
+          transition: 'right 0.3s ease-in-out',
+          opacity: '0.5',
+          background: '#E25D24',
+        }}
+      />
+      <Box
+        sx={{
+          position: 'fixed',
+          top: 0,
+          right: showCart ? 0 : '-50vw',
+
+          height: '100vh',
+          background: 'white',
+          zIndex: 1000,
+        }}
+        ref={ref}
+        w={{ base: '70vw', md: '40vw', lg: '30vw' }}
+        p={10}
+      >
+        {' '}
+        <Text>Cart Content</Text>
+      </Box>
+    </Box>
+  );
+};
+
 function NavbarMenu() {
   const { colorScheme } = useMantineColorScheme();
   const [scrollHeight, setScrollHeight] = useState(0);
   const [scrollDirection, setScrollDirection] = useState('');
-  const [, setOpenCart] = useState(false);
   const [blogSearch, setBlogSearch] = useState('');
   const [debounceQuery] = useDebouncedValue(blogSearch, 1000);
   const [searchActive, setSearchActive] = useState(false);
   const ref = useClickOutside(() => setSearchActive(false));
   const [opened, setOpened] = useState(false);
   const { pathname } = useRouter();
+  const dispatch = useDispatch();
+
+  const handleCartToggle = () => {
+    dispatch(toggleShowCart({ showCart: true }));
+  };
 
   const { data, isLoading, isError, refetch } =
     useApiServicesAppBlogSearchApiQuery(
@@ -151,11 +206,12 @@ function NavbarMenu() {
       window.removeEventListener('scroll', updateScrollHeight);
     };
   }, [scrollHeight]);
+  const showCart = useSelector((state: RootState) => selectShowCart(state));
 
   return (
-    <>
+    <div style={{ position: 'relative' }}>
       <HeaderComponent
-        className={scrollHeight >= 140 ? 'global-nav--sticky' : ''}
+        //  style{{post}}
         position={scrollDirection}
         scrollheight={scrollHeight}
       >
@@ -233,6 +289,7 @@ function NavbarMenu() {
                     background: 'none',
                   },
                 }}
+                onClick={handleCartToggle}
               >
                 <IconShoppingCart
                   fontWeight={400}
@@ -314,7 +371,7 @@ function NavbarMenu() {
                       background: 'none',
                     },
                   }}
-                  onClick={() => setOpenCart(true)}
+                  onClick={handleCartToggle}
                 >
                   <IconShoppingCart
                     fontWeight={400}
@@ -491,8 +548,8 @@ function NavbarMenu() {
           </Box>
         </Collapse>
       </HeaderComponent>
-      {/* <Modal fullScreen>openCart</Modal> */}
-    </>
+      <Cart showCart={showCart} />
+    </div>
   );
 }
 

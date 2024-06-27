@@ -8,13 +8,12 @@ import { usePagination } from 'hooks/usePagination';
 import Pagination from 'components/Pagination';
 import Link from 'next/link';
 import { BlogIPRops } from 'types/blog';
-import moment from 'moment';
-import Popular from './Popular';
 import { formatDateDecampCms } from 'util/dates';
 import { IconClock } from '@tabler/icons';
+import Popular from './Popular';
 
 const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
-  const autoplay = useRef(Autoplay({ delay: 2000 }));
+  const autoplay = useRef(Autoplay({ delay: 3000 }));
   const trendingPost = blogs?.filter((value) => value?.isFeatured);
   const { slicedData, pagination, prevPage, nextPage, changePage } =
     usePagination({
@@ -75,10 +74,10 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                       >
                         <Box
                           sx={{
-                            width: '50%',
-                            height: '400px',
+                            height: '350px',
                             position: 'relative',
                           }}
+                          w={{ base: '100%', md: '50%' }}
                         >
                           <img
                             src={value?.thumbnail}
@@ -88,14 +87,11 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                               height: '100%',
                               width: '100%',
                               borderRadius: 7,
+                              objectFit: 'cover',
                             }}
                           />
                         </Box>
-                        <Box
-                          sx={{
-                            width: '50%',
-                          }}
-                        >
+                        <Box w={{ base: '100%', md: '50%' }}>
                           <Text>
                             <span style={{ fontWeight: '600' }}>
                               {value?.category}
@@ -185,18 +181,27 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                     sx={{ cursor: 'pointer' }}
                   >
                     <Link href={`/blog/${value?.slug}`}>
-                      <Image
-                        src={value?.thumbnail}
-                        alt={value?.contentDescription}
+                      <Box
                         sx={{
-                          '& .mantine-Image-image': {
+                          width: '100%',
+                          height: '225px',
+                          position: 'relative',
+                        }}
+                      >
+                        <img
+                          src={value?.thumbnail}
+                          alt={value?.contentDescription}
+                          loading="eager"
+                          style={{
+                            height: '100%',
+                            width: '100%',
                             borderRadius: '7px',
-                            height: '225px !important',
+                            objectFit: 'cover',
                             boxShadow:
                               'rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px',
-                          },
-                        }}
-                      />
+                          }}
+                        />
+                      </Box>
                       <Box mt={25}>
                         <Text>
                           <span style={{ fontWeight: '600' }}>
