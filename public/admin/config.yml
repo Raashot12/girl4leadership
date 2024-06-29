@@ -102,20 +102,6 @@ collections:
           default: false,
         }
       - {
-          name: isTopSeller,
-          label: Top seller,
-          widget: 'boolean',
-          required: false,
-          default: false,
-        }
-      - {
-          name: isNewArrivals,
-          label: New Arrival,
-          widget: 'boolean',
-          required: false,
-          default: false,
-        }
-      - {
           name: price,
           label: Price,
           widget: 'number',
