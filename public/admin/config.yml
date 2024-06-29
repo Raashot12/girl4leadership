@@ -55,7 +55,6 @@ collections:
           widget: markdown,
         }
       - { name: tags, label: Blog Tags, widget: list, required: false }
-      - { name: cover, label: Blog Cover Link, required: false }
       - { name: body, label: Body, widget: markdown }
 
   - name: 'product'
@@ -65,12 +64,7 @@ collections:
     slug: '{{slug}}' # Filename template, e.g., title.md
     create: true
     fields:
-      - { name: title, label: Title, widget: 'string' }
-      - {
-          name: pageDescription,
-          label: Excerpt / Page Description,
-          required: false,
-        }
+      - { name: productName, label: Product name, widget: 'string' }
       - {
           label: 'Publish Date',
           name: 'date',
@@ -94,14 +88,67 @@ collections:
         }
       - {
           name: contentDescription,
-          label: Content Description mini,
-          widget: markdown,
+          label: Content Description,
+          widget: 'string'
         }
       - {
           name: images,
           label: Product Images,
           widget: list,
-          field: { name: image, label: Image, widget: image },
+          fields: 
+            - { name: image, label: Image, widget: 'image' }
+            - { name: color, label: Color, widget: 'color', required: false }
         }
-      - { name: cover, label: Product Cover Link, required: false }
+      - { name: tags, label: Product Tags, widget: list, required: false }
       - { name: body, label: Product details, widget: markdown }
+      - {
+          name: isFeatured,
+          label: Featured,
+          widget: 'boolean',
+          required: false,
+          default: false,
+        }
+      - {
+          name: isTopSeller,
+          label: Top seller,
+          widget: 'boolean',
+          required: false,
+          default: false,
+        }
+      - {
+          name: isNewArrivals,
+          label: New Arrival,
+          widget: 'boolean',
+          required: false,
+          default: false,
+        }
+      - {
+          name: productId,
+          label: Product ID,
+          widget: 'uuid',
+        }
+      - {
+          name: price,
+          label: Price,
+          widget: 'number',
+          required: true,
+          value_type: 'float',
+        }
+      - {
+          name: currency,
+          label: Currency,
+          widget: 'select',
+          options: ['USD', 'EUR', 'GBP', 'NGN'],
+          default: 'NGN',
+          required: true,
+        }
+      - {
+          name: rating,
+          label: Rating,
+          widget: 'number',
+          required: false,
+          value_type: 'int',
+          min: 1,
+          max: 5,
+          default: 3,
+        }

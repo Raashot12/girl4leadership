@@ -22,6 +22,7 @@ import {
   ScrollArea,
   Button,
   Overlay,
+  Divider,
 } from '@mantine/core';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -35,6 +36,8 @@ import {
   IconShoppingCart,
 } from '@tabler/icons';
 import IconCloseModal from 'components/Icons/IconCloseModal';
+import { BsCart3 } from 'react-icons/bs';
+import { MdClose } from 'react-icons/md';
 import { useClickOutside, useDebouncedValue } from '@mantine/hooks';
 import { useApiServicesAppBlogSearchApiQuery } from 'state/services/blogsApi';
 import { useSelector, useDispatch } from 'react-redux';
@@ -108,9 +111,13 @@ const navMenu = [
 
 const Cart = ({ showCart }: { showCart: boolean }) => {
   const dispatch = useDispatch();
+  const { colorScheme } = useMantineColorScheme();
   const ref = useClickOutside(() =>
     dispatch(toggleShowCart({ showCart: false }))
   );
+  const handleClose = () => {
+    dispatch(toggleShowCart({ showCart: false }));
+  };
   return (
     <Box
       sx={{
@@ -129,7 +136,7 @@ const Cart = ({ showCart }: { showCart: boolean }) => {
         sx={{
           transition: 'right 0.3s ease-in-out',
           opacity: '0.5',
-          background: '#E25D24',
+          background: colorScheme === 'dark' ? 'white' : '#1A1B1E',
         }}
       />
       <Box
@@ -137,17 +144,41 @@ const Cart = ({ showCart }: { showCart: boolean }) => {
           position: 'fixed',
           top: 0,
           right: showCart ? 0 : '-50vw',
-
           height: '100vh',
-          background: 'white',
+          background: colorScheme === 'dark' ? '#1A1B1E' : 'white',
           zIndex: 1000,
         }}
         ref={ref}
         w={{ base: '70vw', md: '40vw', lg: '30vw' }}
-        p={10}
       >
         {' '}
-        <Text>Cart Content</Text>
+        <Flex
+          align={'center'}
+          px={10}
+          pt={10}
+          justify={'space-between'}
+          columnGap={20}
+        >
+          <ActionIcon>
+            <BsCart3
+              size={19}
+              color={colorScheme === 'dark' ? 'white' : 'black'}
+            />
+          </ActionIcon>
+          <Text fw={600} color={colorScheme === 'dark' ? 'white' : 'black'}>
+            REVIEW YOUR CART
+          </Text>
+          <ActionIcon onClick={handleClose}>
+            <MdClose
+              color={colorScheme === 'dark' ? 'white' : 'black'}
+              size={20}
+            />
+          </ActionIcon>
+        </Flex>
+        <Divider
+          mt={10}
+          color={colorScheme === 'dark' ? '#AFAFB0' : '#1A1B1E'}
+        />
       </Box>
     </Box>
   );
@@ -211,7 +242,7 @@ function NavbarMenu() {
   return (
     <div style={{ position: 'relative' }}>
       <HeaderComponent
-        //  style{{post}}
+        className={scrollHeight >= 140 ? 'global-nav--sticky' : ''}
         position={scrollDirection}
         scrollheight={scrollHeight}
       >
