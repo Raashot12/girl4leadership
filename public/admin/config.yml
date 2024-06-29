@@ -126,11 +126,6 @@ collections:
           default: false,
         }
       - {
-          name: productId,
-          label: Product ID,
-          widget: 'uuid',
-        }
-      - {
           name: price,
           label: Price,
           widget: 'number',
@@ -145,13 +140,4 @@ collections:
           default: 'NGN',
           required: true,
         }
-      - {
-          name: rating,
-          label: Rating,
-          widget: 'number',
-          required: false,
-          value_type: 'int',
-          min: 1,
-          max: 5,
-          default: 3,
-        }
+     
