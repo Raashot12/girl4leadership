@@ -91,17 +91,6 @@ collections:
           label: Content Description,
           widget: 'string'
         }
-      - name: images
-        label: Product Images
-        widget: list
-        fields:
-          - name: image
-            label: Image
-            widget: image
-          - name: color
-            label: Color
-            widget: color
-            required: false
       - { name: tags, label: Product Tags, widget: list, required: false }
       - { name: body, label: Product details, widget: markdown }
       - {
