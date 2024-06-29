@@ -91,11 +91,36 @@ collections:
           label: Content Description,
           widget: 'string'
         }
+      - name: images
+        label: Product Images
+        widget: list
+        fields:
+          - name: image
+            label: Image
+            widget: image
+          - name: color
+            label: Color
+            widget: color
+        required: false
       - { name: tags, label: Product Tags, widget: list, required: false }
       - { name: body, label: Product details, widget: markdown }
       - {
           name: isFeatured,
           label: Featured,
+          widget: 'boolean',
+          required: false,
+          default: false,
+        }
+      - {
+          name: isTopSeller,
+          label: Top seller,
+          widget: 'boolean',
+          required: false,
+          default: false,
+        }
+      - {
+          name: isNewArrivals,
+          label: New Arrival,
           widget: 'boolean',
           required: false,
           default: false,
@@ -115,4 +140,4 @@ collections:
           default: 'NGN',
           required: true,
         }
-     
+      
