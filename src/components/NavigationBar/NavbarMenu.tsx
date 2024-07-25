@@ -143,7 +143,7 @@ const Cart = ({ showCart }: { showCart: boolean }) => {
         sx={{
           position: 'fixed',
           top: 0,
-          right: showCart ? 0 : '-50vw',
+          right: showCart ? 0 : '-85vw',
           height: '100vh',
           background: colorScheme === 'dark' ? '#1A1B1E' : 'white',
           zIndex: 1000,

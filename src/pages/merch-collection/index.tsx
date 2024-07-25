@@ -12,11 +12,16 @@ import Cards from 'components/MerchCollection/Cards';
 import Wilderness from 'components/MerchCollection/Wilderness';
 import Accessories from 'components/MerchCollection/Accessories';
 import MerchCollectionBlog from 'components/MerchCollection/MerchCollectionBlog';
+import { useApiServicesAppProductListApiQuery } from 'state/services/product';
+import axios from 'axios';
 
 const allCategories = [...new Set(featured.map((item) => item.categories))];
 
 const MerchCollectionPage = () => {
   const { colorScheme } = useMantineColorScheme();
+  const { data } = useApiServicesAppProductListApiQuery({});
+  console.log(data?.records);
+
   const [allProducts, setAllProducts] = useState<CategoriesType[]>(featured);
   const [categories, setCategories] = useState<string[]>(allCategories);
   useEffect(() => {
