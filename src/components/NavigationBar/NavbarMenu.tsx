@@ -36,6 +36,7 @@ import {
   IconShoppingCart,
 } from '@tabler/icons';
 import IconCloseModal from 'components/Icons/IconCloseModal';
+import NextImage from 'next/image';
 import { BsCart3 } from 'react-icons/bs';
 import { MdClose } from 'react-icons/md';
 import { useClickOutside, useDebouncedValue } from '@mantine/hooks';
@@ -47,6 +48,7 @@ import { useAppSelector } from 'state/hooks';
 import { CartState, cartState } from 'state/features/cartItem/cartSlice';
 import BlogSearchItem from './BlogSearchItem';
 import { ColorSchemeToggle } from '../ColorSchemeToggle';
+import logo from '../../images/logo.svg';
 
 const HeaderComponent = styled(Box as any)<{
   scrollDirection: string;
@@ -291,8 +293,8 @@ function NavbarMenu() {
         <Container size="xl">
           <Flex align={'center'} justify={'space-between'} py={3}>
             <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-              <Image
-                src={'/logo.png'}
+              <NextImage
+                src={logo}
                 alt="Girls 4 leadership Initiative"
                 height={70}
               />
