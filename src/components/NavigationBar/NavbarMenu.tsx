@@ -23,8 +23,8 @@ import {
   Button,
   Overlay,
   Divider,
+  Image,
 } from '@mantine/core';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import {
@@ -43,6 +43,8 @@ import { useApiServicesAppBlogSearchApiQuery } from 'state/services/blogsApi';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectShowCart, toggleShowCart } from 'state/features/nav/navSlice';
 import { RootState } from 'state/store';
+import { useAppSelector } from 'state/hooks';
+import { CartState, cartState } from 'state/features/cartItem/cartSlice';
 import BlogSearchItem from './BlogSearchItem';
 import { ColorSchemeToggle } from '../ColorSchemeToggle';
 import Logo from '../../images/logo.png';
@@ -118,6 +120,8 @@ const Cart = ({ showCart }: { showCart: boolean }) => {
   const handleClose = () => {
     dispatch(toggleShowCart({ showCart: false }));
   };
+  const cartItemState: CartState<any[]> = useAppSelector(cartState);
+
   return (
     <Box
       sx={{
@@ -179,6 +183,45 @@ const Cart = ({ showCart }: { showCart: boolean }) => {
           mt={10}
           color={colorScheme === 'dark' ? '#AFAFB0' : '#1A1B1E'}
         />
+        <Flex mt={100} align="center" justify={'center'}>
+          {cartItemState.cart?.length <= 0 && (
+            <Flex align="center" justify={'center'}>
+              <Box
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
+                <Image
+                  width={160}
+                  height={160}
+                  sx={{
+                    '& .mantine-Image-image': {
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    },
+                  }}
+                  alt="empty"
+                  src="https://res.cloudinary.com/rashot/image/upload/v1721926108/miniCartContentImage_sk4qjd.jpg"
+                />
+                <Text
+                  fw={700}
+                  mt={24}
+                  ta="center"
+                  color={colorScheme === 'dark' ? '#e0e0e1' : '#1A1B1E'}
+                >
+                  YOUR CART IS EMPTY.{' '}
+                </Text>
+                <Text fw={500} ta="center">
+                  GET MOVING ON A NEW ORDER NOW.
+                </Text>
+              </Box>
+            </Flex>
+          )}
+        </Flex>
       </Box>
     </Box>
   );

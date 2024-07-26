@@ -1,13 +1,15 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from 'state/store';
 
-type CartState<T> = {
-  cart: T[];
+export type CartState<T extends any[]> = {
+  cart: T;
   total: number;
   quantity: number;
 };
 
-const initialState: CartState<any> = {
+const initialState: CartState<any[]> = {
   cart: [],
   total: 0,
   quantity: 0,
@@ -57,6 +59,13 @@ const cartSlice = createSlice({
   },
 });
 
-export const { clearCartFunc, addItemToCartFunc } = cartSlice.actions;
+export const {
+  clearCartFunc,
+  addItemToCartFunc,
+  removeCartItemFunct,
+  toggleAmountFunc,
+} = cartSlice.actions;
+export const cartState = (state: RootState): CartState<Array<any>> =>
+  state.cartItem;
 
 export default cartSlice.reducer;

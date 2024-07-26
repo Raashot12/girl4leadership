@@ -1,12 +1,13 @@
+/* eslint-disable import/no-cycle */
 import { configureStore } from '@reduxjs/toolkit';
 import navReducer from './features/nav/navSlice';
-import cartReducer from './features/cart/cartSlice';
 import { baseApi as api } from './services/baseApi';
+import cartSliceFunc from './features/cartItem/cartSlice';
 
 const store = configureStore({
   reducer: {
     nav: navReducer,
-    cart: cartReducer,
+    cartItem: cartSliceFunc,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>
