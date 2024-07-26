@@ -47,7 +47,6 @@ import { useAppSelector } from 'state/hooks';
 import { CartState, cartState } from 'state/features/cartItem/cartSlice';
 import BlogSearchItem from './BlogSearchItem';
 import { ColorSchemeToggle } from '../ColorSchemeToggle';
-import Logo from '../../images/logo.png';
 
 const HeaderComponent = styled(Box as any)<{
   scrollDirection: string;
@@ -293,7 +292,7 @@ function NavbarMenu() {
           <Flex align={'center'} justify={'space-between'} py={3}>
             <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
               <Image
-                src={Logo}
+                src={'/logo.png'}
                 alt="Girls 4 leadership Initiative"
                 height={70}
               />
