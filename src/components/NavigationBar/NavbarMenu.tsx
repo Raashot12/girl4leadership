@@ -178,7 +178,7 @@ const Cart = ({ showCart }: { showCart: boolean }) => {
           zIndex: 1000,
         }}
         ref={ref}
-        w={{ base: '70vw', md: '40vw', lg: '30vw' }}
+        w={{ base: '85vw', md: '50vw', lg: '30vw' }}
       >
         {' '}
         <Flex
