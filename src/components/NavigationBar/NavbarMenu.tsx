@@ -112,6 +112,30 @@ const navMenu = [
   },
 ];
 
+const BtnWhite = styled.div`
+  border: 1px solid #635e68 !important;
+  display: inline-block;
+  padding: 0px 30px;
+  background: white;
+  line-height: 40px;
+  color: #635e68;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  -webkit-transition: all 300ms linear 0s;
+  -o-transition: all 300ms linear 0s;
+  transition: all 300ms linear 0s;
+  border-radius: 10px;
+  &:hover {
+    color: #635e68;
+    background: #f5f5f5;
+    border-color: #e25d24;
+  }
+  @media (max-width: 567px) {
+    padding: 0px 16px;
+  }
+`;
+
 const Cart = ({ showCart }: { showCart: boolean }) => {
   const dispatch = useDispatch();
   const { colorScheme } = useMantineColorScheme();
@@ -122,7 +146,7 @@ const Cart = ({ showCart }: { showCart: boolean }) => {
     dispatch(toggleShowCart({ showCart: false }));
   };
   const cartItemState: CartState<any[]> = useAppSelector(cartState);
-
+  const router = useRouter();
   return (
     <Box
       sx={{
@@ -165,10 +189,28 @@ const Cart = ({ showCart }: { showCart: boolean }) => {
           columnGap={20}
         >
           <ActionIcon>
-            <BsCart3
-              size={19}
-              color={colorScheme === 'dark' ? 'white' : 'black'}
-            />
+            <Box pos={'relative'}>
+              <BsCart3
+                size={20}
+                color={colorScheme === 'dark' ? 'white' : 'black'}
+              />
+              <Flex
+                sx={{
+                  background: '#E25D24',
+                  height: 10,
+                  width: 10,
+                  borderRadius: '50%',
+                  position: 'absolute',
+                  top: -2,
+                  right: -4,
+                }}
+                fz={10}
+                fw={700}
+                align={'center'}
+                justify={'center'}
+                color="white"
+              ></Flex>
+            </Box>
           </ActionIcon>
           <Text fw={600} color={colorScheme === 'dark' ? 'white' : 'black'}>
             REVIEW YOUR CART
@@ -216,9 +258,18 @@ const Cart = ({ showCart }: { showCart: boolean }) => {
                 >
                   YOUR CART IS EMPTY.{' '}
                 </Text>
-                <Text fw={500} ta="center">
+                <Text fw={500} ta="center" mb={50}>
                   GET MOVING ON A NEW ORDER NOW.
                 </Text>
+
+                <BtnWhite
+                  onClick={() => {
+                    router.push('/merch-collection');
+                    handleClose();
+                  }}
+                >
+                  Go to shop
+                </BtnWhite>
               </Box>
             </Flex>
           )}
@@ -366,11 +417,31 @@ function NavbarMenu() {
                 }}
                 onClick={handleCartToggle}
               >
-                <IconShoppingCart
-                  fontWeight={400}
-                  cursor={'pointer'}
-                  size="18"
-                />
+                <Box pos={'relative'}>
+                  <IconShoppingCart
+                    fontWeight={400}
+                    cursor={'pointer'}
+                    size="18"
+                  />
+                  <Flex
+                    sx={{
+                      background: '#E25D24',
+                      height: 10,
+                      width: 10,
+                      borderRadius: '50%',
+                      position: 'absolute',
+                      paddingLeft: 2,
+                      paddingRight: 2,
+                      top: -10,
+                      right: -10,
+                      color: 'white !important',
+                    }}
+                    fz={10}
+                    fw={700}
+                    align={'center'}
+                    justify={'center'}
+                  ></Flex>
+                </Box>
               </ActionIcon>
               <ColorSchemeToggle />
             </Box>
@@ -448,11 +519,31 @@ function NavbarMenu() {
                   }}
                   onClick={handleCartToggle}
                 >
-                  <IconShoppingCart
-                    fontWeight={400}
-                    cursor={'pointer'}
-                    size="18"
-                  />
+                  <Box pos={'relative'}>
+                    <IconShoppingCart
+                      fontWeight={400}
+                      cursor={'pointer'}
+                      size="18"
+                    />
+                    <Flex
+                      sx={{
+                        background: '#E25D24',
+                        height: 10,
+                        width: 10,
+                        borderRadius: '50%',
+                        position: 'absolute',
+                        paddingLeft: 2,
+                        paddingRight: 2,
+                        top: -10,
+                        right: -10,
+                        color: 'white !important',
+                      }}
+                      fz={10}
+                      fw={700}
+                      align={'center'}
+                      justify={'center'}
+                    ></Flex>
+                  </Box>
                 </ActionIcon>
                 <ColorSchemeToggle />
               </Group>
