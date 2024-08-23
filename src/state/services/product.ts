@@ -24,21 +24,23 @@ interface Image {
 
 interface RecordFields {
   Description?: string;
-  'Product Category'?: string;
-  'Publish Date'?: string;
-  'Featured Image'?: Image[];
+  ProductCategory?: string;
+  PublishDate?: string;
+  FeaturedImage?: Image[];
   Price?: number;
-  'Seo keywords'?: string[];
+  Seokeywords?: string[];
   Tags?: string[];
   Likes?: number;
-  'Product Name'?: string;
-  'Product Details'?: string;
-  'Featured Product'?: string[];
-  'Available Colors'?: string[];
-  'Product Images'?: Image[];
+  Categories: string;
+  IsSalesTag: boolean;
+  ProductName?: string;
+  ProductDetails?: string;
+  FeaturedProduct?: string[];
+  AvailableColors?: string[];
+  ProductImages?: Image[];
   currency?: string;
 }
-interface Record {
+export interface Record {
   id: string;
   createdTime: string;
   fields: RecordFields;

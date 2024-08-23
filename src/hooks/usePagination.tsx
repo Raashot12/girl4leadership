@@ -19,7 +19,7 @@ interface IPaginationHook {
 export const usePagination = (initialState: any): IPaginationHook => {
   const { itemsPerPage, data, startFrom } = initialState;
   const perPage = itemsPerPage || 10;
-  const pages = Math.ceil(data.length / perPage);
+  const pages = Math.ceil((data?.length ?? (0 as number)) / perPage);
   const pagination = [];
   const [currentPage, setCurrentPage] = useState(
     startFrom <= pages ? startFrom : 1

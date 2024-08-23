@@ -19,14 +19,10 @@ import { useForm, zodResolver } from '@mantine/form';
 import { z } from 'zod';
 import axios, { AxiosError } from 'axios';
 import Swal from 'sweetalert2';
-import { getAllBlogs } from 'lib/blog';
-import { BlogIPRops } from 'types/blog';
+import { useApiServicesAppBlogSearchApiQuery } from 'state/services/blogsApi';
 
-interface BlogPageProps {
-  blogs: BlogIPRops[];
-}
 const text = 'Our Blog';
-const BlogPage: React.FC<BlogPageProps> = ({ blogs }) => {
+const BlogPage: React.FC = () => {
   const addInviteSchema = z.object({
     emailAddress: z
       .string()
@@ -73,6 +69,7 @@ const BlogPage: React.FC<BlogPageProps> = ({ blogs }) => {
       setIsubmitting(false);
     }
   };
+  const { data, isLoading, isError } = useApiServicesAppBlogSearchApiQuery({});
 
   return (
     <Layout pageTitle="Blog">
@@ -155,7 +152,14 @@ const BlogPage: React.FC<BlogPageProps> = ({ blogs }) => {
             </Box>
           </Container>
         </Flex>
-        <Blog blogs={blogs} />
+        {isError ? (
+          <Box my={50} fz={17} fw={700} sx={{ color: 'red' }} ta={'center'}>
+            Oooop! An unexpected error occurred{' '}
+          </Box>
+        ) : (
+          <Blog blogs={data?.records} isLoading={isLoading} />
+        )}
+
         <Container size={'xl'}>
           <Box
             component="form"
@@ -216,14 +220,5 @@ const BlogPage: React.FC<BlogPageProps> = ({ blogs }) => {
     </Layout>
   );
 };
-
-export async function getStaticProps() {
-  const blogs = getAllBlogs();
-  return {
-    props: {
-      blogs,
-    },
-  };
-}
 
 export default BlogPage;

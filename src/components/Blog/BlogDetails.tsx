@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   useMantineColorScheme,
@@ -9,20 +9,23 @@ import {
   Text,
   Divider,
   Group,
+  Skeleton,
 } from '@mantine/core';
-import DisComments from 'components/Discussion/DisqusComments';
 import { BsFacebook, BsTwitter } from 'react-icons/bs';
 import { FaLinkedin } from 'react-icons/fa';
 import { IoIosShareAlt } from 'react-icons/io';
+import { RiWhatsappFill } from 'react-icons/ri';
+import { formatBlogDate } from 'util/dates';
+import { marked } from 'marked';
+import { IconClock, IconMessage } from '@tabler/icons';
+import { Record } from 'state/services/blogsApi';
+import dynamic from 'next/dynamic';
 import {
-  TwitterShareButton,
   FacebookShareButton,
   LinkedinShareButton,
-} from 'react-share';
-import { BlogIPRops } from 'types/blog';
-import { formatDateDecampCms } from 'util/dates';
-import ReactMarkdown from 'react-markdown';
-import { IconClock } from '@tabler/icons';
+  TwitterShareButton,
+  WhatsappShareButton,
+} from 'next-share';
 
 const BgColor = styled(Box as any)`
   & iframe {
@@ -32,16 +35,47 @@ const BgColor = styled(Box as any)`
       theme.colorScheme === 'dark' ? '#1A1B1E !important' : 'white !important'};
   }
 `;
-const BlogDetails = ({ singleBlogPost }: { singleBlogPost: BlogIPRops }) => {
+const BlogDetails = ({
+  singleBlogPost,
+  isLoading,
+}: {
+  singleBlogPost: Record;
+  isLoading: boolean;
+}) => {
   const { colorScheme } = useMantineColorScheme();
+  const [showComments, setShowComments] = useState(false);
+  const result = `https://girls4leadership.org/${singleBlogPost?.fields?.slug}/${singleBlogPost?.id}`;
+  const urlDecoded = (info: string) => {
+    const data = decodeURI(info);
+    return data;
+  };
+  const disqusConfig = {
+    shortname: 'girls4leadership-1', // replace with your Disqus shortname
+    config: {
+      identifier: `${singleBlogPost?.fields?.slug}/${singleBlogPost?.id}`,
+      title: singleBlogPost?.fields?.Title,
+    },
+  };
+
+  const DiscussionEmbed = dynamic(
+    () => import('disqus-react').then((mod) => mod.DiscussionEmbed),
+    { ssr: false }
+  );
+
   return (
     <>
       <Box mt={90} pb={50} pt={30}>
         <Box>
-          <Box sx={{ textAlign: 'center' }} mb={40}>
-            <Image
-              src={singleBlogPost?.authorAvatar}
-              alt={singleBlogPost?.title}
+          <Flex
+            justify={'center'}
+            direction={'column'}
+            align={'center'}
+            mx={'auto'}
+            mb={40}
+          >
+            <Skeleton
+              visible={isLoading}
+              w={'fit-content'}
               sx={{
                 '& .mantine-Image-image': {
                   borderRadius: '50%',
@@ -53,41 +87,66 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: BlogIPRops }) => {
                     'rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px',
                 },
               }}
-            />
-            <Text
-              fz={18}
-              lh={'1.5'}
-              color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
-              fw={500}
             >
-              {singleBlogPost?.author}
-            </Text>{' '}
-            <Group align="center" sx={{ justifyContent: 'center' }} spacing={5}>
-              <IconClock color="#999" />
+              <Image
+                src={singleBlogPost?.fields?.AuthorImage?.[0]?.url}
+                alt={singleBlogPost?.id}
+                sx={{
+                  '& .mantine-Image-image': {
+                    borderRadius: '50%',
+                    height: '65px !important',
+                    width: '65px !important',
+                    marginRight: 'auto !important',
+                    marginLeft: 'auto !important',
+                    boxShadow:
+                      'rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px',
+                  },
+                }}
+              />
+            </Skeleton>
+            <Skeleton visible={isLoading} w={'fit-content'} mt={10}>
               <Text
-                fz={'0.975em'}
+                fz={18}
+                lh={'1.5'}
                 color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
-                fw={400}
+                fw={500}
               >
-                {formatDateDecampCms(singleBlogPost?.date)}
-              </Text>
-            </Group>
-          </Box>
+                {singleBlogPost?.fields?.Author}
+              </Text>{' '}
+            </Skeleton>
+            <Skeleton visible={isLoading} w={'fit-content'} mt={10}>
+              <Group
+                align="center"
+                sx={{ justifyContent: 'center' }}
+                spacing={5}
+              >
+                <IconClock color="#999" />
+                <Text
+                  fz={'0.975em'}
+                  color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
+                  fw={400}
+                >
+                  {formatBlogDate(singleBlogPost?.fields?.TimeStamp)}
+                </Text>
+              </Group>
+            </Skeleton>
+          </Flex>
           <Box mb={25}>
-            <Text
-              sx={{ textAlign: 'center' }}
-              fz={{ base: 25, sm: 34, md: 40 }}
-              lh={'1.2'}
-              fw={700}
-              color={colorScheme === 'dark' ? '#c4c4c4' : '#051438'}
-            >
-              {singleBlogPost?.title}
-            </Text>{' '}
+            <Skeleton visible={isLoading} w={'fit-content'} mt={16} mb={25}>
+              <Text
+                sx={{ textAlign: 'center' }}
+                fz={{ base: 25, sm: 34, md: 40 }}
+                lh={'1.2'}
+                fw={700}
+                color={colorScheme === 'dark' ? '#c4c4c4' : '#051438'}
+              >
+                {singleBlogPost?.fields?.Title}
+              </Text>{' '}
+            </Skeleton>
           </Box>
-
-          <Image
-            src={singleBlogPost?.thumbnail}
-            alt={singleBlogPost?.title}
+          <Skeleton
+            visible={isLoading}
+            w={'fit-content'}
             sx={{
               '& .mantine-Image-image': {
                 borderRadius: '10px',
@@ -97,19 +156,41 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: BlogIPRops }) => {
                   'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
               },
             }}
-          />
+            mt={16}
+            mb={25}
+          >
+            <Image
+              src={singleBlogPost?.fields?.FeaturedImage?.[0]?.url}
+              alt={singleBlogPost?.fields?.slug}
+              sx={{
+                '& .mantine-Image-image': {
+                  borderRadius: '10px',
+                  height: '100%',
+                  width: '100%',
+                  boxShadow:
+                    'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+                },
+              }}
+            />
+          </Skeleton>
         </Box>
         <Box mt={20}>
-          <Box
-            component="div"
-            fz={{ base: '1rem', sm: '1.25rem' }}
-            mt={10}
-            lh={'1.5'}
-            fw={300}
-            color={colorScheme === 'dark' ? '#c4c4c4' : '#888'}
-          >
-            <ReactMarkdown>{singleBlogPost.body}</ReactMarkdown>
-          </Box>
+          <Skeleton visible={isLoading} w={'fit-content'} mt={16} mb={25}>
+            <Box
+              fz={{ base: '1rem', lg: '1.1rem' }}
+              component="div"
+              style={{
+                color: colorScheme === 'dark' ? '#d6d5d5' : '#3b3a3a',
+                marginTop: 10,
+                lineHeight: '1.8',
+              }}
+              dangerouslySetInnerHTML={{
+                __html: marked(
+                  singleBlogPost?.fields?.Content.trim() as string
+                ) as string,
+              }}
+            ></Box>
+          </Skeleton>
         </Box>
 
         <Divider orientation="horizontal" mt={40} />
@@ -126,31 +207,44 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: BlogIPRops }) => {
               color={colorScheme === 'dark' ? '#c4c4c4' : '#888893'}
             />
           </Flex>
-          <Flex mt={20} align="center" columnGap={20}>
-            <FacebookShareButton
-              url={`https://girls4leadership.org/blog/${singleBlogPost?.slug}`}
-              title={singleBlogPost?.title}
-              quote={'フェイスブックはタイトルが付けれるようです'}
-              hashtag={'#hashtag'}
-              style={{ display: 'flex', alignItems: 'center' }}
+          <Flex justify={'space-between'} align={'center'}>
+            <Flex mt={10} align="center" columnGap={20}>
+              <FacebookShareButton
+                url={` ${urlDecoded(result)}`}
+                title={singleBlogPost?.fields?.Title}
+              >
+                <BsFacebook size={24} className="rounded-full" />
+              </FacebookShareButton>
+              <WhatsappShareButton
+                url={`${urlDecoded(result)}`}
+                title={singleBlogPost?.fields?.Title}
+              >
+                <RiWhatsappFill size={24} className="rounded-full" />
+              </WhatsappShareButton>
+              <LinkedinShareButton
+                url={`${urlDecoded(result)}`}
+                title={singleBlogPost?.fields?.Title}
+              >
+                <FaLinkedin size={24} className="rounded-full" />
+              </LinkedinShareButton>
+              <TwitterShareButton
+                url={` ${urlDecoded(result)}`}
+                title={singleBlogPost?.fields?.Title}
+              >
+                <BsTwitter size={24} className="rounded-full" />
+              </TwitterShareButton>
+            </Flex>
+            <Flex
+              sx={{ cursor: 'pointer' }}
+              columnGap={10}
+              fw={800}
+              onClick={() => {
+                setShowComments(!showComments);
+              }}
             >
-              <BsFacebook cursor={'pointer'} size={20} />
-            </FacebookShareButton>
-            <TwitterShareButton
-              title={singleBlogPost?.title}
-              url={`https://girls4leadership.org/blog/${singleBlogPost?.slug}`}
-              hashtags={['girls4leadership', 'news']}
-              style={{ display: 'flex', alignItems: 'center' }}
-            >
-              <BsTwitter cursor={'pointer'} size={20} />
-            </TwitterShareButton>
-            <LinkedinShareButton
-              title={singleBlogPost?.title}
-              url={`https://girls4leadership.org/blog/${singleBlogPost?.slug}`}
-              style={{ display: 'flex', alignItems: 'center' }}
-            >
-              <FaLinkedin cursor={'pointer'} size={20} />
-            </LinkedinShareButton>
+              <Text> {!showComments ? 'Show' : 'Hide'} comment</Text>
+              <IconMessage />
+            </Flex>
           </Flex>
         </Box>
         <BgColor
@@ -163,10 +257,8 @@ const BlogDetails = ({ singleBlogPost }: { singleBlogPost: BlogIPRops }) => {
                 : '#fffff !important',
           }}
         >
-          <DisComments
-            postTitle={singleBlogPost?.title}
-            postSlug={singleBlogPost?.slug}
-          />
+          {/* <DiscussionEmbed  /> */}
+          {showComments && <DiscussionEmbed {...disqusConfig} />}
         </BgColor>
       </Box>
     </>

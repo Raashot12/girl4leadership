@@ -1,24 +1,42 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
-import { Box, Text, Container, Group, Image, Grid, Flex } from '@mantine/core';
+import {
+  Box,
+  Text,
+  Container,
+  Group,
+  Image,
+  Grid,
+  Flex,
+  Skeleton,
+} from '@mantine/core';
 import Autoplay from 'embla-carousel-autoplay';
 import { Carousel } from '@mantine/carousel';
 import React, { useRef } from 'react';
 import { usePagination } from 'hooks/usePagination';
 import Pagination from 'components/Pagination';
 import Link from 'next/link';
-import { BlogIPRops } from 'types/blog';
-import { formatDateDecampCms } from 'util/dates';
+import { formatBlogDate } from 'util/dates';
 import { IconClock } from '@tabler/icons';
+import { Record } from 'state/services/blogsApi';
 import Popular from './Popular';
+import { fakeData } from './data';
 
-const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
+const Blog = ({
+  blogs,
+  isLoading,
+}: {
+  blogs: Record[];
+  isLoading: boolean;
+}) => {
   const autoplay = useRef(Autoplay({ delay: 3000 }));
-  const trendingPost = blogs?.filter((value) => value?.isFeatured);
+  const trendingPost = isLoading
+    ? fakeData?.filter((value) => value?.fields?.isFeatured)
+    : blogs?.filter((value) => value?.fields?.isFeatured);
   const { slicedData, pagination, prevPage, nextPage, changePage } =
     usePagination({
       itemsPerPage: 4,
-      data: blogs,
+      data: isLoading ? fakeData : (blogs as Record[]),
       startFrom: 1,
     });
 
@@ -57,7 +75,7 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
           {trendingPost &&
             trendingPost.map((value) => {
               return (
-                <React.Fragment key={value?.contentDescription}>
+                <React.Fragment key={value?.fields?.Content}>
                   <Carousel.Slide
                     sx={{
                       '.mantine-Carousel-viewport': {
@@ -65,7 +83,7 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                       },
                     }}
                   >
-                    <Link href={`/blog/${value.slug}`}>
+                    <Link href={`/blog/${value.fields?.slug}/${value?.id}`}>
                       <Flex
                         align={'center'}
                         columnGap={50}
@@ -79,85 +97,137 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                           }}
                           w={{ base: '100%', md: '50%' }}
                         >
-                          <img
-                            src={value?.thumbnail}
-                            alt={value?.contentDescription}
-                            loading="eager"
+                          <Skeleton
+                            visible={isLoading}
+                            w={'fit-content'}
                             style={{
                               height: '100%',
                               width: '100%',
                               borderRadius: 7,
                               objectFit: 'cover',
                             }}
-                          />
+                          >
+                            <img
+                              src={value?.fields?.FeaturedImage[0]?.url}
+                              alt={value.fields?.slug}
+                              loading="eager"
+                              style={{
+                                height: '100%',
+                                width: '100%',
+                                borderRadius: 7,
+                                objectFit: 'cover',
+                              }}
+                            />
+                          </Skeleton>
                         </Box>
                         <Box w={{ base: '100%', md: '50%' }}>
-                          <Text>
-                            <span style={{ fontWeight: '600' }}>
-                              {value?.category}
-                            </span>{' '}
-                            <Text>
-                              <Group spacing={5}>
-                                <IconClock color="#999" />
-                                <span
-                                  style={{
-                                    color: ' #999',
-                                    fontWeight: 500,
-                                    fontSize: 14,
-                                  }}
-                                >
-                                  {formatDateDecampCms(value?.date)}
-                                </span>
-                              </Group>
+                          <Flex align={'center'} columnGap={20}>
+                            <Skeleton
+                              visible={isLoading}
+                              w={'fit-content'}
+                              mt={isLoading ? 10 : 0}
+                            >
+                              <span style={{ fontWeight: '600' }}>
+                                {value?.fields?.Category}
+                              </span>
+                            </Skeleton>
+                            <Skeleton
+                              visible={isLoading}
+                              w={'fit-content'}
+                              mt={isLoading ? 10 : 0}
+                            >
+                              <Text>
+                                <Group spacing={5}>
+                                  <IconClock color="#999" />
+                                  <span
+                                    style={{
+                                      color: ' #999',
+                                      fontWeight: 500,
+                                      fontSize: 14,
+                                    }}
+                                  >
+                                    {formatBlogDate(value?.fields?.TimeStamp)}
+                                  </span>
+                                </Group>
+                              </Text>
+                            </Skeleton>
+                          </Flex>
+                          <Skeleton
+                            visible={isLoading}
+                            w={'fit-content'}
+                            mt={isLoading ? 10 : 0}
+                          >
+                            <Text
+                              fz={{ base: 30, md: 40 }}
+                              fw={700}
+                              lh={1.2}
+                              mt={15}
+                              sx={{ whiteSpace: 'normal' }}
+                            >
+                              {value?.fields?.Title}
                             </Text>
-                          </Text>
-                          <Text
-                            fz={{ base: 30, md: 40 }}
-                            fw={700}
-                            lh={1.2}
-                            mt={15}
-                            sx={{ whiteSpace: 'normal' }}
+                          </Skeleton>
+
+                          <Skeleton
+                            visible={isLoading}
+                            w={'fit-content'}
+                            mt={isLoading ? 10 : 0}
                           >
-                            {value?.title}
-                          </Text>
-                          <Text
-                            fz={14}
-                            fw={400}
-                            lh={1.5}
-                            mt={15}
-                            color="#999"
-                            sx={{ whiteSpace: 'normal' }}
-                          >
-                            {value?.contentDescription?.substring(0, 400)}...
-                          </Text>
+                            <Text
+                              fz={14}
+                              fw={400}
+                              lh={1.5}
+                              mt={15}
+                              color="#999"
+                              sx={{ whiteSpace: 'normal' }}
+                            >
+                              {value?.fields?.Subtitle?.substring(0, 400)}...
+                            </Text>
+                          </Skeleton>
+
                           <Flex
                             mt={20}
                             id="blogs"
                             align={'center'}
                             columnGap={16}
                           >
-                            <Image
-                              src={value?.authorAvatar}
-                              alt="profile display picture"
-                              h={45}
-                              width={45}
-                              sx={{
-                                '& .mantine-Image-image': {
-                                  borderRadius: '50%',
-                                  height: '45px !important',
-                                  width: '45px !important',
-                                  boxShadow:
-                                    'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
-                                },
-                              }}
-                            />
+                            <Skeleton
+                              visible={isLoading}
+                              w={'fit-content'}
+                              mt={isLoading ? 10 : 0}
+                            >
+                              <Image
+                                src={value?.fields?.AuthorImage?.[0]?.url}
+                                alt="profile display picture"
+                                h={45}
+                                width={45}
+                                sx={{
+                                  '& .mantine-Image-image': {
+                                    borderRadius: '50%',
+                                    height: '45px !important',
+                                    width: '45px !important',
+                                    boxShadow:
+                                      'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+                                  },
+                                }}
+                              />
+                            </Skeleton>
+
                             <Box>
-                              <Text fw={700} lh={1}>
-                                {value?.author}
-                              </Text>
-                              <Text fw={14} color="#888">
-                                {value?.profession}
-                              </Text>
+                              <Skeleton visible={isLoading} w={'fit-content'}>
+                                <Text fw={700} lh={1}>
+                                  {value?.fields?.Author}
+                                </Text>
+                              </Skeleton>
+                              <Skeleton
+                                visible={isLoading}
+                                w={'fit-content'}
+                                mt={isLoading ? 10 : 0}
+                              >
+                                <Text fw={14} color="#888">
+                                  {value?.fields?.Profession}
+                                </Text>
+                              </Skeleton>
                             </Box>
                           </Flex>
                         </Box>
@@ -171,7 +241,7 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
         <Box mt={50}>
           <Grid gutter={45}>
             {slicedData &&
-              slicedData.map((value: BlogIPRops, index) => {
+              slicedData.map((value: Record, index) => {
                 return (
                   <Grid.Col
                     xs={12}
@@ -180,7 +250,7 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                     key={index}
                     sx={{ cursor: 'pointer' }}
                   >
-                    <Link href={`/blog/${value?.slug}`}>
+                    <Link href={`/blog/${value.fields?.slug}/${value?.id}`}>
                       <Box
                         sx={{
                           width: '100%',
@@ -188,10 +258,9 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                           position: 'relative',
                         }}
                       >
-                        <img
-                          src={value?.thumbnail}
-                          alt={value?.contentDescription}
-                          loading="eager"
+                        <Skeleton
+                          visible={isLoading}
+                          w={'fit-content'}
                           style={{
                             height: '100%',
                             width: '100%',
@@ -200,69 +269,116 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
                             boxShadow:
                               'rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px',
                           }}
-                        />
-                      </Box>
-                      <Box mt={25}>
-                        <Text>
-                          <span style={{ fontWeight: '600' }}>
-                            {value?.category}
-                          </span>{' '}
-                          <Text>
-                            <Group spacing={5}>
-                              <IconClock color="#999" />
-                              <span
-                                style={{
-                                  color: ' #999',
-                                  fontWeight: 500,
-                                  fontSize: 14,
-                                }}
-                              >
-                                {formatDateDecampCms(value?.date)}
-                              </span>
-                            </Group>
-                          </Text>
-                        </Text>
-                        <Text
-                          fz={{ base: 18 }}
-                          fw={700}
-                          lh={1.2}
-                          mt={14}
-                          sx={{ whiteSpace: 'normal' }}
                         >
-                          {value?.title}
-                        </Text>
-                        <Text
-                          fz={14}
-                          fw={400}
-                          lh={1.5}
-                          mt={15}
-                          color="#999"
-                          sx={{ whiteSpace: 'normal' }}
-                        >
-                          {value?.contentDescription?.substring(0, 150)}...
-                        </Text>
-                        <Group mt={20}>
-                          <Image
-                            src={value?.authorAvatar}
-                            alt="profile display picture"
-                            sx={{
-                              '& .mantine-Image-image': {
-                                borderRadius: '50%',
-                                height: '45px !important',
-                                width: '45px !important',
-                                boxShadow:
-                                  'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
-                              },
+                          <img
+                            src={value?.fields?.FeaturedImage[0]?.url}
+                            alt={value.fields?.slug}
+                            loading="eager"
+                            style={{
+                              height: '100%',
+                              width: '100%',
+                              borderRadius: '7px',
+                              objectFit: 'cover',
+                              boxShadow:
+                                'rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px',
                             }}
                           />
+                        </Skeleton>
+                      </Box>
+                      <Box mt={25}>
+                        <Skeleton
+                          visible={isLoading}
+                          w={'fit-content'}
+                          mt={isLoading ? 10 : 0}
+                        >
+                          <Text>
+                            <span style={{ fontWeight: '600' }}>
+                              {value?.fields?.Category}
+                            </span>{' '}
+                            <Text>
+                              <Group spacing={5}>
+                                <IconClock color="#999" />
+                                <span
+                                  style={{
+                                    color: ' #999',
+                                    fontWeight: 500,
+                                    fontSize: 14,
+                                  }}
+                                >
+                                  {formatBlogDate(value?.fields?.TimeStamp)}
+                                </span>
+                              </Group>
+                            </Text>
+                          </Text>
+                        </Skeleton>
+                        <Skeleton
+                          visible={isLoading}
+                          w={'fit-content'}
+                          mt={isLoading ? 10 : 0}
+                        >
+                          <Text
+                            fz={{ base: 18 }}
+                            fw={700}
+                            lh={1.2}
+                            mt={14}
+                            sx={{ whiteSpace: 'normal' }}
+                          >
+                            {value?.fields?.Title}
+                          </Text>
+                        </Skeleton>
+                        <Skeleton
+                          visible={isLoading}
+                          w={'fit-content'}
+                          mt={isLoading ? 10 : 0}
+                        >
+                          {' '}
+                          <Text
+                            fz={14}
+                            fw={400}
+                            lh={1.5}
+                            mt={15}
+                            color="#999"
+                            sx={{ whiteSpace: 'normal' }}
+                          >
+                            {value?.fields?.Subtitle?.substring(0, 120)}...
+                          </Text>
+                        </Skeleton>
 
+                        <Group mt={20}>
+                          <Skeleton
+                            visible={isLoading}
+                            w={'fit-content'}
+                            mt={isLoading ? 10 : 0}
+                          >
+                            <Image
+                              src={value?.fields?.AuthorImage?.[0]?.url}
+                              alt="profile display picture"
+                              sx={{
+                                '& .mantine-Image-image': {
+                                  borderRadius: '50%',
+                                  height: '45px !important',
+                                  width: '45px !important',
+                                  boxShadow:
+                                    'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px',
+                                },
+                              }}
+                            />
+                          </Skeleton>
                           <Box>
-                            <Text fw={700} lh={1}>
-                              {value?.author}
-                            </Text>
-                            <Text fw={14} color="#888">
-                              {value?.profession}
-                            </Text>
+                            <Skeleton visible={isLoading} w={'fit-content'}>
+                              <Text fw={700} lh={1}>
+                                {value?.fields?.Author}
+                              </Text>
+                            </Skeleton>
+                            <Skeleton
+                              visible={isLoading}
+                              w={'fit-content'}
+                              mt={isLoading ? 10 : 0}
+                            >
+                              <Text fw={14} color="#888">
+                                {value?.fields?.Profession}
+                              </Text>
+                            </Skeleton>
                           </Box>
                         </Group>
                       </Box>
@@ -282,7 +398,7 @@ const Blog = ({ blogs }: { blogs: BlogIPRops[] }) => {
         />
       </Container>
       <Box>
-        <Popular blogs={blogs} />
+        <Popular blogs={blogs} isLoading={isLoading} />
       </Box>
     </Box>
   );

@@ -3,12 +3,20 @@
 /* eslint-disable @next/next/no-img-element */
 import { useCallback, useEffect, useState } from 'react';
 import { Carousel, Embla } from '@mantine/carousel';
-import { Box, Group, Text, Flex, keyframes, Image } from '@mantine/core';
+import {
+  Box,
+  Group,
+  Text,
+  Flex,
+  keyframes,
+  Image,
+  Skeleton,
+} from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
-import { BlogIPRops } from 'types/blog';
-import { formatDateDecampCms } from 'util/dates';
+import { Record } from 'state/services/blogsApi';
+import { formatBlogDate } from 'util/dates';
 
 const progressForward = keyframes`
   0% {
@@ -45,7 +53,13 @@ const BoxFill = styled(Box as any)<{ scrollprogress: number }>`
   background: #e25d24;
   border-radius: 15px;
 `;
-function Popular({ blogs }: { blogs: BlogIPRops[] }) {
+function Popular({
+  blogs,
+  isLoading,
+}: {
+  blogs: Record[];
+  isLoading: boolean;
+}) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [embla, setEmbla] = useState<Embla | null>(null);
   const matches = useMediaQuery('(min-width: 1200px)', true, {
@@ -101,15 +115,15 @@ function Popular({ blogs }: { blogs: BlogIPRops[] }) {
           blogs.map((value, index) => {
             return (
               <Carousel.Slide
-                onClick={() => router.push(`/blog/${value?.slug}`)}
+                onClick={() =>
+                  router.push(`/blog/${value.fields?.slug}/${value?.id}`)
+                }
                 key={index}
                 sx={{ cursor: 'pointer' }}
               >
-                <img
-                  src={value?.thumbnail}
-                  alt={value?.title}
-                  sizes="cover"
-                  loading="eager"
+                <Skeleton
+                  visible={isLoading}
+                  w={'fit-content'}
                   style={{
                     maxWidth: '100%',
                     maxHeight: '300px',
@@ -119,12 +133,28 @@ function Popular({ blogs }: { blogs: BlogIPRops[] }) {
                     verticalAlign: 'middle',
                     objectFit: 'cover',
                   }}
-                />
+                >
+                  <img
+                    src={value?.fields?.FeaturedImage[0]?.url}
+                    alt={value.fields?.slug}
+                    sizes="cover"
+                    loading="eager"
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '300px',
+                      width: '100%',
+                      marginBottom: 30,
+                      borderRadius: 7,
+                      verticalAlign: 'middle',
+                      objectFit: 'cover',
+                    }}
+                  />
+                </Skeleton>
                 <Box w={'100%'}>
                   <Text>
                     <span style={{ fontWeight: '600' }}>
                       {' '}
-                      {value?.category}
+                      {value?.fields?.Category}
                     </span>{' '}
                     <span
                       style={{
@@ -133,7 +163,7 @@ function Popular({ blogs }: { blogs: BlogIPRops[] }) {
                         fontSize: 14,
                       }}
                     >
-                      {formatDateDecampCms(value?.date)}
+                      {formatBlogDate(value?.fields?.TimeStamp)}
                     </span>
                   </Text>
                   <Text
@@ -143,7 +173,7 @@ function Popular({ blogs }: { blogs: BlogIPRops[] }) {
                     mt={15}
                     sx={{ whiteSpace: 'normal' }}
                   >
-                    {value?.title}
+                    {value?.fields?.Title}
                   </Text>
                   <Text
                     fz={14}
@@ -153,26 +183,32 @@ function Popular({ blogs }: { blogs: BlogIPRops[] }) {
                     color="#999"
                     sx={{ whiteSpace: 'normal' }}
                   >
-                    {value?.contentDescription?.substring(0, 150)}...
+                    {value?.fields?.Subtitle.substring(0, 150)}...
                   </Text>
                   <Group mt={20} id="blogs">
-                    <Image
-                      src={value?.authorAvatar}
-                      alt="profile display picture"
-                      height={45}
-                      width={45}
-                      sx={{
-                        '& .mantine-Image-image': {
-                          borderRadius: '50%',
-                        },
-                      }}
-                    />
+                    <Skeleton
+                      visible={isLoading}
+                      w={'fit-content'}
+                      mt={isLoading ? 10 : 0}
+                    >
+                      <Image
+                        src={value?.fields?.AuthorImage?.[0]?.url}
+                        alt="profile display picture"
+                        height={45}
+                        width={45}
+                        sx={{
+                          '& .mantine-Image-image': {
+                            borderRadius: '50%',
+                          },
+                        }}
+                      />
+                    </Skeleton>
                     <Box>
                       <Text fw={700} lh={1}>
-                        {value?.author}
+                        {value?.fields?.Author}
                       </Text>
                       <Text fw={14} color="#888">
-                        {value?.profession}
+                        {value?.fields?.Profession}
                       </Text>
                     </Box>
                   </Group>

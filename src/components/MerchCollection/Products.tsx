@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Image, createStyles, Button } from '@mantine/core';
 import { LoaderAnimation } from 'components/Shared/ScreenLoader';
+import { Record } from 'state/services/product';
 import Product from './Product';
 
 const useStyles = createStyles(() => ({
@@ -25,7 +26,15 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-const Products = ({ categories, filterItems, product }) => {
+const Products = ({
+  categories,
+  filterItems,
+  product,
+}: {
+  categories: string[];
+  filterItems: (categories: string) => void;
+  product: Record[];
+}) => {
   const { classes } = useStyles();
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
@@ -107,9 +116,9 @@ const Products = ({ categories, filterItems, product }) => {
             },
           }}
         >
-          {product.map((item) => (
+          {product?.map((item) => (
             <React.Fragment key={item.id}>
-              <Product {...item} />
+              <Product item={item} />
             </React.Fragment>
           ))}
         </Box>

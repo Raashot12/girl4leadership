@@ -17,9 +17,11 @@ import {
   Flex,
   Group,
   Rating,
+  useMantineColorScheme,
 } from '@mantine/core';
 import {
   IconArrowsDiagonal,
+  IconBasket,
   IconCheck,
   IconCircleCheck,
   IconHeart,
@@ -33,6 +35,7 @@ import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import IconCloseModal from 'components/Icons/IconCloseModal';
 import { useRouter } from 'next/router';
+import { Record } from 'state/services/product';
 import { labels } from './staticData';
 
 const ReformedModal = styled(Modal)<{ colorMode?: string }>`
@@ -61,22 +64,14 @@ const SwiperSlideCustom = styled(SwiperSlide)`
   }
 `;
 const ScopeSwiper = styled(Swiper)``;
-const Product = ({
-  id,
-  bgImg,
-  isSale,
-  name,
-  amount,
-  modalCategories,
-  size,
-  color,
-}) => {
+const Product = ({ item }: { item: Record }) => {
   const [isHover, setIsHover] = useState(false);
   const [isLoading, setIsloading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [qty, setQty] = useState(1);
-  const [allProductImages, setAllProductImages] = useState(bgImg);
+  // const [allProductImages, setAllProductImages] = useState(bgImg);
   const matches = useMediaQuery('(max-width: 1024px)');
+  const { colorScheme } = useMantineColorScheme();
   const router = useRouter();
   const handleRouteToDetailedPage = (identifier: number) => {
     router.push(`/merch-collection/item/${identifier}`);
@@ -92,11 +87,11 @@ const Product = ({
           alignItems: 'center',
           position: 'relative',
         }}
-        onClick={() => handleRouteToDetailedPage(id)}
+        // onClick={() => handleRouteToDetailedPage(item)}
       >
         <Box
           sx={{
-            backgroundImage: `${`url(${allProductImages[0].image})`}`,
+            backgroundImage: `${`url(${item?.fields?.FeaturedImage?.[0]?.url})`}`,
             height: '353px',
             minWidth: '264px',
             backgroundPosition: 'center',
@@ -108,7 +103,7 @@ const Product = ({
             },
           }}
         >
-          {isSale && (
+          {item?.fields?.IsSalesTag && (
             <Box
               sx={{
                 background: '#eb5a46',
@@ -156,6 +151,87 @@ const Product = ({
             </Box>
           )}
         </Box>
+        <Box
+          sx={{
+            position: 'absolute',
+            right: '0',
+            bottom: '0px',
+            width: `100%`,
+          }}
+        >
+          {isHover && (
+            <Box
+              // onClick={(event: any) => {
+              //   setIsloading(true);
+              //   event.stopPropagation();
+              //   setTimeout(() => {
+              //     setIsloading(false);
+              //     setOpenModal(true);
+              //     return;
+              //   }, 1500);
+              // }}
+              sx={{
+                width: '100%',
+                background: '#ffff',
+                cursor: 'pointer',
+                borderBottomRightRadius: 10,
+                borderBottomLeftRadius: 10,
+              }}
+              py={10}
+              px={10}
+            >
+              <Box
+                sx={{
+                  textAlign: 'center',
+                  display: 'grid',
+                  placeItems: 'center',
+                }}
+              >
+                <Text
+                  sx={{
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    letterSpacing: '0.4px',
+                    color: '#051438',
+                  }}
+                >
+                  {item?.fields?.ProductName}
+                </Text>
+                <Text sx={{ color: '#eb5a46', fontWeight: 600 }}>
+                  ${item?.fields?.Price}
+                </Text>
+              </Box>
+              <Flex
+                mt={20}
+                align={'center'}
+                justify={'space-between'}
+                columnGap={20}
+                wrap={'nowrap'}
+              >
+                <Group spacing={4} align={'center'}>
+                  <IconBasket size={18} color="#051438" />
+                  <Text
+                    fz={14}
+                    fw={500}
+                    color={colorScheme === 'dark' ? '#051438' : '#051438'}
+                  >
+                    Add to cart
+                  </Text>
+                </Group>
+                <Group spacing={4} align={'center'}>
+                  <IconHeart size={18} color="#051438" />
+                  <Text
+                    fz={14}
+                    fw={500}
+                    color={colorScheme === 'dark' ? '#051438' : '#051438'}
+                  >
+                    Add to wishlist
+                  </Text>
+                </Group>
+              </Flex>
+            </Box>
+          )}
+        </Box>
         <Box sx={{ textAlign: 'center' }}>
           <Text
             sx={{
@@ -164,9 +240,11 @@ const Product = ({
               letterSpacing: '0.4px',
             }}
           >
-            {name}
+            {item?.fields?.ProductName}
           </Text>
-          <Text sx={{ color: '#eb5a46', fontWeight: 600 }}>${amount}</Text>
+          <Text sx={{ color: '#eb5a46', fontWeight: 600 }}>
+            ${item?.fields?.Price}
+          </Text>
         </Box>
       </Box>
       <ReformedModal
@@ -192,7 +270,7 @@ const Product = ({
               modules={[Navigation]}
               className="mySwiper"
             >
-              {bgImg.map((value) => {
+              {/* {bgImg.map((value) => {
                 return (
                   <SwiperSlideCustom
                     key={value.key}
@@ -206,7 +284,7 @@ const Product = ({
                     }}
                   ></SwiperSlideCustom>
                 );
-              })}
+              })} */}
             </ScopeSwiper>
           </Grid.Col>
 
@@ -237,7 +315,7 @@ const Product = ({
                 },
               }}
             >
-              {name}
+              {/* {fie} */}
             </Text>
             <Divider />
             <Text
@@ -248,7 +326,7 @@ const Product = ({
                 '@media (max-width:767px)': { margin: '5px 0' },
               }}
             >
-              ${amount}
+              {/* ${amount} */}
             </Text>
             <Box
               sx={{
@@ -307,7 +385,7 @@ const Product = ({
             <Box sx={{ marginTop: '18px' }}>
               <Text>Color</Text>
               <Group spacing={10} mb={16}>
-                {color.map((itemColor, index) => (
+                {/* {color.map((itemColor, index) => (
                   <Flex
                     align={'center'}
                     justify={'center'}
@@ -328,7 +406,7 @@ const Product = ({
                       display={index === 0 ? 'block' : 'none'}
                     />
                   </Flex>
-                ))}
+                ))} */}
               </Group>
             </Box>
             <Box sx={{ padding: '10px 0' }}>
@@ -339,7 +417,7 @@ const Product = ({
                 align={'center'}
                 columnGap={10}
               >
-                {size.map((itemSize: string, index) => (
+                {/* {size.map((itemSize: string, index) => (
                   <Text
                     component="span"
                     key={index}
@@ -362,7 +440,7 @@ const Product = ({
                   >
                     {itemSize}
                   </Text>
-                ))}
+                ))} */}
               </Flex>
             </Box>
             <Box sx={{ padding: '10px 0 20px' }}>
@@ -501,9 +579,9 @@ const Product = ({
                 <Box
                   sx={{ display: 'flex', columnGap: '10px', cursor: 'pointer' }}
                 >
-                  {modalCategories.map((modalCategory) => (
+                  {/* {modalCategories.map((modalCategory) => (
                     <Text key={modalCategory}>{modalCategory}</Text>
-                  ))}
+                  ))} */}
                 </Box>
               </Flex>
 
