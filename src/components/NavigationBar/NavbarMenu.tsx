@@ -45,6 +45,7 @@ import { selectShowCart, toggleShowCart } from 'state/features/nav/navSlice';
 import { RootState } from 'state/store';
 import { useAppSelector } from 'state/hooks';
 import { CartState, cartState } from 'state/features/cartItem/cartSlice';
+import useWishList from 'util/useWishList';
 import { ColorSchemeToggle } from '../ColorSchemeToggle';
 import logo from '../../images/logo.svg';
 
@@ -288,6 +289,7 @@ function NavbarMenu() {
   const [opened, setOpened] = useState(false);
   const { pathname, push } = useRouter();
   const dispatch = useDispatch();
+  const { wishlist } = useWishList();
 
   const handleCartToggle = () => {
     dispatch(toggleShowCart({ showCart: true }));
@@ -449,6 +451,7 @@ function NavbarMenu() {
                 rowGap={3}
                 sx={{ cursor: 'pointer' }}
                 onClick={() => push('/wishlist')}
+                pos={'relative'}
               >
                 <IconHeart
                   fontWeight={400}
@@ -464,6 +467,26 @@ function NavbarMenu() {
                 >
                   Wishlist
                 </Text>
+                {wishlist?.length >= 1 && (
+                  <Flex
+                    sx={{
+                      background: '#E25D24',
+                      height: 10,
+                      width: 10,
+                      borderRadius: '50%',
+                      position: 'absolute',
+                      paddingLeft: 2,
+                      paddingRight: 2,
+                      top: -1,
+                      right: 8,
+                      color: 'white !important',
+                    }}
+                    fz={10}
+                    fw={700}
+                    align={'center'}
+                    justify={'center'}
+                  ></Flex>
+                )}
               </Flex>
             </Box>
             <Burger
@@ -573,7 +596,8 @@ function NavbarMenu() {
                   justify={'center'}
                   rowGap={3}
                   sx={{ cursor: 'pointer' }}
-                  // onClick={() => push('/wishlist')}
+                  pos={'relative'}
+                  onClick={() => push('/wishlist')}
                 >
                   <IconHeart
                     fontWeight={400}
@@ -589,6 +613,26 @@ function NavbarMenu() {
                   >
                     Wishlist
                   </Text>
+                  {wishlist?.length >= 1 && (
+                    <Flex
+                      sx={{
+                        background: '#E25D24',
+                        height: 10,
+                        width: 10,
+                        borderRadius: '50%',
+                        position: 'absolute',
+                        paddingLeft: 2,
+                        paddingRight: 2,
+                        top: -10,
+                        right: -10,
+                        color: 'white !important',
+                      }}
+                      fz={10}
+                      fw={700}
+                      align={'center'}
+                      justify={'center'}
+                    ></Flex>
+                  )}
                 </Flex>
               </Group>
             </Box>

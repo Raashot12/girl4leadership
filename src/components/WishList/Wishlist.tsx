@@ -8,10 +8,12 @@ import {
   Stack,
   Text,
   useMantineColorScheme,
+  Image,
 } from '@mantine/core';
 import { IconArrowForward } from '@tabler/icons';
 import Link from 'next/link';
 import React from 'react';
+import useWishList from 'util/useWishList';
 // import useWishList from 'util/useWishList';
 
 const GridWrapperReportTemplateLayout = styled.div<{
@@ -56,7 +58,7 @@ const GridWrapperReportTemplateLayout = styled.div<{
 `;
 const Wishlist = () => {
   const { colorScheme } = useMantineColorScheme();
-  // const { wishlist, setWishlist } = useWishList();
+  const { wishlist, setWishlist } = useWishList();
   return (
     <Box mt={{ base: 110, lg: 140 }} mb={70}>
       <Center>
@@ -117,7 +119,6 @@ const Wishlist = () => {
           }}
         >
           <Box
-            pl={16}
             className="attribute-container report-name"
             fz={14}
             fw={600}
@@ -126,7 +127,6 @@ const Wishlist = () => {
             Item Info
           </Box>
           <Box
-            pl={16}
             className="attribute-container caret-col"
             fz={14}
             fw={600}
@@ -135,7 +135,6 @@ const Wishlist = () => {
             Price
           </Box>
           <Box
-            pl={16}
             className="attribute-container created-by"
             fz={14}
             fw={600}
@@ -144,7 +143,6 @@ const Wishlist = () => {
             Quantity
           </Box>
           <Box
-            pl={16}
             className="attribute-container creation-date-col"
             fz={14}
             fw={600}
@@ -153,7 +151,6 @@ const Wishlist = () => {
             Edit
           </Box>
           <Box
-            pl={16}
             className="attribute-container subtotal-col"
             fz={14}
             fw={700}
@@ -163,6 +160,44 @@ const Wishlist = () => {
           </Box>
         </GridWrapperReportTemplateLayout>
         <Divider mt={12} color={colorScheme ? '#DBE1E6' : 'white'} />
+        <GridWrapperReportTemplateLayout>
+          {wishlist?.map((product) => {
+            return (
+              <React.Fragment key={product?.id}>
+                <Box className="attribute-container report-name" py={16}>
+                  <Flex>
+                    <Box w={120} h={120}>
+                      <Image
+                        src={product?.fields?.FeaturedImage?.[0]?.url}
+                        w={120}
+                        height={120}
+                        // sx={{
+                        //   '.mantine-Image-image': {
+                        //     objectFit: 'cover',
+                        //   },
+                        // }}
+                        alt={product?.fields?.ProductName}
+                      />
+                    </Box>
+                  </Flex>
+                </Box>
+                <Box className="attribute-container caret-col" py={16}>
+                  {product?.fields?.currency}&nbsp;
+                  {product?.fields?.Price}
+                </Box>
+                <Box className="attribute-container created-by" py={16}>
+                  3
+                </Box>
+                <Box className="attribute-container creation-date-col" py={16}>
+                  4
+                </Box>
+                <Box className="attribute-container subtotal-col" py={16}>
+                  5
+                </Box>
+              </React.Fragment>
+            );
+          })}
+        </GridWrapperReportTemplateLayout>
       </Container>
     </Box>
   );

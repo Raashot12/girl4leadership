@@ -35,7 +35,7 @@ const Blog = ({
     : blogs?.filter((value) => value?.fields?.isFeatured);
   const { slicedData, pagination, prevPage, nextPage, changePage } =
     usePagination({
-      itemsPerPage: 4,
+      itemsPerPage: 3,
       data: isLoading ? fakeData : (blogs as Record[]),
       startFrom: 1,
     });

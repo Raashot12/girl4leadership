@@ -44,7 +44,7 @@ const BlogDetails = ({
 }) => {
   const { colorScheme } = useMantineColorScheme();
   const [showComments, setShowComments] = useState(false);
-  const result = `https://girls4leadership.org/${singleBlogPost?.fields?.slug}/${singleBlogPost?.id}`;
+  const result = `https://girls4leadership.org/blog/${singleBlogPost?.fields?.slug}/${singleBlogPost?.id}`;
   const urlDecoded = (info: string) => {
     const data = decodeURI(info);
     return data;

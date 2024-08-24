@@ -88,6 +88,11 @@ const Product = ({ item }: { item: Record }) => {
       return;
     }
     setWishlist((prev) => [...prev, value]);
+    Swal.fire(
+      `${value?.fields?.ProductName} added to wishlist`,
+      'You clicked the button!',
+      'success'
+    );
   };
   return (
     <>
