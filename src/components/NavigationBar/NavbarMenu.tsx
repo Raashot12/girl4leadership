@@ -337,9 +337,10 @@ function NavbarMenu() {
   return (
     <div style={{ position: 'relative' }}>
       <HeaderComponent
-        className={scrollHeight >= 140 ? 'global-nav--sticky' : ''}
+        className={scrollHeight >= 140 ? 'global-nav--sticky' : 'none'}
         position={scrollDirection}
         scrollheight={scrollHeight}
+        display={scrollHeight !== 0 && scrollHeight <= 139 ? 'none' : ''}
       >
         <Container size="xl">
           <Flex align={'center'} justify={'space-between'} py={3}>
