@@ -19,7 +19,6 @@ import {
   Center,
   Alert,
   Loader,
-  ScrollArea,
   Button,
   Overlay,
   Divider,
@@ -30,6 +29,7 @@ import styled from '@emotion/styled';
 import {
   IconAlertCircle,
   IconBucket,
+  IconHeart,
   IconNews,
   IconRefresh,
   IconSearch,
@@ -39,14 +39,12 @@ import IconCloseModal from 'components/Icons/IconCloseModal';
 import NextImage from 'next/image';
 import { BsCart3 } from 'react-icons/bs';
 import { MdClose } from 'react-icons/md';
-import { useClickOutside, useDebouncedValue } from '@mantine/hooks';
-import { useApiServicesAppBlogSearchApiQuery } from 'state/services/blogsApi';
+import { useClickOutside } from '@mantine/hooks';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectShowCart, toggleShowCart } from 'state/features/nav/navSlice';
 import { RootState } from 'state/store';
 import { useAppSelector } from 'state/hooks';
 import { CartState, cartState } from 'state/features/cartItem/cartSlice';
-import BlogSearchItem from './BlogSearchItem';
 import { ColorSchemeToggle } from '../ColorSchemeToggle';
 import logo from '../../images/logo.svg';
 
@@ -284,26 +282,26 @@ function NavbarMenu() {
   const [scrollHeight, setScrollHeight] = useState(0);
   const [scrollDirection, setScrollDirection] = useState('');
   const [blogSearch, setBlogSearch] = useState('');
-  const [debounceQuery] = useDebouncedValue(blogSearch, 1000);
+  // const [debounceQuery] = useDebouncedValue(blogSearch, 1000);
   const [searchActive, setSearchActive] = useState(false);
   const ref = useClickOutside(() => setSearchActive(false));
   const [opened, setOpened] = useState(false);
-  const { pathname } = useRouter();
+  const { pathname, push } = useRouter();
   const dispatch = useDispatch();
 
   const handleCartToggle = () => {
     dispatch(toggleShowCart({ showCart: true }));
   };
 
-  const { data, isLoading, isError, refetch } =
-    useApiServicesAppBlogSearchApiQuery(
-      {
-        searchParam: debounceQuery,
-      },
-      {
-        skip: debounceQuery.trim() === '',
-      }
-    );
+  // const { data, isLoading, isError, refetch } =
+  //   useApiServicesAppBlogSearchApiQuery(
+  //     {
+  //       searchParam: debounceQuery,
+  //     },
+  //     {
+  //       skip: debounceQuery.trim() === '',
+  //     }
+  //   );
 
   useEffect(() => {
     const scrollableElement = document.body;
@@ -444,6 +442,29 @@ function NavbarMenu() {
                 </Box>
               </ActionIcon>
               <ColorSchemeToggle />
+              <Flex
+                align={'center'}
+                direction={'column'}
+                justify={'center'}
+                rowGap={3}
+                sx={{ cursor: 'pointer' }}
+                onClick={() => push('/wishlist')}
+              >
+                <IconHeart
+                  fontWeight={400}
+                  color={colorScheme === 'dark' ? 'white' : '#E25D24'}
+                  cursor={'pointer'}
+                  size="18"
+                />
+                <Text
+                  fz={10}
+                  fw={600}
+                  sx={{ letterSpacing: 1 }}
+                  color={colorScheme === 'dark' ? 'white' : 'brand'}
+                >
+                  Wishlist
+                </Text>
+              </Flex>
             </Box>
             <Burger
               color="#E25D24"
@@ -546,6 +567,29 @@ function NavbarMenu() {
                   </Box>
                 </ActionIcon>
                 <ColorSchemeToggle />
+                <Flex
+                  align={'center'}
+                  direction={'column'}
+                  justify={'center'}
+                  rowGap={3}
+                  sx={{ cursor: 'pointer' }}
+                  // onClick={() => push('/wishlist')}
+                >
+                  <IconHeart
+                    fontWeight={400}
+                    color={colorScheme === 'dark' ? 'white' : '#E25D24'}
+                    cursor={'pointer'}
+                    size="18"
+                  />
+                  <Text
+                    fz={10}
+                    fw={600}
+                    sx={{ letterSpacing: 1 }}
+                    color={colorScheme === 'dark' ? 'white' : 'brand'}
+                  >
+                    Wishlist
+                  </Text>
+                </Flex>
               </Group>
             </Box>
           )}
@@ -619,7 +663,7 @@ function NavbarMenu() {
                         <IconSearch size={18} style={{ cursor: 'pointer' }} />
                       }
                     />
-                    {isLoading ? (
+                    {false ? (
                       <Center>
                         <Loader
                           color="rgba(250, 7, 7, 1)"
@@ -627,7 +671,7 @@ function NavbarMenu() {
                           type="dots"
                         />
                       </Center>
-                    ) : isError ? (
+                    ) : false ? (
                       <Alert
                         icon={<IconAlertCircle size="1rem" />}
                         title="Error"
@@ -642,7 +686,7 @@ function NavbarMenu() {
                         >
                           <Text>Error querying the search for the blog</Text>
                           <Button
-                            onClick={() => refetch()}
+                            // onClick={() => refetch()}
                             fw={600}
                             sx={{
                               '&.mantine-Button-root': {
@@ -663,7 +707,7 @@ function NavbarMenu() {
                       </Alert>
                     ) : (
                       <>
-                        {!isLoading && (data?.data?.length as number) <= 0 ? (
+                        {/* {!isLoading && (data?.data?.length as number) <= 0 ? (
                           <Alert
                             icon={<IconAlertCircle size="1rem" />}
                             title="Search"
@@ -686,7 +730,7 @@ function NavbarMenu() {
                               })}
                             </Stack>
                           </ScrollArea>
-                        )}
+                        )} */}
                       </>
                     )}
                   </>

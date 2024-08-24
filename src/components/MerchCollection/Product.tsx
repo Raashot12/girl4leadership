@@ -29,13 +29,13 @@ import {
 import { FaFacebookF, FaTwitter, FaGoogle, FaPinterestP } from 'react-icons/fa';
 import styled from '@emotion/styled';
 import { useMediaQuery } from '@mantine/hooks';
-// import required modules
 import { Navigation } from 'swiper';
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Swal from 'sweetalert2';
 import IconCloseModal from 'components/Icons/IconCloseModal';
 import { useRouter } from 'next/router';
 import { Record } from 'state/services/product';
+import useWishList from 'util/useWishList';
 import { labels } from './staticData';
 
 const ReformedModal = styled(Modal)<{ colorMode?: string }>`
@@ -69,12 +69,25 @@ const Product = ({ item }: { item: Record }) => {
   const [isLoading, setIsloading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [qty, setQty] = useState(1);
+  const { wishlist, setWishlist } = useWishList();
   // const [allProductImages, setAllProductImages] = useState(bgImg);
   const matches = useMediaQuery('(max-width: 1024px)');
   const { colorScheme } = useMantineColorScheme();
   const router = useRouter();
   const handleRouteToDetailedPage = (identifier: number) => {
     router.push(`/merch-collection/item/${identifier}`);
+  };
+  const handleWishList = (value: Record) => {
+    const findItem = wishlist.find((product) => product.id === value.id);
+    if (findItem) {
+      Swal.fire(
+        `${findItem?.fields?.ProductName} already in the wishlist`,
+        'You clicked the button!',
+        'warning'
+      );
+      return;
+    }
+    setWishlist((prev) => [...prev, value]);
   };
   return (
     <>
@@ -218,7 +231,11 @@ const Product = ({ item }: { item: Record }) => {
                     Add to cart
                   </Text>
                 </Group>
-                <Group spacing={4} align={'center'}>
+                <Group
+                  spacing={4}
+                  align={'center'}
+                  onClick={() => handleWishList(item)}
+                >
                   <IconHeart size={18} color="#051438" />
                   <Text
                     fz={14}
