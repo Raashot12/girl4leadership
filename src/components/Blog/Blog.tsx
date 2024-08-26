@@ -33,6 +33,7 @@ const Blog = ({
   const trendingPost = isLoading
     ? fakeData?.filter((value) => value?.fields?.isFeatured)
     : blogs?.filter((value) => value?.fields?.isFeatured);
+  const orginalAndFakeData = isLoading ? fakeData : blogs;
   const { slicedData, pagination, prevPage, nextPage, changePage } =
     usePagination({
       itemsPerPage: 3,
@@ -83,7 +84,13 @@ const Blog = ({
                       },
                     }}
                   >
-                    <Link href={`/blog/${value.fields?.slug}/${value?.id}`}>
+                    <Link
+                      href={
+                        isLoading
+                          ? '#'
+                          : `/blog/${value.fields?.slug}/${value?.id}`
+                      }
+                    >
                       <Flex
                         align={'center'}
                         columnGap={50}
@@ -250,7 +257,13 @@ const Blog = ({
                     key={index}
                     sx={{ cursor: 'pointer' }}
                   >
-                    <Link href={`/blog/${value.fields?.slug}/${value?.id}`}>
+                    <Link
+                      href={
+                        isLoading
+                          ? '#'
+                          : `/blog/${value.fields?.slug}/${value?.id}`
+                      }
+                    >
                       <Box
                         sx={{
                           width: '100%',
@@ -260,7 +273,7 @@ const Blog = ({
                       >
                         <Skeleton
                           visible={isLoading}
-                          w={'fit-content'}
+                          w={'100%'}
                           style={{
                             height: '100%',
                             width: '100%',
@@ -398,7 +411,7 @@ const Blog = ({
         />
       </Container>
       <Box>
-        <Popular blogs={blogs} isLoading={isLoading} />
+        <Popular blogs={orginalAndFakeData} isLoading={isLoading} />
       </Box>
     </Box>
   );

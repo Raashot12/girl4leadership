@@ -116,14 +116,17 @@ function Popular({
             return (
               <Carousel.Slide
                 onClick={() =>
-                  router.push(`/blog/${value.fields?.slug}/${value?.id}`)
+                  isLoading
+                    ? null
+                    : router.push(`/blog/${value.fields?.slug}/${value?.id}`)
                 }
                 key={index}
                 sx={{ cursor: 'pointer' }}
               >
                 <Skeleton
                   visible={isLoading}
-                  w={'fit-content'}
+                  h={300}
+                  w={'100%'}
                   style={{
                     maxWidth: '100%',
                     maxHeight: '300px',
@@ -152,39 +155,47 @@ function Popular({
                 </Skeleton>
                 <Box w={'100%'}>
                   <Text>
-                    <span style={{ fontWeight: '600' }}>
-                      {' '}
-                      {value?.fields?.Category}
-                    </span>{' '}
-                    <span
-                      style={{
-                        color: ' #999',
-                        fontWeight: 400,
-                        fontSize: 14,
-                      }}
+                    <Skeleton visible={isLoading} w={'fit-content'} mt={10}>
+                      <span style={{ fontWeight: '600' }}>
+                        {' '}
+                        {value?.fields?.Category}
+                      </span>{' '}
+                    </Skeleton>
+                    <Skeleton visible={isLoading} w={'fit-content'} mt={10}>
+                      <span
+                        style={{
+                          color: ' #999',
+                          fontWeight: 400,
+                          fontSize: 14,
+                        }}
+                      >
+                        {formatBlogDate(value?.fields?.TimeStamp)}
+                      </span>
+                    </Skeleton>
+                  </Text>
+                  <Skeleton visible={isLoading} w={'fit-content'} mt={10}>
+                    <Text
+                      fz={18}
+                      fw={700}
+                      lh={1.2}
+                      mt={15}
+                      sx={{ whiteSpace: 'normal' }}
                     >
-                      {formatBlogDate(value?.fields?.TimeStamp)}
-                    </span>
-                  </Text>
-                  <Text
-                    fz={18}
-                    fw={700}
-                    lh={1.2}
-                    mt={15}
-                    sx={{ whiteSpace: 'normal' }}
-                  >
-                    {value?.fields?.Title}
-                  </Text>
-                  <Text
-                    fz={14}
-                    fw={400}
-                    lh={1.5}
-                    mt={15}
-                    color="#999"
-                    sx={{ whiteSpace: 'normal' }}
-                  >
-                    {value?.fields?.Subtitle.substring(0, 150)}...
-                  </Text>
+                      {value?.fields?.Title}
+                    </Text>
+                  </Skeleton>
+                  <Skeleton visible={isLoading} w={'fit-content'} mt={10}>
+                    <Text
+                      fz={14}
+                      fw={400}
+                      lh={1.5}
+                      mt={15}
+                      color="#999"
+                      sx={{ whiteSpace: 'normal' }}
+                    >
+                      {value?.fields?.Subtitle.substring(0, 150)}...
+                    </Text>
+                  </Skeleton>
                   <Group mt={20} id="blogs">
                     <Skeleton
                       visible={isLoading}
@@ -203,13 +214,18 @@ function Popular({
                         }}
                       />
                     </Skeleton>
+
                     <Box>
-                      <Text fw={700} lh={1}>
-                        {value?.fields?.Author}
-                      </Text>
-                      <Text fw={14} color="#888">
-                        {value?.fields?.Profession}
-                      </Text>
+                      <Skeleton visible={isLoading} w={'fit-content'} mt={10}>
+                        <Text fw={700} lh={1}>
+                          {value?.fields?.Author}
+                        </Text>
+                      </Skeleton>
+                      <Skeleton visible={isLoading} w={'fit-content'} mt={10}>
+                        <Text fw={14} color="#888">
+                          {value?.fields?.Profession}
+                        </Text>
+                      </Skeleton>
                     </Box>
                   </Group>
                 </Box>

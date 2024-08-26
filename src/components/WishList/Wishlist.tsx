@@ -22,6 +22,11 @@ import { DialogConfirmationModal } from 'components/Shared/style';
 import IconConfirmDialog from 'components/Icons/IconConfirmDialog';
 import DialogConfirmationDetail from 'components/Shared/DialogConfirmationDetail';
 import { GiEmptyMetalBucketHandle } from 'react-icons/gi';
+import { Record } from 'state/services/product';
+import { addItemToCartFunc } from 'state/features/cartItem/cartSlice';
+import Swal from 'sweetalert2';
+import { useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
 // import useWishList from 'util/useWishList';
 
 const GridWrapperReportTemplateLayout = styled.div<{
@@ -73,6 +78,24 @@ const Wishlist = () => {
     const remainingWishlist = wishlist.filter((value) => value.id !== id);
     setWishlist(remainingWishlist);
     setOpenModal(false);
+    Swal.fire(
+      `Item removed successfully`,
+      'You clicked the button!',
+      'success'
+    );
+  };
+  const dispatch = useDispatch();
+  const handleCartFunc = (product: Record) => {
+    dispatch(addItemToCartFunc(product));
+    Swal.fire(
+      `${product?.fields?.ProductName} added to Cart`,
+      'You clicked the button!',
+      'success'
+    );
+    const remainingWishlist = wishlist.filter(
+      (value) => value.id !== product.id
+    );
+    setWishlist(remainingWishlist);
   };
   return (
     <Box
@@ -83,9 +106,15 @@ const Wishlist = () => {
       <Center>
         <Stack>
           <Stack spacing={0} align="center">
-            <Box component="h1" mt={0} mb={0} fz={{ base: 48, lg: 64 }}>
-              Wishlist
-            </Box>
+            <motion.div
+              initial={{ x: -300, opacity: 0, scale: 0.5 }}
+              animate={{ x: 0, opacity: 1, scale: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <Box component="h1" mt={0} mb={0} fz={{ base: 48, lg: 64 }}>
+                Wishlist
+              </Box>
+            </motion.div>
             <Box h={4} w={80} sx={{ background: '#EB5A46' }}></Box>
           </Stack>
           <Flex
@@ -95,7 +124,7 @@ const Wishlist = () => {
             fz={14}
             mt={30}
           >
-            <Link href={'/'}>
+            <Link href={'/merch-collection'}>
               <Text
                 component="div"
                 sx={{
@@ -109,7 +138,7 @@ const Wishlist = () => {
                   },
                 }}
               >
-                Home
+                Merch Collections
               </Text>
             </Link>
             <IconArrowForward />
@@ -284,6 +313,7 @@ const Wishlist = () => {
                     </Box>
                     <Box className="attribute-container subtotal-col" py={16}>
                       <Button
+                        onClick={() => handleCartFunc(product)}
                         sx={{
                           '&.mantine-UnstyledButton-root': {
                             background: '#E25D24',

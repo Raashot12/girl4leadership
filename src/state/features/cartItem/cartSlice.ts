@@ -1,15 +1,16 @@
 /* eslint-disable import/no-cycle */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Record } from 'state/services/product';
 import { RootState } from 'state/store';
 
-export type CartState<T extends any[]> = {
+export type CartState<T extends Record[]> = {
   cart: T;
   total: number;
   quantity: number;
 };
 
-const initialState: CartState<any[]> = {
+const initialState: CartState<Record[]> = {
   cart: [],
   total: 0,
   quantity: 0,
@@ -24,15 +25,28 @@ const cartSlice = createSlice({
       state.total = 0;
       state.quantity = 0;
     },
-    addItemToCartFunc: (state, action) => {
-      state.cart = action.payload;
+    addItemToCartFunc: (state, action: PayloadAction<Record>) => {
+      const existingItem = state.cart.find(
+        (item) => item.id === action.payload.id
+      );
+      if (existingItem) {
+        // Update the quantity if the item already exists in the cart
+        existingItem.fields.quantity += action.payload.fields.quantity;
+      } else {
+        // Add the new item to the cart
+        state.cart.push(action.payload);
+      }
     },
     getTotalAmountFunc: (state) => {
       state.total = state.cart.reduce(
-        (acc, item) => acc + item.price * item.quantity,
+        (acc, item) =>
+          acc + Number(item?.fields?.Price) * Number(item?.fields?.quantity),
         0
       );
-      state.quantity = state.cart.reduce((acc, item) => acc + item.quantity, 0);
+      state.quantity = state.cart.reduce(
+        (acc, item) => acc + Number(item?.fields?.quantity),
+        0
+      );
     },
     toggleAmountFunc: (
       state,
@@ -41,20 +55,26 @@ const cartSlice = createSlice({
       const cartItem = state.cart.find((item) => item.id === action.payload.id);
       if (cartItem) {
         if (action.payload.toggle === 'inc') {
-          cartItem.amount += 1;
+          cartItem.fields.quantity += 1;
         }
-        if (action.payload.toggle === 'dec' && cartItem.amount > 0) {
-          cartItem.amount -= 1;
+        if (action.payload.toggle === 'dec' && cartItem?.fields?.quantity > 0) {
+          cartItem.fields.quantity -= 1;
         }
       }
     },
-    removeCartItemFunct: (state, action) => {
-      return {
-        ...state,
-        cart: state.cart.filter((cartremove) => {
-          return cartremove.id !== action.payload.id;
-        }),
-      };
+    removeCartItemFunct: (state, action: PayloadAction<{ id: string }>) => {
+      state.cart = state.cart.filter(
+        (cartItem) => cartItem.id !== action.payload.id
+      );
+      state.total = state.cart.reduce(
+        (acc, item) =>
+          acc + Number(item?.fields?.Price) * Number(item?.fields?.quantity),
+        0
+      );
+      state.quantity = state.cart.reduce(
+        (acc, item) => acc + Number(item?.fields?.quantity),
+        0
+      );
     },
   },
 });
@@ -65,7 +85,7 @@ export const {
   removeCartItemFunct,
   toggleAmountFunc,
 } = cartSlice.actions;
-export const cartState = (state: RootState): CartState<Array<any>> =>
+export const cartState = (state: RootState): CartState<Array<Record>> =>
   state.cartItem;
 
 export default cartSlice.reducer;

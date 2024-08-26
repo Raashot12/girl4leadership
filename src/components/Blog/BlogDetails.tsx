@@ -146,7 +146,7 @@ const BlogDetails = ({
           </Box>
           <Skeleton
             visible={isLoading}
-            w={'fit-content'}
+            w={'100%'}
             sx={{
               '& .mantine-Image-image': {
                 borderRadius: '10px',
@@ -175,7 +175,7 @@ const BlogDetails = ({
           </Skeleton>
         </Box>
         <Box mt={20}>
-          <Skeleton visible={isLoading} w={'fit-content'} mt={16} mb={25}>
+          <Skeleton visible={isLoading} w={'100%'} mt={16} mb={25}>
             <Box
               fz={{ base: '1rem', lg: '1.1rem' }}
               component="div"

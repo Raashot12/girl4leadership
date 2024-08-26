@@ -21,11 +21,12 @@ import TagManager, { TagManagerArgs } from 'react-gtm-module';
 import { buttonStyles, checkboxStyles, defaultFonts, inputStyles } from 'theme';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { LoaderAnimation } from 'components/Shared/ScreenLoader';
-import store from '../state/store';
+import { PersistGate } from 'redux-persist/integration/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { persistor, store } from 'state/store';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -88,97 +89,99 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <SessionProvider session={pageProps.session}>
       <Provider store={store}>
-        <ColorSchemeProvider
-          colorScheme={colorScheme}
-          toggleColorScheme={toggleColorScheme}
-        >
-          <MantineProvider
-            theme={{
-              globalStyles: (theme) => ({
-                body: {
-                  ...theme.fn.fontStyles(),
-                  backgroundColor:
-                    theme.colorScheme === 'dark'
-                      ? theme.colors.dark[7]
-                      : theme.white,
-                  color:
-                    theme.colorScheme === 'dark'
-                      ? theme.colors.brand[5]
-                      : theme.black,
-                  lineHeight: theme.lineHeight,
-                },
-                a: {
-                  textDecoration: 'none',
-                  color:
-                    theme.colorScheme === 'dark'
-                      ? theme.colors.brand[5]
-                      : theme.black,
-                },
-                html: {
-                  scrollBehavior: 'smooth',
-                },
-              }),
-              colorScheme,
-              black: '#051438',
-              colors: {
-                brand: [
-                  '#020217',
-                  '#060746',
-                  '#0B0C7D',
-                  '#E25D24',
-                  '#5b5cf1',
-                  '#c4c4c4',
-                  '#141517',
-                  '#ffffff',
-                ],
-              },
-              primaryColor: 'brand',
-              primaryShade: 2,
-              fontFamily: defaultFonts,
-
-              headings: {
-                fontFamily: defaultFonts,
-                sizes: {
-                  h2: { fontWeight: 700, fontSize: '24px', lineHeight: 1.35 },
-                  h3: { fontWeight: 600, fontSize: '18px', lineHeight: 1.25 },
-                },
-              },
-
-              components: {
-                Input: {
-                  styles: () => ({
-                    input: inputStyles.input,
-                    label: inputStyles.label,
-                  }),
-                },
-                InputWrapper: {
-                  styles: () => ({
-                    label: inputStyles.label,
-                  }),
-                },
-                PasswordInput: {
-                  styles: () => ({
-                    innerInput: inputStyles.input,
-                  }),
-                },
-                Button: {
-                  styles: () => buttonStyles,
-                },
-                Checkbox: {
-                  styles: () => checkboxStyles,
-                },
-              },
-            }}
-            withGlobalStyles
-            withNormalizeCSS
+        <PersistGate loading={null} persistor={persistor}>
+          <ColorSchemeProvider
+            colorScheme={colorScheme}
+            toggleColorScheme={toggleColorScheme}
           >
-            {loading ? (
-              <LoaderAnimation />
-            ) : (
-              <>{getLayout(<Component {...pageProps} />)}</>
-            )}
-          </MantineProvider>
-        </ColorSchemeProvider>
+            <MantineProvider
+              theme={{
+                globalStyles: (theme) => ({
+                  body: {
+                    ...theme.fn.fontStyles(),
+                    backgroundColor:
+                      theme.colorScheme === 'dark'
+                        ? theme.colors.dark[7]
+                        : theme.white,
+                    color:
+                      theme.colorScheme === 'dark'
+                        ? theme.colors.brand[5]
+                        : theme.black,
+                    lineHeight: theme.lineHeight,
+                  },
+                  a: {
+                    textDecoration: 'none',
+                    color:
+                      theme.colorScheme === 'dark'
+                        ? theme.colors.brand[5]
+                        : theme.black,
+                  },
+                  html: {
+                    scrollBehavior: 'smooth',
+                  },
+                }),
+                colorScheme,
+                black: '#051438',
+                colors: {
+                  brand: [
+                    '#020217',
+                    '#060746',
+                    '#0B0C7D',
+                    '#E25D24',
+                    '#5b5cf1',
+                    '#c4c4c4',
+                    '#141517',
+                    '#ffffff',
+                  ],
+                },
+                primaryColor: 'brand',
+                primaryShade: 2,
+                fontFamily: defaultFonts,
+
+                headings: {
+                  fontFamily: defaultFonts,
+                  sizes: {
+                    h2: { fontWeight: 700, fontSize: '24px', lineHeight: 1.35 },
+                    h3: { fontWeight: 600, fontSize: '18px', lineHeight: 1.25 },
+                  },
+                },
+
+                components: {
+                  Input: {
+                    styles: () => ({
+                      input: inputStyles.input,
+                      label: inputStyles.label,
+                    }),
+                  },
+                  InputWrapper: {
+                    styles: () => ({
+                      label: inputStyles.label,
+                    }),
+                  },
+                  PasswordInput: {
+                    styles: () => ({
+                      innerInput: inputStyles.input,
+                    }),
+                  },
+                  Button: {
+                    styles: () => buttonStyles,
+                  },
+                  Checkbox: {
+                    styles: () => checkboxStyles,
+                  },
+                },
+              }}
+              withGlobalStyles
+              withNormalizeCSS
+            >
+              {loading ? (
+                <LoaderAnimation />
+              ) : (
+                <>{getLayout(<Component {...pageProps} />)}</>
+              )}
+            </MantineProvider>
+          </ColorSchemeProvider>
+        </PersistGate>
       </Provider>
     </SessionProvider>
   );

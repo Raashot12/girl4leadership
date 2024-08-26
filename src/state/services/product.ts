@@ -39,6 +39,7 @@ interface RecordFields {
   AvailableColors?: string[];
   ProductImages?: Image[];
   currency?: string;
+  quantity: number;
 }
 export interface Record {
   id: string;

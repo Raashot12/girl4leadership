@@ -36,6 +36,8 @@ import IconCloseModal from 'components/Icons/IconCloseModal';
 import { useRouter } from 'next/router';
 import { Record } from 'state/services/product';
 import useWishList from 'util/useWishList';
+import { useDispatch } from 'react-redux';
+import { addItemToCartFunc } from 'state/features/cartItem/cartSlice';
 import { labels } from './staticData';
 
 const ReformedModal = styled(Modal)<{ colorMode?: string }>`
@@ -69,11 +71,21 @@ const Product = ({ item }: { item: Record }) => {
   const [isLoading, setIsloading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [qty, setQty] = useState(1);
+  const dispatch = useDispatch();
   const { wishlist, setWishlist } = useWishList();
   // const [allProductImages, setAllProductImages] = useState(bgImg);
   const matches = useMediaQuery('(max-width: 1024px)');
   const { colorScheme } = useMantineColorScheme();
   const router = useRouter();
+
+  const handleCartFunc = (product: Record) => {
+    dispatch(addItemToCartFunc(product));
+    Swal.fire(
+      `${product?.fields?.ProductName} added to Cart`,
+      'You clicked the button!',
+      'success'
+    );
+  };
   const handleRouteToDetailedPage = (identifier: number) => {
     router.push(`/merch-collection/item/${identifier}`);
   };
@@ -179,15 +191,6 @@ const Product = ({ item }: { item: Record }) => {
         >
           {isHover && (
             <Box
-              // onClick={(event: any) => {
-              //   setIsloading(true);
-              //   event.stopPropagation();
-              //   setTimeout(() => {
-              //     setIsloading(false);
-              //     setOpenModal(true);
-              //     return;
-              //   }, 1500);
-              // }}
               sx={{
                 width: '100%',
                 background: '#ffff',
@@ -232,6 +235,7 @@ const Product = ({ item }: { item: Record }) => {
                     fz={14}
                     fw={500}
                     color={colorScheme === 'dark' ? '#051438' : '#051438'}
+                    onClick={() => handleCartFunc(item)}
                   >
                     Add to cart
                   </Text>

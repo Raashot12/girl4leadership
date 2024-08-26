@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -23,6 +24,7 @@ import {
   Overlay,
   Divider,
   Image,
+  Input,
 } from '@mantine/core';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
@@ -44,8 +46,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectShowCart, toggleShowCart } from 'state/features/nav/navSlice';
 import { RootState } from 'state/store';
 import { useAppSelector } from 'state/hooks';
-import { CartState, cartState } from 'state/features/cartItem/cartSlice';
+import {
+  CartState,
+  cartState,
+  removeCartItemFunct,
+} from 'state/features/cartItem/cartSlice';
 import useWishList from 'util/useWishList';
+import { motion } from 'framer-motion';
+import { Record } from 'state/services/product';
 import { ColorSchemeToggle } from '../ColorSchemeToggle';
 import logo from '../../images/logo.svg';
 
@@ -138,13 +146,17 @@ const BtnWhite = styled.div`
 const Cart = ({ showCart }: { showCart: boolean }) => {
   const dispatch = useDispatch();
   const { colorScheme } = useMantineColorScheme();
+  const [qty, setQty] = useState(1);
   const ref = useClickOutside(() =>
     dispatch(toggleShowCart({ showCart: false }))
   );
   const handleClose = () => {
     dispatch(toggleShowCart({ showCart: false }));
   };
-  const cartItemState: CartState<any[]> = useAppSelector(cartState);
+  const handleRemoveItemFromCart = (id) => {
+    dispatch(removeCartItemFunct({ id }));
+  };
+  const cartItemState: CartState<Record[]> = useAppSelector(cartState);
   const router = useRouter();
   return (
     <Box
@@ -177,7 +189,7 @@ const Cart = ({ showCart }: { showCart: boolean }) => {
           zIndex: 1000,
         }}
         ref={ref}
-        w={{ base: '85vw', md: '50vw', lg: '30vw' }}
+        w={{ base: '85vw', md: '50vw', lg: '32vw' }}
       >
         {' '}
         <Flex
@@ -190,25 +202,29 @@ const Cart = ({ showCart }: { showCart: boolean }) => {
           <ActionIcon>
             <Box pos={'relative'}>
               <BsCart3
-                size={20}
+                size={22}
                 color={colorScheme === 'dark' ? 'white' : 'black'}
               />
-              <Flex
-                sx={{
-                  background: '#E25D24',
-                  height: 10,
-                  width: 10,
-                  borderRadius: '50%',
-                  position: 'absolute',
-                  top: -2,
-                  right: -4,
-                }}
-                fz={10}
-                fw={700}
-                align={'center'}
-                justify={'center'}
-                color="white"
-              ></Flex>
+              {cartItemState.cart?.length >= 1 && (
+                <Flex
+                  sx={{
+                    background: '#E25D24',
+                    height: 15,
+                    width: 15,
+                    borderRadius: '50%',
+                    position: 'absolute',
+                    top: -4,
+                    right: -8,
+                  }}
+                  fz={10}
+                  fw={600}
+                  align={'center'}
+                  justify={'center'}
+                  color="white"
+                >
+                  {cartItemState.cart?.length}
+                </Flex>
+              )}
             </Box>
           </ActionIcon>
           <Text fw={600} color={colorScheme === 'dark' ? 'white' : 'black'}>
@@ -225,8 +241,8 @@ const Cart = ({ showCart }: { showCart: boolean }) => {
           mt={10}
           color={colorScheme === 'dark' ? '#AFAFB0' : '#1A1B1E'}
         />
-        <Flex mt={100} align="center" justify={'center'}>
-          {cartItemState.cart?.length <= 0 && (
+        {cartItemState.cart?.length <= 0 && (
+          <Flex mt={100} align="center" justify={'center'}>
             <Flex align="center" justify={'center'}>
               <Box
                 style={{
@@ -271,8 +287,140 @@ const Cart = ({ showCart }: { showCart: boolean }) => {
                 </BtnWhite>
               </Box>
             </Flex>
-          )}
-        </Flex>
+          </Flex>
+        )}
+        {cartItemState.cart?.length >= 1 && (
+          <Box px={16} mt={30}>
+            {cartItemState.cart?.map((value) => {
+              return (
+                <Flex
+                  key={value.id}
+                  align={'center'}
+                  justify={'space-between'}
+                  columnGap={50}
+                >
+                  <Flex
+                    columnGap={15}
+                    sx={{
+                      justifyContent: 'flex-start',
+                      alignItems: 'flex-start',
+                    }}
+                    mb={30}
+                  >
+                    <Box h={'5rem'} w={'5rem'}>
+                      <Image
+                        src={value?.fields?.FeaturedImage?.[0]?.url}
+                        alt={value?.fields?.ProductName}
+                        sx={{
+                          '& .mantine-Image-image': {
+                            maxWidth: '100%',
+                            height: 'auto',
+                            maxHeight: '6rem',
+                            verticalAlign: 'middle',
+                            borderRadius: '5px',
+                          },
+                        }}
+                      />
+                    </Box>
+                    <Box>
+                      <Text fw={600}>{value?.fields?.ProductName}</Text>
+                      <Flex align={'center'} fw={500} fz={14}>
+                        <Box component="span" sx={{ fontWeight: 600 }}>
+                          Color
+                        </Box>
+                        &nbsp;: {value?.fields?.AvailableColors?.join(', ')}
+                      </Flex>
+                      <Flex align={'center'} fw={500} fz={14}>
+                        {value?.fields?.currency}
+                        {Number(value?.fields?.Price)
+                          ?.toFixed(2)
+                          .replace(/\d(?=(\d{3})+\.)/g, '$&,')
+                          .replace(/\.00$/, '')}
+                      </Flex>
+                      <Text
+                        sx={{
+                          color: '#E25D24',
+                          cursor: 'pointer',
+                          ':hover': {
+                            textDecoration: 'underline',
+                          },
+                        }}
+                        fw={600}
+                        fz={14}
+                        onClick={() => handleRemoveItemFromCart(value.id)}
+                      >
+                        Remove
+                      </Text>
+                    </Box>
+                  </Flex>
+                  <Flex align={'center'}>
+                    <Input
+                      value={qty}
+                      onChange={(e) => setQty(parseInt(e.target.value, 10))}
+                      type="number"
+                      styles={{
+                        input: {
+                          width: '60px',
+                          height: '60px',
+                          borderRadius: '0',
+                          textAlign: 'center',
+                        },
+                      }}
+                    />
+                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                      <Button
+                        variant="outline"
+                        onClick={() => setQty(qty + 1)}
+                        sx={{
+                          width: '30px',
+                          height: '30px',
+                          borderRadius: '0',
+                          padding: '0',
+                          border: '1px solid #dbe1e6',
+                          color: 'gray',
+                          ':hover': {
+                            background: 'none',
+                          },
+                          '.mantine-Button-label': {
+                            fontWeight: 400,
+                            fontSize: '1.2rem',
+                          },
+                        }}
+                      >
+                        +
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          if (qty > 1) {
+                            setQty(qty - 1);
+                          }
+                        }}
+                        sx={{
+                          width: '30px',
+                          height: '30px',
+                          borderRadius: '0',
+                          padding: '0',
+                          border: '1px solid #dbe1e6',
+                          color: 'gray',
+                          ':hover': {
+                            background: 'none',
+                          },
+                          '.mantine-Button-label': {
+                            fontWeight: 400,
+                            fontSize: '1.2rem',
+                          },
+                        }}
+                      >
+                        -
+                      </Button>
+                    </Box>
+                  </Flex>
+                </Flex>
+              );
+            })}
+          </Box>
+        )}
       </Box>
     </Box>
   );
@@ -290,6 +438,8 @@ function NavbarMenu() {
   const { pathname, push } = useRouter();
   const dispatch = useDispatch();
   const { wishlist } = useWishList();
+
+  const cartItemState: CartState<Record[]> = useAppSelector(cartState);
 
   const handleCartToggle = () => {
     dispatch(toggleShowCart({ showCart: true }));
@@ -352,35 +502,41 @@ function NavbarMenu() {
               />
             </Link>
 
-            <Box
-              sx={{
-                display: 'flex',
-                columnGap: 25,
-                '@media (max-width:900px)': {
-                  display: 'none',
-                },
-              }}
+            <motion.div
+              initial={{ y: -500, opacity: 0, scale: 0.5 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              transition={{ duration: 1 }}
             >
-              {navMenu.map((value) => {
-                return (
-                  <React.Fragment key={value.id}>
-                    <CustomLink
-                      href={value.route}
-                      className={
-                        pathname === '/' && value.route === '/'
-                          ? 'active'
-                          : pathname.includes(value.route) &&
-                            value.route !== '/'
-                          ? 'active'
-                          : 'not-active'
-                      }
-                    >
-                      {value.pathName}
-                    </CustomLink>
-                  </React.Fragment>
-                );
-              })}
-            </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  columnGap: 25,
+                  '@media (max-width:900px)': {
+                    display: 'none',
+                  },
+                }}
+              >
+                {navMenu.map((value) => {
+                  return (
+                    <React.Fragment key={value.id}>
+                      <CustomLink
+                        href={value.route}
+                        className={
+                          pathname === '/' && value.route === '/'
+                            ? 'active'
+                            : pathname.includes(value.route) &&
+                              value.route !== '/'
+                            ? 'active'
+                            : 'not-active'
+                        }
+                      >
+                        {value.pathName}
+                      </CustomLink>
+                    </React.Fragment>
+                  );
+                })}
+              </Box>
+            </motion.div>
             <Box
               sx={{
                 display: 'flex',
@@ -424,24 +580,26 @@ function NavbarMenu() {
                     cursor={'pointer'}
                     size="18"
                   />
-                  <Flex
-                    sx={{
-                      background: '#E25D24',
-                      height: 10,
-                      width: 10,
-                      borderRadius: '50%',
-                      position: 'absolute',
-                      paddingLeft: 2,
-                      paddingRight: 2,
-                      top: -10,
-                      right: -10,
-                      color: 'white !important',
-                    }}
-                    fz={10}
-                    fw={700}
-                    align={'center'}
-                    justify={'center'}
-                  ></Flex>
+                  {cartItemState.cart?.length >= 1 && (
+                    <Flex
+                      sx={{
+                        background: '#E25D24',
+                        height: 10,
+                        width: 10,
+                        borderRadius: '50%',
+                        position: 'absolute',
+                        paddingLeft: 2,
+                        paddingRight: 2,
+                        top: -10,
+                        right: -10,
+                        color: 'white !important',
+                      }}
+                      fz={10}
+                      fw={700}
+                      align={'center'}
+                      justify={'center'}
+                    ></Flex>
+                  )}
                 </Box>
               </ActionIcon>
               <ColorSchemeToggle />
